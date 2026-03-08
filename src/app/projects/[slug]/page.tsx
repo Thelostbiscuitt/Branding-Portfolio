@@ -4,12 +4,15 @@ import Link from "next/link";
 import { ArrowLeft, ArrowUpRight } from "lucide-react";
 import { getProjectBySlug, PROJECT_DETAILS, type ProjectDetail, type MediaEmbed, type ContribSection } from "@/lib/projects";
 
+export const dynamicParams = true;
+
 export async function generateStaticParams() {
   return PROJECT_DETAILS.map((p) => ({ slug: p.slug }));
 }
 
-export async function generateMetadata({ params }: { params: { slug: string } }) {
-  const project = getProjectBySlug(params.slug);
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params;
+  const project = getProjectBySlug(slug);
   if (!project) return {};
   return {
     title: `${project.title} — Michael Oguntimehin`,
@@ -307,11 +310,12 @@ function ContributionBlock({ contrib, index, showPitchSamples }: { contrib: Cont
 // ─────────────────────────────────────────────────────────────────────────────
 // PAGE
 // ─────────────────────────────────────────────────────────────────────────────
-export default function ProjectPage({ params }: { params: { slug: string } }) {
-  const project = getProjectBySlug(params.slug);
+export default async function ProjectPage({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params;
+  const project = getProjectBySlug(slug);
   if (!project) notFound();
 
-  const currentIndex = PROJECT_DETAILS.findIndex((p) => p.slug === params.slug);
+  const currentIndex = PROJECT_DETAILS.findIndex((p) => p.slug === slug);
   const next = PROJECT_DETAILS[(currentIndex + 1) % PROJECT_DETAILS.length];
   const isLeadway = project.slug === "leadway-pensure";
   const is1ETHFP  = project.slug === "1ethfp";
