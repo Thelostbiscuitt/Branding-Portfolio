@@ -1,0 +1,903 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Leadway Pensure — Brand Extensions 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Barlow+Condensed:wght@300;400;600;700;800;900&family=Barlow:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --orange:      #E8660A;
+  --orange-deep: #C4520A;
+  --amber:       #F5A623;
+  --amber-light: #FFCA6B;
+  --black:       #111111;
+  --charcoal:    #1E1E1E;
+  --ch-mid:      #2C2C2C;
+  --offwhite:    #FAF7F2;
+  --cream:       #FFF3E6;
+  --mid:         #5A5A5A;
+  --light:       #9A9A9A;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{font-family:'Barlow',sans-serif;background:var(--black);color:var(--offwhite);overflow-x:hidden;}
+
+/* ─── NAV ─── */
+nav{
+  position:fixed;top:0;left:0;width:100%;z-index:100;
+  display:flex;justify-content:space-between;align-items:center;
+  padding:18px 48px;
+  background:rgba(17,17,17,0.94);backdrop-filter:blur(16px);
+  border-bottom:1px solid rgba(232,102,10,0.2);
+}
+.nav-logo{display:flex;align-items:center;gap:12px;}
+.nav-dot{width:28px;height:28px;border-radius:50%;background:radial-gradient(circle at 35% 35%,#F5A623 0%,#E8660A 100%);flex-shrink:0;}
+.nav-wm{font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:14px;letter-spacing:2px;text-transform:uppercase;}
+.nav-wm span{color:var(--orange);}
+.nav-links{display:flex;gap:28px;list-style:none;}
+.nav-links a{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:rgba(250,247,242,0.4);text-decoration:none;transition:color .3s;}
+.nav-links a:hover{color:var(--amber);}
+
+/* ─── HERO ─── */
+.hero{
+  min-height:100vh;background:var(--black);
+  display:flex;flex-direction:column;justify-content:flex-end;
+  padding:100px 60px 80px;position:relative;overflow:hidden;
+}
+.hero-orb{position:absolute;top:-180px;right:-180px;width:680px;height:680px;border-radius:50%;background:radial-gradient(circle at 40% 40%,#F5A623 0%,#E8660A 50%,transparent 80%);opacity:.11;animation:pulse 9s ease-in-out infinite alternate;}
+@keyframes pulse{from{transform:scale(1);opacity:.11;}to{transform:scale(1.07);opacity:.17;}}
+.hero-orb2{position:absolute;bottom:-250px;left:-100px;width:440px;height:440px;border-radius:50%;background:radial-gradient(circle,var(--orange) 0%,transparent 70%);opacity:.05;}
+.hero-bg-word{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:clamp(100px,20vw,280px);color:rgba(232,102,10,0.05);letter-spacing:-6px;line-height:.85;white-space:nowrap;user-select:none;}
+.hero-eye{font-size:11px;letter-spacing:4px;text-transform:uppercase;color:var(--amber);margin-bottom:28px;font-weight:700;display:flex;align-items:center;gap:16px;}
+.hero-eye::before{content:'';width:48px;height:1px;background:var(--amber);}
+.hero h1{font-family:'Playfair Display',serif;font-weight:900;font-size:clamp(52px,9vw,124px);line-height:.92;letter-spacing:-2px;position:relative;}
+.hero h1 em{font-style:italic;color:var(--orange);}
+.hero-sub{margin-top:48px;display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:32px;}
+.hero-desc{max-width:500px;font-size:17px;line-height:1.8;color:rgba(250,247,242,0.58);font-weight:300;}
+.hero-pills{display:flex;flex-direction:column;gap:10px;align-items:flex-end;}
+.hero-pill{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:11px;letter-spacing:2px;text-transform:uppercase;padding:8px 18px;border-radius:100px;border:1px solid rgba(232,102,10,0.4);color:var(--orange);}
+.scroll-hint{position:absolute;bottom:32px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:8px;font-size:10px;letter-spacing:3px;text-transform:uppercase;color:rgba(250,247,242,0.22);animation:bob 2.4s ease-in-out infinite;}
+@keyframes bob{0%,100%{transform:translateX(-50%) translateY(0);}50%{transform:translateX(-50%) translateY(10px);}}
+.scroll-hint::after{content:'';width:1px;height:40px;background:rgba(232,102,10,0.3);}
+
+/* ─── SHARED ─── */
+section{padding:120px 60px;}
+.sl{font-size:10px;letter-spacing:4px;text-transform:uppercase;color:var(--amber);margin-bottom:64px;font-weight:700;display:flex;align-items:center;gap:16px;}
+.sl::after{content:'';flex:1;height:1px;background:linear-gradient(to right,rgba(245,166,35,.4),transparent);}
+.sl.dark{color:var(--orange-deep);}
+.sl.dark::after{background:linear-gradient(to right,rgba(232,102,10,.4),transparent);}
+.st{font-family:'Playfair Display',serif;font-size:clamp(36px,5vw,68px);font-weight:900;line-height:1.05;margin-bottom:32px;}
+.st em{font-style:italic;color:var(--orange);}
+.st.dark em{color:var(--orange-deep);}
+
+/* ─── ABOUT ─── */
+.about{background:var(--charcoal);}
+.about-grid{display:grid;grid-template-columns:1.2fr 0.8fr;gap:80px;align-items:start;}
+.about-left p{font-size:17px;line-height:1.85;color:rgba(250,247,242,.63);font-weight:300;margin-bottom:20px;}
+.stat-block{border-top:1px solid rgba(255,255,255,.08);padding:24px 0;}
+.stat-block:last-child{border-bottom:1px solid rgba(255,255,255,.08);}
+.stat-num{font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:52px;color:var(--orange);line-height:1;}
+.stat-label{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:rgba(250,247,242,.32);margin-top:4px;}
+
+/* ─── AWARDS TICKER ─── */
+.awards-ticker{background:var(--orange);padding:20px 0;overflow:hidden;border-top:1px solid rgba(0,0,0,.1);}
+.ticker-track{display:flex;gap:0;animation:ticker 28s linear infinite;width:max-content;}
+.ticker-item{font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:13px;letter-spacing:2px;text-transform:uppercase;color:var(--black);padding:0 48px;white-space:nowrap;opacity:.7;}
+.ticker-item strong{opacity:1;color:var(--black);}
+.ticker-sep{color:rgba(0,0,0,.25);padding:0 8px;}
+@keyframes ticker{from{transform:translateX(0);}to{transform:translateX(-50%);}}
+
+/* ─── PRODUCTS ─── */
+.products{background:var(--black);}
+.products-intro{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;margin-bottom:100px;}
+.products-intro p{font-size:17px;line-height:1.8;color:rgba(250,247,242,.6);font-weight:300;}
+.products-intro p+p{margin-top:16px;}
+
+/* Product cards grid */
+.products-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;}
+.prod-card{background:var(--ch-mid);padding:52px 40px;position:relative;overflow:hidden;border:1px solid rgba(255,255,255,.04);transition:background .4s,border-color .4s;cursor:default;}
+.prod-card:hover{background:rgba(232,102,10,.08);border-color:rgba(232,102,10,.25);}
+.prod-card.featured{background:var(--orange);grid-column:span 2;border-color:transparent;}
+.prod-card.featured:hover{background:var(--orange-deep);}
+.prod-card.featured .prod-tag{color:rgba(0,0,0,.5);}
+.prod-card.featured .prod-title{color:var(--black);}
+.prod-card.featured .prod-body{color:rgba(0,0,0,.65);}
+.prod-card.featured .prod-feature-list li{color:rgba(0,0,0,.7);border-color:rgba(0,0,0,.15);}
+.prod-card.featured .prod-feature-list li::before{background:rgba(0,0,0,.4);}
+.prod-card.featured .prod-cta{color:var(--black);border-color:rgba(0,0,0,.35);}
+.prod-card.dark-card{background:var(--black);border-color:rgba(232,102,10,.12);}
+.prod-num{position:absolute;top:-10px;right:16px;font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:110px;color:rgba(232,102,10,.05);line-height:1;}
+.prod-card.featured .prod-num{color:rgba(0,0,0,.06);}
+.prod-icon{font-size:32px;margin-bottom:20px;}
+.prod-tag{font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--amber);font-weight:700;margin-bottom:12px;}
+.prod-title{font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:28px;letter-spacing:.5px;text-transform:uppercase;color:var(--offwhite);margin-bottom:16px;line-height:1.05;}
+.prod-body{font-size:14px;line-height:1.75;color:rgba(250,247,242,.58);font-weight:300;margin-bottom:24px;}
+.prod-feature-list{list-style:none;margin-bottom:28px;}
+.prod-feature-list li{font-size:13px;color:rgba(250,247,242,.6);padding:10px 0;border-top:1px solid rgba(255,255,255,.07);display:flex;align-items:flex-start;gap:10px;line-height:1.5;}
+.prod-feature-list li::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--orange);flex-shrink:0;margin-top:6px;}
+.prod-cta{display:inline-flex;align-items:center;gap:8px;font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--orange);border:1px solid rgba(232,102,10,.4);padding:10px 20px;border-radius:100px;font-weight:700;transition:background .3s,color .3s;}
+.prod-cta:hover{background:var(--orange);color:white;}
+
+/* PPP Contribution flow visual */
+.ppp-flow{display:flex;align-items:center;gap:0;margin:32px 0;flex-wrap:wrap;}
+.flow-step{flex:1;min-width:120px;}
+.flow-bubble{background:rgba(0,0,0,.2);border-radius:12px;padding:16px;text-align:center;margin:0 2px;}
+.flow-bubble-icon{font-size:22px;margin-bottom:6px;}
+.flow-bubble-label{font-size:10px;font-weight:800;letter-spacing:1px;text-transform:uppercase;color:rgba(0,0,0,.6);}
+.flow-bubble-sub{font-size:11px;color:rgba(0,0,0,.5);margin-top:4px;line-height:1.4;}
+.flow-arrow{font-size:20px;color:rgba(0,0,0,.3);flex-shrink:0;padding:0 4px;}
+
+/* 50/50 Split visual */
+.split-visual{display:flex;height:12px;border-radius:100px;overflow:hidden;margin:20px 0 8px;}
+.split-a{flex:1;background:var(--black);}
+.split-b{flex:1;background:rgba(0,0,0,.3);}
+.split-labels{display:flex;justify-content:space-between;font-size:10px;letter-spacing:1px;text-transform:uppercase;font-weight:700;color:rgba(0,0,0,.5);}
+
+/* ─── IDENTITY ─── */
+.identity{background:var(--offwhite);color:var(--black);}
+.palette-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:0;margin-bottom:80px;border-radius:16px;overflow:hidden;box-shadow:0 8px 40px rgba(0,0,0,.12);}
+.color-swatch{aspect-ratio:1/1.5;display:flex;flex-direction:column;justify-content:flex-end;padding:20px 16px;transition:transform .3s;cursor:default;}
+.color-swatch:hover{transform:scaleY(1.05);transform-origin:bottom;}
+.sw-name{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:13px;letter-spacing:1px;text-transform:uppercase;}
+.sw-hex{font-size:11px;opacity:.6;margin-top:3px;}
+.sw-role{font-size:10px;opacity:.42;letter-spacing:1px;text-transform:uppercase;margin-top:2px;}
+.type-showcase{margin-top:80px;}
+.type-row{display:flex;align-items:baseline;gap:28px;padding:28px 0;border-top:1px solid rgba(17,17,17,.1);flex-wrap:wrap;}
+.type-name{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--light);min-width:140px;}
+.type-spec{font-size:11px;color:var(--light);margin-left:auto;align-self:center;white-space:nowrap;}
+
+/* ─── PRINCIPLES ─── */
+.principles{background:var(--black);}
+.principles-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;margin-top:64px;}
+.p-card{background:var(--ch-mid);padding:48px 36px;border:1px solid rgba(255,255,255,.05);position:relative;overflow:hidden;transition:background .4s,border-color .4s;}
+.p-card:hover{background:rgba(232,102,10,.08);border-color:rgba(232,102,10,.25);}
+.p-card::before{content:attr(data-n);position:absolute;top:-12px;right:16px;font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:110px;color:rgba(232,102,10,.06);line-height:1;}
+.p-icon{font-size:28px;margin-bottom:20px;}
+.p-title{font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:20px;letter-spacing:1px;text-transform:uppercase;color:var(--amber);margin-bottom:14px;}
+.p-text{font-size:14px;line-height:1.75;color:rgba(250,247,242,.56);font-weight:300;}
+
+/* ─── TAGLINE ─── */
+.tagline-block{background:var(--orange);padding:160px 60px;text-align:center;position:relative;overflow:hidden;}
+.tagline-block::before{content:'"';position:absolute;top:-80px;left:20px;font-family:'Playfair Display',serif;font-size:500px;color:rgba(0,0,0,.06);line-height:1;}
+.tagline{font-family:'Playfair Display',serif;font-weight:900;font-style:italic;font-size:clamp(32px,5.5vw,80px);line-height:1.1;position:relative;color:var(--black);}
+.tagline-sub{margin-top:28px;font-size:12px;letter-spacing:4px;text-transform:uppercase;color:rgba(0,0,0,.38);font-weight:600;}
+
+/* ─── VOICE ─── */
+.voice{background:var(--cream);color:var(--black);}
+.voice-grid{display:grid;grid-template-columns:1fr 1fr;gap:3px;margin-top:64px;}
+.v-card{padding:44px 40px;background:white;}
+.v-card.do{border-top:3px solid #1B7A3A;}
+.v-card.dont{border-top:3px solid var(--orange-deep);}
+.v-tag{font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:11px;letter-spacing:3px;text-transform:uppercase;margin-bottom:24px;}
+.v-card.do .v-tag{color:#1B7A3A;}
+.v-card.dont .v-tag{color:var(--orange-deep);}
+.v-ex{font-family:'Playfair Display',serif;font-size:19px;line-height:1.5;font-style:italic;color:var(--black);margin-bottom:14px;}
+.v-note{font-size:13px;color:var(--mid);line-height:1.65;}
+
+/* ─── SOCIAL ─── */
+.social{background:var(--charcoal);}
+.social-intro{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;margin-bottom:80px;}
+.social-intro p{font-size:16px;line-height:1.8;color:rgba(250,247,242,.58);font-weight:300;}
+.posts-grid{display:grid;grid-template-columns:repeat(3,1fr);grid-auto-rows:360px;gap:20px;}
+.post{border-radius:16px;overflow:hidden;position:relative;cursor:pointer;transition:transform .3s,box-shadow .3s;}
+.post:hover{transform:translateY(-6px);box-shadow:0 24px 60px rgba(0,0,0,.6);}
+.post-wide{grid-column:span 2;}
+.post-tall{grid-row:span 2;}
+/* Individual posts */
+.p1{background:var(--black);display:flex;flex-direction:column;justify-content:space-between;padding:32px;border:1px solid rgba(232,102,10,.15);}
+.p-logo-s{font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--amber);opacity:.7;}
+.p1-big{font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:clamp(44px,6vw,72px);color:white;line-height:.88;letter-spacing:-2px;text-transform:uppercase;}
+.p1-big span{color:var(--orange);}
+.p1-sub{font-family:'Playfair Display',serif;font-style:italic;font-size:15px;color:rgba(255,255,255,.48);line-height:1.5;}
+.p-cta-pill{display:inline-block;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--orange);border:1px solid rgba(232,102,10,.5);padding:7px 14px;border-radius:100px;font-weight:700;width:fit-content;}
+.p2{background:var(--orange);padding:28px;display:flex;flex-direction:column;justify-content:space-between;}
+.p2-tag{font-size:10px;letter-spacing:3px;text-transform:uppercase;color:rgba(0,0,0,.48);font-weight:700;}
+.p2-num{font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:clamp(52px,8vw,88px);color:var(--black);line-height:.9;letter-spacing:-3px;}
+.p2-label{font-family:'Playfair Display',serif;font-size:17px;color:rgba(0,0,0,.72);line-height:1.4;font-style:italic;}
+.p2-logo{font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:13px;letter-spacing:2px;color:rgba(0,0,0,.38);text-transform:uppercase;}
+.p3{background:var(--offwhite);padding:32px;display:flex;flex-direction:column;justify-content:center;text-align:center;}
+.p3 blockquote{font-family:'Playfair Display',serif;font-size:clamp(15px,2.2vw,20px);font-style:italic;color:var(--black);line-height:1.55;margin-bottom:18px;}
+.p3-attr{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--orange-deep);font-weight:700;margin-bottom:20px;}
+.p3-logo{font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:15px;letter-spacing:2px;color:var(--orange-deep);text-transform:uppercase;}
+.p4{background:var(--ch-mid);padding:40px 48px;display:flex;align-items:center;gap:40px;border:1px solid rgba(232,102,10,.12);}
+.p4-left{flex:1;}
+.p4-tag{font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--amber);margin-bottom:14px;font-weight:700;}
+.p4-title{font-family:'Playfair Display',serif;font-weight:900;font-size:clamp(20px,3vw,36px);line-height:1.15;margin-bottom:14px;}
+.p4-title em{font-style:italic;color:var(--orange);}
+.p4-body{font-size:14px;line-height:1.7;color:rgba(250,247,242,.58);font-weight:300;}
+.p4-circle{width:116px;height:116px;border-radius:50%;background:radial-gradient(circle at 35% 35%,var(--amber) 0%,var(--orange) 100%);display:flex;flex-direction:column;align-items:center;justify-content:center;flex-shrink:0;}
+.p4-c-num{font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:30px;color:var(--black);line-height:1;}
+.p4-c-lab{font-size:8px;letter-spacing:1px;text-transform:uppercase;color:rgba(0,0,0,.6);text-align:center;padding:0 8px;}
+.p5{background:var(--black);padding:32px;display:flex;flex-direction:column;justify-content:space-between;}
+.p5-top{font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:clamp(44px,7vw,80px);line-height:.88;letter-spacing:-2px;text-transform:uppercase;}
+.la{color:var(--amber);}.lo{color:var(--orange);}.lw{color:var(--offwhite);}
+.p5-q{font-family:'Playfair Display',serif;font-style:italic;font-size:16px;color:rgba(250,247,242,.48);line-height:1.55;border-left:2px solid var(--orange);padding-left:16px;}
+.p5-bot{display:flex;justify-content:space-between;align-items:center;}
+.p5-logo{font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:14px;color:var(--amber);letter-spacing:2px;text-transform:uppercase;}
+.p5-handle{font-size:11px;color:rgba(250,247,242,.28);}
+.p6{background:white;padding:30px;display:flex;flex-direction:column;justify-content:space-between;}
+.p6-num{font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:96px;line-height:1;color:var(--orange);opacity:.1;letter-spacing:-4px;}
+.p6-tip{font-family:'Playfair Display',serif;font-size:clamp(16px,2.4vw,22px);font-weight:700;color:var(--black);line-height:1.35;margin-top:-40px;position:relative;z-index:1;}
+.p6-tip span{color:var(--orange-deep);font-style:italic;}
+.p6-bot{display:flex;justify-content:space-between;align-items:center;}
+.p6-cta{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--orange);font-weight:700;display:flex;align-items:center;gap:6px;}
+.p6-cta::after{content:'→';}
+.p6-logo{font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:13px;color:var(--black);letter-spacing:1px;text-transform:uppercase;opacity:.2;}
+.p7{background:linear-gradient(145deg,var(--orange-deep) 0%,var(--orange) 60%,var(--amber) 100%);padding:32px;display:flex;flex-direction:column;justify-content:space-between;position:relative;overflow:hidden;}
+.p7::after{content:'';position:absolute;width:240px;height:240px;border-radius:50%;border:50px solid rgba(255,255,255,.06);right:-80px;bottom:-80px;}
+.p7-tag{font-size:10px;letter-spacing:3px;text-transform:uppercase;color:rgba(0,0,0,.45);font-weight:700;}
+.p7-body{font-family:'Playfair Display',serif;font-size:clamp(18px,2.8vw,26px);line-height:1.35;font-weight:700;color:var(--black);}
+.p7-body em{font-style:italic;}
+.p7-bot{font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:10px;letter-spacing:3px;text-transform:uppercase;color:rgba(0,0,0,.38);}
+
+/* ─── PPP POST ─── */
+.p8{background:var(--ch-mid);padding:28px;display:flex;flex-direction:column;justify-content:space-between;border:1px solid rgba(232,102,10,.2);}
+.p8-tag{font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--amber);font-weight:700;margin-bottom:8px;}
+.p8-title{font-family:'Playfair Display',serif;font-weight:900;font-size:clamp(20px,3vw,30px);line-height:1.1;margin-bottom:12px;}
+.p8-title em{font-style:italic;color:var(--orange);}
+.p8-split{display:flex;gap:12px;margin:8px 0 16px;}
+.p8-half{flex:1;background:rgba(255,255,255,.06);border-radius:8px;padding:12px;text-align:center;}
+.p8-half-pct{font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:32px;color:var(--orange);line-height:1;}
+.p8-half-label{font-size:9px;letter-spacing:1px;text-transform:uppercase;color:rgba(250,247,242,.4);margin-top:4px;}
+.p8-sub{font-size:12px;line-height:1.6;color:rgba(250,247,242,.5);font-weight:300;margin-bottom:12px;}
+.p8-bot{display:flex;justify-content:space-between;align-items:center;}
+
+/* ─── CLIENTS ─── */
+.clients{background:var(--charcoal);}
+.clients-label-row{display:flex;align-items:center;gap:24px;margin-bottom:24px;}
+.clients-label-row::after{content:'';flex:1;height:1px;background:rgba(255,255,255,.06);}
+.clients-subtitle{font-size:14px;color:rgba(250,247,242,.45);line-height:1.7;max-width:560px;margin-bottom:64px;font-weight:300;}
+.clients-scroll{overflow:hidden;}
+.clients-track{display:flex;gap:0;animation:clientscroll 30s linear infinite;width:max-content;}
+.clients-track:hover{animation-play-state:paused;}
+.client-logo{padding:24px 36px;border:1px solid rgba(255,255,255,.07);background:rgba(255,255,255,.03);margin:0 2px;white-space:nowrap;font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:16px;letter-spacing:1px;text-transform:uppercase;color:rgba(250,247,242,.4);transition:color .3s,background .3s;}
+.client-logo:hover{color:var(--amber);background:rgba(232,102,10,.07);}
+@keyframes clientscroll{from{transform:translateX(0);}to{transform:translateX(-50%);}}
+.awards-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:2px;margin-top:64px;}
+.award-card{background:var(--ch-mid);padding:32px 28px;border:1px solid rgba(255,255,255,.04);}
+.award-year{font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:40px;color:var(--orange);line-height:1;margin-bottom:8px;}
+.award-title{font-size:13px;line-height:1.6;color:rgba(250,247,242,.6);font-weight:300;}
+
+/* ─── LOGO USAGE ─── */
+.logo-sec{background:var(--black);}
+.logo-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;margin-top:64px;}
+.logo-box{padding:48px 32px;min-height:200px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;text-align:center;}
+.logo-dot-lg{width:44px;height:44px;border-radius:50%;margin-bottom:4px;}
+.logo-wm{font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:22px;letter-spacing:2px;text-transform:uppercase;line-height:1.1;}
+.logo-verdict{margin-top:14px;font-size:10px;letter-spacing:1px;text-transform:uppercase;font-weight:700;}
+.ok{color:#2DA85C;}.no{color:#E05252;}
+
+/* ─── GUIDELINES ─── */
+.guidelines{background:var(--offwhite);color:var(--black);}
+.g-rules{display:grid;grid-template-columns:repeat(2,1fr);gap:2px;margin-top:64px;}
+.r-card{background:white;padding:48px 40px;}
+.r-card.full{grid-column:span 2;}
+.r-num{font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:72px;line-height:1;color:var(--orange);opacity:.1;margin-bottom:-24px;}
+.r-title{font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:19px;letter-spacing:1px;text-transform:uppercase;color:var(--black);margin-bottom:14px;position:relative;}
+.r-body{font-size:14px;line-height:1.75;color:var(--mid);}
+.r-ex{margin-top:20px;display:flex;gap:8px;flex-wrap:wrap;}
+.rx{font-size:11px;padding:5px 12px;border-radius:100px;font-weight:600;}
+.rx.y{background:rgba(45,168,92,.1);color:#1B7A3A;border:1px solid rgba(45,168,92,.25);}
+.rx.n{background:rgba(232,102,10,.1);color:var(--orange-deep);border:1px solid rgba(232,102,10,.25);text-decoration:line-through;}
+.sp-grid{display:flex;align-items:flex-end;gap:0;margin-top:48px;border-bottom:1px solid rgba(17,17,17,.12);padding-bottom:32px;}
+.sp-block{display:flex;flex-direction:column;align-items:center;gap:6px;flex:1;}
+.sp-bar{width:100%;background:var(--orange);opacity:.65;transition:opacity .3s;}
+.sp-block:hover .sp-bar{opacity:1;}
+.sp-label{font-size:9px;letter-spacing:1px;color:var(--mid);}
+.sp-val{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:13px;color:var(--black);}
+
+/* ─── FOOTER ─── */
+.footer-cta{background:var(--orange);padding:160px 60px;text-align:center;position:relative;overflow:hidden;}
+.footer-bg{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:320px;color:rgba(0,0,0,.06);letter-spacing:-10px;white-space:nowrap;line-height:1;}
+.footer-cta h2{font-family:'Playfair Display',serif;font-weight:900;font-size:clamp(36px,5vw,68px);line-height:1.1;position:relative;margin-bottom:20px;color:var(--black);}
+.footer-cta h2 em{font-style:italic;}
+.footer-cta p{font-size:17px;color:rgba(0,0,0,.52);max-width:480px;margin:0 auto 48px;line-height:1.75;font-weight:300;}
+.cta-btn{display:inline-block;background:var(--black);color:white;font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:12px;letter-spacing:3px;text-transform:uppercase;text-decoration:none;padding:18px 44px;border-radius:4px;transition:transform .2s,background .3s;margin:0 10px;}
+.cta-btn:hover{transform:translateY(-2px);background:var(--charcoal);}
+.cta-btn.out{background:transparent;border:2px solid rgba(0,0,0,.3);color:var(--black);}
+.cta-btn.out:hover{background:rgba(0,0,0,.07);}
+.footer-bottom{background:var(--black);padding:40px 60px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;border-top:3px solid var(--orange);}
+.footer-brand{font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:22px;letter-spacing:2px;color:white;}
+.footer-brand span{color:var(--orange);}
+.footer-note{font-size:11px;color:rgba(250,247,242,.2);line-height:1.7;text-align:right;max-width:420px;}
+
+/* ─── FADE ─── */
+.fade-up{opacity:0;transform:translateY(36px);transition:opacity .8s ease,transform .8s ease;}
+.fade-up.visible{opacity:1;transform:translateY(0);}
+
+/* ─── RESPONSIVE ─── */
+@media(max-width:900px){
+  section{padding:80px 24px;}
+  nav{padding:14px 24px;}
+  .nav-links{display:none;}
+  .hero{padding:100px 24px 60px;}
+  .about-grid,.social-intro,.voice-grid,.g-rules,.products-intro{grid-template-columns:1fr;}
+  .r-card.full{grid-column:span 1;}
+  .palette-grid{grid-template-columns:repeat(3,1fr);}
+  .principles-grid,.products-grid{grid-template-columns:1fr;}
+  .prod-card.featured{grid-column:span 1;}
+  .posts-grid{grid-template-columns:1fr 1fr;grid-auto-rows:280px;}
+  .post-wide{grid-column:span 2;}
+  .post-tall{grid-row:span 1;}
+  .logo-grid{grid-template-columns:1fr 1fr;}
+  .awards-grid{grid-template-columns:1fr 1fr;}
+  .footer-cta,.footer-bottom{padding:80px 24px;}
+  .footer-note{text-align:left;}
+  .ppp-flow{gap:4px;}
+  .flow-arrow{display:none;}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">
+    <div class="nav-dot"></div>
+    <span class="nav-wm">LEADWAY <span>PENSURE</span></span>
+  </div>
+  <ul class="nav-links">
+    <li><a href="#brief">Brief</a></li>
+    <li><a href="#products">Products</a></li>
+    <li><a href="#identity">Identity</a></li>
+    <li><a href="#voice">Voice</a></li>
+    <li><a href="#social">Social</a></li>
+    <li><a href="#guidelines">Guidelines</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-orb"></div>
+  <div class="hero-orb2"></div>
+  <div class="hero-bg-word">PENSURE</div>
+  <div class="hero-eye">Brand Extension Concept · 2026</div>
+  <h1>Your <em>future,</em><br>built with<br>intention.</h1>
+  <div class="hero-sub">
+    <p class="hero-desc">New brand materials for Leadway Pensure PFA — product showcases, social media templates, identity extensions, and communication guidelines. Designed to reach the next generation of Nigerian professionals without losing the authority the brand has spent 20 years earning.</p>
+    <div class="hero-pills">
+      <div class="hero-pill">Product Showcases</div>
+      <div class="hero-pill">Brand Case Study</div>
+      <div class="hero-pill">Brand Guidelines</div>
+      <div class="hero-pill">Social Media System</div>
+    </div>
+  </div>
+  <div class="scroll-hint">Scroll</div>
+</section>
+
+<!-- AWARDS TICKER -->
+<div class="awards-ticker">
+  <div class="ticker-track">
+    <span class="ticker-item"><strong>Best PFA of the Year 2024</strong> <span class="ticker-sep">·</span> National Quality Award</span>
+    <span class="ticker-item"><strong>West Africa Pension Company of the Year</strong> <span class="ticker-sep">·</span> 2024 &amp; 2025</span>
+    <span class="ticker-item"><strong>Africa's Fastest Growing PFA</strong> <span class="ticker-sep">·</span> 2024</span>
+    <span class="ticker-item"><strong>Organisational Excellence in GRC</strong> <span class="ticker-sep">·</span> Pension Industry 2025</span>
+    <span class="ticker-item"><strong>Best Pension &amp; Finance CEO</strong> <span class="ticker-sep">·</span> West Africa Innovation Awards 2023</span>
+    <span class="ticker-item"><strong>Financial Crime Prevention Excellence</strong> <span class="ticker-sep">·</span> 2025</span>
+    <span class="ticker-item"><strong>Best PFA of the Year 2024</strong> <span class="ticker-sep">·</span> National Quality Award</span>
+    <span class="ticker-item"><strong>West Africa Pension Company of the Year</strong> <span class="ticker-sep">·</span> 2024 &amp; 2025</span>
+    <span class="ticker-item"><strong>Africa's Fastest Growing PFA</strong> <span class="ticker-sep">·</span> 2024</span>
+    <span class="ticker-item"><strong>Organisational Excellence in GRC</strong> <span class="ticker-sep">·</span> Pension Industry 2025</span>
+    <span class="ticker-item"><strong>Best Pension &amp; Finance CEO</strong> <span class="ticker-sep">·</span> West Africa Innovation Awards 2023</span>
+    <span class="ticker-item"><strong>Financial Crime Prevention Excellence</strong> <span class="ticker-sep">·</span> 2025</span>
+  </div>
+</div>
+
+<!-- BRIEF -->
+<section class="about" id="brief">
+  <div class="sl fade-up">01 — The Brief</div>
+  <div class="about-grid fade-up">
+    <div class="about-left">
+      <h2 class="st">Built on <em>trust.</em><br>Ready for what's next.</h2>
+      <p>Leadway Pensure PFA has spent over 20 years earning the trust of Nigerian workers — managing retirement savings with integrity, transparency, and a long-term view. That legacy is powerful. But it needs a modern voice.</p>
+      <p>The camel — the brand's mascot — is the perfect symbol: patient, resilient, built for the long haul. This project extends that story into new channels without abandoning what makes the brand matter.</p>
+      <p>The goal: make retirement feel <strong>relevant, personal, and urgent</strong> for working Nigerians aged 25–45 — before they put it off until it's too late.</p>
+    </div>
+    <div>
+      <div class="stat-block"><div class="stat-num">2004</div><div class="stat-label">Year Established</div></div>
+      <div class="stat-block"><div class="stat-num">₦8.7B+</div><div class="stat-label">Shareholders' Fund</div></div>
+      <div class="stat-block"><div class="stat-num">#1</div><div class="stat-label">Most Capitalised PFA in Nigeria</div></div>
+      <div class="stat-block"><div class="stat-num">8</div><div class="stat-label">Industry Awards — 2023 to 2025</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- PRODUCTS -->
+<section class="products" id="products">
+  <div class="sl fade-up">02 — Product Suite</div>
+  <div class="products-intro fade-up">
+    <div>
+      <h2 class="st">Every Nigerian.<br>Every <em>journey.</em></h2>
+    </div>
+    <div>
+      <p>Whether you're a salaried employee, a freelancer, a market trader, or a corporate employer — Leadway Pensure has a product built for your exact stage of life. This is what that suite looks like when it's designed with the clarity it deserves.</p>
+      <p>The products below are real. These are reimagined marketing treatments that show how each offering can be communicated to its target audience.</p>
+    </div>
+  </div>
+
+  <div class="products-grid fade-up">
+
+    <!-- PPP — FEATURED (spans 2) -->
+    <div class="prod-card featured">
+      <div class="prod-num">01</div>
+      <div class="prod-icon">🧑‍💼</div>
+      <div class="prod-tag">For the Self-Employed &amp; Informal Sector</div>
+      <div class="prod-title">Personal Pension Plan (PPP)</div>
+      <div class="prod-body">You built your own hustle. Your pension should work the same way — on your schedule, at your pace. The PPP is the retirement plan designed for Nigerians who don't wait for an employer to secure their future.</div>
+
+      <!-- 50/50 split visual -->
+      <div style="margin-bottom:28px;">
+        <div class="split-visual">
+          <div class="split-a" style="background:rgba(0,0,0,0.35);border-radius:100px 0 0 100px;"></div>
+          <div class="split-b" style="background:rgba(0,0,0,0.18);border-radius:0 100px 100px 0;"></div>
+        </div>
+        <div class="split-labels" style="color:rgba(0,0,0,0.55);">
+          <span>50% — Contingent Withdrawal</span>
+          <span>50% — Retirement Benefit</span>
+        </div>
+      </div>
+
+      <!-- Contribution flow -->
+      <div class="ppp-flow">
+        <div class="flow-step">
+          <div class="flow-bubble">
+            <div class="flow-bubble-icon">💰</div>
+            <div class="flow-bubble-label">You Contribute</div>
+            <div class="flow-bubble-sub">Any amount. Daily, weekly, or monthly.</div>
+          </div>
+        </div>
+        <div class="flow-arrow">›</div>
+        <div class="flow-step">
+          <div class="flow-bubble">
+            <div class="flow-bubble-icon">📱</div>
+            <div class="flow-bubble-label">Via PenPay / Remita / First Bank</div>
+            <div class="flow-bubble-sub">Multiple channels. Zero friction.</div>
+          </div>
+        </div>
+        <div class="flow-arrow">›</div>
+        <div class="flow-step">
+          <div class="flow-bubble">
+            <div class="flow-bubble-icon">🏦</div>
+            <div class="flow-bubble-label">First Bank Custodian</div>
+            <div class="flow-bubble-sub">Funds held securely in your name.</div>
+          </div>
+        </div>
+        <div class="flow-arrow">›</div>
+        <div class="flow-step">
+          <div class="flow-bubble">
+            <div class="flow-bubble-icon">📲</div>
+            <div class="flow-bubble-label">Leadway Credits &amp; Notifies</div>
+            <div class="flow-bubble-sub">Instant SMS confirmation to you.</div>
+          </div>
+        </div>
+      </div>
+
+      <ul class="prod-feature-list" style="margin-top:20px;">
+        <li>Open to anyone aged 18+ — salaried employees may also contribute on top of their RSA</li>
+        <li>Access 50% contingent funds after just 3 months — paid to your account within 24 hours</li>
+        <li>Retire from age 50. Retirees may continue contributing and access savings every 5 years</li>
+        <li>Qualifies you for mortgage protection, health plans, and micro-credit</li>
+        <li>No fees on balances up to ₦5,000,000 — regulated by PenCom</li>
+      </ul>
+      <div class="prod-cta">Enrol in the PPP Today</div>
+    </div>
+
+    <!-- RSA -->
+    <div class="prod-card dark-card">
+      <div class="prod-num">02</div>
+      <div class="prod-icon">🏛</div>
+      <div class="prod-tag">For Employed Nigerians</div>
+      <div class="prod-title">Retirement Savings Account (RSA)</div>
+      <div class="prod-body">Your employer contributes 10%. You contribute 8%. Together, that's 18% of your salary — automatically growing for you every month. The RSA is Nigeria's mandatory pension foundation, and Leadway Pensure makes it work harder.</div>
+      <ul class="prod-feature-list">
+        <li>18% of monthly salary contributed (10% employer + 8% employee)</li>
+        <li>Invested across government securities, equities, and money market instruments</li>
+        <li>Multi-Fund structure (Funds I–VI) — choose your risk preference</li>
+        <li>Qualify for up to 25% RSA balance as home equity (RSA Mortgage)</li>
+        <li>Access benefits at age 50 or on medical grounds</li>
+      </ul>
+      <div class="prod-cta">Open Your RSA</div>
+    </div>
+
+    <!-- AVC -->
+    <div class="prod-card">
+      <div class="prod-num">03</div>
+      <div class="prod-icon">📈</div>
+      <div class="prod-tag">For Employees Who Want More</div>
+      <div class="prod-title">Additional Voluntary Contributions (AVC)</div>
+      <div class="prod-body">Your mandatory RSA is just the floor. AVCs let you build above it — tax-efficiently. Withdraw after 5 years with significant tax advantages under the PRA 2014.</div>
+      <ul class="prod-feature-list">
+        <li>Contribute any amount above the mandatory 8% at any time</li>
+        <li>Tax-free withdrawal after 5 years of consistent contribution</li>
+        <li>All existing Voluntary Contributions automatically harmonised with PPP</li>
+        <li>Managed by Leadway Pensure under PenCom regulation</li>
+      </ul>
+      <div class="prod-cta">Start Contributing More</div>
+    </div>
+
+    <!-- Asset Management -->
+    <div class="prod-card">
+      <div class="prod-num">04</div>
+      <div class="prod-icon">🏢</div>
+      <div class="prod-tag">For Corporate Employers</div>
+      <div class="prod-title">Asset &amp; Fund Management</div>
+      <div class="prod-body">Leadway Pensure manages employer gratuity funds, group pension schemes, and institutional portfolios with 20+ years of capital market expertise and a proven track record.</div>
+      <ul class="prod-feature-list">
+        <li>Gratuity Fund management for staff and executive teams</li>
+        <li>Corporate Legacy Fund structures</li>
+        <li>Clients include Dangote, MTN, Nestlé, GTBank, NCC, and 100+ others</li>
+        <li>Custom fund mandates with dedicated relationship management</li>
+      </ul>
+      <div class="prod-cta">Speak to a Relationship Manager</div>
+    </div>
+
+    <!-- Micro Pension -->
+    <div class="prod-card dark-card">
+      <div class="prod-num">05</div>
+      <div class="prod-icon">🛵</div>
+      <div class="prod-tag">For Informal Sector Workers</div>
+      <div class="prod-title">Micro Pension Plan</div>
+      <div class="prod-body">The okada rider. The market woman. The artisan. The gig worker. The Micro Pension Plan was built specifically so that no Nigerian is left out of the retirement system — no matter how small the start.</div>
+      <ul class="prod-feature-list">
+        <li>Contributions as low as ₦500 per week via mobile platforms</li>
+        <li>40% available as contingent savings, 60% reserved for retirement</li>
+        <li>Flexible withdrawal from contingent portion at any time</li>
+        <li>No employer needed — fully self-managed</li>
+      </ul>
+      <div class="prod-cta">Join the Micro Pension Plan</div>
+    </div>
+
+    <!-- RSA Mortgage -->
+    <div class="prod-card" style="background:var(--ch-mid);">
+      <div class="prod-num">06</div>
+      <div class="prod-icon">🏠</div>
+      <div class="prod-tag">Housing Benefit</div>
+      <div class="prod-title">RSA Equity (Mortgage Support)</div>
+      <div class="prod-body">Your RSA can be more than retirement income. Use up to 25% of your RSA balance as equity contribution toward buying your own home — putting your pension savings to work today, not just tomorrow.</div>
+      <ul class="prod-feature-list">
+        <li>Up to 25% of RSA balance accessible for mortgage equity</li>
+        <li>Reduces required upfront capital for property purchase</li>
+        <li>Available to RSA holders who meet PenCom eligibility criteria</li>
+        <li>Applied directly to mortgage lender — no cash payout</li>
+      </ul>
+      <div class="prod-cta">Check Your Eligibility</div>
+    </div>
+
+  </div>
+</section>
+
+<!-- IDENTITY -->
+<section class="identity" id="identity">
+  <div class="sl dark fade-up">03 — Brand Identity</div>
+  <h2 class="st dark fade-up">Colour.<br>Type. <em>Character.</em></h2>
+
+  <div class="palette-grid fade-up">
+    <div class="color-swatch" style="background:#111111;">
+      <span class="sw-name" style="color:rgba(255,255,255,.9);">Black</span>
+      <span class="sw-hex" style="color:rgba(255,255,255,.55);">#111111</span>
+      <span class="sw-role" style="color:rgba(255,255,255,.35);">Primary Dark</span>
+    </div>
+    <div class="color-swatch" style="background:#C4520A;">
+      <span class="sw-name" style="color:rgba(255,255,255,.9);">Burnt Orange</span>
+      <span class="sw-hex" style="color:rgba(255,255,255,.6);">#C4520A</span>
+      <span class="sw-role" style="color:rgba(255,255,255,.4);">Primary Deep</span>
+    </div>
+    <div class="color-swatch" style="background:#E8660A;">
+      <span class="sw-name" style="color:rgba(255,255,255,.9);">Leadway Orange</span>
+      <span class="sw-hex" style="color:rgba(255,255,255,.6);">#E8660A</span>
+      <span class="sw-role" style="color:rgba(255,255,255,.4);">Primary Brand</span>
+    </div>
+    <div class="color-swatch" style="background:#F5A623;">
+      <span class="sw-name" style="color:rgba(17,17,17,.9);">Amber</span>
+      <span class="sw-hex" style="color:rgba(17,17,17,.55);">#F5A623</span>
+      <span class="sw-role" style="color:rgba(17,17,17,.4);">Warm Accent</span>
+    </div>
+    <div class="color-swatch" style="background:#FAF7F2;border:1px solid #eee;">
+      <span class="sw-name" style="color:rgba(17,17,17,.9);">Ivory</span>
+      <span class="sw-hex" style="color:rgba(17,17,17,.55);">#FAF7F2</span>
+      <span class="sw-role" style="color:rgba(17,17,17,.4);">Background Light</span>
+    </div>
+  </div>
+
+  <div class="type-showcase fade-up">
+    <div class="type-row">
+      <span class="type-name">Display / Hero</span>
+      <span class="type-sample" style="font-family:'Playfair Display',serif;font-size:52px;font-weight:900;color:#111;line-height:1;">Your <em style="color:#E8660A;">future</em> is a decision.</span>
+      <span class="type-spec">Playfair Display · 900 · Italic accent</span>
+    </div>
+    <div class="type-row">
+      <span class="type-name">Headline</span>
+      <span class="type-sample" style="font-family:'Barlow Condensed',sans-serif;font-size:44px;font-weight:800;color:#111;text-transform:uppercase;letter-spacing:-1px;">SECURE YOUR TOMORROW</span>
+      <span class="type-spec">Barlow Condensed · 800 · Caps</span>
+    </div>
+    <div class="type-row">
+      <span class="type-name">Subheading</span>
+      <span class="type-sample" style="font-family:'Barlow Condensed',sans-serif;font-size:22px;font-weight:600;color:#5A5A5A;letter-spacing:2px;text-transform:uppercase;">Retirement Planning · Fund Management</span>
+      <span class="type-spec">Barlow Condensed · 600 · Tracked</span>
+    </div>
+    <div class="type-row">
+      <span class="type-name">Body Copy</span>
+      <span class="type-sample" style="font-family:'Barlow',sans-serif;font-size:17px;color:#5A5A5A;line-height:1.75;max-width:500px;font-weight:300;">We manage your pension with integrity and expertise — so you can focus on today while we protect your tomorrow.</span>
+      <span class="type-spec">Barlow · 300 · 17px / 1.75</span>
+    </div>
+    <div class="type-row">
+      <span class="type-name">Label / CTA</span>
+      <span class="type-sample" style="font-family:'Barlow',sans-serif;font-size:11px;color:#E8660A;letter-spacing:4px;font-weight:700;text-transform:uppercase;">Pension Fund Administrator · Est. 2004</span>
+      <span class="type-spec">Barlow · 700 · 4px tracking</span>
+    </div>
+  </div>
+</section>
+
+<!-- PRINCIPLES -->
+<section class="principles">
+  <div class="sl fade-up">04 — Brand Principles</div>
+  <h2 class="st fade-up">The camel <em>endures.</em><br>So should the brand.</h2>
+  <div class="principles-grid fade-up">
+    <div class="p-card" data-n="01"><div class="p-icon">🐪</div><div class="p-title">Built for the Long Haul</div><p class="p-text">Like the camel, Leadway Pensure carries weight over distance. Every brand expression should radiate patience, endurance, and the quiet confidence of an institution that doesn't panic — it perseveres.</p></div>
+    <div class="p-card" data-n="02"><div class="p-icon">🧭</div><div class="p-title">Human Direction</div><p class="p-text">Retirement is personal. We talk to people, not portfolios. Our voice is warm, clear, and direct — explaining complex pension concepts without condescension, jargon, or cold finance language.</p></div>
+    <div class="p-card" data-n="03"><div class="p-icon">🇳🇬</div><div class="p-title">Nigerian at the Core</div><p class="p-text">Built for Nigeria, by Nigerians. Our materials celebrate the ambition and resilience of the Nigerian professional — because their dignity in retirement is the entire point of what we do.</p></div>
+    <div class="p-card" data-n="04"><div class="p-icon">⚡</div><div class="p-title">Urgent Relevance</div><p class="p-text">We must reach the 30-year-old who thinks pension is for later. Our communications carry calm but compelling urgency — the best time to start was yesterday, and the second best is today.</p></div>
+    <div class="p-card" data-n="05"><div class="p-icon">🛡</div><div class="p-title">Trusted Authority</div><p class="p-text">20+ years of proven fund management. Every communication reinforces Leadway Pensure as the most credible choice — never the flashiest. Gravitas is earned, not claimed with design tricks.</p></div>
+    <div class="p-card" data-n="06"><div class="p-icon">📐</div><div class="p-title">Design Discipline</div><p class="p-text">Less decoration, more intention. The brand communicates premium quality through restraint — bold orange is used purposefully, not liberally. Every visual element must earn its place.</p></div>
+  </div>
+</section>
+
+<!-- TAGLINE -->
+<div class="tagline-block">
+  <div class="tagline">"Your work built Nigeria.<br>Let us build your retirement."</div>
+  <div class="tagline-sub">— Proposed Campaign Line · Leadway Pensure PFA · 2026</div>
+</div>
+
+<!-- VOICE -->
+<section class="voice" id="voice">
+  <div class="sl dark fade-up">05 — Brand Voice</div>
+  <h2 class="st dark fade-up">How we <em>speak.</em></h2>
+  <p style="max-width:540px;font-size:17px;line-height:1.8;color:#5A5A5A;font-weight:300;" class="fade-up">Leadway Pensure's voice is the trusted advisor who also happens to be a friend — authoritative without being stiff, warm without being casual, urgent without being alarmist.</p>
+  <div class="voice-grid fade-up">
+    <div class="v-card do"><div class="v-tag">✓ Do — Say This</div><div class="v-ex">"Your salary stops one day. Your dignity doesn't have to."</div><div class="v-note">Lead with human outcome. Make retirement feel like dignity preserved, not money saved.</div></div>
+    <div class="v-card dont"><div class="v-tag">✕ Avoid — Not This</div><div class="v-ex">"Maximize your RSA contributions for optimal portfolio ROI."</div><div class="v-note">Jargon creates distance. Talk like a person, not a prospectus.</div></div>
+    <div class="v-card do"><div class="v-tag">✓ Do — Say This</div><div class="v-ex">"Whether you collect salary or collect hustle — your retirement matters."</div><div class="v-note">Speaks directly to both formal and informal sector workers. Inclusive, not generic.</div></div>
+    <div class="v-card dont"><div class="v-tag">✕ Avoid — Not This</div><div class="v-ex">"Don't miss out on compound interest! Act now before it's too late!!"</div><div class="v-note">Hype and alarm undermine trust. Premium brands don't shout.</div></div>
+    <div class="v-card do"><div class="v-tag">✓ Do — Say This</div><div class="v-ex">"₦10,000 today becomes ₦4.2M in 30 years. That's not a promise — it's maths."</div><div class="v-note">Make the abstract concrete. Real numbers beat vague assurances every time.</div></div>
+    <div class="v-card dont"><div class="v-tag">✕ Avoid — Not This</div><div class="v-ex">"We are committed to delivering world-class solutions to all valued stakeholders."</div><div class="v-note">Corporate boilerplate says nothing. Every sentence must earn its place.</div></div>
+  </div>
+</section>
+
+<!-- SOCIAL -->
+<section class="social" id="social">
+  <div class="sl fade-up">06 — Social Media System</div>
+  <div class="social-intro fade-up">
+    <div><h2 class="st">Posts that<br><em>stop the scroll.</em></h2></div>
+    <div>
+      <p>Eight post templates — awareness, education, statistics, quotes, campaigns, and product-specific formats. The PPP post is a new addition, showing how product content can live on social without becoming a brochure.</p>
+      <p style="margin-top:20px;font-size:12px;letter-spacing:2px;text-transform:uppercase;color:rgba(250,247,242,.3);font-weight:600;">Instagram · LinkedIn · Twitter/X · Facebook</p>
+    </div>
+  </div>
+  <div class="posts-grid fade-up">
+
+    <!-- 1 — Dark statement -->
+    <div class="post p1">
+      <div class="p-logo-s">Leadway Pensure PFA</div>
+      <div><div class="p1-big">EVERY<br>DAY<br><span>COUNTS.</span></div></div>
+      <div class="p1-sub">The earlier you contribute to your RSA, the more your money works while you sleep.</div>
+      <div class="p-cta-pill">Open Your RSA Today</div>
+    </div>
+
+    <!-- 2 — Orange stat -->
+    <div class="post p2">
+      <div class="p2-tag">Did You Know?</div>
+      <div><div class="p2-num">₦4.2M</div><div class="p2-label">What ₦10,000/month becomes over 30 years with Leadway Pensure.</div></div>
+      <div class="p2-logo">Leadway Pensure · @leadwaypensure</div>
+    </div>
+
+    <!-- 3 — Quote -->
+    <div class="post p3">
+      <div style="font-size:10px;letter-spacing:2px;text-transform:uppercase;color:#C4520A;font-weight:700;margin-bottom:12px;">Words to retire by</div>
+      <blockquote>"The best time to plant a tree was 20 years ago. The second best time is now."</blockquote>
+      <div class="p3-attr">Chinese Proverb · Applied to your pension</div>
+      <div class="p3-logo">LEADWAY PENSURE PFA</div>
+    </div>
+
+    <!-- 4 — Wide educational RSA -->
+    <div class="post p4 post-wide">
+      <div class="p4-left">
+        <div class="p4-tag">Pension 101 — What is an RSA?</div>
+        <div class="p4-title">Your <em>Retirement Savings Account</em> is not an expense. It's your most important asset.</div>
+        <p class="p4-body">Every Nigerian employee contributes to an RSA. Leadway Pensure ensures yours grows with enviable returns — managed by professionals with 125+ combined years of experience.</p>
+      </div>
+      <div class="p4-circle"><div class="p4-c-num">20+</div><div class="p4-c-lab">Years trusted by Nigerians</div></div>
+    </div>
+
+    <!-- 5 — Tall stacked words -->
+    <div class="post p5 post-tall">
+      <div class="p5-top">
+        <div class="la">YOUR</div>
+        <div class="lw">WORK</div>
+        <div class="lo">BUILT</div>
+        <div class="lw">THIS</div>
+        <div class="la">COUNTRY.</div>
+      </div>
+      <div class="p5-q">Let us build your retirement. You've earned every kobo of what comes next.</div>
+      <div class="p5-bot">
+        <div><div class="p5-logo">Leadway Pensure</div><div class="p5-handle">@leadwaypensure</div></div>
+        <svg width="36" height="36" viewBox="0 0 36 36" fill="none" opacity="0.3"><circle cx="18" cy="18" r="16" stroke="#F5A623" stroke-width="1.5"/><path d="M18 9v9l6 6" stroke="#F5A623" stroke-width="1.5" stroke-linecap="round"/></svg>
+      </div>
+    </div>
+
+    <!-- 6 — White tip -->
+    <div class="post p6">
+      <div><div class="p6-num">01</div><div class="p6-tip">Pension tip: <span>Your employer matches your contribution.</span> That's free money. Don't leave it on the table.</div></div>
+      <div class="p6-bot"><div class="p6-cta">Learn more</div><div class="p6-logo">Leadway Pensure</div></div>
+    </div>
+
+    <!-- 7 — Campaign -->
+    <div class="post p7">
+      <div class="p7-tag">Campaign · #SecureYourTomorrow</div>
+      <div class="p7-body"><em>Dignity</em> is not luck. It is the result of the decisions you make today.</div>
+      <div class="p7-bot">Leadway Pensure PFA · Est. 2004 · Nigeria</div>
+    </div>
+
+    <!-- 8 — PPP PRODUCT POST -->
+    <div class="post p8 post-wide">
+      <div>
+        <div class="p8-tag">Product Spotlight — Personal Pension Plan</div>
+        <div class="p8-title">No employer? <em>No problem.</em></div>
+      </div>
+      <div class="p8-split">
+        <div class="p8-half">
+          <div class="p8-half-pct">50%</div>
+          <div class="p8-half-label">Access anytime after 3 months</div>
+        </div>
+        <div class="p8-half">
+          <div class="p8-half-pct">50%</div>
+          <div class="p8-half-label">Grows until retirement at 50</div>
+        </div>
+      </div>
+      <div class="p8-sub">The PPP lets you contribute daily, weekly, or monthly — on your terms. Designed for the self-employed, gig workers, traders, and every Nigerian who built their own path.</div>
+      <div class="p8-bot">
+        <div class="p-cta-pill" style="border-color:rgba(232,102,10,.6);">Enrol via PenPay or Remita</div>
+        <div class="p-logo-s">@leadwaypensure</div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- CLIENTS -->
+<section class="clients" id="clients">
+  <div class="sl fade-up">07 — Our Clients</div>
+  <div class="fade-up">
+    <h2 class="st">Nigeria's <em>biggest</em><br>names trust us.</h2>
+    <p class="clients-subtitle">Companies across every sector of the Nigerian economy have chosen Leadway Pensure to manage their employees' retirement savings.</p>
+  </div>
+  <div class="clients-scroll fade-up">
+    <div class="clients-track">
+      <div class="client-logo">First Bank</div><div class="client-logo">MTN Nigeria</div><div class="client-logo">Dangote Group</div><div class="client-logo">GTBank</div><div class="client-logo">UBA</div><div class="client-logo">Nestlé</div><div class="client-logo">Guinness</div><div class="client-logo">Airtel</div><div class="client-logo">Ericsson</div><div class="client-logo">Standard Chartered</div><div class="client-logo">Ecobank</div><div class="client-logo">NCC</div><div class="client-logo">Maersk</div><div class="client-logo">Seplat</div><div class="client-logo">Julius Berger</div><div class="client-logo">Union Bank</div><div class="client-logo">Unilever</div><div class="client-logo">Honeywell</div><div class="client-logo">NNPC</div><div class="client-logo">PwC Nigeria</div>
+      <div class="client-logo">First Bank</div><div class="client-logo">MTN Nigeria</div><div class="client-logo">Dangote Group</div><div class="client-logo">GTBank</div><div class="client-logo">UBA</div><div class="client-logo">Nestlé</div><div class="client-logo">Guinness</div><div class="client-logo">Airtel</div><div class="client-logo">Ericsson</div><div class="client-logo">Standard Chartered</div><div class="client-logo">Ecobank</div><div class="client-logo">NCC</div><div class="client-logo">Maersk</div><div class="client-logo">Seplat</div><div class="client-logo">Julius Berger</div><div class="client-logo">Union Bank</div><div class="client-logo">Unilever</div><div class="client-logo">Honeywell</div><div class="client-logo">NNPC</div><div class="client-logo">PwC Nigeria</div>
+    </div>
+  </div>
+
+  <div class="awards-grid fade-up">
+    <div class="award-card"><div class="award-year">2023</div><div class="award-title">Best Pension &amp; Finance CEO of the Year — West Africa Innovation Awards</div></div>
+    <div class="award-card"><div class="award-year">2024</div><div class="award-title">National Quality — Best Pension Fund Administrator of the Year</div></div>
+    <div class="award-card"><div class="award-year">2024</div><div class="award-title">West African Pension &amp; Lifestyle Company of the Year + Africa's Fastest Growing PFA</div></div>
+    <div class="award-card"><div class="award-year">2025</div><div class="award-title">Organisational Excellence in GRC + Financial Crime Prevention + West Africa Company of the Year</div></div>
+  </div>
+</section>
+
+<!-- LOGO USAGE -->
+<section class="logo-sec">
+  <div class="sl fade-up">08 — Logo Usage</div>
+  <h2 class="st fade-up">Where the brand <em>lives.</em></h2>
+  <p class="fade-up" style="font-size:16px;line-height:1.8;color:rgba(250,247,242,.52);font-weight:300;max-width:540px;">The camel mark and wordmark carry two decades of earned trust. These placements show where the brand thrives — and where it must never appear.</p>
+  <div class="logo-grid fade-up">
+    <div class="logo-box" style="background:#111;">
+      <div class="logo-dot-lg" style="background:radial-gradient(circle at 35% 35%,#F5A623 0%,#E8660A 100%);"></div>
+      <div class="logo-wm" style="color:white;">LEADWAY<br><span style="color:#E8660A;">PENSURE</span> <span style="font-size:13px;color:rgba(255,255,255,.35);">pfa</span></div>
+      <div class="logo-verdict ok">✓ On Black — Preferred</div>
+    </div>
+    <div class="logo-box" style="background:#E8660A;">
+      <div class="logo-dot-lg" style="background:rgba(0,0,0,.2);"></div>
+      <div class="logo-wm" style="color:#111;">LEADWAY<br>PENSURE <span style="font-size:13px;color:rgba(0,0,0,.35);">pfa</span></div>
+      <div class="logo-verdict" style="color:rgba(0,0,0,.45);">✓ On Brand Orange</div>
+    </div>
+    <div class="logo-box" style="background:#FAF7F2;">
+      <div class="logo-dot-lg" style="background:radial-gradient(circle at 35% 35%,#F5A623 0%,#E8660A 100%);"></div>
+      <div class="logo-wm" style="color:#111;">LEADWAY<br><span style="color:#E8660A;">PENSURE</span> <span style="font-size:13px;color:#9A9A9A;">pfa</span></div>
+      <div class="logo-verdict ok">✓ On Ivory/White</div>
+    </div>
+    <div class="logo-box" style="background:#F5A623;">
+      <div class="logo-dot-lg" style="background:rgba(0,0,0,.15);"></div>
+      <div class="logo-wm" style="color:#111;">LEADWAY<br>PENSURE <span style="font-size:13px;color:rgba(0,0,0,.32);">pfa</span></div>
+      <div class="logo-verdict" style="color:rgba(0,0,0,.4);">✓ On Amber Accent</div>
+    </div>
+    <div class="logo-box" style="background:#ddd;position:relative;">
+      <div style="opacity:.38;position:relative;"><div class="logo-wm" style="color:#aaa;">LEADWAY<br>PENSURE pfa</div><div style="position:absolute;top:50%;left:-5%;width:110%;height:2px;background:#E8660A;transform:rotate(-8deg);"></div></div>
+      <div class="logo-verdict no">✗ Low Contrast</div>
+    </div>
+    <div class="logo-box" style="background:linear-gradient(135deg,#333,#666);position:relative;">
+      <div style="opacity:.3;position:relative;"><div class="logo-wm" style="color:white;">LEADWAY<br>PENSURE pfa</div><div style="position:absolute;top:50%;left:-5%;width:110%;height:2px;background:#E8660A;transform:rotate(-8deg);"></div></div>
+      <div class="logo-verdict no">✗ No Gradients</div>
+    </div>
+  </div>
+</section>
+
+<!-- GUIDELINES -->
+<section class="guidelines" id="guidelines">
+  <div class="sl dark fade-up">09 — Brand Guidelines</div>
+  <h2 class="st dark fade-up">The rules.<br>The <em>reasons.</em></h2>
+
+  <div class="fade-up" style="margin-bottom:80px;">
+    <h3 style="font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:17px;letter-spacing:2px;text-transform:uppercase;color:#111;margin-bottom:8px;">Spacing System — Base 8 Grid</h3>
+    <p style="font-size:14px;color:#9A9A9A;margin-bottom:32px;">Minimum clear-space around the logo equals the cap-height of the "L" in LEADWAY.</p>
+    <div class="sp-grid">
+      <div class="sp-block"><div class="sp-bar" style="height:8px;"></div><div class="sp-label">×0.5</div><div class="sp-val">4px</div></div>
+      <div class="sp-block"><div class="sp-bar" style="height:16px;"></div><div class="sp-label">×1</div><div class="sp-val">8px</div></div>
+      <div class="sp-block"><div class="sp-bar" style="height:24px;"></div><div class="sp-label">×1.5</div><div class="sp-val">12px</div></div>
+      <div class="sp-block"><div class="sp-bar" style="height:32px;"></div><div class="sp-label">×2</div><div class="sp-val">16px</div></div>
+      <div class="sp-block"><div class="sp-bar" style="height:48px;"></div><div class="sp-label">×3</div><div class="sp-val">24px</div></div>
+      <div class="sp-block"><div class="sp-bar" style="height:64px;"></div><div class="sp-label">×4</div><div class="sp-val">32px</div></div>
+      <div class="sp-block"><div class="sp-bar" style="height:96px;"></div><div class="sp-label">×6</div><div class="sp-val">48px</div></div>
+      <div class="sp-block"><div class="sp-bar" style="height:128px;"></div><div class="sp-label">×8</div><div class="sp-val">64px</div></div>
+    </div>
+  </div>
+
+  <div class="g-rules fade-up">
+    <div class="r-card">
+      <div class="r-num">01</div>
+      <div class="r-title">Colour Ratios</div>
+      <p class="r-body">Black anchors at 50–60%. Ivory/white provides breathing space at 25–35%. Leadway Orange (#E8660A) is the hero accent at 10–20% — enough to be unmistakably the brand, not so much it overwhelms. Amber is used sparingly as a secondary label, rule, or icon highlight.</p>
+      <div class="r-ex"><span class="rx y">50–60% Black</span><span class="rx y">25–35% Ivory</span><span class="rx y">10–20% Orange</span><span class="rx n">Orange as full background</span><span class="rx n">Off-brand colours</span></div>
+    </div>
+    <div class="r-card">
+      <div class="r-num">02</div>
+      <div class="r-title">Photography Direction</div>
+      <p class="r-body">Real-looking Nigerian professionals and workers, ages 18–65, mixed gender, urban and informal settings. Include informal sector workers — traders, artisans, gig workers — not just office professionals. Warm, natural light. Candid moments. No posed handshakes, no stock-perfect smiles.</p>
+      <div class="r-ex"><span class="rx y">Natural light</span><span class="rx y">Informal sector workers</span><span class="rx y">Candid moments</span><span class="rx n">Stock handshakes</span><span class="rx n">Office-only representation</span></div>
+    </div>
+    <div class="r-card">
+      <div class="r-num">03</div>
+      <div class="r-title">Product Communication</div>
+      <p class="r-body">Each product should lead with the human benefit, not the product mechanics. PPP communications target self-employed and informal workers — speak their language. RSA communications are for employees — emphasise what they're entitled to. Asset Management speaks B2B — be precise and professional.</p>
+      <div class="r-ex"><span class="rx y">Benefit-first headline</span><span class="rx y">Audience-specific tone</span><span class="rx y">One product per post</span><span class="rx n">Mixing products in one post</span><span class="rx n">Leading with product names</span></div>
+    </div>
+    <div class="r-card">
+      <div class="r-num">04</div>
+      <div class="r-title">Social Media Specs</div>
+      <p class="r-body">Instagram square: 1080×1080px. Story/Reel: 1080×1920px. LinkedIn feed: 1200×628px. Always include @leadwaypensure at the base of every post. Logo wordmark always top-left. Minimum rendered type in image: 28px. Maintain 60px safe-zone margins inside all crop boundaries.</p>
+      <div class="r-ex"><span class="rx y">Handle on every post</span><span class="rx y">Logo top-left</span><span class="rx y">60px safe margins</span><span class="rx n">Text in bottom 15%</span><span class="rx n">Logo centred/floating</span></div>
+    </div>
+    <div class="r-card full">
+      <div class="r-num">05</div>
+      <div class="r-title">What the Brand Never Does</div>
+      <p class="r-body" style="max-width:800px;">Leadway Pensure does not use gimmicks. The brand never features fake countdown timers, unverified testimonials, or aggressive loss-aversion copy. It does not make promises it cannot quantify. It never speaks down to its audience or treats pension products as something to be sold rather than a life decision to be supported. No memes, no clickbait, no multiple exclamation marks. The camel mark must never be placed directly on a busy photographic background without a solid colour block behind it. Product content must accurately reflect PenCom-regulated terms — never overstate return rates or access timelines.</p>
+      <div class="r-ex" style="margin-top:20px;"><span class="rx n">Fake countdown timers</span><span class="rx n">Overstated return claims</span><span class="rx n">Unverified testimonials</span><span class="rx n">Brand memes</span><span class="rx n">Multiple exclamation marks</span><span class="rx n">Logo on busy photo</span><span class="rx n">Non-compliant product claims</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<div class="footer-cta">
+  <div class="footer-bg">LP</div>
+  <h2>Let's build<br>something <em>lasting.</em></h2>
+  <p>Spec work demonstrating how Leadway Pensure's brand can be extended — with new product showcases, social content, and communication guidelines — without losing the trust it took 20 years to earn.</p>
+  <a href="/cdn-cgi/l/email-protection#bed3d7dd90d1d9cbd0cad7d3dbd6d7d0fed9d3dfd7d290ddd1d3" class="cta-btn">Get in Touch</a>
+  <a href="#brief" class="cta-btn out">View Again</a>
+</div>
+<div class="footer-bottom">
+  <div>
+    <div class="footer-brand">LEADWAY <span>PENSURE</span> PFA</div>
+    <div style="font-size:11px;color:rgba(250,247,242,.2);margin-top:6px;letter-spacing:1px;">Brand Extension Pitch · 2026 · Spec Work</div>
+  </div>
+  <div class="footer-note">Independent spec work. Not affiliated with or endorsed by Leadway Pensure PFA Limited or the Leadway Group. Product details sourced from publicly available Leadway Pensure materials and PenCom guidelines.</div>
+</div>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+const obs = new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible');});
+},{threshold:0.08,rootMargin:'0px 0px -50px 0px'});
+document.querySelectorAll('.fade-up').forEach(el=>obs.observe(el));
+['.principles-grid','.voice-grid','.posts-grid','.palette-grid','.g-rules','.logo-grid','.products-grid','.awards-grid'].forEach(sel=>{
+  
