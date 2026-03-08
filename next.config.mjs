@@ -45,7 +45,7 @@ const nextConfig = {
               "img-src 'self' data: blob: https:",
               "font-src 'self' data:",
               "connect-src 'self' https://api.resend.com",
-              "frame-src 'self' https://www.youtube.com https://w.soundcloud.com https://www.behance.net",
+              "frame-src 'self' https://www.youtube.com https://w.soundcloud.com https://www.behance.net https://open.spotify.com",
               "object-src 'none'",
               "base-uri 'self'",
               "form-action 'self'",

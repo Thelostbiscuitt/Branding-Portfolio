@@ -96,5 +96,5 @@ export const SOCIALS = [
   { label: "Behance",           href: "https://www.behance.net/BlvckOreo" },
   { label: "GitHub",            href: "https://github.com/Thelostbiscuitt" },
   { label: "LinkedIn",          href: "https://www.linkedin.com/in/michael-oguntimehin-480751398" },
-  { label: "hello@michael.dev", href: "mailto:hello@michael.dev", isEmail: true },
+  { label: "mic.oguntimehin@gmail.com", href: "mailto:mic.oguntimehin@gmail.com", isEmail: true },
 ];

@@ -325,8 +325,7 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
     <main className="min-h-screen bg-bg">
 
       {/* ── Navbar ── */}
-      <nav className="fixed top-0 left-0 right-0 z-[300] flex items-center justify-between px-12 py-5"
-        style={{ background: "rgba(var(--bg-raw, 249,247,244), 0.96)", backdropFilter: "blur(12px)", borderBottom: "1px solid var(--rule)" }}>
+      <nav className="fixed top-0 left-0 right-0 z-[300] flex items-center justify-between px-12 py-5 bg-bg/96 backdrop-blur-md border-b border-rule">
         <Link href="/" className="flex items-center gap-2 font-mono text-[0.65rem] tracking-[0.1em] uppercase text-mid hover:text-ink transition-colors no-underline">
           <ArrowLeft className="w-3 h-3" /> Back to work
         </Link>

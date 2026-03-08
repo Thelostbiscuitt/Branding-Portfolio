@@ -54,70 +54,85 @@ export function Projects() {
         {/* Project list */}
         <div className="flex flex-col">
           <AnimatePresence mode="popLayout">
-            {filtered.map((project, i) => (
-              <motion.div
-                key={project.id}
-                layout
-                initial={{ opacity: 0, y: 16 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0 }}
-                transition={{ duration: 0.35, delay: i * 0.04 }}
-                className="group grid grid-cols-1 sm:grid-cols-[120px_1fr_auto] gap-6 items-center py-7 border-t border-rule last:border-b hover:bg-card transition-colors duration-200 px-0 hover:px-4 -mx-0 hover:-mx-4"
-                style={{ transition: "background 0.2s, padding 0.25s, margin 0.25s" }}
-              >
-                {/* Number */}
-                <div className="font-mono text-[0.65rem] tracking-[0.1em] text-mid hidden sm:flex items-center gap-4">
-                  <span className="flex-1 h-px bg-rule" />
-                  {String(i + 1).padStart(2, "0")}
-                </div>
-
-                {/* Content */}
-                <div>
-                  <div className="font-mono text-[0.58rem] tracking-[0.1em] uppercase text-terra mb-1.5">
-                    {project.cat}
+            {filtered.map((project, i) => {
+              const isInternal = project.url.startsWith("/projects/");
+              const RowContent = (
+                <>
+                  {/* Number */}
+                  <div className="font-mono text-[0.65rem] tracking-[0.1em] text-mid hidden sm:flex items-center gap-4">
+                    <span className="flex-1 h-px bg-rule" />
+                    {String(i + 1).padStart(2, "0")}
                   </div>
-                  <h3 className="font-sans font-bold text-[1.1rem] tracking-[-0.02em] text-ink group-hover:text-terra transition-colors duration-200 mb-2">
-                    {project.title}
-                  </h3>
-                  <div className="flex flex-wrap gap-1.5">
-                    {project.tags.map((tag) => (
-                      <span key={tag} className="font-mono text-[0.55rem] tracking-[0.04em] uppercase text-mid bg-rule px-2 py-0.5">
-                        {tag}
+
+                  {/* Content */}
+                  <div>
+                    <div className="font-mono text-[0.58rem] tracking-[0.1em] uppercase text-terra mb-1.5">
+                      {project.cat}
+                    </div>
+                    <h3 className="font-sans font-bold text-[1.1rem] tracking-[-0.02em] text-ink group-hover:text-terra transition-colors duration-200 mb-2">
+                      {project.title}
+                    </h3>
+                    <div className="flex flex-wrap gap-1.5">
+                      {project.tags.map((tag) => (
+                        <span key={tag} className="font-mono text-[0.55rem] tracking-[0.04em] uppercase text-mid bg-rule px-2 py-0.5">
+                          {tag}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Arrow indicator */}
+                  <div className="flex items-center">
+                    {project.url !== "#" ? (
+                      <ArrowUpRight className="w-4 h-4 text-mid group-hover:text-terra transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                    ) : (
+                      <span className="font-mono text-[0.62rem] tracking-[0.08em] uppercase text-rule whitespace-nowrap">
+                        Soon
                       </span>
-                    ))}
+                    )}
                   </div>
-                </div>
+                </>
+              );
 
-                {/* Link */}
-                <div>
+              return (
+                <motion.div
+                  key={project.id}
+                  layout
+                  initial={{ opacity: 0, y: 16 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0 }}
+                  transition={{ duration: 0.35, delay: i * 0.04 }}
+                >
                   {project.url !== "#" ? (
-                    project.url.startsWith("/projects/") ? (
+                    isInternal ? (
                       <Link
                         href={project.url}
-                        className="font-mono text-[0.62rem] tracking-[0.08em] uppercase text-mid group-hover:text-terra transition-colors duration-200 flex items-center gap-2 no-underline whitespace-nowrap"
+                        className="group grid grid-cols-1 sm:grid-cols-[120px_1fr_auto] gap-6 items-center py-7 border-t border-rule last:border-b hover:bg-card transition-colors duration-200 px-0 hover:px-4 -mx-0 hover:-mx-4 no-underline"
+                        style={{ transition: "background 0.2s, padding 0.25s, margin 0.25s" }}
                       >
-                        View
-                        <ArrowUpRight className="w-3 h-3 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                        {RowContent}
                       </Link>
                     ) : (
                       <a
                         href={project.url}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="font-mono text-[0.62rem] tracking-[0.08em] uppercase text-mid group-hover:text-terra transition-colors duration-200 flex items-center gap-2 no-underline whitespace-nowrap"
+                        className="group grid grid-cols-1 sm:grid-cols-[120px_1fr_auto] gap-6 items-center py-7 border-t border-rule last:border-b hover:bg-card transition-colors duration-200 px-0 hover:px-4 -mx-0 hover:-mx-4 no-underline"
+                        style={{ transition: "background 0.2s, padding 0.25s, margin 0.25s" }}
                       >
-                        View
-                        <ArrowUpRight className="w-3 h-3 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                        {RowContent}
                       </a>
                     )
                   ) : (
-                    <span className="font-mono text-[0.62rem] tracking-[0.08em] uppercase text-rule whitespace-nowrap">
-                      Soon
-                    </span>
+                    <div
+                      className="group grid grid-cols-1 sm:grid-cols-[120px_1fr_auto] gap-6 items-center py-7 border-t border-rule last:border-b px-0 opacity-50"
+                    >
+                      {RowContent}
+                    </div>
                   )}
-                </div>
-              </motion.div>
-            ))}
+                </motion.div>
+              );
+            })}
           </AnimatePresence>
         </div>
 
