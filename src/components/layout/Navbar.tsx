@@ -105,6 +105,15 @@ export function Navbar() {
                 </motion.li>
               ))}
             </ul>
+            {/* LightSwitch for mobile */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: NAV_LINKS.length * 0.07 }}
+              className="mt-8"
+            >
+              <LightSwitch />
+            </motion.div>
           </motion.div>
         )}
       </AnimatePresence>

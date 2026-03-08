@@ -53,7 +53,7 @@ export function Hero() {
                       }`}
                       style={{
                         fontSize: "clamp(3.5rem, 10.5vw, 11rem)",
-                        WebkitTextStroke: i === 2 ? "1.5px #111010" : undefined,
+                        WebkitTextStroke: i === 2 ? "1.5px var(--ink)" : undefined,
                       }}
                       initial={{ y: "105%", opacity: 0 }}
                       animate={{ y: 0, opacity: 1 }}
@@ -80,9 +80,10 @@ export function Hero() {
                     src="/photo.jpg"
                     alt="Michael Oguntimehin"
                     fill
+                    quality={90}
                     className="object-cover"
                     style={{ objectPosition: "center 15%" }}
-                    sizes="380px"
+                    sizes="(max-width: 1024px) 0px, 380px"
                     priority
                   />
                 </div>

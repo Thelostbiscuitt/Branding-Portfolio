@@ -27,6 +27,7 @@ export function About() {
                   src="/photo.jpg"
                   alt="Michael Oguntimehin"
                   fill
+                  quality={90}
                   className="object-cover transition-transform duration-700 hover:scale-[1.03]"
                   style={{ objectPosition: "center 8%" }}
                   sizes="(max-width: 768px) 100vw, 380px"

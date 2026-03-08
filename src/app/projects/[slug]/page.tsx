@@ -390,7 +390,7 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
         {/* ── Cover image (non-Leadway) ── */}
         {!isLeadway && (
           <div className="w-full relative overflow-hidden mb-16 bg-card" style={{ aspectRatio: "16/9" }}>
-            <Image src={project.coverImage} alt={project.title} fill
+            <Image src={project.coverImage} alt={project.title} fill quality={90}
               className={`${project.coverImage.includes("roadmap") ? "object-contain" : "object-cover object-top"}`}
               priority sizes="100vw" />
           </div>
@@ -464,7 +464,7 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
             <div className="flex flex-col gap-[2px] border border-rule overflow-hidden">
               {project.epkScreenshots.map((img, i) => (
                 <div key={i} className="w-full bg-card overflow-hidden relative">
-                  <Image src={img.src} alt={img.alt} width={1440} height={900} className="w-full h-auto" sizes="100vw" />
+                  <Image src={img.src} alt={img.alt} width={1440} height={900} quality={90} className="w-full h-auto" sizes="100vw" />
                 </div>
               ))}
             </div>
@@ -478,7 +478,7 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
             <div className="space-y-4">
               {project.images.map((img, i) => (
                 <div key={i} className="w-full bg-card overflow-hidden">
-                  <Image src={img.src} alt={img.alt} width={1440} height={900}
+                  <Image src={img.src} alt={img.alt} width={1440} height={900} quality={90}
                     className={`w-full ${img.display === "contain" ? "object-contain" : "object-cover"}`}
                     style={img.display !== "contain" ? { aspectRatio: "16/9" } : {}}
                     sizes="100vw" />
