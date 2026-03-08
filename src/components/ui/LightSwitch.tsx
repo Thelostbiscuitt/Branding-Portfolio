@@ -107,14 +107,6 @@ export function LightSwitch() {
           }}
         />
       </div>
-
-      {/* Tooltip */}
-      <span
-        className="absolute right-full mr-2 top-1/2 -translate-y-1/2 font-mono text-[0.52rem] tracking-[0.1em] uppercase whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none"
-        style={{ color: "var(--mid)" }}
-      >
-        {dark ? "Lights on" : "Lights off"}
-      </span>
     </button>
   );
 }

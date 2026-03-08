@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Epilogue, Lora, IBM_Plex_Mono } from "next/font/google";
 import "./globals.css";
+import { CustomCursor } from "@/components/layout/CustomCursor";
 
 const epilogue = Epilogue({
   subsets: ["latin"],
@@ -62,6 +63,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en" className="scroll-smooth">
       <body className={`${epilogue.variable} ${lora.variable} ${ibmMono.variable} font-sans bg-bg text-ink overflow-x-hidden`}>
+        <CustomCursor />
         <a
           href="#main"
           className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[9999] focus:bg-terra focus:text-white focus:px-4 focus:py-2"

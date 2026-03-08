@@ -3,6 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { ArrowLeft, ArrowUpRight } from "lucide-react";
 import { getProjectBySlug, PROJECT_DETAILS, type ProjectDetail, type MediaEmbed, type ContribSection } from "@/lib/projects";
+import { LightSwitch } from "@/components/ui/LightSwitch";
 
 export const dynamicParams = true;
 
@@ -332,17 +333,20 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
         <span className="font-sans font-black text-[1.05rem] tracking-[-0.02em] text-ink">
           Michael<span className="text-terra">.</span>
         </span>
-        {project.liveUrl ? (
-          <a href={project.liveUrl} target="_blank" rel="noopener noreferrer"
-            className="flex items-center gap-2 font-mono text-[0.65rem] tracking-[0.1em] uppercase text-mid hover:text-terra transition-colors no-underline">
-            Live EPK <ArrowUpRight className="w-3 h-3" />
-          </a>
-        ) : project.behanceUrl ? (
-          <a href={project.behanceUrl} target="_blank" rel="noopener noreferrer"
-            className="flex items-center gap-2 font-mono text-[0.65rem] tracking-[0.1em] uppercase text-mid hover:text-terra transition-colors no-underline">
-            Behance <ArrowUpRight className="w-3 h-3" />
-          </a>
-        ) : <div />}
+        <div className="flex items-center gap-4">
+          <LightSwitch />
+          {project.liveUrl ? (
+            <a href={project.liveUrl} target="_blank" rel="noopener noreferrer"
+              className="flex items-center gap-2 font-mono text-[0.65rem] tracking-[0.1em] uppercase text-mid hover:text-terra transition-colors no-underline">
+              Live EPK <ArrowUpRight className="w-3 h-3" />
+            </a>
+          ) : project.behanceUrl ? (
+            <a href={project.behanceUrl} target="_blank" rel="noopener noreferrer"
+              className="flex items-center gap-2 font-mono text-[0.65rem] tracking-[0.1em] uppercase text-mid hover:text-terra transition-colors no-underline">
+              Behance <ArrowUpRight className="w-3 h-3" />
+            </a>
+          ) : null}
+        </div>
       </nav>
 
       <div className="pt-24 px-12 pb-0 max-w-[1280px] mx-auto">

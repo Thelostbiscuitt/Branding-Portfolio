@@ -1,6 +1,5 @@
 import { Navbar }        from "@/components/layout/Navbar";
 import { Footer }        from "@/components/layout/Footer";
-import { CustomCursor }  from "@/components/layout/CustomCursor";
 import { ScrollProgress } from "@/components/layout/ScrollProgress";
 import { ScrollToTop }   from "@/components/layout/ScrollToTop";
 import { SectionDots }   from "@/components/layout/SectionDots";
@@ -12,7 +11,6 @@ import { Contact }       from "@/components/sections/Contact";
 export default function Home() {
   return (
     <>
-      <CustomCursor />
       <ScrollProgress />
       <SectionDots />
       <ScrollToTop />
