@@ -41,19 +41,39 @@ const nextConfig = {
           // Content Security Policy - allow necessary sources for portfolio
           {
             key: "Content-Security-Policy",
-            value: [
-              "default-src 'self'",
-              "script-src 'self' 'unsafe-inline' 'unsafe-eval'", // unsafe-inline/eval needed for Next.js dev mode
-              "style-src 'self' 'unsafe-inline'", // unsafe-inline needed for Tailwind
-              "img-src 'self' data: blob: https:",
-              "font-src 'self' data:",
-              "connect-src 'self' https://api.resend.com",
-              "frame-src 'self' https://www.youtube.com https://w.soundcloud.com https://www.behance.net https://open.spotify.com",
-              "object-src 'none'",
-              "base-uri 'self'",
-              "form-action 'self'",
-              "frame-ancestors 'none'",
-            ].join("; "),
+            value: process.env.NODE_ENV === 'production'
+              ? [
+                  // Production: Strict CSP
+                  "default-src 'self'",
+                  "script-src 'self'",
+                  "style-src 'self' 'unsafe-inline'", // Tailwind requires unsafe-inline
+                  "img-src 'self' data: blob: https:",
+                  "font-src 'self' data:",
+                  "connect-src 'self' https://api.resend.com",
+                  "frame-src 'self' https://www.youtube.com https://w.soundcloud.com https://www.behance.net https://open.spotify.com",
+                  "object-src 'none'",
+                  "base-uri 'self'",
+                  "form-action 'self'",
+                  "frame-ancestors 'none'",
+                  "report-uri /api/csp-violation", // Report violations for monitoring
+                  "report-to csp-endpoint",
+                ].join("; ")
+              : [
+                  // Development: Permissive CSP for Next.js dev mode
+                  "default-src 'self'",
+                  "script-src 'self' 'unsafe-inline' 'unsafe-eval'",
+                  "style-src 'self' 'unsafe-inline'",
+                  "img-src 'self' data: blob: https:",
+                  "font-src 'self' data:",
+                  "connect-src 'self' https://api.resend.com",
+                  "frame-src 'self' https://www.youtube.com https://w.soundcloud.com https://www.behance.net https://open.spotify.com",
+                  "object-src 'none'",
+                  "base-uri 'self'",
+                  "form-action 'self'",
+                  "frame-ancestors 'none'",
+                  "report-uri /api/csp-violation",
+                  "report-to csp-endpoint",
+                ].join("; "),
           },
         ],
       },
