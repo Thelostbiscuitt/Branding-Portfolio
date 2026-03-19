@@ -11,13 +11,13 @@ export const metadata: Metadata = {
 
 export default function BiscuitAiPage() {
   return (
-    <main className="min-h-screen bg-[#FAF7F2]">
+    <main className="min-h-screen bg-[#FAF7F2] dark:bg-[#111]">
       {/* ── Navbar ── */}
-      <nav className="fixed top-0 left-0 right-0 z-[300] flex items-center justify-between px-12 py-5 bg-[#FAF7F2]/96 backdrop-blur-md border-b border-[#E8E6E1]">
-        <Link href="/projects" className="flex items-center gap-2 font-mono text-[0.65rem] tracking-[0.1em] uppercase text-[#666] hover:text-[#111] transition-colors no-underline">
+      <nav className="fixed top-0 left-0 right-0 z-[300] flex items-center justify-between px-12 py-5 bg-[#FAF7F2]/96 dark:bg-[#111]/96 backdrop-blur-md border-b border-[#E8E6E1] dark:border-[#333]/50">
+        <Link href="/projects" className="flex items-center gap-2 font-mono text-[0.65rem] tracking-[0.1em] uppercase text-[#666] dark:text-[#999] hover:text-[#111] dark:hover:text-[#FAF7F2] transition-colors no-underline">
           <ArrowLeft className="w-3 h-3" /> Back to work
         </Link>
-        <span className="font-sans font-black text-[1.05rem] tracking-[-0.02em] text-[#111]">
+        <span className="font-sans font-black text-[1.05rem] tracking-[-0.02em] text-[#111] dark:text-[#FAF7F2]">
           Michael<span className="text-[#E8660A]">.</span>
         </span>
         <div className="flex items-center gap-4">
@@ -34,24 +34,24 @@ export default function BiscuitAiPage() {
         {/* ── Meta row ── */}
         <div className="flex flex-wrap items-center gap-3 mb-8 pt-8 px-12">
           <span className="font-mono text-[0.6rem] tracking-[0.1em] uppercase text-[#E8660A]">Design</span>
-          <span className="text-[#E8E6E1]">·</span>
-          <span className="font-mono text-[0.6rem] tracking-[0.1em] uppercase text-[#666]">2026</span>
-          <span className="text-[#E8E6E1]">·</span>
-          <span className="font-mono text-[0.6rem] tracking-[0.1em] uppercase text-[#666]">Personal Project</span>
-          <span className="text-[#E8E6E1]">·</span>
+          <span className="text-[#E8E6E1] dark:text-[#333]">·</span>
+          <span className="font-mono text-[0.6rem] tracking-[0.1em] uppercase text-[#666] dark:text-[#999]">2026</span>
+          <span className="text-[#E8E6E1] dark:text-[#333]">·</span>
+          <span className="font-mono text-[0.6rem] tracking-[0.1em] uppercase text-[#666] dark:text-[#999]">Personal Project</span>
+          <span className="text-[#E8E6E1] dark:text-[#333]">·</span>
           <span className="font-mono text-[0.6rem] tracking-[0.1em] uppercase text-[#E8660A]">Self-Directed</span>
         </div>
 
         {/* ── Hero Section ── */}
         <div className="px-12 mb-20">
-          <h1 className="font-serif font-bold text-[clamp(3rem,6vw,5rem)] leading-[1.1] mb-6 text-[#111]">
+          <h1 className="font-serif font-bold text-[clamp(3rem,6vw,5rem)] leading-[1.1] mb-6 text-[#111] dark:text-[#FAF7F2]">
             Biscuit AI
           </h1>
           <p className="font-serif italic text-[clamp(1.5rem,3vw,2.5rem)] text-[#E8660A] leading-[1.1] mb-6">
             The LLM was good. The browser was dumb. So I fixed it.
           </p>
-          <p className="font-sans text-[clamp(1rem,2vw,1.3rem)] text-[#333] leading-[1.6] max-w-3xl">
-            A production-ready Telegram bot built around GLM-4.7 — because the best model in the world is only as good as the interface you use to reach it. Biscuit moves the conversation out of a browser tab and into the app that's already open all day.
+          <p className="font-sans text-[clamp(1rem,2vw,1.3rem)] text-[#333] dark:text-[#999] leading-[1.6] max-w-3xl">
+            A production-ready Telegram bot built around GLM-4.7 — because best model in the world is only as good as the interface you use to reach it. Biscuit moves the conversation out of a browser tab and into the app that's already open all day.
           </p>
         </div>
 
@@ -100,25 +100,25 @@ export default function BiscuitAiPage() {
               
               {/* ── Section 01: The Problem ── */}
               <div>
-                <div className="font-mono text-[0.6rem] tracking-[0.14em] uppercase text-[#666] mb-8">
+                <div className="font-mono text-[0.6rem] tracking-[0.14em] uppercase text-[#666] dark:text-[#999] mb-8">
                   01 — THE PROBLEM
                 </div>
-                <h2 className="font-serif text-[clamp(2rem,4vw,3rem)] text-[#111] mb-8">
+                <h2 className="font-serif text-[clamp(2rem,4vw,3rem)] text-[#111] dark:text-[#FAF7F2] mb-8">
                   A great model locked behind a bad interface.
                 </h2>
                 <blockquote className="border-l-4 border-[#E8660A] pl-6 py-4 mb-8">
-                  <p className="font-serif text-[1.1rem] leading-[1.8] text-[#333] italic">
+                  <p className="font-serif text-[1.1rem] leading-[1.8] text-[#333] dark:text-[#999] italic">
                     GLM-4.7 is a capable model with real-time web search. The problem: accessing it meant opening a browser, navigating to the platform, and working inside a UI that wasn't designed around how I actually work.
                   </p>
                 </blockquote>
-                <p className="font-serif text-[1.1rem] leading-[1.8] text-[#333]">
+                <p className="font-serif text-[1.1rem] leading-[1.8] text-[#333] dark:text-[#999]">
                   That friction was a design problem. Users had to switch contexts to the browser, navigate complex web interfaces, deal with poor mobile experience, and lose conversation context. The best model in the world is only as good as the interface you use to reach it.
                 </p>
               </div>
 
               {/* ── Section 02: Before/After ── */}
               <div>
-                <div className="font-mono text-[0.6rem] tracking-[0.14em] uppercase text-[#666] mb-8">
+                <div className="font-mono text-[0.6rem] tracking-[0.14em] uppercase text-[#666] dark:text-[#999] mb-8">
                   02 — THE SHIFT
                 </div>
                 <div className="grid grid-cols-2 gap-6">
@@ -127,7 +127,7 @@ export default function BiscuitAiPage() {
                       <span className="text-[#E8660A] text-xl">✕</span>
                       <span className="font-mono text-[0.65rem] tracking-[0.1em] uppercase text-[#E8660A]">Before</span>
                     </div>
-                    <ul className="space-y-3 text-[#333] font-serif">
+                    <ul className="space-y-3 text-[#333] dark:text-[#999] font-serif">
                       <li className="flex items-start gap-2">
                         <span className="text-[#E8660A] mt-1">—</span>
                         Switch contexts to browser
@@ -147,12 +147,12 @@ export default function BiscuitAiPage() {
                     </ul>
                   </div>
                   
-                  <div className="bg-[#FAF7F2] p-8 rounded-lg border-2 border-[#E8660A]">
+                  <div className="bg-[#FAF7F2] dark:bg-[#111] p-8 rounded-lg border-2 border-[#E8660A]">
                     <div className="flex items-center gap-3 mb-4">
                       <span className="text-[#E8660A] text-xl">✓</span>
                       <span className="font-mono text-[0.65rem] tracking-[0.1em] uppercase text-[#E8660A]">After</span>
                     </div>
-                    <ul className="space-y-3 text-[#333] font-serif">
+                    <ul className="space-y-3 text-[#333] dark:text-[#999] font-serif">
                       <li className="flex items-start gap-2">
                         <span className="text-[#E8660A] mt-1">+</span>
                         Zero context switching
@@ -180,7 +180,7 @@ export default function BiscuitAiPage() {
 
               {/* ── Section 03: UX Decisions ── */}
               <div>
-                <div className="font-mono text-[0.6rem] tracking-[0.14em] uppercase text-[#666] mb-8">
+                <div className="font-mono text-[0.6rem] tracking-[0.14em] uppercase text-[#666] dark:text-[#999] mb-8">
                   03 — UX DECISIONS
                 </div>
                 <div className="grid grid-cols-2 gap-6">
@@ -223,14 +223,14 @@ export default function BiscuitAiPage() {
 
               {/* ── Architecture Flow Diagram ── */}
               <div>
-                <div className="font-mono text-[0.6rem] tracking-[0.14em] uppercase text-[#666] mb-8">
+                <div className="font-mono text-[0.6rem] tracking-[0.14em] uppercase text-[#666] dark:text-[#999] mb-8">
                   04 — ARCHITECTURE FLOW
                 </div>
-                <div className="bg-[#FAF7F2] p-12 rounded-lg border-2 border-[#E8660A]">
+                <div className="bg-[#FAF7F2] dark:bg-[#111] p-12 rounded-lg border-2 border-[#E8660A]">
                   <div className="space-y-4">
                     {/* Title */}
                     <div className="text-center mb-8">
-                      <h3 className="font-serif text-[2rem] text-[#111] mb-2">▸ Conversation Flow — Biscuit AI</h3>
+                      <h3 className="font-serif text-[2rem] text-[#111] dark:text-[#FAF7F2] mb-2">▸ Conversation Flow — Biscuit AI</h3>
                     </div>
 
                     {/* Flow Tree */}
@@ -258,7 +258,7 @@ export default function BiscuitAiPage() {
 
                       {/* Handler Router */}
                       <div className="text-center">
-                        <span className="font-mono text-[0.65rem] tracking-[0.1em] uppercase text-[#666]">Handler Router — classifies intent</span>
+                        <span className="font-mono text-[0.65rem] tracking-[0.1em] uppercase text-[#666] dark:text-[#999]">Handler Router — classifies intent</span>
                       </div>
 
                       {/* Arrow */}
@@ -276,7 +276,7 @@ export default function BiscuitAiPage() {
                             <span className="font-mono text-[0.65rem] tracking-[0.1em] uppercase text-[#FAF7F2]">llm_router.py</span>
                           </div>
                           <div className="text-center">
-                            <span className="font-mono text-[0.6rem] tracking-[0.1em] uppercase text-[#666]">GLM-4.7 + Web Search</span>
+                            <span className="font-mono text-[0.6rem] tracking-[0.1em] uppercase text-[#666] dark:text-[#999]">GLM-4.7 + Web Search</span>
                           </div>
                         </div>
 
@@ -290,7 +290,7 @@ export default function BiscuitAiPage() {
                             <span className="font-mono text-[0.65rem] tracking-[0.1em] uppercase text-[#FAF7F2]">notion_handler.py</span>
                           </div>
                           <div className="text-center">
-                            <span className="font-mono text-[0.6rem] tracking-[0.1em] uppercase text-[#666]">Upload / Retrieve</span>
+                            <span className="font-mono text-[0.6rem] tracking-[0.1em] uppercase text-[#666] dark:text-[#999]">Upload / Retrieve</span>
                           </div>
                         </div>
 
@@ -304,7 +304,7 @@ export default function BiscuitAiPage() {
                             <span className="font-mono text-[0.65rem] tracking-[0.1em] uppercase text-[#FAF7F2]">image_handler.py</span>
                           </div>
                           <div className="text-center">
-                            <span className="font-mono text-[0.6rem] tracking-[0.1em] uppercase text-[#666]">Stability AI / HF</span>
+                            <span className="font-mono text-[0.6rem] tracking-[0.1em] uppercase text-[#666] dark:text-[#999]">Stability AI / HF</span>
                           </div>
                         </div>
                       </div>
@@ -318,7 +318,7 @@ export default function BiscuitAiPage() {
                       </div>
 
                       <div className="text-center">
-                        <span className="font-mono text-[0.65rem] tracking-[0.1em] uppercase text-[#666]">Pagination · Cost tracking · Delivery</span>
+                        <span className="font-mono text-[0.65rem] tracking-[0.1em] uppercase text-[#666] dark:text-[#999]">Pagination · Cost tracking · Delivery</span>
                       </div>
 
                       {/* Arrow */}
@@ -330,7 +330,7 @@ export default function BiscuitAiPage() {
                       </div>
 
                       <div className="text-center">
-                        <span className="font-mono text-[0.65rem] tracking-[0.1em] uppercase text-[#666]">Telegram — clean, paginated response</span>
+                        <span className="font-mono text-[0.65rem] tracking-[0.1em] uppercase text-[#666] dark:text-[#999]">Telegram — clean, paginated response</span>
                       </div>
                     </div>
                   </div>
@@ -339,23 +339,23 @@ export default function BiscuitAiPage() {
 
               {/* ── Section 05: Features ── */}
               <div>
-                <div className="font-mono text-[0.6rem] tracking-[0.14em] uppercase text-[#666] mb-8">
+                <div className="font-mono text-[0.6rem] tracking-[0.14em] uppercase text-[#666] dark:text-[#999] mb-8">
                   05 — KEY FEATURES
                 </div>
                 <div className="grid grid-cols-3 gap-6 mb-12">
-                  <div className="bg-[#FAF7F2] p-6 rounded-lg border-2 border-[#E8660A]">
-                    <h3 className="font-serif text-[1.3rem] text-[#111] mb-4">Intelligent Chat</h3>
-                    <p className="font-serif text-[0.95rem] leading-[1.6] text-[#666]">GLM-4.7 with live web search. Configured with strict guardrails: if it can't verify a fact, it says so — it doesn't guess.</p>
+                  <div className="bg-[#FAF7F2] dark:bg-[#111] p-6 rounded-lg border-2 border-[#E8660A]">
+                    <h3 className="font-serif text-[1.3rem] text-[#111] dark:text-[#FAF7F2] mb-4">Intelligent Chat</h3>
+                    <p className="font-serif text-[0.95rem] leading-[1.6] text-[#666] dark:text-[#999]">GLM-4.7 with live web search. Configured with strict guardrails: if it can't verify a fact, it says so — it doesn't guess.</p>
                   </div>
                   
-                  <div className="bg-[#FAF7F2] p-6 rounded-lg border-2 border-[#E8660A]">
-                    <h3 className="font-serif text-[1.3rem] text-[#111] mb-4">Notion Library</h3>
-                    <p className="font-serif text-[0.95rem] leading-[1.6] text-[#666]">Upload a PDF and its metadata goes straight to your Notion database. Ask about your books in plain language — no command required.</p>
+                  <div className="bg-[#FAF7F2] dark:bg-[#111] p-6 rounded-lg border-2 border-[#E8660A]">
+                    <h3 className="font-serif text-[1.3rem] text-[#111] dark:text-[#FAF7F2] mb-4">Notion Library</h3>
+                    <p className="font-serif text-[0.95rem] leading-[1.6] text-[#666] dark:text-[#999]">Upload a PDF and its metadata goes straight to your Notion database. Ask about your books in plain language — no command required.</p>
                   </div>
                   
-                  <div className="bg-[#FAF7F2] p-6 rounded-lg border-2 border-[#E8660A]">
-                    <h3 className="font-serif text-[1.3rem] text-[#111] mb-4">Image Generation</h3>
-                    <p className="font-serif text-[0.95rem] leading-[1.6] text-[#666]">/image {`<prompt>`} routes to Stability AI / Hugging Face and returns the result in-chat.</p>
+                  <div className="bg-[#FAF7F2] dark:bg-[#111] p-6 rounded-lg border-2 border-[#E8660A]">
+                    <h3 className="font-serif text-[1.3rem] text-[#111] dark:text-[#FAF7F2] mb-4">Image Generation</h3>
+                    <p className="font-serif text-[0.95rem] leading-[1.6] text-[#666] dark:text-[#999]">/image {`<prompt>`} routes to Stability AI / Hugging Face and returns the result in-chat.</p>
                   </div>
                 </div>
 
@@ -381,7 +381,7 @@ export default function BiscuitAiPage() {
                       ].map((item, index) => (
                         <tr key={index} className="border-b border-[#E8E6E1]/20">
                           <td className="py-3 font-mono text-[0.6rem] tracking-[0.08em] uppercase text-[#E8660A]">{item.cmd}</td>
-                          <td className="py-3 font-serif text-[0.95rem] text-[#333]">{item.desc}</td>
+                          <td className="py-3 font-serif text-[0.95rem] text-[#333] dark:text-[#999]">{item.desc}</td>
                         </tr>
                       ))}
                     </tbody>
@@ -391,13 +391,13 @@ export default function BiscuitAiPage() {
 
               {/* ── Section 06: Outcome ── */}
               <div>
-                <div className="font-mono text-[0.6rem] tracking-[0.14em] uppercase text-[#666] mb-8">
+                <div className="font-mono text-[0.6rem] tracking-[0.14em] uppercase text-[#666] dark:text-[#999] mb-8">
                   06 — OUTCOME
                 </div>
-                <h2 className="font-serif text-[clamp(2rem,4vw,3rem)] text-[#111] mb-8">
+                <h2 className="font-serif text-[clamp(2rem,4vw,3rem)] text-[#111] dark:text-[#FAF7F2] mb-8">
                   A tool that fits the actual day.
                 </h2>
-                <p className="font-serif text-[1.1rem] leading-[1.8] text-[#333] mb-8">
+                <p className="font-serif text-[1.1rem] leading-[1.8] text-[#333] dark:text-[#999] mb-8">
                   A production-ready Telegram bot with intelligent chat, smart pagination, Notion library integration, image generation, and cost visibility features. Self-initiated and actively used. The interface decisions were made in the same order as any other design project — problem first, solution second, implementation last.
                 </p>
 
@@ -429,29 +429,29 @@ export default function BiscuitAiPage() {
 
               {/* ── Design Notes ── */}
               <div>
-                <div className="font-mono text-[0.6rem] tracking-[0.14em] uppercase text-[#666] mb-8">
+                <div className="font-mono text-[0.6rem] tracking-[0.14em] uppercase text-[#666] dark:text-[#999] mb-8">
                   DESIGN NOTES
                 </div>
-                <div className="bg-[#FAF7F2] p-8 rounded-lg border-2 border-[#E8660A]">
+                <div className="bg-[#FAF7F2] dark:bg-[#111] p-8 rounded-lg border-2 border-[#E8660A]">
                   <div className="grid grid-cols-2 gap-6">
                     <div>
                       <h4 className="font-mono text-[0.65rem] tracking-[0.1em] uppercase text-[#E8660A] mb-2">Pagination</h4>
-                      <p className="font-serif text-[0.95rem] leading-[1.6] text-[#333]">Exists because dumping a 2,000-word AI response into a chat is a UX failure, not a feature.</p>
+                      <p className="font-serif text-[0.95rem] leading-[1.6] text-[#333] dark:text-[#999]">Exists because dumping a 2,000-word AI response into a chat is a UX failure, not a feature.</p>
                     </div>
                     
                     <div>
                       <h4 className="font-mono text-[0.65rem] tracking-[0.1em] uppercase text-[#E8660A] mb-2">Natural Language</h4>
-                      <p className="font-serif text-[0.95rem] leading-[1.6] text-[#333]">For the Notion library (just say "books") exists because the interface should meet language, not demand that users learn syntax.</p>
+                      <p className="font-serif text-[0.95rem] leading-[1.6] text-[#333] dark:text-[#999]">For the Notion library (just say "books") exists because the interface should meet language, not demand that users learn syntax.</p>
                     </div>
                     
                     <div>
                       <h4 className="font-mono text-[0.65rem] tracking-[0.1em] uppercase text-[#E8660A] mb-2">Honest Uncertainty</h4>
-                      <p className="font-serif text-[0.95rem] leading-[1.6] text-[#333]">Is configured deliberately — the bot will say it can't find a reliable answer rather than fabricate one. That's a trust decision, not just a safety one.</p>
+                      <p className="font-serif text-[0.95rem] leading-[1.6] text-[#333] dark:text-[#999]">Is configured deliberately — the bot will say it can't find a reliable answer rather than fabricate one. That's a trust decision, not just a safety one.</p>
                     </div>
                     
                     <div>
                       <h4 className="font-mono text-[0.65rem] tracking-[0.1em] uppercase text-[#E8660A] mb-2">Cost Visibility</h4>
-                      <p className="font-serif text-[0.95rem] leading-[1.6] text-[#333]">via /stats is there because users deserve to know what's happening on their behalf.</p>
+                      <p className="font-serif text-[0.95rem] leading-[1.6] text-[#333] dark:text-[#999]">via /stats is there because users deserve to know what's happening on their behalf.</p>
                     </div>
                   </div>
                 </div>
@@ -462,32 +462,32 @@ export default function BiscuitAiPage() {
             {/* ── Sticky Sidebar ── */}
             <div className="hidden lg:block">
               <div className="sticky top-24 space-y-6">
-                <div className="border border-[#E8E6E1] p-6 bg-[#FAF7F2]">
-                  <div className="flex justify-between py-3 border-b border-[#E8E6E1]">
-                    <span className="font-mono text-[0.6rem] tracking-[0.08em] uppercase text-[#666]">Role</span>
-                    <span className="font-mono text-[0.6rem] tracking-[0.08em] uppercase text-[#111] text-right max-w-[58%]">Product Design • UX Research • Frontend Development</span>
+                <div className="border border-[#E8E6E1] dark:border-[#333]/50 p-6 bg-[#FAF7F2] dark:bg-[#111]">
+                  <div className="flex justify-between py-3 border-b border-[#E8E6E1] dark:border-[#333]/50">
+                    <span className="font-mono text-[0.6rem] tracking-[0.08em] uppercase text-[#666] dark:text-[#999]">Role</span>
+                    <span className="font-mono text-[0.6rem] tracking-[0.08em] uppercase text-[#111] dark:text-[#FAF7F2] text-right max-w-[58%]">Product Design • UX Research • Frontend Development</span>
                   </div>
-                  <div className="flex justify-between py-3 border-b border-[#E8E6E1]">
-                    <span className="font-mono text-[0.6rem] tracking-[0.08em] uppercase text-[#666]">Year</span>
-                    <span className="font-mono text-[0.6rem] tracking-[0.08em] uppercase text-[#111]">2026</span>
+                  <div className="flex justify-between py-3 border-b border-[#E8E6E1] dark:border-[#333]/50">
+                    <span className="font-mono text-[0.6rem] tracking-[0.08em] uppercase text-[#666] dark:text-[#999]">Year</span>
+                    <span className="font-mono text-[0.6rem] tracking-[0.08em] uppercase text-[#111] dark:text-[#FAF7F2]">2026</span>
                   </div>
-                  <div className="flex justify-between py-3 border-b border-[#E8E6E1]">
-                    <span className="font-mono text-[0.6rem] tracking-[0.08em] uppercase text-[#666]">Type</span>
-                    <span className="font-mono text-[0.6rem] tracking-[0.08em] uppercase text-[#111]">Personal Project</span>
+                  <div className="flex justify-between py-3 border-b border-[#E8E6E1] dark:border-[#333]/50">
+                    <span className="font-mono text-[0.6rem] tracking-[0.08em] uppercase text-[#666] dark:text-[#999]">Type</span>
+                    <span className="font-mono text-[0.6rem] tracking-[0.08em] uppercase text-[#111] dark:text-[#FAF7F2]">Personal Project</span>
                   </div>
                   <div className="pt-3">
-                    <div className="font-mono text-[0.6rem] tracking-[0.08em] uppercase text-[#666] mb-3">
+                    <div className="font-mono text-[0.6rem] tracking-[0.08em] uppercase text-[#666] dark:text-[#999] mb-3">
                       Deliverables
                     </div>
                     <div className="flex flex-wrap gap-2">
                       {["Product Design", "UX Research", "Bot Development", "Documentation"].map((deliverable) => (
-                        <span key={deliverable} className="font-mono text-[0.55rem] tracking-[0.06em] uppercase border border-[#E8E6E1] text-[#666] px-2 py-1">{deliverable}</span>
+                        <span key={deliverable} className="font-mono text-[0.55rem] tracking-[0.06em] uppercase border border-[#E8E6E1] dark:border-[#333]/50 text-[#666] dark:text-[#999] px-2 py-1">{deliverable}</span>
                       ))}
                     </div>
                   </div>
-                  <div className="pt-4 mt-3 border-t border-[#E8E6E1]">
+                  <div className="pt-4 mt-3 border-t border-[#E8E6E1] dark:border-[#333]/50">
                     <a href="https://github.com/Thelostbiscuitt/biscuit-ai" target="_blank" rel="noopener noreferrer"
-                      className="flex items-center justify-between font-mono text-[0.62rem] tracking-[0.08em] uppercase text-[#666] hover:text-[#E8660A] transition-colors no-underline">
+                      className="flex items-center justify-between font-mono text-[0.62rem] tracking-[0.08em] uppercase text-[#666] dark:text-[#999] hover:text-[#E8660A] transition-colors no-underline">
                       View on GitHub <Github className="w-3 h-3" />
                     </a>
                   </div>
@@ -499,26 +499,26 @@ export default function BiscuitAiPage() {
         </div>
 
         {/* ── Next Project ── */}
-        <div className="border-t border-[#E8E6E1] py-12 mb-8 px-12">
-          <div className="font-mono text-[0.6rem] tracking-[0.14em] uppercase text-[#666] mb-6">NEXT PROJECT</div>
+        <div className="border-t border-[#E8E6E1] dark:border-[#333]/50 py-12 mb-8 px-12">
+          <div className="font-mono text-[0.6rem] tracking-[0.14em] uppercase text-[#666] dark:text-[#999] mb-6">NEXT PROJECT</div>
           <Link href="/projects/leadway-pensure" className="group flex items-center justify-between no-underline">
             <div>
               <div className="font-mono text-[0.58rem] tracking-[0.1em] uppercase text-[#E8660A] mb-1">Brand</div>
-              <h3 className="font-sans font-black text-[clamp(1.5rem,3vw,3rem)] tracking-[-0.03em] text-[#111] group-hover:text-[#E8660A] transition-colors">
+              <h3 className="font-sans font-black text-[clamp(1.5rem,3vw,3rem)] tracking-[-0.03em] text-[#111] dark:text-[#FAF7F2] group-hover:text-[#E8660A] transition-colors">
                 Leadway Pensure — Brand & Comms →
               </h3>
             </div>
-            <ArrowUpRight className="w-8 h-8 text-[#666] group-hover:text-[#E8660A] transition-colors flex-shrink-0" />
+            <ArrowUpRight className="w-8 h-8 text-[#666] dark:text-[#999] group-hover:text-[#E8660A] transition-colors flex-shrink-0" />
           </Link>
         </div>
 
         {/* ── Footer ── */}
-        <footer className="border-t border-[#E8E6E1] py-8 px-12">
+        <footer className="border-t border-[#E8E6E1] dark:border-[#333]/50 py-8 px-12">
           <div className="flex items-center justify-between">
-            <div className="font-mono text-[0.55rem] tracking-[0.1em] uppercase text-[#666]">
+            <div className="font-mono text-[0.55rem] tracking-[0.1em] uppercase text-[#666] dark:text-[#999]">
               © 2026 MICHAEL OGUNTIMEHIN
             </div>
-            <div className="font-mono text-[0.55rem] tracking-[0.1em] uppercase text-[#666]">
+            <div className="font-mono text-[0.55rem] tracking-[0.1em] uppercase text-[#666] dark:text-[#999]">
               LAGOS, NIGERIA
             </div>
           </div>
