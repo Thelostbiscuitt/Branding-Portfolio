@@ -2,6 +2,7 @@ import { Metadata } from "next";
 import Link from "next/link";
 import { ArrowLeft, ArrowUpRight, Github, ExternalLink } from "lucide-react";
 import Image from "next/image";
+import { LightSwitch } from "@/components/ui/LightSwitch";
 
 export const metadata: Metadata = {
   title: "Biscuit AI — Case Study",
@@ -19,10 +20,13 @@ export default function BiscuitAiPage() {
         <span className="font-sans font-black text-[1.05rem] tracking-[-0.02em] text-[#111]">
           Michael<span className="text-[#E8660A]">.</span>
         </span>
-        <a href="https://github.com/Thelostbiscuitt/biscuit-ai" target="_blank" rel="noopener noreferrer"
-          className="flex items-center gap-2 font-mono text-[0.65rem] tracking-[0.1em] uppercase text-[#666] hover:text-[#E8660A] transition-colors no-underline">
-          GitHub <Github className="w-3 h-3" />
-        </a>
+        <div className="flex items-center gap-4">
+          <LightSwitch />
+          <a href="https://github.com/Thelostbiscuitt/biscuit-ai" target="_blank" rel="noopener noreferrer"
+            className="flex items-center gap-2 font-mono text-[0.65rem] tracking-[0.1em] uppercase text-[#666] hover:text-[#E8660A] transition-colors no-underline">
+            GitHub <Github className="w-3 h-3" />
+          </a>
+        </div>
       </nav>
 
       <div className="pt-24 max-w-[1280px] mx-auto">
@@ -31,7 +35,7 @@ export default function BiscuitAiPage() {
         <div className="flex flex-wrap items-center gap-3 mb-8 pt-8 px-12">
           <span className="font-mono text-[0.6rem] tracking-[0.1em] uppercase text-[#E8660A]">Design</span>
           <span className="text-[#E8E6E1]">·</span>
-          <span className="font-mono text-[0.6rem] tracking-[0.1em] uppercase text-[#666]">2024</span>
+          <span className="font-mono text-[0.6rem] tracking-[0.1em] uppercase text-[#666]">2026</span>
           <span className="text-[#E8E6E1]">·</span>
           <span className="font-mono text-[0.6rem] tracking-[0.1em] uppercase text-[#666]">Personal Project</span>
           <span className="text-[#E8E6E1]">·</span>
@@ -40,7 +44,7 @@ export default function BiscuitAiPage() {
 
         {/* ── Hero Section ── */}
         <div className="px-12 mb-20">
-          <h1 className="font-serif font-medium text-[clamp(3rem,6vw,5rem)] leading-[1.1] mb-6">
+          <h1 className="font-serif font-bold text-[clamp(3rem,6vw,5rem)] leading-[1.1] mb-6 text-[#111]">
             Biscuit AI
           </h1>
           <p className="font-serif italic text-[clamp(1.5rem,3vw,2.5rem)] text-[#E8660A] leading-[1.1] mb-6">
@@ -108,7 +112,7 @@ export default function BiscuitAiPage() {
                   </p>
                 </blockquote>
                 <p className="font-serif text-[1.1rem] leading-[1.8] text-[#333]">
-                  That friction was a design problem. Users had to switch contexts to browser, navigate complex web interfaces, deal with poor mobile experience, and lose conversation context. The best model in the world is only as good as the interface you use to reach it.
+                  That friction was a design problem. Users had to switch contexts to the browser, navigate complex web interfaces, deal with poor mobile experience, and lose conversation context. The best model in the world is only as good as the interface you use to reach it.
                 </p>
               </div>
 
@@ -217,40 +221,118 @@ export default function BiscuitAiPage() {
                 </div>
               </div>
 
-              {/* ── Flow Diagram ── */}
+              {/* ── Architecture Flow Diagram ── */}
               <div>
                 <div className="font-mono text-[0.6rem] tracking-[0.14em] uppercase text-[#666] mb-8">
                   04 — ARCHITECTURE FLOW
                 </div>
-                <div className="bg-[#111] p-12 rounded-lg border border-[#E8660A]">
-                  <div className="grid grid-cols-4 gap-8 text-center mb-8">
-                    <div>
-                      <div className="bg-[#E8660A]/20 text-[#E8660A] p-4 rounded mb-2">
-                        <span className="text-2xl">📱</span>
-                      </div>
-                      <p className="font-mono text-[0.6rem] tracking-[0.08em] uppercase text-[#999]">Telegram</p>
+                <div className="bg-[#FAF7F2] p-12 rounded-lg border-2 border-[#E8660A]">
+                  <div className="space-y-4">
+                    {/* Title */}
+                    <div className="text-center mb-8">
+                      <h3 className="font-serif text-[2rem] text-[#111] mb-2">▸ Conversation Flow — Biscuit AI</h3>
                     </div>
-                    <div>
-                      <div className="bg-[#E8660A]/20 text-[#E8660A] p-4 rounded mb-2">
-                        <span className="text-2xl">🤖</span>
+
+                    {/* Flow Tree */}
+                    <div className="flex flex-col items-center space-y-3">
+                      {/* User Input */}
+                      <div className="bg-[#111] px-8 py-4 rounded-lg">
+                        <span className="font-mono text-[0.8rem] tracking-[0.1em] uppercase text-[#FAF7F2]">User Input</span>
                       </div>
-                      <p className="font-mono text-[0.6rem] tracking-[0.08em] uppercase text-[#999]">Bot Logic</p>
-                    </div>
-                    <div>
-                      <div className="bg-[#E8660A]/20 text-[#E8660A] p-4 rounded mb-2">
-                        <span className="text-2xl">🧠</span>
+
+                      {/* Arrow */}
+                      <div className="text-[#E8660A] text-2xl">▼</div>
+
+                      {/* Telegram Message */}
+                      <div className="bg-[#111] px-8 py-4 rounded-lg">
+                        <span className="font-mono text-[0.8rem] tracking-[0.1em] uppercase text-[#FAF7F2]">Telegram Message / Command</span>
                       </div>
-                      <p className="font-mono text-[0.6rem] tracking-[0.08em] uppercase text-[#999]">GLM-4.7</p>
-                    </div>
-                    <div>
-                      <div className="bg-[#E8660A]/20 text-[#E8660A] p-4 rounded mb-2">
-                        <span className="text-2xl">🔗</span>
+
+                      {/* Arrow */}
+                      <div className="text-[#E8660A] text-2xl">▼</div>
+
+                      {/* Main.py */}
+                      <div className="bg-[#E8660A] px-8 py-4 rounded-lg">
+                        <span className="font-mono text-[0.8rem] tracking-[0.1em] uppercase text-[#FAF7F2]">main.py</span>
                       </div>
-                      <p className="font-mono text-[0.6rem] tracking-[0.08em] uppercase text-[#999]">Integrations</p>
+
+                      {/* Handler Router */}
+                      <div className="text-center">
+                        <span className="font-mono text-[0.65rem] tracking-[0.1em] uppercase text-[#666]">Handler Router — classifies intent</span>
+                      </div>
+
+                      {/* Arrow */}
+                      <div className="text-[#E8660A] text-2xl">▼</div>
+
+                      {/* Three Branches */}
+                      <div className="grid grid-cols-3 gap-4 w-full">
+                        {/* Chat Branch */}
+                        <div className="flex flex-col items-center space-y-3">
+                          <div className="bg-[#111] px-6 py-3 rounded-lg">
+                            <span className="font-mono text-[0.7rem] tracking-[0.1em] uppercase text-[#E8660A]">Chat</span>
+                          </div>
+                          <div className="text-[#E8660A] text-xl">▼</div>
+                          <div className="bg-[#111] px-6 py-3 rounded-lg">
+                            <span className="font-mono text-[0.65rem] tracking-[0.1em] uppercase text-[#FAF7F2]">llm_router.py</span>
+                          </div>
+                          <div className="text-center">
+                            <span className="font-mono text-[0.6rem] tracking-[0.1em] uppercase text-[#666]">GLM-4.7 + Web Search</span>
+                          </div>
+                        </div>
+
+                        {/* Library Branch */}
+                        <div className="flex flex-col items-center space-y-3">
+                          <div className="bg-[#111] px-6 py-3 rounded-lg">
+                            <span className="font-mono text-[0.7rem] tracking-[0.1em] uppercase text-[#E8660A]">Library</span>
+                          </div>
+                          <div className="text-[#E8660A] text-xl">▼</div>
+                          <div className="bg-[#111] px-6 py-3 rounded-lg">
+                            <span className="font-mono text-[0.65rem] tracking-[0.1em] uppercase text-[#FAF7F2]">notion_handler.py</span>
+                          </div>
+                          <div className="text-center">
+                            <span className="font-mono text-[0.6rem] tracking-[0.1em] uppercase text-[#666]">Upload / Retrieve</span>
+                          </div>
+                        </div>
+
+                        {/* Image Branch */}
+                        <div className="flex flex-col items-center space-y-3">
+                          <div className="bg-[#111] px-6 py-3 rounded-lg">
+                            <span className="font-mono text-[0.7rem] tracking-[0.1em] uppercase text-[#E8660A]">Image</span>
+                          </div>
+                          <div className="text-[#E8660A] text-xl">▼</div>
+                          <div className="bg-[#111] px-6 py-3 rounded-lg">
+                            <span className="font-mono text-[0.65rem] tracking-[0.1em] uppercase text-[#FAF7F2]">image_handler.py</span>
+                          </div>
+                          <div className="text-center">
+                            <span className="font-mono text-[0.6rem] tracking-[0.1em] uppercase text-[#666]">Stability AI / HF</span>
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* Arrow */}
+                      <div className="text-[#E8660A] text-2xl">▼</div>
+
+                      {/* Response Layer */}
+                      <div className="bg-[#111] px-8 py-4 rounded-lg">
+                        <span className="font-mono text-[0.8rem] tracking-[0.1em] uppercase text-[#FAF7F2]">Response Layer</span>
+                      </div>
+
+                      <div className="text-center">
+                        <span className="font-mono text-[0.65rem] tracking-[0.1em] uppercase text-[#666]">Pagination · Cost tracking · Delivery</span>
+                      </div>
+
+                      {/* Arrow */}
+                      <div className="text-[#E8660A] text-2xl">▼</div>
+
+                      {/* Output */}
+                      <div className="bg-[#E8660A] px-8 py-4 rounded-lg">
+                        <span className="font-mono text-[0.8rem] tracking-[0.1em] uppercase text-[#FAF7F2]">Output</span>
+                      </div>
+
+                      <div className="text-center">
+                        <span className="font-mono text-[0.65rem] tracking-[0.1em] uppercase text-[#666]">Telegram — clean, paginated response</span>
+                      </div>
                     </div>
-                  </div>
-                  <div className="text-center text-[#666] font-mono text-[0.55rem] tracking-[0.06em] uppercase">
-                    User Input → Command Routing → API Integration → Response Generation → Smart Formatting
                   </div>
                 </div>
               </div>
@@ -387,7 +469,7 @@ export default function BiscuitAiPage() {
                   </div>
                   <div className="flex justify-between py-3 border-b border-[#E8E6E1]">
                     <span className="font-mono text-[0.6rem] tracking-[0.08em] uppercase text-[#666]">Year</span>
-                    <span className="font-mono text-[0.6rem] tracking-[0.08em] uppercase text-[#111]">2024</span>
+                    <span className="font-mono text-[0.6rem] tracking-[0.08em] uppercase text-[#111]">2026</span>
                   </div>
                   <div className="flex justify-between py-3 border-b border-[#E8E6E1]">
                     <span className="font-mono text-[0.6rem] tracking-[0.08em] uppercase text-[#666]">Type</span>
