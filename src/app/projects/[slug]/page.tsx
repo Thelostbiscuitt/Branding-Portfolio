@@ -388,7 +388,7 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
         )}
 
         {/* ── Cover image (non-Leadway) ── */}
-        {!isLeadway && (
+        {!isLeadway && project.coverImage && (
           <div className="w-full relative overflow-hidden mb-16 bg-card" style={{ aspectRatio: "16/9" }}>
             <Image src={project.coverImage} alt={project.title} fill quality={90}
               className={`${project.coverImage.includes("roadmap") ? "object-contain" : "object-cover object-top"}`}
@@ -435,9 +435,9 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
             </div>
             <SidebarBlock
               project={project}
-              role={project.role}
-              year={project.year}
-              tools={project.tools}
+              role={project.role || ""}
+              year={project.year || ""}
+              tools={project.tools || []}
               liveUrl={project.liveUrl}
               behanceUrl={project.behanceUrl}
             />

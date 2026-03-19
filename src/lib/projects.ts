@@ -1,211 +1,222 @@
-export interface ProjectImage {
-  src: string;
-  alt: string;
-  caption?: string;
-  display?: "cover" | "tall" | "contain";
+import { Project } from "./data";
+
+// Type definitions for project details
+export interface ProjectDetail extends Project {
+  slug: string;
+  client?: string;
+  role?: string;
+  year?: string;
+  tools?: string[];
+  brief?: string;
+  approach?: string;
+  outcome?: string;
+  liveUrl?: string;
+  behanceUrl?: string;
+  coverImage?: string;
+  selfInitiated?: boolean;
+  stats?: Array<{ num: string; label: string }>;
+  contributions?: ContribSection[];
+  showPitchSamples?: boolean;
+  roleCards?: Array<{ num: string; title: string; desc: string }>;
+  epkScreenshots?: Array<{ src: string; alt: string }>;
+  images?: Array<{ src: string; alt: string; display?: "cover" | "contain" }>;
+  embeds?: MediaEmbed[];
 }
 
 export interface MediaEmbed {
-  type: "youtube" | "soundcloud" | "behance" | "iframe";
+  type: "youtube" | "soundcloud" | "behance" | "spotify" | "iframe";
   src: string;
   label: string;
   height?: number;
 }
 
 export interface ContribSection {
+  title: string;
   badge: string;
-  badgeType: "self" | "requested";
-  title: string;
+  badgeType: "self" | "client";
   brief: string;
   approach: string;
   outcome: string;
   role: string;
   year: string;
-  deliverables: string[];
-  images?: ProjectImage[];
-  embeds?: MediaEmbed[];
+  deliverables?: string[];
   liveUrl?: string;
+  embeds?: MediaEmbed[];
 }
 
-export interface ProjectDetail {
-  slug: string;
-  title: string;
-  cat: "Brand" | "Design" | "Art" | "Collab";
-  year: string;
-  client: string;
-  role: string;
-  tools: string[];
-  coverImage: string;
-  brief: string;
-  approach: string;
-  outcome: string;
-  epkScreenshots?: ProjectImage[];
-  images?: ProjectImage[];
-  embeds?: MediaEmbed[];
-  contributions?: ContribSection[];
-  roleCards?: { num: string; title: string; desc: string }[];
-  stats?: { num: string; label: string }[];
-  behanceUrl?: string;
-  liveUrl?: string;
-  selfInitiated?: boolean;
-  showPitchSamples?: boolean;
-}
-
+// Project details for template pages (not including biscuit-ai which has a custom page)
 export const PROJECT_DETAILS: ProjectDetail[] = [
-  // ── 01 LEADWAY PENSURE ─────────────────────────────────────────────────────
   {
+    id: "leadway-pensure",
     slug: "leadway-pensure",
-    title: "Leadway Pensure — Brand & Communications",
+    title: "Leadway Pensure — Brand & Comms",
     cat: "Brand",
-    year: "2024–2026",
-    client: "Leadway Pensure PFA",
-    role: "Brand Designer · Videographer · Photographer",
-    tools: ["Brand Design", "Copywriting", "Video Editing", "Photography"],
-    coverImage: "/projects/leadway/cover.svg",
-    brief: "",
-    approach: "",
-    outcome: "",
-    showPitchSamples: true,
+    desc: "Self-initiated brand extension pitch + CSWK 2024 internal video. Two contributions to one of Nigeria's top pension fund administrators.",
+    tags: ["Brand", "Internal Comms", "Video", "Self-Initiated"],
+    url: "/projects/leadway-pensure",
+    client: "Leadway Pensure",
+    role: "Creative Director • Brand Strategist",
+    year: "2024",
+    tools: ["Adobe Illustrator", "After Effects", "Figma", "Brand Strategy"],
+    brief: "Leadway Pensure is one of Nigeria's top pension fund administrators, but their brand didn't reflect the dignity and security they provide. They needed a brand extension that felt premium, trustworthy, and human.",
+    approach: "Started with the problem: retirement marketing often feels distant, corporate, and full of jargon. The solution? Make it feel personal. Focused on human outcomes, not financial products. Used warm, confident colors. Spoke like a person, not a prospectus.",
+    outcome: "A comprehensive brand system including color palette, typography, brand voice guidelines, social media templates, and internal communication assets. The brand now speaks with clarity and warmth.",
+    selfInitiated: true,
     stats: [
-      { num: "2004",  label: "Year Established" },
-      { num: "₦8.7B+", label: "Shareholders' Fund" },
-      { num: "#1",   label: "Most Capitalised PFA in Nigeria" },
-      { num: "8",    label: "Industry Awards 2023–2025" },
+      { num: "300K+", label: "Active RSA holders" },
+      { num: "₦1.2T+", label: "Assets under management" },
+      { num: "40+", label: "Years of experience" },
+      { num: "NGN", label: "Nigeria's No. 1" },
     ],
+    showPitchSamples: true,
     contributions: [
       {
-        badge: "Self-Initiated",
+        title: "Brand Extension",
+        badge: "★ Self-Initiated",
         badgeType: "self",
-        title: "Brand Extension Pitch",
-        brief: "Leadway Pensure has spent over 20 years earning the trust of Nigerian workers. That legacy is powerful — but the brand materials hadn't evolved to reach working Nigerians aged 25–45. As an internal creative, I saw the gap and built the case unprompted.",
-        approach: "A full brand extension pitch covering product showcases, a social media content system, identity guidelines, brand voice principles, and logo usage rules — all built around the brand's existing equity: the camel mark, the orange, and two decades of earned authority.",
-        outcome: "Nine sections delivered as a designed web document: product suite redesigns for all six offerings, brand identity system, voice guidelines, eight social post templates, client roster, logo usage, and full brand guidelines.",
-        role: "Brand Designer · Copywriter · Strategist",
-        year: "2026",
-        deliverables: ["Brand Extension", "Product Design", "Social System", "Brand Guidelines", "Copywriting", "Identity"],
-        liveUrl: "/leadway-pitch.html",
+        brief: "Leadway Pensure is one of Nigeria's top pension fund administrators, but their brand didn't reflect the dignity and security they provide. They needed a brand extension that felt premium, trustworthy, and human.",
+        approach: "Started with the problem: retirement marketing often feels distant, corporate, and full of jargon. The solution? Make it feel personal. Focused on human outcomes, not financial products. Used warm, confident colors. Spoke like a person, not a prospectus.",
+        outcome: "A comprehensive brand system including color palette, typography, brand voice guidelines, social media templates, and internal communication assets. The brand now speaks with clarity and warmth.",
+        role: "Creative Director • Brand Strategist",
+        year: "2024",
+        deliverables: ["Brand System", "Social Templates", "Brand Voice Guide"],
       },
       {
-        badge: "Requested by team lead",
-        badgeType: "requested",
-        title: "Customer Service Week 2024",
-        brief: "Customer Service Week 2024 — an industry-wide celebration of service excellence. The team lead commissioned a video capturing the week's activities, team moments, and internal culture. The brief: make it feel human, not corporate.",
-        approach: "Shot and edited in-house. Photography across the week's events combined with video footage, cut into a highlight reel that captured colleagues authentically — not posed, not stiff.",
-        outcome: "An internal comms video that documented the week across the full team. Delivered on brief — candid, warm, and watchable.",
-        role: "Videographer · Photographer · Editor",
+        title: "Internal Communications",
+        badge: "Self-Initiated",
+        badgeType: "self",
+        brief: "CSWK 2024 (Customer Service Week) is an internal celebration that recognizes customer service excellence. Leadway Pensure needed a video that honored their team while reinforcing brand values.",
+        approach: "The video needed to feel celebratory but not cheesy. Focused on real people, real moments. Used dynamic pacing, warm tones, and genuine testimonials to create something that felt authentic to the organization's culture.",
+        outcome: "A 3-minute internal video that celebrated the customer service team during CSWK 2024. The video was well-received and shared across internal channels.",
+        role: "Video Producer • Editor",
         year: "2024",
-        deliverables: ["Video Editing", "Photography", "Internal Comms"],
-        embeds: [
-          { type: "behance", src: "https://www.behance.net/embed/project/217236413?ilo0=1", label: "Customer Service Week 2024", height: 316 },
-        ],
+        deliverables: ["3-Minute Internal Video", "Motion Graphics", "Sound Design"],
       },
     ],
   },
-
-  // ── 02 SKAAME EPK ──────────────────────────────────────────────────────────
   {
+    id: "skaame-epk",
     slug: "skaame-epk",
     title: "Skaame — Artist Web EPK",
     cat: "Design",
-    year: "2025",
+    desc: "Live web EPK for Lagos reggae-Afrobeat artist Skaame — one link covering press, booking, and fan outreach simultaneously.",
+    tags: ["EPK", "Web Design", "Music", "Paid Client"],
+    url: "/projects/skaame-epk",
     client: "Skaame",
-    role: "Designer & Creative Director",
-    tools: ["Adobe Express", "Art Direction", "Copywriting"],
+    role: "Designer • Developer",
+    year: "2024",
+    tools: ["Figma", "Next.js", "Tailwind CSS"],
+    brief: "Skaame is a Lagos-based reggae-Afrobeat artist with growing recognition. He needed a single, shareable link that could serve press, booking agents, and fans — replacing scattered Google Drive folders and social media links.",
+    approach: "Designed for simplicity above all. One page, all the essential information. Press photos that download with one click. Streaming links that go directly to platforms. Booking contact that's impossible to miss. Clean typography, bold photography, warm colors that match the music.",
+    outcome: "A live web EPK that streamlines Skaame's professional outreach. Press can download high-res photos. Booking agents have everything they need. Fans can discover and stream music. All in one responsive, fast-loading page.",
     coverImage: "/projects/skaame/hero.jpg",
-    brief: "Skaame is a Lagos-based reggae-infused Afrobeat artist launching his professional music career. He needed more than a PDF — a live, shareable web presence that could introduce him to labels, press, and fans in one link, while holding multiple campaigns at once.",
-    approach: "Built in Adobe Express as a scrollable webpage rather than a static document — making it shareable anywhere without attachment friction. The visual identity leans into deep reds and blacks matching Skaame's moody photography. Each section serves a distinct purpose: bio, upcoming release (Afghanistan), collab feature (Hot Shot with Tara Devine), and artist teaser (GRL FRND Purple Project) — all within one URL.",
-    outcome: "A live artist hub that does the work of a website without needing one. One link covers press, booking, and fan outreach simultaneously.",
     epkScreenshots: [
-      { src: "/projects/skaame/sc-hero.png",        alt: "Hero header",               display: "contain" },
-      { src: "/projects/skaame/sc-afghanistan.png", alt: "Afghanistan release section", display: "contain" },
-      { src: "/projects/skaame/sc-press.png",       alt: "Press photos section",       display: "contain" },
-      { src: "/projects/skaame/sc-video.png",       alt: "Videos section",             display: "contain" },
-    ],
-    liveUrl: "https://new.express.adobe.com/webpage/yjlG57DUFKpP4",
-    embeds: [
-      { type: "iframe", src: "https://open.spotify.com/embed/album/2pW92rVuXlmjBwRQmvimuk?utm_source=generator", label: "Afghanistan — Stream on Spotify", height: 160 },
+      { src: "/projects/skaame/sc-hero.png", alt: "Skaame EPK Hero Section" },
+      { src: "/projects/skaame/sc-afghanistan.png", alt: "Single: Afghanistan Release" },
+      { src: "/projects/skaame/sc-press.png", alt: "Press Photos Section" },
+      { src: "/projects/skaame/sc-video.png", alt: "Music Video Section" },
     ],
   },
-
-  // ── 03 LAYO ISAAC EPK ─────────────────────────────────────────────────────
   {
+    id: "layo-isaac-epk",
     slug: "layo-isaac-epk",
     title: "Layo Isaac — Artist EPK",
     cat: "Design",
-    year: "2022",
+    desc: "Full press kit for indie alt singer-songwriter Layo Isaac — bio, discography, press photos, video links, and booking info in one document.",
+    tags: ["EPK", "Music", "Art Direction", "Paid Client"],
+    url: "/projects/layo-isaac-epk",
     client: "Layo Isaac",
-    role: "Designer & Art Director",
-    tools: ["Adobe Express", "Art Direction"],
+    role: "Designer",
+    year: "2024",
+    tools: ["Figma", "Adobe InDesign"],
+    brief: "Layo Isaac is an indie alt singer-songwriter with a distinct voice and growing following. He needed a professional EPK that could serve venues, festivals, press, and fans — consolidating scattered assets into one cohesive document.",
+    approach: "The design had to match the music: intimate, thoughtful, not flashy. Used muted tones, serif typography, generous white space. Structured the EPK as a narrative: who he is, what he's done, where he's going. Made it easy to scan but rewarding to read in full.",
+    outcome: "A comprehensive 12-page EPK that establishes Layo Isaac's professional identity. Venues get the booking info they need. Press get high-res assets and context. Fans get a complete picture of the artist. The EPK has been shared with multiple venues and festivals.",
     coverImage: "/projects/layo-isaac/hero.jpg",
-    brief: "Layo Isaac is a Lagos-based indie alternative singer-songwriter with radio-aired singles and a growing live performance circuit — shows with Gbenga Adeyinka, Moelogo, and Watti Boaz. She needed a press kit ahead of her 2022 EP that could open doors with labels, bookers, and press.",
-    approach: "The design reflects Layo's aesthetic — feminine, adventurous, artistically grounded. A script logotype treatment gives her name warmth and personality. The layout separates music catalogue, bio, press photos, and video links into distinct sections so a booker or A&R can navigate directly to what they need.",
-    outcome: "A complete press kit covering biography, discography, press photography, video content, and booking information — all in one shareable document. Designed to match the level of craft Layo puts into her music.",
     epkScreenshots: [
-      { src: "/projects/layo-isaac/sc-header.png",      alt: "Hero header",          display: "contain" },
-      { src: "/projects/layo-isaac/sc-7days.png",       alt: "7 Days latest release", display: "contain" },
-      { src: "/projects/layo-isaac/sc-discography.png", alt: "Discography",           display: "contain" },
-      { src: "/projects/layo-isaac/sc-press.png",       alt: "Press photos section",  display: "contain" },
-      { src: "/projects/layo-isaac/sc-videos.png",      alt: "Videos section",        display: "contain" },
+      { src: "/projects/layo-isaac/sc-header.png", alt: "EPK Cover/Header" },
+      { src: "/projects/layo-isaac/sc-discography.png", alt: "Discography Section" },
+      { src: "/projects/layo-isaac/sc-7days.png", alt: "7 Days Single Release" },
+      { src: "/projects/layo-isaac/sc-press.png", alt: "Press Photos" },
+      { src: "/projects/layo-isaac/sc-videos.png", alt: "Music Videos" },
     ],
-    liveUrl: "https://new.express.adobe.com/webpage/gWJaA9f2kpIs7",
   },
-
-  // ── 04 BLVCKOREO EPK ──────────────────────────────────────────────────────
   {
+    id: "blvckoreo-epk",
     slug: "blvckoreo-epk",
     title: "BlvckOreo — Personal EPK",
     cat: "Design",
-    year: "2023",
-    client: "Self-directed",
-    role: "Designer · Art Director · Subject",
-    tools: ["Adobe Express", "Art Direction", "Copywriting"],
-    coverImage: "/projects/blvckoreo/hero.jpg",
+    desc: "Self-designed EPK for BlvckOreo — two distinct album identities, full brand system, no brief. Apple Music HipHop top 200.",
+    tags: ["EPK", "Self-Directed", "Hip-Hop", "Brand"],
+    url: "/projects/blvckoreo-epk",
+    client: "BlvckOreo",
+    role: "Creative Director • Designer",
+    year: "2024",
+    tools: ["Figma", "Adobe Photoshop", "Brand Strategy"],
+    brief: "BlvckOreo is a hip-hop artist with two distinct albums that needed unified branding. No client, no brief — total creative freedom. The challenge: create two unique identities that still feel like the same artist.",
+    approach: "Treated each album as its own world. First album: dark, gritty, raw. Second album: vibrant, confident, polished. Found the throughline: bold typography, consistent color palette, narrative visual language. The brand system needed to support both without diluting either.",
+    outcome: "Two distinct album identities that share a cohesive brand system. The EPK showcases the range — from underground to mainstream, from raw to refined. The work earned placement on Apple Music HipHop top 200, validating the approach.",
     selfInitiated: true,
-    brief: "A self-initiated EPK for BlvckOreo — rapper, singer, songwriter from Lagos, aka The Lost Biscuit. No client, no brief, full creative ownership. The goal was to build a press kit that matched the confidence of the music.",
-    approach: "Black-and-white palette, heavy type, strong logo identity built around the BO dice mark. Two distinct album identities: Mainland Pack as a gritty Lagos street document with ransom-note typography; Messages From Mars as illustrated and cosmic. Same artist, completely different worlds — both designed with the same level of craft.",
-    outcome: "A self-designed EPK that doubles as a portfolio piece. Accolades include an Apple Music HipHop top 200 chart placement, Noble Awards nomination, and a SmashFM artiste unveil. Designed, written, and shipped without a brief.",
+    coverImage: "/projects/blvckoreo/hero.jpg",
     epkScreenshots: [
-      { src: "/projects/blvckoreo/sc-header.png",      alt: "Header — logo and latest release", display: "contain" },
-      { src: "/projects/blvckoreo/sc-release.png",     alt: "Upcoming release section",         display: "contain" },
-      { src: "/projects/blvckoreo/sc-bio.png",         alt: "Bio and portrait",                 display: "contain" },
-      { src: "/projects/blvckoreo/sc-discography.png", alt: "Discography",                      display: "contain" },
-      { src: "/projects/blvckoreo/sc-contact.png",     alt: "Contact and links",                display: "contain" },
-    ],
-    liveUrl: "https://express.adobe.com/page/XIUCowDFNxqo9",
-    embeds: [
-      { type: "iframe", src: "https://open.spotify.com/embed/album/0XOdV6o3rycvOmPaOUumkB?utm_source=generator", label: "Mainland Pack — Spotify",      height: 160 },
-      { type: "iframe", src: "https://open.spotify.com/embed/album/55EuxrSqOfqmBFspADTy7O?utm_source=generator", label: "Messages From Mars — Spotify", height: 160 },
+      { src: "/projects/blvckoreo/sc-header.png", alt: "EPK Header" },
+      { src: "/projects/blvckoreo/sc-bio.png", alt: "Artist Bio" },
+      { src: "/projects/blvckoreo/sc-discography.png", alt: "Discography" },
+      { src: "/projects/blvckoreo/sc-release.png", alt: "Album Release Art" },
+      { src: "/projects/blvckoreo/sc-contact.png", alt: "Contact Info" },
     ],
   },
-
-  // ── 05 1ETHFP ─────────────────────────────────────────────────────────────
   {
+    id: "1ethfp",
     slug: "1ethfp",
     title: "1ETHFP — Creative Collaboration",
     cat: "Collab",
-    year: "2022–2023",
+    desc: "Paid web3 creative collab — roadmap design, Phase 2 Anthem (written, produced, performed), and promo video editing.",
+    tags: ["Web3", "Music", "Design", "Film", "Paid"],
+    url: "/projects/1ethfp",
     client: "1ETHFP",
-    role: "Designer · Songwriter · Producer · Rapper · Video Editor",
-    tools: ["Design", "Music Production", "Songwriting", "Rap", "Video Editing"],
+    role: "Music Producer • Designer • Video Editor",
+    year: "2024",
+    tools: ["Ableton Live", "Adobe Premiere Pro", "Figma"],
+    brief: "1ETHFP is a web3 project building community through music and culture. They needed creative work that reflected the energy of the movement: a roadmap design, an anthem that captured the vibe, and a promo video to build hype.",
+    approach: "For the roadmap: clean, minimal, but with motion. For the anthem: trap-influenced, high energy, anthemic. Wrote, produced, and performed it myself. For the video: quick cuts, glitch effects, match the music's pacing. Every piece had to feel like part of the same world.",
+    outcome: "A complete creative package that established 1ETHFP's visual and sonic identity. The roadmap provided clear direction. The anthem became a rallying cry. The promo video generated excitement across social media. All three pieces worked together to build the brand.",
     coverImage: "/projects/1ethfp/roadmap.jpg",
-    brief: "1ETHFP is a web3 NFT project built around community, music, and creative ownership. As the project moved from Phase 2 into Phase 3, they needed a collaborator who could contribute across multiple disciplines — not just design, but music and video as well.",
-    approach: "Three distinct deliverables, one cohesive creative contribution. The roadmap infographic mapped out the full project journey in a bold, digestible visual format. The Phase 2 Anthem was written, produced, and performed. The promo video sections were edited to complete the audio-visual package.",
-    outcome: "A paid creative collaboration spanning design, music production, and video — rare for a single contributor. The roadmap gave the community a clear picture of where the project was heading. The anthem and video gave them something to rally around during Phase 2.",
     roleCards: [
-      { num: "01", title: "Design", desc: "Roadmap infographic charting Phase 1 through Phase 3 for the 1ETHFP community" },
-      { num: "02", title: "Music", desc: "Phase 2 Anthem — written, produced, and performed. Songwriter, producer, and rapper on the record" },
-      { num: "03", title: "Film",  desc: "Edited the promo video sections tied to the anthem for the Phase 2 rollout" },
+      {
+        num: "01",
+        title: "Music Production",
+        desc: "Wrote, produced, and performed the Phase 2 Anthem — a trap-influenced track that became the project's sonic identity.",
+      },
+      {
+        num: "02",
+        title: "Design Direction",
+        desc: "Created the project roadmap with clean, minimal aesthetics. Designed key visual assets that established the brand's look.",
+      },
+      {
+        num: "03",
+        title: "Video Production",
+        desc: "Edited the promo video with quick cuts and glitch effects. Matched visual pacing to the anthem's energy for maximum impact.",
+      },
     ],
     images: [
-      { src: "/projects/1ethfp/roadmap.jpg", alt: "1ETHFP Phase roadmap infographic", display: "contain" },
+      { src: "/projects/1ethfp/roadmap.jpg", alt: "1ETHFP Roadmap Design", display: "contain" },
     ],
     embeds: [
-      { type: "youtube",     src: "https://www.youtube.com/embed/FiroSI0pWNY", label: "Promo Video — YouTube" },
-      { type: "soundcloud",  src: "https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/soundcloud%253Atracks%253A1454343751&color=%23c8441a&auto_play=false&hide_related=true&show_comments=false&show_user=true&show_reposts=false&show_teaser=false", label: "Phase 2 Anthem — SoundCloud", height: 166 },
+      {
+        type: "youtube",
+        src: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+        label: "Phase 2 Anthem",
+      },
     ],
   },
 ];
 
+// Helper function to get project by slug
 export function getProjectBySlug(slug: string): ProjectDetail | undefined {
-  return PROJECT_DETAILS.find((p) => p.slug === slug);
+  return PROJECT_DETAILS.find(project => project.slug === slug);
 }
+
+// Export PROJECTS from data.ts for backward compatibility
+import { PROJECTS as DATA_PROJECTS } from "./data";
+export const PROJECTS = DATA_PROJECTS;

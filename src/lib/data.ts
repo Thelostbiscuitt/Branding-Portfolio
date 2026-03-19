@@ -12,6 +12,14 @@ export interface Project {
 
 export const PROJECTS: Project[] = [
   {
+    id: "biscuit-ai",
+    title: "Biscuit AI — Telegram Bot Design",
+    cat: "Design",
+    desc: "A production-ready Telegram bot built around GLM-4.7 with intelligent chat, smart pagination, Notion library integration, and image generation capabilities.",
+    tags: ["Telegram Bot", "AI Interface", "UX Design", "Python", "GLM-4.7", "Self-Initiated"],
+    url: "/projects/biscuit-ai",
+  },
+  {
     id: "leadway-pensure",
     title: "Leadway Pensure — Brand & Comms",
     cat: "Brand",
