@@ -1,4 +1,4 @@
-# Michael Oguntimehin — Creative Portfolio
+# Habib Oguntimehin — Creative Portfolio
 
 > **Creative Director · Visual Designer · Builder**  
 > Lagos, Nigeria · Available for work
