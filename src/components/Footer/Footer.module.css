@@ -1,0 +1,31 @@
+.footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 28px 48px;
+  border-top: 1px solid var(--border);
+}
+
+.logo {
+  font-family: var(--font-display);
+  font-size: 16px;
+  font-weight: 800;
+  color: rgba(245, 241, 235, 0.2);
+  letter-spacing: -0.02em;
+}
+
+.copy {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  color: #333333;
+}
+
+@media (max-width: 600px) {
+  .footer {
+    padding: 24px;
+    flex-direction: column;
+    gap: 8px;
+    align-items: flex-start;
+  }
+}

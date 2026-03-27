@@ -1,153 +1,104 @@
-import { NextRequest, NextResponse } from "next/server";
+import { Resend } from 'resend'
+import { NextResponse } from 'next/server'
 
-// ─────────────────────────────────────────────────────────────────────────────
-// SECURITY: HTML escape function to prevent XSS attacks
-// ─────────────────────────────────────────────────────────────────────────────
-function escapeHtml(str: string): string {
+const resend = new Resend(process.env.RESEND_API_KEY)
+
+/** Escape the five HTML special characters to prevent XSS in email templates. */
+function esc(str: unknown): string {
+  if (typeof str !== 'string') return ''
   return str
-    .replace(/&/g, "&amp;")
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;")
-    .replace(/"/g, "&quot;")
-    .replace(/'/g, "&#039;");
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#039;')
 }
 
-// ─────────────────────────────────────────────────────────────────────────────
-// SECURITY: Simple in-memory rate limiting (resets on server restart)
-// For production, consider using Upstash Redis or similar
-// ─────────────────────────────────────────────────────────────────────────────
-const rateLimitMap = new Map<string, { count: number; resetTime: number }>();
-const RATE_LIMIT_WINDOW_MS = 60 * 1000; // 1 minute
-const RATE_LIMIT_MAX_REQUESTS = 3; // Max 3 requests per window per IP
-
-function checkRateLimit(ip: string): { allowed: boolean; remaining: number; resetIn: number } {
-  const now = Date.now();
-  const entry = rateLimitMap.get(ip);
-
-  if (!entry || now > entry.resetTime) {
-    rateLimitMap.set(ip, { count: 1, resetTime: now + RATE_LIMIT_WINDOW_MS });
-    return { allowed: true, remaining: RATE_LIMIT_MAX_REQUESTS - 1, resetIn: RATE_LIMIT_WINDOW_MS };
-  }
-
-  if (entry.count >= RATE_LIMIT_MAX_REQUESTS) {
-    return { allowed: false, remaining: 0, resetIn: entry.resetTime - now };
-  }
-
-  entry.count++;
-  return { allowed: true, remaining: RATE_LIMIT_MAX_REQUESTS - entry.count, resetIn: entry.resetTime - now };
-}
-
-// ─────────────────────────────────────────────────────────────────────────────
-// SECURITY: Input validation with length limits
-// ─────────────────────────────────────────────────────────────────────────────
-const MAX_NAME_LENGTH = 100;
-const MAX_EMAIL_LENGTH = 254; // RFC 5321 max
-const MAX_MESSAGE_LENGTH = 5000;
-
-function validateInput(name: string, email: string, message: string): { valid: boolean; error?: string } {
-  if (!name?.trim() || !email?.trim() || !message?.trim()) {
-    return { valid: false, error: "All fields are required." };
-  }
-
-  if (name.length > MAX_NAME_LENGTH) {
-    return { valid: false, error: `Name must be ${MAX_NAME_LENGTH} characters or less.` };
-  }
-
-  if (email.length > MAX_EMAIL_LENGTH) {
-    return { valid: false, error: `Email must be ${MAX_EMAIL_LENGTH} characters or less.` };
-  }
-
-  if (message.length > MAX_MESSAGE_LENGTH) {
-    return { valid: false, error: `Message must be ${MAX_MESSAGE_LENGTH} characters or less.` };
-  }
-
-  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  if (!emailRegex.test(email)) {
-    return { valid: false, error: "Invalid email address." };
-  }
-
-  return { valid: true };
-}
-
-export async function POST(req: NextRequest) {
+export async function POST(req: Request) {
   try {
-    // ── Rate limiting ──
-    const ip = req.headers.get("x-forwarded-for")?.split(",")[0]?.trim() 
-      || req.headers.get("x-real-ip") 
-      || "unknown";
-    
-    const rateCheck = checkRateLimit(ip);
-    if (!rateCheck.allowed) {
-      return NextResponse.json(
-        { error: "Too many requests. Please try again later." },
-        { 
-          status: 429,
-          headers: {
-            "Retry-After": String(Math.ceil(rateCheck.resetIn / 1000)),
-          }
-        }
-      );
-    }
+    const body = await req.json()
+    const { name, email, projectType, timeline, brief } = body
 
-    const body = await req.json();
-    const { name, email, message } = body;
-
-    // ── Input validation ──
-    const validation = validateInput(name, email, message);
-    if (!validation.valid) {
+    if (!name || !email) {
       return NextResponse.json(
-        { error: validation.error },
+        { error: 'Name and email are required.' },
         { status: 400 }
-      );
+      )
     }
 
-    // ── Sanitize inputs for email HTML ──
-    const sanitizedName = escapeHtml(name.trim());
-    const sanitizedEmail = escapeHtml(email.trim().toLowerCase());
-    const sanitizedMessage = escapeHtml(message.trim());
-
-    // --- EMAIL TRANSPORT ---
-    // If RESEND_API_KEY or SMTP env vars are set, use them.
-    // Otherwise we log and return success (for local/demo).
-    // To wire up Resend: npm install resend, add RESEND_API_KEY to .env.local
-    // To wire up Nodemailer SMTP: npm install nodemailer, add SMTP_* vars to .env.local
-
-    const RESEND_API_KEY = process.env.RESEND_API_KEY;
-    const CONTACT_EMAIL  = process.env.CONTACT_EMAIL ?? "hello@michael.dev";
-
-    if (RESEND_API_KEY) {
-      const res = await fetch("https://api.resend.com/emails", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${RESEND_API_KEY}`,
-        },
-        body: JSON.stringify({
-          from:    "Portfolio Contact <noreply@michael.dev>",
-          to:      [CONTACT_EMAIL],
-          subject: `New enquiry from ${sanitizedName}`,
-          html: `
-            <p><strong>From:</strong> ${sanitizedName} &lt;${sanitizedEmail}&gt;</p>
-            <p><strong>Message:</strong></p>
-            <p>${sanitizedMessage.replace(/\n/g, "<br>")}</p>
-          `,
-          reply_to: sanitizedEmail,
-        }),
-      });
-
-      if (!res.ok) {
-        const err = await res.text();
-        console.error("Resend error:", err);
-        return NextResponse.json({ error: "Failed to send message." }, { status: 500 });
-      }
-    } else {
-      // Development fallback — log to console (sanitized)
-      console.log("[Contact Form]", { name: sanitizedName, email: sanitizedEmail });
+    // Basic email format guard — Resend will also validate but good to fail fast
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+    if (!emailRegex.test(email)) {
+      return NextResponse.json(
+        { error: 'Please enter a valid email address.' },
+        { status: 400 }
+      )
     }
 
-    return NextResponse.json({ ok: true });
+    const safeName        = esc(name)
+    const safeEmail       = esc(email)
+    const safeTimeline    = esc(timeline)
+    const safeBrief       = esc(brief)
+    const safeProjectType = Array.isArray(projectType)
+      ? projectType.map(esc).join(', ')
+      : '—'
+
+    const { error } = await resend.emails.send({
+      from:    'Portfolio Contact <onboarding@resend.dev>',
+      // Once habib.studio is verified in Resend, change to:
+      // from: 'Habib <contact@habib.studio>',
+      to:      'mic.oguntimehin@gmail.com',
+      replyTo: email,
+      subject: `New enquiry from ${safeName}`,
+      html: `
+        <div style="font-family: monospace; max-width: 560px; color: #111;">
+          <p style="font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: #888; margin-bottom: 24px;">
+            New project enquiry — habib.studio
+          </p>
+
+          <table style="width: 100%; border-collapse: collapse; margin-bottom: 24px;">
+            <tr>
+              <td style="padding: 10px 0; border-bottom: 1px solid #eee; color: #888; font-size: 11px; width: 120px;">Name</td>
+              <td style="padding: 10px 0; border-bottom: 1px solid #eee; font-size: 13px;">${safeName}</td>
+            </tr>
+            <tr>
+              <td style="padding: 10px 0; border-bottom: 1px solid #eee; color: #888; font-size: 11px;">Email</td>
+              <td style="padding: 10px 0; border-bottom: 1px solid #eee; font-size: 13px;">
+                <a href="mailto:${safeEmail}" style="color: #E8660A;">${safeEmail}</a>
+              </td>
+            </tr>
+            <tr>
+              <td style="padding: 10px 0; border-bottom: 1px solid #eee; color: #888; font-size: 11px;">Project type</td>
+              <td style="padding: 10px 0; border-bottom: 1px solid #eee; font-size: 13px;">${safeProjectType || '—'}</td>
+            </tr>
+            <tr>
+              <td style="padding: 10px 0; border-bottom: 1px solid #eee; color: #888; font-size: 11px;">Timeline</td>
+              <td style="padding: 10px 0; border-bottom: 1px solid #eee; font-size: 13px;">${safeTimeline || '—'}</td>
+            </tr>
+          </table>
+
+          ${safeBrief ? `
+            <p style="font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: #888; margin-bottom: 8px;">Brief</p>
+            <p style="font-size: 13px; line-height: 1.7; background: #f5f5f5; padding: 16px; border-radius: 4px;">${safeBrief}</p>
+          ` : ''}
+        </div>
+      `,
+    })
+
+    if (error) {
+      console.error('Resend error:', error)
+      return NextResponse.json(
+        { error: 'Failed to send message. Please try again.' },
+        { status: 500 }
+      )
+    }
+
+    return NextResponse.json({ success: true })
   } catch (err) {
-    console.error("[Contact API]", err);
-    return NextResponse.json({ error: "Server error." }, { status: 500 });
+    console.error('API route error:', err)
+    return NextResponse.json(
+      { error: 'Something went wrong.' },
+      { status: 500 }
+    )
   }
 }

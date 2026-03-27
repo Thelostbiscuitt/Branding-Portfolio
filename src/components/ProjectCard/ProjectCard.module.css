@@ -1,0 +1,149 @@
+.card {
+  display: block;
+  position: relative;
+  overflow: hidden;
+  background: var(--black);
+  min-height: 220px;
+  transition: background 0.2s ease;
+}
+
+.featured {
+  grid-column: 1 / -1;
+  min-height: 280px;
+}
+
+/* ── Thumbnail ── */
+.thumb {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  z-index: 0;
+}
+
+.thumbVisible {
+  opacity: 1;
+}
+
+.thumbImg {
+  object-fit: cover;
+  object-position: center;
+  transform: scale(1.04);
+  transition: transform 0.5s ease;
+}
+
+.thumbVisible .thumbImg {
+  transform: scale(1);
+}
+
+.thumbOverlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(12, 12, 12, 0.72);
+}
+
+/* ── Content ── */
+.content {
+  position: relative;
+  z-index: 1;
+  padding: 28px 32px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+  min-height: inherit;
+}
+
+.top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: auto;
+}
+
+.index {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  color: #3a3a3a;
+}
+
+.category {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--orange);
+  background: rgba(232, 102, 10, 0.1);
+  border: 1px solid rgba(232, 102, 10, 0.2);
+  padding: 3px 9px;
+  border-radius: 2px;
+}
+
+.bottom {
+  padding-top: 48px;
+}
+
+.title {
+  font-family: var(--font-display);
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--white);
+  line-height: 1.2;
+  margin-bottom: 14px;
+  letter-spacing: -0.02em;
+}
+
+.featured .title {
+  font-size: 24px;
+}
+
+.tags {
+  display: flex;
+  gap: 0;
+  flex-wrap: wrap;
+  list-style: none;
+}
+
+.tag {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.04em;
+  color: #484848;
+}
+
+.tag::after {
+  content: ' · ';
+  color: #2e2e2e;
+  margin: 0 4px;
+}
+
+.tag:last-child::after {
+  display: none;
+}
+
+/* ── Arrow ── */
+.arrow {
+  position: absolute;
+  bottom: 28px;
+  right: 32px;
+  font-family: var(--font-mono);
+  font-size: 18px;
+  color: var(--orange);
+  transition: transform 0.25s ease;
+  z-index: 2;
+}
+
+.arrowHovered {
+  transform: translate(3px, -3px);
+}
+
+@media (max-width: 600px) {
+  .content {
+    padding: 20px;
+  }
+
+  .title {
+    font-size: 17px;
+  }
+}

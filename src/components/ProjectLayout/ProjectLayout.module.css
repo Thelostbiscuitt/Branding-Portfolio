@@ -1,0 +1,347 @@
+.article {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 48px;
+}
+
+/* ── Back ── */
+.backRow {
+  padding: 32px 0 0;
+}
+
+.back {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #4a4a4a;
+  transition: color 0.15s ease;
+}
+
+.back:hover {
+  color: var(--white);
+}
+
+/* ── Header ── */
+.header {
+  padding: 40px 0 48px;
+  border-bottom: 1px solid var(--border);
+}
+
+.headerMeta {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--orange);
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.dot {
+  color: #2e2e2e;
+}
+
+.title {
+  font-family: var(--font-display);
+  font-size: clamp(32px, 4.5vw, 56px);
+  font-weight: 800;
+  color: var(--white);
+  line-height: 1.05;
+  letter-spacing: -0.025em;
+  margin-bottom: 24px;
+}
+
+.headerLinks {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.headerLink {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--orange);
+  border: 1px solid rgba(232, 102, 10, 0.3);
+  padding: 8px 16px;
+  border-radius: 2px;
+  transition: background 0.15s ease;
+}
+
+.headerLink:hover {
+  background: rgba(232, 102, 10, 0.08);
+}
+
+/* ── Hero image ── */
+.heroWrap {
+  position: relative;
+  aspect-ratio: 16 / 7;
+  overflow: hidden;
+  background: #181818;
+  margin: 0 -48px;
+  width: calc(100% + 96px);
+}
+
+.heroImg {
+  object-fit: cover;
+  object-position: center;
+  filter: contrast(1.05) saturate(0.88);
+}
+
+/* ── Body grid ── */
+.body {
+  display: grid;
+  grid-template-columns: 220px 1fr;
+  gap: 64px;
+  padding: 64px 0;
+  border-bottom: 1px solid var(--border);
+}
+
+/* ── Aside ── */
+.aside {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  border-right: 1px solid var(--border);
+  padding-right: 40px;
+}
+
+.asideBlock {
+  padding: 16px 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.asideBlock:first-child {
+  padding-top: 0;
+}
+
+.asideLabel {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #3a3a3a;
+  margin-bottom: 6px;
+}
+
+.asideVal {
+  font-family: var(--font-body);
+  font-size: 13px;
+  color: var(--white);
+  line-height: 1.5;
+}
+
+.toolsList {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.toolTag {
+  font-family: var(--font-body);
+  font-size: 12px;
+  color: #666666;
+}
+
+/* ── Sections ── */
+.sections {
+  display: flex;
+  flex-direction: column;
+  gap: 48px;
+}
+
+.section {}
+
+.sectionNum {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #4a4a4a;
+  margin-bottom: 16px;
+}
+
+.sectionNumOrange {
+  color: var(--orange);
+}
+
+.sectionBody {
+  font-family: var(--font-body);
+  font-size: 15px;
+  line-height: 1.8;
+  color: var(--gray);
+}
+
+.sectionBody p {
+  margin-bottom: 16px;
+}
+
+.sectionBody p:last-child {
+  margin-bottom: 0;
+}
+
+/* sectionBody heading — used in Biscuit AI-style pages */
+.sectionBody h3 {
+  font-family: var(--font-display);
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--white);
+  margin-bottom: 12px;
+  letter-spacing: -0.02em;
+}
+
+/* sectionBody blockquote */
+.sectionBody blockquote {
+  border-left: 2px solid var(--orange);
+  padding-left: 20px;
+  color: var(--white);
+  font-style: italic;
+  margin: 20px 0;
+}
+
+/* before/after list */
+.sectionBody ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin: 16px 0;
+}
+
+.sectionBody ul li {
+  font-size: 14px;
+  padding-left: 16px;
+  position: relative;
+}
+
+.sectionBody ul li::before {
+  content: '·';
+  position: absolute;
+  left: 0;
+  color: var(--orange);
+}
+
+/* ── Screenshots ── */
+.screenshotsWrap {
+  padding: 64px 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.screenshotsLabel {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #4a4a4a;
+  margin-bottom: 20px;
+}
+
+.screenshotsGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 8px;
+}
+
+.screenshotsGridSingle {
+  grid-template-columns: 1fr;
+}
+
+.screenshotFrame {
+  position: relative;
+  aspect-ratio: 16 / 10;
+  overflow: hidden;
+  background: #181818;
+  border: 1px solid var(--border);
+  border-radius: 2px;
+}
+
+.screenshotImg {
+  object-fit: cover;
+  object-position: top center;
+}
+
+/* ── Next project ── */
+.nextWrap {
+  padding: 56px 0;
+}
+
+.nextLabel {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #3a3a3a;
+  margin-bottom: 16px;
+}
+
+.nextLink {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  max-width: fit-content;
+}
+
+.nextLink:hover .nextTitle {
+  color: var(--orange);
+}
+
+.nextCategory {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--orange);
+}
+
+.nextTitle {
+  font-family: var(--font-display);
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--white);
+  letter-spacing: -0.02em;
+  transition: color 0.15s ease;
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 900px) {
+  .article {
+    padding: 0 24px;
+  }
+
+  .heroWrap {
+    margin: 0 -24px;
+    width: calc(100% + 48px);
+    aspect-ratio: 16 / 9;
+  }
+
+  .body {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+
+  .aside {
+    border-right: none;
+    border-bottom: 1px solid var(--border);
+    padding-right: 0;
+    padding-bottom: 40px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0;
+  }
+
+  .screenshotsGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 600px) {
+  .aside {
+    grid-template-columns: 1fr;
+  }
+}

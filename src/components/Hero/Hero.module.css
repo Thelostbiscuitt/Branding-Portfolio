@@ -1,0 +1,200 @@
+.hero {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  min-height: 560px;
+}
+
+/* ── LEFT ── */
+.left {
+  padding: 72px 48px 72px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+
+.status {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--orange);
+  margin-bottom: 32px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.statusDot {
+  display: block;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--orange);
+  flex-shrink: 0;
+}
+
+.heading {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.headingMain {
+  font-family: var(--font-display);
+  font-size: clamp(52px, 6vw, 80px);
+  font-weight: 800;
+  line-height: 0.92;
+  color: var(--white);
+  letter-spacing: -0.03em;
+}
+
+.headingSub {
+  font-family: var(--font-display);
+  font-size: clamp(18px, 2vw, 26px);
+  font-weight: 400;
+  font-style: italic;
+  color: var(--orange);
+  letter-spacing: -0.01em;
+  margin-top: 12px;
+}
+
+.rule {
+  width: 40px;
+  height: 1px;
+  background: var(--orange);
+  margin: 32px 0;
+  flex-shrink: 0;
+}
+
+.description {
+  font-family: var(--font-body);
+  font-size: 15px;
+  line-height: 1.75;
+  color: var(--gray);
+  max-width: 360px;
+  margin-bottom: 40px;
+}
+
+.actions {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.ctaPrimary {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--black);
+  background: var(--orange);
+  padding: 13px 24px;
+  border-radius: 3px;
+  transition: background 0.15s ease;
+}
+
+.ctaPrimary:hover {
+  background: var(--orange-dim);
+}
+
+.ctaSecondary {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--gray);
+  background: none;
+  border: 1px solid rgba(245, 241, 235, 0.12);
+  padding: 13px 24px;
+  border-radius: 3px;
+  transition: color 0.15s ease, border-color 0.15s ease;
+}
+
+.ctaSecondary:hover {
+  color: var(--white);
+  border-color: rgba(245, 241, 235, 0.3);
+}
+
+/* ── RIGHT ── */
+.right {
+  position: relative;
+  overflow: hidden;
+  background: #181818;
+  min-height: 580px;
+}
+
+.photo {
+  object-fit: cover;
+  object-position: center top;
+  filter: contrast(1.08) saturate(0.82);
+}
+
+/* Bottom-to-top gradient so the text side stays dark */
+.photoOverlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to right,
+    rgba(12, 12, 12, 0.35) 0%,
+    transparent 30%
+  );
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* Subtle scanline texture — not a heavy effect, just enough to read "treated" */
+.scanlines {
+  position: absolute;
+  inset: 0;
+  background-image: repeating-linear-gradient(
+    0deg,
+    rgba(0, 0, 0, 0.04) 0px,
+    rgba(0, 0, 0, 0.04) 1px,
+    transparent 1px,
+    transparent 4px
+  );
+  z-index: 2;
+  pointer-events: none;
+}
+
+.geoTag {
+  position: absolute;
+  bottom: 28px;
+  right: 28px;
+  z-index: 3;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(232, 102, 10, 0.55);
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 900px) {
+  .hero {
+    grid-template-columns: 1fr;
+    min-height: unset;
+  }
+
+  .right {
+    height: 420px;
+  }
+
+  .geoTag {
+    writing-mode: horizontal-tb;
+    transform: none;
+  }
+}
+
+@media (max-width: 600px) {
+  .left {
+    padding: 48px 24px;
+  }
+
+  .right {
+    height: 360px;
+  }
+}

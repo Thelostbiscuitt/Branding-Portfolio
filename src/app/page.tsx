@@ -1,27 +1,23 @@
-import { Navbar }        from "@/components/layout/Navbar";
-import { Footer }        from "@/components/layout/Footer";
-import { ScrollProgress } from "@/components/layout/ScrollProgress";
-import { ScrollToTop }   from "@/components/layout/ScrollToTop";
-import { SectionDots }   from "@/components/layout/SectionDots";
-import { Hero }          from "@/components/sections/Hero";
-import { About }         from "@/components/sections/About";
-import { Projects }      from "@/components/sections/Projects";
-import { Contact }       from "@/components/sections/Contact";
+import Nav     from '@/components/Nav/Nav'
+import Hero    from '@/components/Hero/Hero'
+import Stats   from '@/components/Stats/Stats'
+import Ticker  from '@/components/Ticker/Ticker'
+import Work    from '@/components/Work/Work'
+import About   from '@/components/About/About'
+import Contact from '@/components/Contact/Contact'
+import Footer  from '@/components/Footer/Footer'
 
-export default function Home() {
+export default function HomePage() {
   return (
-    <>
-      <ScrollProgress />
-      <SectionDots />
-      <ScrollToTop />
-      <Navbar />
-      <main id="main">
-        <Hero />
-        <About />
-        <Projects />
-        <Contact />
-      </main>
+    <main id="main">
+      <Nav />
+      <Hero />
+      <Stats />
+      <Ticker />
+      <Work />
+      <About />
+      <Contact />
       <Footer />
-    </>
-  );
+    </main>
+  )
 }

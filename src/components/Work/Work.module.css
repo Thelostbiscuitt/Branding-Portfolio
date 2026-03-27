@@ -1,0 +1,134 @@
+.section {
+  padding: 96px 48px;
+  border-top: 1px solid var(--border);
+  position: relative;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 48px;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+
+.sectionLabel {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #4a4a4a;
+  margin-bottom: 10px;
+}
+
+.heading {
+  font-family: var(--font-display);
+  font-size: clamp(32px, 4vw, 48px);
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -0.025em;
+}
+
+/* Ghost section number — typographic texture */
+.heading::before {
+  content: '02';
+  position: absolute;
+  top: -16px;
+  right: 48px;
+  font-family: var(--font-display);
+  font-size: 160px;
+  font-weight: 800;
+  color: rgba(245, 241, 235, 0.025);
+  line-height: 1;
+  pointer-events: none;
+  user-select: none;
+  z-index: 0;
+}
+
+.headingLight {
+  color: var(--white);
+  font-weight: 400;
+}
+
+.headingItalic {
+  font-style: italic;
+  color: var(--orange);
+  font-weight: 800;
+}
+
+.controls {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 12px;
+}
+
+.filters {
+  display: flex;
+  gap: 4px;
+}
+
+.filterBtn {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #4a4a4a;
+  background: none;
+  border: 1px solid transparent;
+  padding: 6px 14px;
+  border-radius: 2px;
+  transition: color 0.15s ease, border-color 0.15s ease;
+}
+
+.filterBtn:hover {
+  color: var(--white);
+}
+
+.filterBtnActive {
+  color: var(--orange);
+  border-color: rgba(232, 102, 10, 0.3);
+  background: rgba(232, 102, 10, 0.06);
+}
+
+.archiveLink {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #4a4a4a;
+  transition: color 0.15s ease;
+}
+
+.archiveLink:hover {
+  color: var(--white);
+}
+
+/* ── Grid ── */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1px;
+  background: var(--border);
+  border: 1px solid var(--border);
+}
+
+@media (max-width: 768px) {
+  .section {
+    padding: 64px 24px;
+  }
+
+  .grid {
+    grid-template-columns: 1fr;
+  }
+
+  .header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .controls {
+    align-items: flex-start;
+  }
+}

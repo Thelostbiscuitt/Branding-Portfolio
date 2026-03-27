@@ -1,0 +1,165 @@
+.section {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  padding: 96px 48px;
+  border-top: 1px solid var(--border);
+}
+
+/* ── LEFT ── */
+.sectionLabel {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #4a4a4a;
+  margin-bottom: 28px;
+}
+
+.heading {
+  font-family: var(--font-display);
+  font-size: clamp(36px, 4vw, 52px);
+  font-weight: 800;
+  line-height: 1.05;
+  color: var(--white);
+  letter-spacing: -0.025em;
+  margin-bottom: 28px;
+}
+
+.headingItalic {
+  font-style: italic;
+  color: var(--orange);
+  font-weight: 400;
+  font-size: 0.72em;
+}
+
+.body {
+  font-family: var(--font-body);
+  font-size: 15px;
+  line-height: 1.8;
+  color: var(--gray);
+  margin-bottom: 24px;
+}
+
+.pull {
+  font-family: var(--font-display);
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--white);
+  line-height: 1.5;
+  border-left: 2px solid var(--orange);
+  padding-left: 22px;
+  margin: 36px 0;
+  font-style: normal;
+}
+
+.location {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  color: #4a4a4a;
+  margin-top: 8px;
+}
+
+/* ── RIGHT ── */
+.right {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.photoFrame {
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  position: relative;
+  overflow: hidden;
+  background: #181818;
+  border-radius: 2px;
+  flex-shrink: 0;
+}
+
+.photo {
+  object-fit: cover;
+  object-position: center top;
+  /* Slightly different treatment from hero — more desaturated, higher contrast */
+  filter: contrast(1.12) saturate(0.6) brightness(0.95);
+}
+
+/* Horizontal scanlines — a different texture to the hero's subtle gradient */
+.scanlines {
+  position: absolute;
+  inset: 0;
+  background-image: repeating-linear-gradient(
+    0deg,
+    rgba(12, 12, 12, 0.06) 0px,
+    rgba(12, 12, 12, 0.06) 1px,
+    transparent 1px,
+    transparent 3px
+  );
+  z-index: 1;
+  pointer-events: none;
+}
+
+.photoCaption {
+  position: absolute;
+  bottom: 16px;
+  left: 16px;
+  z-index: 2;
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(245, 241, 235, 0.25);
+}
+
+/* ── Meta grid ── */
+.metaGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  border: 1px solid var(--border);
+}
+
+.metaRow {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 16px 18px;
+  border-bottom: 1px solid var(--border);
+  border-right: 1px solid var(--border);
+}
+
+.metaRow:nth-child(even) {
+  border-right: none;
+}
+
+.metaRow:nth-last-child(-n+2) {
+  border-bottom: none;
+}
+
+.metaKey {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #3a3a3a;
+}
+
+.metaVal {
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--white);
+}
+
+.metaValHighlight {
+  color: var(--orange);
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 900px) {
+  .section {
+    grid-template-columns: 1fr;
+    gap: 48px;
+    padding: 64px 24px;
+  }
+}
