@@ -157,7 +157,7 @@ Before deploying to production:
 
 If you discover a security vulnerability, please report it responsibly:
 
-1. **Email**: mic.oguntimehin@gmail.com
+1. **Email**: habib@habiibcore.com
 2. **Subject**: [SECURITY] - Brief description
 3. **Include**:
    - Description of the vulnerability

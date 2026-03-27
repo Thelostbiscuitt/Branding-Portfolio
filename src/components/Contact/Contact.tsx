@@ -24,7 +24,7 @@ const socialLinks = [
   { platform: 'Behance',  handle: 'BlvckOreo',               href: 'https://www.behance.net/BlvckOreo' },
   { platform: 'GitHub',   handle: 'Thelostbiscuitt',          href: 'https://github.com/Thelostbiscuitt' },
   { platform: 'LinkedIn', handle: 'habib-oguntimehin',        href: 'https://www.linkedin.com/in/michael-oguntimehin-480751398' },
-  { platform: 'Email',    handle: 'mic.oguntimehin@gmail.com', href: 'mailto:mic.oguntimehin@gmail.com' },
+  { platform: 'Email',    handle: 'habib@habiibcore.com', href: 'mailto:habib@habiibcore.com' },
 ]
 
 export default function Contact() {

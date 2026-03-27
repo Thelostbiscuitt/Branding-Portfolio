@@ -47,7 +47,7 @@ export async function POST(req: Request) {
       from:    'Portfolio Contact <onboarding@resend.dev>',
       // Once habib.studio is verified in Resend, change to:
       // from: 'Habib <contact@habib.studio>',
-      to:      'mic.oguntimehin@gmail.com',
+      to:      'habib@habiibcore.com',
       reply_to: email,
       subject: `New enquiry from ${safeName}`,
       html: `
