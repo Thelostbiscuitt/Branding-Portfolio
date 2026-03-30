@@ -1,92 +1,276 @@
-# Habib Oguntimehin — Creative Portfolio
+# Habib — Portfolio
 
-> **Creative Director · Visual Designer · Builder**  
-> Lagos, Nigeria · Available for work
+Personal portfolio and case study site for Habib, creative director and developer based in Lagos.
 
-A personal portfolio and case study website for a Lagos-based creative director and visual designer. The site presents selected branding, identity, art direction, and digital design work — with an emphasis on the rare combination of design authorship and technical execution.
-
----
-
-## About
-
-This is the portfolio of **Michael Oguntimehin**, a creative director who spans brand identity, art direction, music packaging, EPK design, and digital product work. What distinguishes the practice: every project is designed and shipped by the same person. No handoff. No translation loss between vision and execution.
-
-The portfolio reflects 5+ years of active work, 30+ delivered projects, and 12+ brands shaped — with clients ranging from financial institutions to independent musicians.
+Built with Next.js 14, TypeScript, and CSS Modules. Deployed on Vercel. Contact form powered by Resend.
 
 ---
 
-## What's Inside
+## Getting started
 
-The site is structured around three primary sections:
+### Prerequisites
 
-### Work
-A curated selection of projects spanning:
-- **Brand Identity** — identity systems, brand guidelines, logo usage
-- **Art Direction** — visual strategy and creative direction across campaigns
-- **Music Packaging & EPK Design** — artist electronic press kits and release materials
-- **Design Systems** — component libraries, social media templates, colour systems
-- **Digital** — landing pages, web apps, and custom tools
+- Node.js 18.17 or later
+- npm, yarn, or pnpm
 
-Each case study includes project context, the approach taken, deliverables, and role. Projects are tagged by type (Brand / Design / Collab) and engagement model (Paid Client / Self-Initiated).
+### Installation
 
-### About
-Background on the designer's philosophy, skill set, and positioning — including both design disciplines (Photoshop, Adobe Suite) and development capabilities (React, Next.js).
+```bash
+# Clone the repository
+git clone https://github.com/your-username/your-repo-name.git
+cd your-repo-name
 
-### Contact
-A direct enquiry form for project discussions. The designer is open to brand projects, product design, and development work, operating globally from a Lagos base.
+# Install dependencies
+npm install
+```
 
----
+### Environment variables
 
-## Tech Stack
+Create a `.env.local` file in the project root:
 
-Built with **Next.js** and deployed on **Vercel**.
+```env
+RESEND_API_KEY=your_resend_api_key_here
+```
 
-| Layer | Technology |
-|-------|------------|
-| Framework | Next.js (App Router) |
-| Hosting | Vercel |
-| Images | Next.js Image Optimization |
-| Styling | CSS (custom) |
+Get your API key from the [Resend dashboard](https://resend.com/api-keys). This is required for the contact form to send emails.
 
----
+### Development
 
-## Project Types
+```bash
+npm run dev
+```
 
-| Type | Description |
-|------|-------------|
-| `Brand` | Full brand identity and communications work |
-| `Design` | Focused design deliverables (EPKs, packaging, art direction) |
-| `Collab` | Cross-disciplinary collaborations (design + web3, film, music) |
+Open [http://localhost:3000](http://localhost:3000).
 
----
+### Production build
 
-## Featured Work
-
-| # | Project | Type | Notes |
-|---|---------|------|-------|
-| 01 | Leadway Pensure — Brand & Comms | Brand | Self-initiated brand extension pitch + internal comms |
-| 02 | Skaame — Artist Web EPK | Design | Paid client, music/web |
-| 03 | Layo Isaac — Artist EPK | Design | Paid client, art direction |
-| 04 | BlvckOreo — Personal EPK | Design | Self-directed, hip-hop brand |
-| 05 | 1ETHFP — Creative Collaboration | Collab | Web3 + music + film |
-
-Full project archive available on [Behance](https://www.behance.net/BlvckOreo).
+```bash
+npm run build
+npm run start
+```
 
 ---
 
-## Links
+## Project structure
 
-- **Live Site** — [branding-portfolio-ochre.vercel.app](https://branding-portfolio-ochre.vercel.app/)
-- **Behance** — Extended project archive
-- **LinkedIn** — Professional profile
-- **Email** — Available via the contact section on the site
+```
+src/
+├── app/
+│   ├── globals.css              # Global styles, CSS variables, font imports
+│   ├── layout.tsx               # Root layout and site metadata
+│   ├── page.tsx                 # Homepage
+│   ├── api/
+│   │   └── contact/
+│   │       └── route.ts         # Contact form API endpoint
+│   └── projects/
+│       ├── biscuit-ai/
+│       ├── leadway-pensure/
+│       ├── skaame-epk/
+│       ├── layo-isaac-epk/
+│       ├── blvckoreo-epk/
+│       └── 1ethfp/
+├── components/
+│   ├── Nav/
+│   ├── Hero/
+│   ├── Stats/
+│   ├── Ticker/
+│   ├── Work/
+│   ├── ProjectCard/
+│   ├── About/
+│   ├── Contact/
+│   ├── Footer/
+│   └── ProjectLayout/           # Shared template for all project pages
+└── data/
+    └── projects.ts              # Project index data
+```
 
 ---
 
-## Status
+## Adding a new project
 
-The designer is **currently available** for new work — brand projects, product design, and development engagements. Based in Lagos; working globally.
+### 1. Add images
+
+Place project images in `/public/projects/your-project-slug/`:
+
+```
+public/
+└── projects/
+    └── your-project-slug/
+        ├── hero.jpg          # Used as card thumbnail and page hero
+        ├── sc-01.png         # Screenshots (name them however you like)
+        └── sc-02.png
+```
+
+Recommended image sizes:
+- `hero.jpg` — 1600×900px minimum, JPG for photos
+- Screenshots — actual resolution, PNG or JPG both fine
+
+### 2. Add to the project index
+
+Open `src/data/projects.ts` and add an entry to the `projects` array:
+
+```ts
+{
+  slug:     'your-project-slug',   // Must match the folder name in /projects/
+  index:    '07',                  // Display number
+  category: 'Design',              // 'Brand' | 'Design' | 'Collab'
+  title:    'Project Name — Subtitle',
+  tags:     ['Tag One', 'Tag Two', 'Tag Three'],
+  thumb:    '/projects/your-project-slug/hero.jpg',
+  // featured: true,               // Uncomment to make this card full-width
+}
+```
+
+### 3. Create the project page
+
+Create `src/app/projects/your-project-slug/page.tsx`:
+
+```tsx
+import ProjectLayout from '@/components/ProjectLayout/ProjectLayout'
+
+export const metadata = {
+  title: 'Project Name | Habib',
+  description: 'One sentence describing this project.',
+}
+
+export default function YourProject() {
+  return (
+    <ProjectLayout
+      title="Project Name — Subtitle"
+      heroImage="/projects/your-project-slug/hero.jpg"
+      heroAlt="Description of the hero image"
+      meta={{
+        category: 'Design',
+        year:     '2026',
+        client:   'Client Name',
+        role:     'Designer · Developer',
+        tools:    ['Figma', 'Next.js'],
+        tags:     ['Deliverable One', 'Deliverable Two'],
+        liveUrl:  'https://example.com',      // optional
+        githubUrl: 'https://github.com/...',  // optional
+      }}
+      sections={[
+        {
+          number:  '01',
+          heading: 'The problem',
+          body: <p>Describe the problem this project solved.</p>,
+        },
+        {
+          number:  '02',
+          heading: 'The approach',
+          body: <p>Describe how you approached it.</p>,
+        },
+        {
+          number:  '03',
+          heading: 'The outcome',
+          body: <p>Describe what was delivered and its impact.</p>,
+        },
+      ]}
+      screenshots={[
+        { src: '/projects/your-project-slug/sc-01.png', alt: 'Description' },
+        { src: '/projects/your-project-slug/sc-02.png', alt: 'Description' },
+      ]}
+      next={{
+        slug:     'next-project-slug',
+        category: 'Brand',
+        title:    'Next Project Title',
+      }}
+    />
+  )
+}
+```
+
+The `next` prop is optional — leave it out if this is the last project.
 
 ---
 
-*© 2026 Michael Oguntimehin — Lagos, Nigeria*
+## Contact form
+
+The contact form at `POST /api/contact` accepts:
+
+| Field         | Type       | Required |
+|---------------|------------|----------|
+| `name`        | `string`   | Yes      |
+| `email`       | `string`   | Yes      |
+| `projectType` | `string[]` | No       |
+| `timeline`    | `string`   | No       |
+| `brief`       | `string`   | No       |
+
+Emails are sent to the address configured in `src/app/api/contact/route.ts`.
+
+### Updating the sender address
+
+Once your domain is verified in Resend, update the `from` field in `route.ts`:
+
+```ts
+// Before
+from: 'Portfolio Contact <onboarding@resend.dev>',
+
+// After
+from: 'Habib <contact@habib.studio>',
+```
+
+---
+
+## Deployment
+
+The site is deployed on [Vercel](https://vercel.com). Every push to `main` triggers a production deployment automatically.
+
+### Environment variables on Vercel
+
+Go to your project in the Vercel dashboard → **Settings** → **Environment Variables** and add:
+
+| Variable          | Value                  | Environments              |
+|-------------------|------------------------|---------------------------|
+| `RESEND_API_KEY`  | Your Resend API key    | Production, Preview, Dev  |
+
+### Custom domain
+
+To connect `habib.studio`:
+
+1. Go to your Vercel project → **Settings** → **Domains**
+2. Add `habib.studio` and `www.habib.studio`
+3. Follow the DNS instructions Vercel provides
+4. Update the `url` field in `src/app/layout.tsx` metadata once the domain is live
+
+---
+
+## Fonts
+
+The site uses three typefaces loaded via Google Fonts:
+
+- **Syne** (400, 600, 700, 800) — headings and display text
+- **DM Sans** (300, 400, 500) — body copy and form elements
+- **DM Mono** (300, 400, 500) — labels, eyebrows, navigation, tags
+
+Font imports live in `globals.css`. No third-party font package is required.
+
+---
+
+## Tech stack
+
+| Layer        | Technology                  |
+|--------------|-----------------------------|
+| Framework    | Next.js 14 (App Router)     |
+| Language     | TypeScript                  |
+| Styling      | CSS Modules                 |
+| Images       | next/image                  |
+| Email        | Resend                      |
+| Deployment   | Vercel                      |
+
+---
+
+## Scripts
+
+| Command           | Description                        |
+|-------------------|------------------------------------|
+| `npm run dev`     | Start local development server     |
+| `npm run build`   | Build for production               |
+| `npm run start`   | Start production server locally    |
+| `npm run lint`    | Run ESLint                         |
+
+---
+
+## License
+
+All content, case studies, and project work belong to Habib. The codebase structure may be referenced but not redistributed as a template.
