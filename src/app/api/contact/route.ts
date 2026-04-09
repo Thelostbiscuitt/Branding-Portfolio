@@ -1,7 +1,12 @@
 import { Resend } from 'resend'
 import { NextResponse } from 'next/server'
 
-const resend = new Resend(process.env.RESEND_API_KEY)
+function getResend(): Resend {
+  if (!process.env.RESEND_API_KEY) {
+    throw new Error('RESEND_API_KEY is not configured')
+  }
+  return new Resend(process.env.RESEND_API_KEY)
+}
 
 /** Escape the five HTML special characters to prevent XSS in email templates. */
 function esc(str: unknown): string {
@@ -42,6 +47,8 @@ export async function POST(req: Request) {
     const safeProjectType = Array.isArray(projectType)
       ? projectType.map(esc).join(', ')
       : '—'
+
+    const resend = getResend()
 
     const { error } = await resend.emails.send({
       from:    'Portfolio Contact <onboarding@resend.dev>',
