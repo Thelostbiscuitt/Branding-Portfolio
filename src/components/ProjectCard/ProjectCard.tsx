@@ -42,6 +42,9 @@ export default function ProjectCard({ project }: Props) {
 
         <div className={styles.bottom}>
           <h3 className={styles.title}>{project.title}</h3>
+          {project.description && (
+            <p className={styles.description}>{project.description}</p>
+          )}
           <ul className={styles.tags} aria-label="Project tags">
             {project.tags.map((tag) => (
               <li key={tag} className={styles.tag}>{tag}</li>
