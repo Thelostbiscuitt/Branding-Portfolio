@@ -12,8 +12,8 @@ export default function Hero() {
         </p>
 
         <h1 className={styles.heading}>
-          <span className={styles.headingMain}>Creative<br />Director.</span>
-          <span className={styles.headingSub}>Builds it too.</span>
+          <span className={styles.headingMain}>Operator.<br />Designer.</span>
+          <span className={styles.headingSub}>Builds both.</span>
         </h1>
 
         <div className={styles.rule} aria-hidden="true" />
