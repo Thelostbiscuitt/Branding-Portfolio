@@ -33,6 +33,12 @@ export default function About() {
         </blockquote>
 
         <p className={styles.body}>
+          Spent four years in financial services operations, building automation
+          systems and running process improvement at scale. The two practices
+          feed each other.
+        </p>
+
+        <p className={styles.body}>
           What makes the work different: I build it too. Landing pages, web
           apps, custom tools — designed by me, shipped by me. No handoff, no
           translation loss between vision and execution. Clients like Leadway
