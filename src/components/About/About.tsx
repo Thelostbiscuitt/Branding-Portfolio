@@ -8,6 +8,38 @@ const meta = [
   { key: 'Also',    value: 'Builds it with AI' },
 ]
 
+type TimelineEntry = {
+  year:     string
+  org:      string
+  role:     string
+  logo?:    string   // path under /public; falls back to monogram when absent
+  monogram: string   // 2-letter fallback tile
+}
+
+const timeline: TimelineEntry[] = [
+  {
+    year:     '2026',
+    org:      'Birdview Travels & Tours',
+    role:     'CRM development, process automation & AI training',
+    logo:     '/timeline/birdview.png',
+    monogram: 'BV',
+  },
+  {
+    year:     '2022',
+    org:      'Leadway Pensure',
+    role:     'Operations & process automation',
+    logo:     '/timeline/leadway.png',
+    monogram: 'LP',
+  },
+  {
+    year:     '2020',   // TODO: confirm the year the design practice started
+    org:      'Habibcore',
+    role:     'Brand & art direction',
+    logo:     '/logo.png',
+    monogram: 'HC',
+  },
+]
+
 export default function About() {
   return (
     <section className={styles.section} id="about" aria-label="About">
@@ -52,21 +84,56 @@ export default function About() {
 
       {/* ── Right: photo + logo badge + meta ── */}
       <div className={styles.right}>
-        <div className={styles.frame}>
-          <Image
-            src="/photo.jpg"
-            alt="Habib"
-            fill
-            sizes="(max-width: 900px) 100vw, 45vw"
-            className={styles.photo}
-          />
-          {/* Bottom scrim keeps the badge/caption legible regardless of what's in the photo */}
-          <div className={styles.scrim} aria-hidden="true" />
+        <div className={styles.frameWrap}>
+          <div className={styles.frame}>
+            <Image
+              src="/photo.jpg"
+              alt="Habib"
+              fill
+              sizes="(max-width: 900px) 100vw, 45vw"
+              className={styles.photo}
+            />
+            {/* Bottom scrim keeps the caption legible regardless of what's in the photo */}
+            <div className={styles.scrim} aria-hidden="true" />
+            <p className={styles.caption}>Habib — Lagos</p>
+          </div>
+
+          {/* Sibling of the frame, not a child — it can't overhang the corner
+              from inside an overflow: hidden box. */}
           <div className={styles.badge}>
             <Image src="/logo.png" alt="" width={28} height={28} className={styles.badgeLogo} />
           </div>
-          <p className={styles.caption}>Habib — Lagos</p>
         </div>
+
+        <ol className={styles.timeline} role="list" aria-label="Career timeline">
+          {timeline.map((entry) => (
+            <li key={entry.org} className={styles.timelineItem}>
+              <p className={styles.timelineYear}>{entry.year}</p>
+
+              {entry.logo ? (
+                /* Tile is white because all the marks are transparent PNGs with
+                   dark or coloured artwork — they need a light backing to read
+                   against --black. Never tinted or inverted. */
+                <span className={styles.logoTile}>
+                  <Image
+                    src={entry.logo}
+                    alt=""
+                    width={130}
+                    height={44}
+                    className={styles.logoImg}
+                  />
+                </span>
+              ) : (
+                <span className={styles.monogram} aria-hidden="true">{entry.monogram}</span>
+              )}
+
+              <div>
+                <p className={styles.timelineOrg}>{entry.org}</p>
+                <p className={styles.timelineRole}>{entry.role}</p>
+              </div>
+            </li>
+          ))}
+        </ol>
 
         <div className={styles.metaGrid} role="list" aria-label="Profile details">
           {meta.map((row) => (

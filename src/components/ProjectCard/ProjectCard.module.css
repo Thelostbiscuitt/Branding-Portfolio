@@ -166,6 +166,98 @@
   transform: translate(3px, -3px);
 }
 
+/* ── Stacked variant (current work) ──
+   Two columns: image one side, text the other. Declared after the base rules
+   so the equal-specificity hover overrides below actually win. The card keeps
+   an opaque background or the sticky stack shows through; the stack geometry
+   itself lives in Work.module.css. */
+.stacked {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  min-height: 300px;
+  border: 1px solid var(--border-mid);
+  background: var(--black);
+}
+
+/* DOM order is thumb then content, so by default the thumb takes column 2
+   and .stackedFlip swaps the two. */
+.stacked .thumb,
+.stacked .content {
+  grid-row: 1;
+}
+
+.stacked .thumb   { grid-column: 2; }
+.stacked .content { grid-column: 1; }
+
+.stackedFlip .thumb   { grid-column: 1; }
+.stackedFlip .content { grid-column: 2; }
+
+/* Hero images have inconsistent ratios (.jpg heroes plus one .svg cover), so
+   the container fixes the ratio and the image covers it — keeps the stack even. */
+.stacked .thumb {
+  position: relative;
+  inset: auto;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  opacity: 1;
+  transition: none;
+}
+
+/* Always visible now. The reveal is replaced by a small scale shift on
+   hover — and on keyboard focus, same as everything else here. */
+.stacked .thumbImg {
+  transform: none;
+}
+
+.stacked:hover .thumbImg,
+.stacked:focus-visible .thumbImg {
+  transform: scale(1.04);
+}
+
+/* Text lives in its own column, so the image no longer needs a scrim over it */
+.stacked .thumbOverlay {
+  display: none;
+}
+
+.stacked .content {
+  padding: 36px 40px;
+}
+
+.stacked .title {
+  font-size: 24px;
+}
+
+.stacked .description {
+  max-width: none;
+}
+
+@media (max-width: 768px) {
+  /* Single column — image on top, text beneath */
+  .stacked {
+    grid-template-columns: 1fr;
+  }
+
+  .stacked .thumb,
+  .stackedFlip .thumb,
+  .stacked .content,
+  .stackedFlip .content {
+    grid-column: 1;
+    grid-row: auto;
+  }
+
+  .stacked .thumb {
+    aspect-ratio: 16 / 10;
+  }
+
+  .stacked .content {
+    padding: 28px 24px;
+  }
+
+  .stacked .title {
+    font-size: 19px;
+  }
+}
+
 @media (max-width: 600px) {
   .content {
     padding: 20px;
@@ -173,5 +265,16 @@
 
   .title {
     font-size: 17px;
+  }
+}
+
+/* Must sit at the end of the file — the stacked hover rules above share its
+   specificity, so this only wins by source order. */
+@media (prefers-reduced-motion: reduce) {
+  .stacked .thumbImg,
+  .stacked:hover .thumbImg,
+  .stacked:focus-visible .thumbImg {
+    transform: none;
+    transition: none;
   }
 }

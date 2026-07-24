@@ -5,8 +5,10 @@
 }
 
 /* ── LEFT ── */
+/* Top padding clears the fixed nav. The right panel stays full-bleed and the
+   pill floats over it — its logo is centred well below the pill. */
 .left {
-  padding: 72px 48px 72px;
+  padding: calc(72px + var(--nav-offset)) 48px 72px;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
@@ -175,7 +177,7 @@
 
 @media (max-width: 600px) {
   .left {
-    padding: 48px 24px;
+    padding: calc(48px + var(--nav-offset)) 24px 48px;
   }
 
   .right {

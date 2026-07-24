@@ -5,8 +5,9 @@
 }
 
 /* ── Back ── */
+/* Clears the fixed nav — this is the first content on the page */
 .backRow {
-  padding: 32px 0 0;
+  padding: calc(32px + var(--nav-offset)) 0 0;
 }
 
 .back {

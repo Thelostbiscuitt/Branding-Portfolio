@@ -27,9 +27,14 @@ export default function Work() {
         </a>
       </div>
 
-      <div className={styles.grid}>
-        {current.map((project) => (
-          <ProjectCard key={project.slug} project={project} />
+      {/* Current work is a sticky scroll-stack of full-width cards; past work
+          stays a plain grid. The difference between the two reinforces which
+          set matters. */}
+      <div className={styles.stack}>
+        {current.map((project, i) => (
+          <div key={project.slug} className={styles.stackItem}>
+            <ProjectCard project={project} stacked flip={i % 2 === 1} />
+          </div>
         ))}
       </div>
 

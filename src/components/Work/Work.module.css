@@ -92,6 +92,34 @@
   color: var(--gray);
 }
 
+/* ── Stack (current work) ──
+   Each card pins a little lower than the one before it, so they overlap as the
+   page scrolls. Pure CSS position: sticky — no scroll listeners, no observer.
+   Sticky is bounded by .stack, so the cards release once the group scrolls out. */
+.stack {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.stackItem {
+  position: sticky;
+  top: calc(var(--nav-offset) + 24px);
+}
+
+.stackItem:nth-child(2) { top: calc(var(--nav-offset) + 48px); }
+.stackItem:nth-child(3) { top: calc(var(--nav-offset) + 72px); }
+.stackItem:nth-child(4) { top: calc(var(--nav-offset) + 96px); }
+.stackItem:nth-child(5) { top: calc(var(--nav-offset) + 120px); }
+.stackItem:nth-child(6) { top: calc(var(--nav-offset) + 144px); }
+
+.stackItem:nth-child(1) > a { animation-delay: 0ms; }
+.stackItem:nth-child(2) > a { animation-delay: 60ms; }
+.stackItem:nth-child(3) > a { animation-delay: 120ms; }
+.stackItem:nth-child(4) > a { animation-delay: 180ms; }
+.stackItem:nth-child(5) > a { animation-delay: 240ms; }
+.stackItem:nth-child(6) > a { animation-delay: 300ms; }
+
 /* ── Grid ── */
 .grid {
   display: grid;
@@ -120,5 +148,19 @@
   .header {
     flex-direction: column;
     align-items: flex-start;
+  }
+
+  /* A stacked card is taller than a phone viewport, so pinning it just traps
+     the reader. Plain flow instead. */
+  .stackItem {
+    position: static;
+  }
+}
+
+/* Flatten the stack to normal flow — the overlap only reads as intentional
+   while it's animating under the scroll. */
+@media (prefers-reduced-motion: reduce) {
+  .stackItem {
+    position: static;
   }
 }

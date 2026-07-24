@@ -1,13 +1,33 @@
+/* Floating pill — sits over the content instead of boxing it in.
+   Fixed, so it takes no flow space; page content offsets itself with
+   --nav-offset (see globals.css). The explicit height keeps --nav-height
+   truthful rather than something that has to be re-measured by hand. */
 .nav {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 20px 48px;
-  border-bottom: 1px solid var(--border);
-  position: sticky;
-  top: 0;
+  gap: 24px;
+  position: fixed;
+  top: var(--nav-top);
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  width: min(100% - 32px, 1100px);
+  height: var(--nav-height);
+  padding: 0 10px 0 24px;
+  border: 1px solid var(--border-mid);
+  border-radius: 999px;
   z-index: 100;
+  /* Fallback for browsers without backdrop-filter — opaque, never washed out */
   background: var(--black);
+}
+
+@supports ((backdrop-filter: blur(12px)) or (-webkit-backdrop-filter: blur(12px))) {
+  .nav {
+    background: rgba(12, 12, 12, 0.72);
+    -webkit-backdrop-filter: blur(12px);
+    backdrop-filter: blur(12px);
+  }
 }
 
 .menuToggle {
@@ -16,10 +36,11 @@
   justify-content: center;
   background: none;
   border: 1px solid var(--border-mid);
-  border-radius: 3px;
+  border-radius: 50%;
   width: 36px;
   height: 36px;
   color: var(--white);
+  flex-shrink: 0;
   transition: border-color 0.15s ease;
 }
 
@@ -38,6 +59,7 @@
   font-weight: 800;
   color: var(--white);
   letter-spacing: -0.02em;
+  flex-shrink: 0;
 }
 
 .links {
@@ -55,7 +77,8 @@
   transition: color 0.15s ease;
 }
 
-.links a:hover {
+.links a:hover,
+.links a:focus-visible {
   color: var(--white);
 }
 
@@ -66,18 +89,22 @@
   text-transform: uppercase;
   color: var(--black);
   background: var(--orange);
-  padding: 9px 20px;
-  border-radius: 3px;
+  padding: 10px 20px;
+  border-radius: 999px;
+  white-space: nowrap;
+  flex-shrink: 0;
   transition: background 0.15s ease;
 }
 
-.cta:hover {
+.cta:hover,
+.cta:focus-visible {
   background: var(--orange-dim);
 }
 
 @media (max-width: 768px) {
   .nav {
-    padding: 16px 24px;
+    gap: 12px;
+    padding: 0 10px 0 20px;
   }
 
   .links {
@@ -88,17 +115,22 @@
     display: flex;
   }
 
+  /* A separate rounded panel offset below the pill rather than a dropdown
+     flush against it. The -1px insets and the +9px top line the panel up with
+     the pill's outer border box (absolute children resolve against the pill's
+     padding box, which sits 1px inside its border). */
   .mobileLinks {
     display: flex;
     flex-direction: column;
     position: absolute;
-    top: 100%;
-    left: 0;
-    right: 0;
+    top: calc(100% + 9px);
+    left: -1px;
+    right: -1px;
     background: var(--black);
-    border-bottom: 1px solid var(--border);
-    padding: 8px 24px 20px;
-    gap: 4px;
+    border: 1px solid var(--border-mid);
+    border-radius: 20px;
+    padding: 6px 22px 10px;
+    gap: 0;
     max-height: 0;
     overflow: hidden;
     opacity: 0;

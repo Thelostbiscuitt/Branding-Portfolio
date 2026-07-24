@@ -7,22 +7,35 @@ import styles from './ProjectCard.module.css'
 
 type Props = {
   project: Project
+  /** Full-width scroll-stack variant — image one side, text the other */
+  stacked?: boolean
+  /** Puts the image on the left instead of the right; alternates down the stack */
+  flip?: boolean
 }
 
-export default function ProjectCard({ project }: Props) {
+export default function ProjectCard({ project, stacked = false, flip = false }: Props) {
+  const className = [
+    styles.card,
+    stacked ? styles.stacked : '',
+    stacked && flip ? styles.stackedFlip : '',
+    // `featured` spans a grid column, which means nothing in the full-width stack
+    !stacked && project.featured ? styles.featured : '',
+  ].filter(Boolean).join(' ')
+
   return (
     <Link
       href={`/projects/${project.slug}`}
-      className={`${styles.card} ${project.featured ? styles.featured : ''}`}
+      className={className}
       aria-label={`View project: ${project.title}`}
     >
-      {/* Thumbnail — revealed on hover/keyboard focus (pure CSS, see .module.css) */}
+      {/* Thumbnail — always visible when stacked, revealed on hover/keyboard
+          focus in the grid (pure CSS, see .module.css) */}
       <div className={styles.thumb}>
         <Image
           src={project.thumb}
           alt=""
           fill
-          sizes={project.featured ? '100vw' : '50vw'}
+          sizes={stacked || project.featured ? '(max-width: 768px) 100vw, 50vw' : '50vw'}
           className={styles.thumbImg}
         />
         <div className={styles.thumbOverlay} />
