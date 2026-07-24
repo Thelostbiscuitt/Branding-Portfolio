@@ -883,7 +883,7 @@ section{padding:120px 60px;}
   <div class="footer-bg">LP</div>
   <h2>Let's build<br>something <em>lasting.</em></h2>
   <p>Spec work demonstrating how Leadway Pensure's brand can be extended — with new product showcases, social content, and communication guidelines — without losing the trust it took 20 years to earn.</p>
-  <a href="/cdn-cgi/l/email-protection#bed3d7dd90d1d9cbd0cad7d3dbd6d7d0fed9d3dfd7d290ddd1d3" class="cta-btn">Get in Touch</a>
+  <a href="mailto:mic.oguntimehin@gmail.com" class="cta-btn">Get in Touch</a>
   <a href="#brief" class="cta-btn out">View Again</a>
 </div>
 <div class="footer-bottom">
@@ -894,10 +894,16 @@ section{padding:120px 60px;}
   <div class="footer-note">Independent spec work. Not affiliated with or endorsed by Leadway Pensure PFA Limited or the Leadway Group. Product details sourced from publicly available Leadway Pensure materials and PenCom guidelines.</div>
 </div>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+<script>
 const obs = new IntersectionObserver(entries=>{
   entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible');});
 },{threshold:0.08,rootMargin:'0px 0px -50px 0px'});
 document.querySelectorAll('.fade-up').forEach(el=>obs.observe(el));
 ['.principles-grid','.voice-grid','.posts-grid','.palette-grid','.g-rules','.logo-grid','.products-grid','.awards-grid'].forEach(sel=>{
-  
+  document.querySelectorAll(sel).forEach(g=>{
+    [...g.children].forEach((c,i)=>{c.style.transitionDelay=`${i*70}ms`;});
+  });
+});
+</script>
+</body>
+</html>

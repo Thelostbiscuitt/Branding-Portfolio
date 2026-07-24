@@ -24,8 +24,8 @@ export default function LeadwayPensure() {
   return (
     <ProjectLayout
       title="Leadway Pensure — Brand & Communications"
-      heroImage="/projects/leadway/cover.svg"
-      heroAlt="Leadway Pensure brand extension pitch"
+      heroImage="/projects/leadway/hero.jpg"
+      heroAlt="Leadway Pensure brand pitch hero — 'Your future, built with intention.'"
       meta={{
         category:   'Brand',
         year:       '2024–2026',
@@ -102,7 +102,18 @@ export default function LeadwayPensure() {
           ),
         },
       ]}
-      screenshots={[]}
+      screenshots={[
+        { src: '/projects/leadway/sc-brief.jpg',      alt: 'Leadway Pensure pitch — the brief, with company stats' },
+        { src: '/projects/leadway/sc-products.jpg',   alt: 'Leadway Pensure pitch — product suite intro and Personal Pension Plan treatment' },
+        { src: '/projects/leadway/sc-products-2.jpg', alt: 'Leadway Pensure pitch — AVC, Asset & Fund Management, and Micro Pension Plan cards' },
+        { src: '/projects/leadway/sc-identity.jpg',   alt: 'Leadway Pensure pitch — brand colour palette with hex values and roles' },
+        { src: '/projects/leadway/sc-type.jpg',       alt: 'Leadway Pensure pitch — typography scale from display to CTA label' },
+        { src: '/projects/leadway/sc-principles.jpg', alt: 'Leadway Pensure pitch — six brand principles built around the camel mark' },
+        { src: '/projects/leadway/sc-voice.jpg',      alt: 'Leadway Pensure pitch — brand voice do/avoid examples' },
+        { src: '/projects/leadway/sc-social.jpg',     alt: 'Leadway Pensure pitch — social post templates for Instagram, LinkedIn, X, and Facebook' },
+        { src: '/projects/leadway/sc-logo.jpg',       alt: 'Leadway Pensure pitch — logo usage across approved and prohibited backgrounds' },
+        { src: '/projects/leadway/sc-guidelines.jpg', alt: 'Leadway Pensure pitch — spacing system on a base-8 grid' },
+      ]}
       next={{
         slug:     'olumayowa-nursing-home',
         category: 'Design',

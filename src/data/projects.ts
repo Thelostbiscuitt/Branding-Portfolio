@@ -39,7 +39,7 @@ export const projects: Project[] = [
     title:       'Leadway Pensure — Brand & Comms',
     description: 'A self-initiated brand extension pitch for Nigeria\'s largest pension fund. Covers product redesigns, identity guidelines, social systems, and brand voice — built from four years of operational experience inside the organisation.',
     tags:        ['Brand', 'Internal Comms', 'Self-Service Platform', 'Process Design', 'Video'],
-    thumb:       '/projects/leadway/cover.svg',
+    thumb:       '/projects/leadway/hero.jpg',
     featured:    true,
   },
   {
