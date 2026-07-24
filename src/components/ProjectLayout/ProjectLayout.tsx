@@ -43,9 +43,10 @@ export default function ProjectLayout({
 }: Props) {
   return (
     <>
+      <a href="#project-content" className="skip-link">Skip to content</a>
       <Nav />
 
-      <article className={styles.article}>
+      <article id="project-content" className={styles.article}>
         {/* ── Back link ── */}
         <div className={styles.backRow}>
           <Link href="/#work" className={styles.back}>

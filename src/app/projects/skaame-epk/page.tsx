@@ -3,6 +3,21 @@ import ProjectLayout from '@/components/ProjectLayout/ProjectLayout'
 export const metadata = {
   title: 'Skaame — Artist Web EPK | Habib',
   description: 'A live web EPK for Lagos-based reggae-Afrobeat artist Skaame. Designed and built as a single shareable link for press, booking agents, and fans.',
+  openGraph: {
+    title: 'Skaame — Artist Web EPK | Habib',
+    description: 'A live web EPK for Lagos-based reggae-Afrobeat artist Skaame. Designed and built as a single shareable link for press, booking agents, and fans.',
+    url: 'https://habibcore.com/projects/skaame-epk',
+    siteName: 'Habib',
+    locale: 'en_NG',
+    type: 'website',
+    images: [{ url: '/og-image.png', width: 1200, height: 630, alt: 'Skaame — Artist Web EPK | Habib' }],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Skaame — Artist Web EPK | Habib',
+    description: 'A live web EPK for Lagos-based reggae-Afrobeat artist Skaame. Designed and built as a single shareable link for press, booking agents, and fans.',
+    images: ['/og-image.png'],
+  },
 }
 
 export default function SkaameEPK() {

@@ -5,7 +5,7 @@ const meta = [
   { key: 'Base',    value: 'Lagos, NG' },
   { key: 'Status',  value: 'Open to work', highlight: true },
   { key: 'Primary', value: 'Creative Director' },
-  { key: 'Also',    value: 'Builds what he designs' },
+  { key: 'Also',    value: 'Builds it with AI' },
 ]
 
 export default function About() {
@@ -22,9 +22,9 @@ export default function About() {
         </h2>
 
         <p className={styles.body}>
-          Creative director and visual designer based in Lagos. Work spans brand
-          identity, art direction, music packaging, and digital design for brands
-          that want to stand out and stay consistent.
+          Creative director based in Lagos, now focused on AI-assisted
+          product design and development — SaaS tools, web apps, and the
+          brand systems that sit around them.
         </p>
 
         <blockquote className={styles.pull}>
@@ -39,10 +39,10 @@ export default function About() {
         </p>
 
         <p className={styles.body}>
-          What makes the work different: I build it too. Landing pages, web
-          apps, custom tools — designed by me, shipped by me. No handoff, no
-          translation loss between vision and execution. Clients like Leadway
-          Pensure get the full picture without assembling a team.
+          What makes the work different: I build it too. Landing pages, SaaS
+          tools, AI-assisted software — designed by me, shipped by me. No
+          handoff, no translation loss between vision and execution. Clients
+          like Leadway Pensure get the full picture without assembling a team.
         </p>
 
         <p className={styles.location}>
@@ -50,23 +50,22 @@ export default function About() {
         </p>
       </div>
 
-      {/* ── Right: photo + meta ── */}
+      {/* ── Right: photo + logo badge + meta ── */}
       <div className={styles.right}>
-        {/*
-          Photo appears ONLY here — NOT duplicated in the hero.
-          Different crop (4:5 portrait), different filter treatment.
-        */}
-        <div className={styles.photoFrame}>
+        <div className={styles.frame}>
           <Image
             src="/photo.jpg"
-            alt="Habib at work"
+            alt="Habib"
             fill
             sizes="(max-width: 900px) 100vw, 45vw"
             className={styles.photo}
           />
-          {/* Scanline texture — distinct from hero treatment */}
-          <div className={styles.scanlines} aria-hidden="true" />
-          <p className={styles.photoCaption}>Habib — Lagos</p>
+          {/* Bottom scrim keeps the badge/caption legible regardless of what's in the photo */}
+          <div className={styles.scrim} aria-hidden="true" />
+          <div className={styles.badge}>
+            <Image src="/logo.png" alt="" width={28} height={28} className={styles.badgeLogo} />
+          </div>
+          <p className={styles.caption}>Habib — Lagos</p>
         </div>
 
         <div className={styles.metaGrid} role="list" aria-label="Profile details">

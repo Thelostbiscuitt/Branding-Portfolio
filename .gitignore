@@ -38,3 +38,12 @@ src_backup/
 src_backup_/
 patch_2/
 plans/
+
+# editor / agent tooling
+/.claude
+/.agents
+/.kilo
+
+# archives
+*.zip
+*.tar.gz

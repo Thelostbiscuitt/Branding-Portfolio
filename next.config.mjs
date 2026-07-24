@@ -45,9 +45,9 @@ const nextConfig = {
               "default-src 'self'",
               "script-src 'self' 'unsafe-inline' 'unsafe-eval'", // Required for Next.js
               "style-src 'self' 'unsafe-inline'", // Required for Tailwind CSS
-              "img-src 'self' data: blob: https: https://images.unsplash.com https://images.unsplash.com",
+              "img-src 'self' data: blob: https:",
               "font-src 'self' data:",
-              "connect-src 'self' https://api.resend.com https://*.unsplash.com",
+              "connect-src 'self' https://api.resend.com",
               "frame-src 'self' https://www.youtube.com https://w.soundcloud.com https://www.behance.net https://open.spotify.com",
               "object-src 'none'",
               "base-uri 'self'",

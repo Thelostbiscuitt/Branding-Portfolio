@@ -3,6 +3,21 @@ import ProjectLayout from '@/components/ProjectLayout/ProjectLayout'
 export const metadata = {
   title: 'Biscuit AI — Telegram Bot Design | Habib',
   description: 'A production-ready Telegram bot built around GLM-4.7. Intelligent chat, Notion library, image generation, and cost visibility — all in one conversational interface.',
+  openGraph: {
+    title: 'Biscuit AI — Telegram Bot Design | Habib',
+    description: 'A production-ready Telegram bot built around GLM-4.7. Intelligent chat, Notion library, image generation, and cost visibility — all in one conversational interface.',
+    url: 'https://habibcore.com/projects/biscuit-ai',
+    siteName: 'Habib',
+    locale: 'en_NG',
+    type: 'website',
+    images: [{ url: '/og-image.png', width: 1200, height: 630, alt: 'Biscuit AI — Telegram Bot Design | Habib' }],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Biscuit AI — Telegram Bot Design | Habib',
+    description: 'A production-ready Telegram bot built around GLM-4.7. Intelligent chat, Notion library, image generation, and cost visibility — all in one conversational interface.',
+    images: ['/og-image.png'],
+  },
 }
 
 export default function BiscuitAI() {
@@ -105,9 +120,9 @@ export default function BiscuitAI() {
       ]}
       screenshots={[]}
       next={{
-        slug:     'leadway-pensure',
-        category: 'Brand',
-        title:    'Leadway Pensure — Brand & Comms',
+        slug:     'meal-planning-bot',
+        category: 'Design',
+        title:    'Meal Planning Bot — Telegram Kitchen Assistant',
       }}
     />
   )

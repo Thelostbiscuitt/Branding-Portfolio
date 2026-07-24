@@ -2,7 +2,6 @@
 
 import Link from 'next/link'
 import Image from 'next/image'
-import { useState } from 'react'
 import type { Project } from '@/data/projects'
 import styles from './ProjectCard.module.css'
 
@@ -11,18 +10,14 @@ type Props = {
 }
 
 export default function ProjectCard({ project }: Props) {
-  const [hovered, setHovered] = useState(false)
-
   return (
     <Link
       href={`/projects/${project.slug}`}
       className={`${styles.card} ${project.featured ? styles.featured : ''}`}
-      onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => setHovered(false)}
       aria-label={`View project: ${project.title}`}
     >
-      {/* Thumbnail — revealed on hover */}
-      <div className={`${styles.thumb} ${hovered ? styles.thumbVisible : ''}`}>
+      {/* Thumbnail — revealed on hover/keyboard focus (pure CSS, see .module.css) */}
+      <div className={styles.thumb}>
         <Image
           src={project.thumb}
           alt=""
@@ -52,7 +47,7 @@ export default function ProjectCard({ project }: Props) {
           </ul>
         </div>
 
-        <span className={`${styles.arrow} ${hovered ? styles.arrowHovered : ''}`} aria-hidden="true">
+        <span className={styles.arrow} aria-hidden="true">
           ↗
         </span>
       </div>

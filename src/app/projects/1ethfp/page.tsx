@@ -3,6 +3,21 @@ import ProjectLayout from '@/components/ProjectLayout/ProjectLayout'
 export const metadata = {
   title: '1ETHFP — Creative Collaboration | Habib',
   description: 'A complete creative package for a web3 music and culture project — roadmap design, a produced anthem, and a promo video, all from one person.',
+  openGraph: {
+    title: '1ETHFP — Creative Collaboration | Habib',
+    description: 'A complete creative package for a web3 music and culture project — roadmap design, a produced anthem, and a promo video, all from one person.',
+    url: 'https://habibcore.com/projects/1ethfp',
+    siteName: 'Habib',
+    locale: 'en_NG',
+    type: 'website',
+    images: [{ url: '/og-image.png', width: 1200, height: 630, alt: '1ETHFP — Creative Collaboration | Habib' }],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: '1ETHFP — Creative Collaboration | Habib',
+    description: 'A complete creative package for a web3 music and culture project — roadmap design, a produced anthem, and a promo video, all from one person.',
+    images: ['/og-image.png'],
+  },
 }
 
 export default function OneEthFP() {
@@ -92,9 +107,9 @@ export default function OneEthFP() {
         { src: '/projects/1ethfp/roadmap.jpg', alt: '1ETHFP roadmap design' },
       ]}
       next={{
-        slug:     'biscuit-ai',
+        slug:     'olumayowa-nursing-home',
         category: 'Design',
-        title:    'Biscuit AI — Telegram Bot Design',
+        title:    'Olumayowa Nursing Home — Healthcare Website',
       }}
     />
   )

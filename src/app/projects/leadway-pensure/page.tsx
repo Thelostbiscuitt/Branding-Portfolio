@@ -3,6 +3,21 @@ import ProjectLayout from '@/components/ProjectLayout/ProjectLayout'
 export const metadata = {
   title: 'Leadway Pensure — Brand & Communications | Habib',
   description: 'A self-initiated brand extension pitch for Nigeria\'s most capitalised pension fund. Nine sections covering product redesigns, social system, identity guidelines, and brand voice.',
+  openGraph: {
+    title: 'Leadway Pensure — Brand & Communications | Habib',
+    description: 'A self-initiated brand extension pitch for Nigeria\'s most capitalised pension fund. Nine sections covering product redesigns, social system, identity guidelines, and brand voice.',
+    url: 'https://habibcore.com/projects/leadway-pensure',
+    siteName: 'Habib',
+    locale: 'en_NG',
+    type: 'website',
+    images: [{ url: '/og-image.png', width: 1200, height: 630, alt: 'Leadway Pensure — Brand & Communications | Habib' }],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Leadway Pensure — Brand & Communications | Habib',
+    description: 'A self-initiated brand extension pitch for Nigeria\'s most capitalised pension fund. Nine sections covering product redesigns, social system, identity guidelines, and brand voice.',
+    images: ['/og-image.png'],
+  },
 }
 
 export default function LeadwayPensure() {
@@ -89,9 +104,9 @@ export default function LeadwayPensure() {
       ]}
       screenshots={[]}
       next={{
-        slug:     'skaame-epk',
+        slug:     'olumayowa-nursing-home',
         category: 'Design',
-        title:    'Skaame — Artist Web EPK',
+        title:    'Olumayowa Nursing Home — Healthcare Website',
       }}
     />
   )

@@ -24,7 +24,7 @@ const socialLinks = [
   { platform: 'Behance',  handle: 'BlvckOreo',               href: 'https://www.behance.net/BlvckOreo' },
   { platform: 'GitHub',   handle: 'Thelostbiscuitt',          href: 'https://github.com/Thelostbiscuitt' },
   { platform: 'LinkedIn', handle: 'habib-oguntimehin',        href: 'https://www.linkedin.com/in/michael-oguntimehin-480751398' },
-  { platform: 'Email',    handle: 'habib@habiibcore.com', href: 'mailto:habib@habiibcore.com' },
+  { platform: 'Email',    handle: 'habib@habibcore.com', href: 'mailto:habib@habibcore.com' },
 ]
 
 export default function Contact() {
@@ -129,7 +129,8 @@ export default function Contact() {
           <form onSubmit={handleSubmit} className={styles.form} noValidate>
             <fieldset className={styles.step}>
               <legend className={styles.stepLabel}>
-                <span className={styles.stepNum}>01</span> What are you building?
+                <span className={styles.stepNum}>01</span> What are you building?{' '}
+                <span className={styles.optional}>(select all that apply)</span>
               </legend>
               <div className={styles.pills}>
                 {projectTypes.map((type) => (

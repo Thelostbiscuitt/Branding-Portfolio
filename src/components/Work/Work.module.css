@@ -18,7 +18,7 @@
   font-size: 10px;
   letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: #4a4a4a;
+  color: var(--gray);
   margin-bottom: 10px;
 }
 
@@ -57,52 +57,39 @@
   font-weight: 800;
 }
 
-.controls {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  gap: 12px;
-}
-
-.filters {
-  display: flex;
-  gap: 4px;
-}
-
-.filterBtn {
-  font-family: var(--font-mono);
-  font-size: 10px;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: #4a4a4a;
-  background: none;
-  border: 1px solid transparent;
-  padding: 6px 14px;
-  border-radius: 2px;
-  transition: color 0.15s ease, border-color 0.15s ease;
-}
-
-.filterBtn:hover {
-  color: var(--white);
-}
-
-.filterBtnActive {
-  color: var(--orange);
-  border-color: rgba(232, 102, 10, 0.3);
-  background: rgba(232, 102, 10, 0.06);
-}
-
 .archiveLink {
   font-family: var(--font-mono);
   font-size: 10px;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: #4a4a4a;
+  color: var(--gray);
   transition: color 0.15s ease;
 }
 
 .archiveLink:hover {
   color: var(--white);
+}
+
+.pastHeader {
+  margin-top: 64px;
+  padding-top: 28px;
+  border-top: 1px solid var(--border);
+  margin-bottom: 24px;
+}
+
+.pastLabel {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--white);
+  margin-bottom: 6px;
+}
+
+.pastNote {
+  font-family: var(--font-body);
+  font-size: 13px;
+  color: var(--gray);
 }
 
 /* ── Grid ── */
@@ -113,6 +100,13 @@
   background: var(--border);
   border: 1px solid var(--border);
 }
+
+.grid > a:nth-child(1) { animation-delay: 0ms; }
+.grid > a:nth-child(2) { animation-delay: 60ms; }
+.grid > a:nth-child(3) { animation-delay: 120ms; }
+.grid > a:nth-child(4) { animation-delay: 180ms; }
+.grid > a:nth-child(5) { animation-delay: 240ms; }
+.grid > a:nth-child(6) { animation-delay: 300ms; }
 
 @media (max-width: 768px) {
   .section {
@@ -125,10 +119,6 @@
 
   .header {
     flex-direction: column;
-    align-items: flex-start;
-  }
-
-  .controls {
     align-items: flex-start;
   }
 }

@@ -32,7 +32,7 @@ The homepage follows a vertical scroll layout with 7 distinct sections, each wit
 ┌─────────────────────────────────────────────────────────────────┐
 │ ┌─────────────────────┐  ┌─────────────────────────────┐ │
 │ │ • Available for    │  │                         │ │
-│ │   work — Lagos, NG │  │    [Photo with scanlines] │ │
+│ │   work — Lagos, NG │  │       [Logo, glow]        │ │
 │ │                   │  │                         │ │
 │ │ Creative           │  │                         │ │
 │ │ Director.         │  │                         │ │
@@ -55,11 +55,8 @@ The homepage follows a vertical scroll layout with 7 distinct sections, each wit
   - Secondary: Border outline, gray text
 
 **Right Column**:
-- Photo: [`/photo.jpg`](public/photo.jpg) with filter treatment
-  - Contrast: 1.08
-  - Saturation: 0.82
-  - Scanline overlay effect
-- Gradient vignette (left to right fade)
+- Logo: [`/logo.png`](public/logo.png), centered and contained (not full-bleed)
+  - Soft radial orange glow behind the mark
 - Geo tag: "LAGOS — 2026" (vertical text, bottom right)
 
 **Responsive**: Stacks to single column below 900px
@@ -165,15 +162,15 @@ The homepage follows a vertical scroll layout with 7 distinct sections, each wit
 
 ---
 
-## Section 6: About (2-column with photo)
+## Section 6: About (2-column with logo)
 **Layout**: Grid (1fr 1fr)
 
 ```
 ┌─────────────────────────────────────────────────────────────────┐
 │ ┌─────────────────────┐  ┌─────────────────────────────┐ │
 │ │ 03 — About        │  │                         │ │
-│ │                   │  │    [Photo with denser       │ │
-│ │ I'm a creative    │  │     scanlines]            │ │
+│ │                   │  │         [Logo, glow]        │ │
+│ │ I'm a creative    │  │                           │ │
 │ │ director and       │  │                         │ │
 │ │ developer based    │  │                         │ │
 │ │ in Lagos. I       │  │  ┌─────┬─────┐        │ │
@@ -196,12 +193,9 @@ The homepage follows a vertical scroll layout with 7 distinct sections, each wit
 - Pullquote: "No handoff. No translation loss."
 
 **Right Column**:
-- Photo: Different treatment than Hero
-  - Contrast: 1.12
-  - Saturation: 0.6
-  - Brightness: 0.95
-  - Denser scanline overlay
-- Photo caption: "Habib — Lagos"
+- Logo: Same mark as Hero, centered in a 4:5 frame (not full-bleed)
+  - Soft radial orange glow behind the mark
+- Caption: "Habib — Lagos"
 - Meta grid (2×2):
   - Role
   - Year
@@ -360,7 +354,7 @@ The homepage follows a vertical scroll layout with 7 distinct sections, each wit
 ### Mobile (< 600px)
 - Single column layout for all sections
 - Reduced padding (48px → 24px)
-- Hero photo: 360px height
+- Hero logo panel: 360px height
 - Work grid: 1 column
 - Meta grids: 2×2 → 1 column
 

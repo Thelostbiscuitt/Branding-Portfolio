@@ -52,15 +52,15 @@ export async function POST(req: Request) {
 
     const { error } = await resend.emails.send({
       from:    'Portfolio Contact <onboarding@resend.dev>',
-      // Once habib.studio is verified in Resend, change to:
-      // from: 'Habib <contact@habib.studio>',
-      to:      'habib@habiibcore.com',
+      // Once habibcore.com is verified in Resend, change to:
+      // from: 'Habib <contact@habibcore.com>',
+      to:      'habib@habibcore.com',
       reply_to: email,
       subject: `New enquiry from ${safeName}`,
       html: `
         <div style="font-family: monospace; max-width: 560px; color: #111;">
           <p style="font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: #888; margin-bottom: 24px;">
-            New project enquiry — habib.studio
+            New project enquiry — habibcore.com
           </p>
 
           <table style="width: 100%; border-collapse: collapse; margin-bottom: 24px;">

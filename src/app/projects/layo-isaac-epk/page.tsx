@@ -3,6 +3,21 @@ import ProjectLayout from '@/components/ProjectLayout/ProjectLayout'
 export const metadata = {
   title: 'Layo Isaac — Artist EPK | Habib',
   description: 'A 12-page EPK for indie alt singer-songwriter Layo Isaac. Muted tones, serif typography, structured as a narrative.',
+  openGraph: {
+    title: 'Layo Isaac — Artist EPK | Habib',
+    description: 'A 12-page EPK for indie alt singer-songwriter Layo Isaac. Muted tones, serif typography, structured as a narrative.',
+    url: 'https://habibcore.com/projects/layo-isaac-epk',
+    siteName: 'Habib',
+    locale: 'en_NG',
+    type: 'website',
+    images: [{ url: '/og-image.png', width: 1200, height: 630, alt: 'Layo Isaac — Artist EPK | Habib' }],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Layo Isaac — Artist EPK | Habib',
+    description: 'A 12-page EPK for indie alt singer-songwriter Layo Isaac. Muted tones, serif typography, structured as a narrative.',
+    images: ['/og-image.png'],
+  },
 }
 
 export default function LayoIsaacEPK() {

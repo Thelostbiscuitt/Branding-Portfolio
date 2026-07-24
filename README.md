@@ -2,7 +2,7 @@
 
 Personal portfolio and case study site for Habib, creative director and developer based in Lagos.
 
-Built with Next.js 14, TypeScript, and CSS Modules. Deployed on Vercel. Contact form powered by Resend.
+Built with Next.js 16, TypeScript, and CSS Modules. Deployed on Vercel. Contact form powered by Resend.
 
 ---
 
@@ -56,8 +56,8 @@ npm run start
 ```
 src/
 ├── app/
-│   ├── globals.css              # Global styles, CSS variables, font imports
-│   ├── layout.tsx               # Root layout and site metadata
+│   ├── globals.css              # Global styles and CSS variables
+│   ├── layout.tsx               # Root layout, site metadata, and font loading (next/font)
 │   ├── page.tsx                 # Homepage
 │   ├── api/
 │   │   └── contact/
@@ -207,7 +207,7 @@ Once your domain is verified in Resend, update the `from` field in `route.ts`:
 from: 'Portfolio Contact <onboarding@resend.dev>',
 
 // After
-from: 'Habib <contact@habib.studio>',
+from: 'Habib <contact@habibcore.com>',
 ```
 
 ---
@@ -226,12 +226,12 @@ Go to your project in the Vercel dashboard → **Settings** → **Environment Va
 
 ### Custom domain
 
-To connect `habib.studio`:
+To connect `habibcore.com`:
 
 1. Go to your Vercel project → **Settings** → **Domains**
-2. Add `habib.studio` and `www.habib.studio`
+2. Add `habibcore.com` and `www.habibcore.com`
 3. Follow the DNS instructions Vercel provides
-4. Update the `url` field in `src/app/layout.tsx` metadata once the domain is live
+4. Update the `url` field in `src/app/layout.tsx` metadata if the domain ever changes
 
 ---
 
@@ -243,7 +243,7 @@ The site uses three typefaces loaded via Google Fonts:
 - **DM Sans** (300, 400, 500) — body copy and form elements
 - **DM Mono** (300, 400, 500) — labels, eyebrows, navigation, tags
 
-Font imports live in `globals.css`. No third-party font package is required.
+Fonts are loaded via `next/font/google` in `src/app/layout.tsx`, which self-hosts the font files at build time (no external request to Google Fonts at runtime, no render-blocking `@import`). Each typeface is exposed as a CSS variable (`--font-display`, `--font-body`, `--font-mono`) consumed throughout `globals.css` and the component stylesheets. No third-party font package is required beyond `next/font`, which ships with Next.js.
 
 ---
 
@@ -251,7 +251,7 @@ Font imports live in `globals.css`. No third-party font package is required.
 
 | Layer        | Technology                  |
 |--------------|-----------------------------|
-| Framework    | Next.js 14 (App Router)     |
+| Framework    | Next.js 16 (App Router)     |
 | Language     | TypeScript                  |
 | Styling      | CSS Modules                 |
 | Images       | next/image                  |

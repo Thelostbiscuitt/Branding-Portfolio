@@ -1,4 +1,5 @@
 import Image from 'next/image'
+import Link from 'next/link'
 import styles from './Hero.module.css'
 
 export default function Hero() {
@@ -25,29 +26,26 @@ export default function Hero() {
         </p>
 
         <div className={styles.actions}>
-          <a href="/#contact" className={styles.ctaPrimary}>
+          <Link href="/#contact" className={styles.ctaPrimary}>
             Start a project
-          </a>
-          <a href="/#work" className={styles.ctaSecondary}>
+          </Link>
+          <Link href="/#work" className={styles.ctaSecondary}>
             View work ↓
-          </a>
+          </Link>
         </div>
       </div>
 
-      {/* ── Right: photo ── */}
+      {/* ── Right: logo ── */}
       <div className={styles.right} aria-hidden="true">
+        <div className={styles.logoGlow} />
         <Image
-          src="/photo.jpg"
-          alt="Habib"
-          fill
+          src="/logo.png"
+          alt=""
+          width={320}
+          height={320}
           priority
-          sizes="(max-width: 900px) 100vw, 50vw"
-          className={styles.photo}
+          className={styles.logo}
         />
-        {/* Gradient vignette so left text edge stays readable */}
-        <div className={styles.photoOverlay} />
-        {/* Scanline texture treatment */}
-        <div className={styles.scanlines} />
         <span className={styles.geoTag}>Lagos — 2026</span>
       </div>
     </section>

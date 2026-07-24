@@ -122,40 +122,24 @@
   overflow: hidden;
   background: #181818;
   min-height: 580px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.photo {
-  object-fit: cover;
-  object-position: center top;
-  filter: contrast(1.08) saturate(0.82);
-}
-
-/* Bottom-to-top gradient so the text side stays dark */
-.photoOverlay {
+/* Soft brand-color glow behind the mark so the panel doesn't read as empty */
+.logoGlow {
   position: absolute;
   inset: 0;
-  background: linear-gradient(
-    to right,
-    rgba(12, 12, 12, 0.35) 0%,
-    transparent 30%
-  );
+  background: radial-gradient(circle at center, rgba(232, 102, 10, 0.16) 0%, transparent 60%);
+  pointer-events: none;
+}
+
+.logo {
+  position: relative;
   z-index: 1;
-  pointer-events: none;
-}
-
-/* Subtle scanline texture — not a heavy effect, just enough to read "treated" */
-.scanlines {
-  position: absolute;
-  inset: 0;
-  background-image: repeating-linear-gradient(
-    0deg,
-    rgba(0, 0, 0, 0.04) 0px,
-    rgba(0, 0, 0, 0.04) 1px,
-    transparent 1px,
-    transparent 4px
-  );
-  z-index: 2;
-  pointer-events: none;
+  width: min(38%, 280px);
+  height: auto;
 }
 
 .geoTag {
@@ -167,7 +151,7 @@
   font-size: 10px;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: rgba(232, 102, 10, 0.55);
+  color: var(--orange);
   writing-mode: vertical-rl;
   transform: rotate(180deg);
 }

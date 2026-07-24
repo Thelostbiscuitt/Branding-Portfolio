@@ -3,6 +3,21 @@ import ProjectLayout from '@/components/ProjectLayout/ProjectLayout'
 export const metadata = {
   title: 'BlvckOreo — Personal EPK | Habib',
   description: 'Self-directed EPK for BlvckOreo — rapper, singer, songwriter from Lagos. Two distinct album identities, full creative ownership.',
+  openGraph: {
+    title: 'BlvckOreo — Personal EPK | Habib',
+    description: 'Self-directed EPK for BlvckOreo — rapper, singer, songwriter from Lagos. Two distinct album identities, full creative ownership.',
+    url: 'https://habibcore.com/projects/blvckoreo-epk',
+    siteName: 'Habib',
+    locale: 'en_NG',
+    type: 'website',
+    images: [{ url: '/og-image.png', width: 1200, height: 630, alt: 'BlvckOreo — Personal EPK | Habib' }],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'BlvckOreo — Personal EPK | Habib',
+    description: 'Self-directed EPK for BlvckOreo — rapper, singer, songwriter from Lagos. Two distinct album identities, full creative ownership.',
+    images: ['/og-image.png'],
+  },
 }
 
 export default function BlvckOreoEPK() {
