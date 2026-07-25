@@ -170,11 +170,19 @@
    Two columns: image one side, text the other. Declared after the base rules
    so the equal-specificity hover overrides below actually win. The card keeps
    an opaque background or the sticky stack shows through; the stack geometry
-   itself lives in Work.module.css. */
+   itself lives in Work.module.css.
+
+   The 40px padding is load-bearing, not just breathing room: the sticky stack
+   reveals the top 24px of the card beneath, and without padding that strip was
+   raw image. Card 1's hero is a near-white screenshot, which is where the white
+   band above the image came from. Padding guarantees the strip is always card
+   background, whatever a hero happens to look like. */
 .stacked {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  min-height: 300px;
+  gap: 48px;
+  padding: 40px;
+  min-height: 340px;
   border: 1px solid var(--border-mid);
   background: var(--black);
 }
@@ -192,12 +200,19 @@
 .stackedFlip .thumb   { grid-column: 1; }
 .stackedFlip .content { grid-column: 2; }
 
-/* Hero images have inconsistent ratios (.jpg heroes plus one .svg cover), so
-   the container fixes the ratio and the image covers it — keeps the stack even. */
+/* Hero sources run from 0.77 (a portrait screenshot) to 2.29 (wide artwork),
+   so no single crop ratio suits them all — `cover` was cutting ~42% off the
+   width of the 2.29 heroes and slicing through the artwork's type. `contain`
+   on a fixed plate frames every image whole instead, at any source ratio.
+   Centred rather than stretched so it stays balanced against a taller text
+   column without the plate ballooning. */
 .stacked .thumb {
   position: relative;
   inset: auto;
-  aspect-ratio: 4 / 3;
+  align-self: center;
+  aspect-ratio: 16 / 10;
+  border-radius: 8px;
+  background: #181818;
   overflow: hidden;
   opacity: 1;
   transition: none;
@@ -206,6 +221,7 @@
 /* Always visible now. The reveal is replaced by a small scale shift on
    hover — and on keyboard focus, same as everything else here. */
 .stacked .thumbImg {
+  object-fit: contain;
   transform: none;
 }
 
@@ -219,22 +235,56 @@
   display: none;
 }
 
+/* The card's own padding is the text inset now. Bottom padding reserves room
+   for the arrow so the centred block can't collide with it. */
 .stacked .content {
-  padding: 36px 40px;
+  padding: 0 0 30px;
+  justify-content: flex-start;
+  /* Base .content inherits the card's min-height, which in a single-column
+     stack would pad the text block out to 340px of mostly nothing. The grid
+     row still stretches it on desktop. */
+  min-height: 0;
+}
+
+/* space-between stranded these at opposite edges of a tall card with a void
+   between. Index/category stay pinned at the top; the rest becomes one block
+   centred in what's left. */
+.stacked .top {
+  margin-bottom: 0;
+}
+
+.stacked .bottom {
+  margin: auto 0;
+  padding-top: 0;
 }
 
 .stacked .title {
-  font-size: 24px;
+  font-size: clamp(30px, 4vw, 56px);
+  font-weight: 800;
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  overflow-wrap: break-word;
+  margin-bottom: 20px;
 }
 
 .stacked .description {
-  max-width: none;
+  font-size: 16px;
+  line-height: 1.65;
+  max-width: 46ch;
+  margin-bottom: 22px;
+}
+
+.stacked .arrow {
+  bottom: 0;
+  right: 0;
 }
 
 @media (max-width: 768px) {
   /* Single column — image on top, text beneath */
   .stacked {
     grid-template-columns: 1fr;
+    gap: 28px;
+    padding: 24px;
   }
 
   .stacked .thumb,
@@ -245,16 +295,14 @@
     grid-row: auto;
   }
 
-  .stacked .thumb {
-    aspect-ratio: 16 / 10;
+  /* Nothing to centre against in a single column, and the auto margins would
+     just add slack between the image and the text. */
+  .stacked .bottom {
+    margin: 20px 0 0;
   }
 
-  .stacked .content {
-    padding: 28px 24px;
-  }
-
-  .stacked .title {
-    font-size: 19px;
+  .stacked .description {
+    font-size: 15px;
   }
 }
 

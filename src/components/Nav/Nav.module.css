@@ -1,3 +1,11 @@
+/* Registered so it can be animated — a plain custom property is not
+   interpolable and the beam would jump rather than travel. */
+@property --nav-beam-angle {
+  syntax: '<angle>';
+  initial-value: 0deg;
+  inherits: false;
+}
+
 /* Floating pill — sits over the content instead of boxing it in.
    Fixed, so it takes no flow space; page content offsets itself with
    --nav-offset (see globals.css). The explicit height keeps --nav-height
@@ -18,16 +26,86 @@
   border: 1px solid var(--border-mid);
   border-radius: 999px;
   z-index: 100;
+  /* Own stacking context, so the beam's z-index: -1 is scoped to this pill and
+     lands above the pill's background but below every link and the CTA. */
+  isolation: isolate;
   /* Fallback for browsers without backdrop-filter — opaque, never washed out */
   background: var(--black);
 }
 
 @supports ((backdrop-filter: blur(12px)) or (-webkit-backdrop-filter: blur(12px))) {
   .nav {
-    background: rgba(12, 12, 12, 0.72);
+    /* Near-opaque on purpose. Content scrolls beneath the pill — the hero
+       logo, the white logo tiles in the About timeline — and anything lighter
+       than this drops the nav links below 4.5:1. The blur alone is not enough. */
+    background: rgba(12, 12, 12, 0.92);
     -webkit-backdrop-filter: blur(12px);
     backdrop-filter: blur(12px);
   }
+}
+
+/* ── Border beam ──
+   A short arc of orange travelling around the pill's outline. The mask-composite
+   check is not optional: without it the conic-gradient would paint as a filled
+   rectangle over the whole pill rather than a 1px ring.
+
+   Unsupported @property degrades safely on its own. var(--nav-beam-angle) fails
+   substitution, background becomes invalid at computed-value time and resolves
+   to none, leaving the static border underneath untouched.
+
+   Containment is deliberately belt-and-braces, because a beam that escapes the
+   pill is far worse than one that sits a pixel inside it:
+     - inset: 0 keeps the layer within the nav's padding box, so it is strictly
+       inside the border. A negative inset put its edge flush with the pill's
+       outer boundary, where any rounding error shows up outside the pill.
+     - An explicit radius rather than `inherit`, so the rounding never depends
+       on inherit resolving against a different box.
+     - clip-path is the hard stop: it clips the element's own painting, so the
+       gradient cannot render outside the pill shape even if the mask fails. */
+@supports (background: conic-gradient(from 0deg, red, blue)) and
+          ((mask-composite: exclude) or (-webkit-mask-composite: xor)) {
+  .nav::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 999px;
+    padding: 1px;
+    /* ~12% of the circumference, fading at both ends so it reads as a moving
+       light and not a rotating wedge. */
+    background: conic-gradient(
+      from var(--nav-beam-angle),
+      transparent 0deg,
+      var(--orange) 18deg,
+      transparent 44deg,
+      transparent 360deg
+    );
+    -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+            mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+            mask-composite: exclude;
+    clip-path: inset(0 round 999px);
+    opacity: 0.7;
+    pointer-events: none;
+    /* Above the pill's background, below every link and the CTA, which claim
+       z-index: 1 below. A negative z-index put the beam on the far side of the
+       pill's own backdrop-filter, which is its own source of artefacts. */
+    z-index: 0;
+    animation: navBeam 7s linear infinite;
+  }
+}
+
+@keyframes navBeam {
+  to { --nav-beam-angle: 360deg; }
+}
+
+/* Everything the reader actually interacts with sits above the beam layer, so
+   neither the arc nor a focus ring can ever be obscured by the other. */
+.logo,
+.links,
+.cta,
+.menuToggle {
+  position: relative;
+  z-index: 1;
 }
 
 .menuToggle {
@@ -134,6 +212,8 @@
     max-height: 0;
     overflow: hidden;
     opacity: 0;
+    /* Above the beam layer, same as the rest of the nav's content */
+    z-index: 2;
     transition: max-height 0.25s ease, opacity 0.2s ease;
   }
 
@@ -171,5 +251,14 @@
 @media (prefers-reduced-motion: reduce) {
   .mobileLinks {
     transition: none;
+  }
+
+  /* Removed outright, not just paused — pausing would strand a bright arc on
+     one side of the pill. The static var(--border-mid) border is the fallback.
+     Must stay after the @supports block above: same specificity, so this only
+     wins on source order. */
+  .nav::before {
+    display: none;
+    animation: none;
   }
 }

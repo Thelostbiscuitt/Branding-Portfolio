@@ -1,14 +1,19 @@
+/* Padding on the grid container, not on a column: it offsets both columns
+   including the full-bleed right panel, so at scroll 0 the band behind the
+   floating pill is uniform page background with no panel edge running through
+   it. +24px is breathing room below the pill, so it reads as floating rather
+   than sitting on the panel. Horizontal edges are untouched — the right panel
+   still bleeds to the viewport edge. */
 .hero {
   display: grid;
   grid-template-columns: 1fr 1fr;
   min-height: 560px;
+  padding-top: calc(var(--nav-offset) + 24px);
 }
 
 /* ── LEFT ── */
-/* Top padding clears the fixed nav. The right panel stays full-bleed and the
-   pill floats over it — its logo is centred well below the pill. */
 .left {
-  padding: calc(72px + var(--nav-offset)) 48px 72px;
+  padding: 72px 48px;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
@@ -176,8 +181,14 @@
 }
 
 @media (max-width: 600px) {
+  /* Tighter gap below the pill — the same 24px reads as dead space when the
+     layout is a single column and vertical room is scarce. */
+  .hero {
+    padding-top: calc(var(--nav-offset) + 12px);
+  }
+
   .left {
-    padding: calc(48px + var(--nav-offset)) 24px 48px;
+    padding: 48px 24px;
   }
 
   .right {
