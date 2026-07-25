@@ -279,8 +279,13 @@
   right: 0;
 }
 
+/* ── Single column ──
+   The desktop layout alternates the image left/right down the stack. In a
+   single column there are no sides to alternate, so .stackedFlip is neutralised
+   and the image is always on top. Vertical alternation was considered and
+   rejected: with this card structure it would read as an inconsistency rather
+   than a rhythm. */
 @media (max-width: 768px) {
-  /* Single column — image on top, text beneath */
   .stacked {
     grid-template-columns: 1fr;
     gap: 28px;
@@ -300,19 +305,66 @@
   .stacked .bottom {
     margin: 20px 0 0;
   }
-
-  .stacked .description {
-    font-size: 15px;
-  }
 }
 
+/* ── Phone ──
+   Deliberately NOT scaled down. The headline stays display type and the
+   description stays comfortably above body size; the tag row is the only
+   element that stays quiet. The card is allowed to exceed the viewport — the
+   sticky stack in Work.module.css depends on that being acceptable. */
 @media (max-width: 600px) {
+  /* Grid cards (past work), which are not the stacked variant */
   .content {
     padding: 20px;
   }
 
   .title {
     font-size: 17px;
+  }
+
+  /* The card's 24px padding is the image's inset on all four sides, so the
+     image never bleeds to the card edge and the sticky reveal strip above it
+     is always card background rather than raw screenshot. */
+  .stacked {
+    padding: 24px;
+    gap: 20px;
+  }
+
+  .stacked .thumb {
+    border-radius: 14px;
+  }
+
+  /* Lands 32px at 320, ~34px at 375, 36px at 414 — display type at every
+     phone width, not a label. */
+  .stacked .title {
+    font-size: clamp(32px, 9vw, 36px);
+    margin-bottom: 16px;
+  }
+
+  /* Larger than the 16px desktop size, not smaller. At this measure the
+     description is doing real work, so it is not truncated or line-clamped. */
+  .stacked .description {
+    font-size: 18px;
+    line-height: 1.6;
+    max-width: none;
+    margin-bottom: 20px;
+  }
+
+  /* Index and category fold in above the headline as one quiet 20px row
+     rather than being given their own band. Placing them above the image
+     would need them lifted out of .content, which would cost the desktop
+     layout its text column. */
+  .stacked .top {
+    margin-bottom: 4px;
+  }
+
+  .stacked .bottom {
+    margin: 12px 0 0;
+  }
+
+  /* Room for the arrow, which sits at the card's inner bottom-right */
+  .stacked .content {
+    padding-bottom: 34px;
   }
 }
 

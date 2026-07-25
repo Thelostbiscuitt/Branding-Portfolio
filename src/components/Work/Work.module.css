@@ -66,7 +66,8 @@
   transition: color 0.15s ease;
 }
 
-.archiveLink:hover {
+.archiveLink:hover,
+.archiveLink:focus-visible {
   color: var(--white);
 }
 
@@ -137,10 +138,6 @@
 .grid > a:nth-child(6) { animation-delay: 300ms; }
 
 @media (max-width: 768px) {
-  .section {
-    padding: 64px 24px;
-  }
-
   .grid {
     grid-template-columns: 1fr;
   }
@@ -149,12 +146,27 @@
     flex-direction: column;
     align-items: flex-start;
   }
+}
 
-  /* A stacked card is taller than a phone viewport, so pinning it just traps
-     the reader. Plain flow instead. */
-  .stackItem {
-    position: static;
+/* Sticky stacking is deliberate at every width, so .stackItem is NOT reset to
+   static here. A card taller than the viewport does not break the effect: it
+   scrolls normally until its top reaches the offset, pins there, and the next
+   card rises over it.
+
+   The per-card step halves to 12px, though. Six cards at the desktop 24px step
+   would reserve 144px of stacked headers at the top of a 667px phone screen,
+   which is a fifth of the viewport spent on cards you have already read. */
+@media (max-width: 600px) {
+  .section {
+    padding: 64px 24px;
   }
+
+  .stackItem                { top: calc(var(--nav-offset) + 12px); }
+  .stackItem:nth-child(2)   { top: calc(var(--nav-offset) + 24px); }
+  .stackItem:nth-child(3)   { top: calc(var(--nav-offset) + 36px); }
+  .stackItem:nth-child(4)   { top: calc(var(--nav-offset) + 48px); }
+  .stackItem:nth-child(5)   { top: calc(var(--nav-offset) + 60px); }
+  .stackItem:nth-child(6)   { top: calc(var(--nav-offset) + 72px); }
 }
 
 /* Flatten the stack to normal flow — the overlap only reads as intentional

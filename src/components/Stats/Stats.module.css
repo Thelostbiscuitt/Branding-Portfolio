@@ -57,7 +57,7 @@
   color: var(--gray);
 }
 
-@media (max-width: 768px) {
+@media (max-width: 600px) {
   .stats {
     padding: 48px 24px;
   }

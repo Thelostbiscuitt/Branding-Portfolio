@@ -108,22 +108,33 @@
   z-index: 1;
 }
 
+/* 44px is the touch target, not the visual weight. The border is drawn on an
+   inset ::before at the old 36px so the button still *reads* as a 36px circle
+   while the hit area is a full 44px square, and the 20px glyph is unchanged. */
 .menuToggle {
   display: none;
+  position: relative;
   align-items: center;
   justify-content: center;
   background: none;
-  border: 1px solid var(--border-mid);
-  border-radius: 50%;
-  width: 36px;
-  height: 36px;
+  border: none;
+  width: 44px;
+  height: 44px;
   color: var(--white);
   flex-shrink: 0;
+}
+
+.menuToggle::before {
+  content: '';
+  position: absolute;
+  inset: 4px;
+  border: 1px solid var(--border-mid);
+  border-radius: 50%;
   transition: border-color 0.15s ease;
 }
 
-.menuToggle:hover,
-.menuToggle:focus-visible {
+.menuToggle:hover::before,
+.menuToggle:focus-visible::before {
   border-color: rgba(232, 102, 10, 0.4);
 }
 
@@ -193,10 +204,22 @@
     display: flex;
   }
 
+  /* Touch target. The pill is 58px tall, so a 44px CTA still sits inside it
+     with 7px of breathing room top and bottom. */
+  .cta {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    padding: 0 16px;
+  }
+
   /* A separate rounded panel offset below the pill rather than a dropdown
      flush against it. The -1px insets and the +9px top line the panel up with
      the pill's outer border box (absolute children resolve against the pill's
-     padding box, which sits 1px inside its border). */
+     padding box, which sits 1px inside its border), so the panel and the pill
+     share one horizontal inset. Radius 24px is the pill's own rounding family
+     — the 58px pill reads as a 29px radius — so the two read as one system
+     rather than a rounded box bolted under a capsule. */
   .mobileLinks {
     display: flex;
     flex-direction: column;
@@ -206,7 +229,7 @@
     right: -1px;
     background: var(--black);
     border: 1px solid var(--border-mid);
-    border-radius: 20px;
+    border-radius: 24px;
     padding: 6px 22px 10px;
     gap: 0;
     max-height: 0;
@@ -217,14 +240,29 @@
     transition: max-height 0.25s ease, opacity 0.2s ease;
   }
 
+  /* Same near-opaque fill and blur as the pill, for the same reason: the panel
+     opens over the hero and the stacked cards. */
+  @supports ((backdrop-filter: blur(12px)) or (-webkit-backdrop-filter: blur(12px))) {
+    .mobileLinks {
+      background: rgba(12, 12, 12, 0.92);
+      -webkit-backdrop-filter: blur(12px);
+      backdrop-filter: blur(12px);
+    }
+  }
+
   .mobileLinksOpen {
     max-height: 320px;
     opacity: 1;
   }
 
+  /* Flex rather than block so min-height can do the work: 12px mono at
+     line-height 1.6 is only 19px, and padding alone left these at 47px in
+     one place and under 44px in another as soon as the font changed. */
   .mobileLinks a {
-    display: block;
-    padding: 14px 0;
+    display: flex;
+    align-items: center;
+    min-height: 44px;
+    padding: 4px 0;
     border-bottom: 1px solid var(--border);
     font-family: var(--font-mono);
     font-size: 12px;

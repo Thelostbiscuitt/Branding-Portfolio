@@ -48,7 +48,8 @@
   transition: background 0.15s ease;
 }
 
-.cta:hover {
+.cta:hover,
+.cta:focus-visible {
   background: var(--orange-dim);
 }
 

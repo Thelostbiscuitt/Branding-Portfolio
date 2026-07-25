@@ -19,7 +19,8 @@
   transition: color 0.15s ease;
 }
 
-.back:hover {
+.back:hover,
+.back:focus-visible {
   color: var(--white);
 }
 
@@ -74,7 +75,8 @@
   transition: background 0.15s ease;
 }
 
-.headerLink:hover {
+.headerLink:hover,
+.headerLink:focus-visible {
   background: rgba(232, 102, 10, 0.08);
 }
 
@@ -288,7 +290,8 @@
   max-width: fit-content;
 }
 
-.nextLink:hover .nextTitle {
+.nextLink:hover .nextTitle,
+.nextLink:focus-visible .nextTitle {
   color: var(--orange);
 }
 
@@ -311,13 +314,9 @@
 
 /* ── RESPONSIVE ── */
 @media (max-width: 900px) {
-  .article {
-    padding: 0 24px;
-  }
-
+  /* Structure only. A 16/7 hero is too letterboxed once the page is narrow,
+     but the horizontal padding stays at 48px until the phone tier. */
   .heroWrap {
-    margin: 0 -24px;
-    width: calc(100% + 48px);
     aspect-ratio: 16 / 9;
   }
 
@@ -342,6 +341,18 @@
 }
 
 @media (max-width: 600px) {
+  /* The article padding and the hero's negative margin are one pair — the
+     hero full-bleeds by cancelling the padding exactly, so they must step
+     together or the hero stops reaching the viewport edge. */
+  .article {
+    padding: 0 24px;
+  }
+
+  .heroWrap {
+    margin: 0 -24px;
+    width: calc(100% + 48px);
+  }
+
   .aside {
     grid-template-columns: 1fr;
   }

@@ -78,9 +78,20 @@
   gap: 20px;
 }
 
-/* The tilted frame's corners reach ~12px horizontally and ~10px vertically
-   past its layout box, and the badge overhangs further still — the margin
-   keeps both clear of the timeline and the grid gutter. */
+/* ── Tilt clearance ──
+   The frame is rotate(-2deg) at aspect-ratio 4/5, so for a frame of width W its
+   rotated bounding box is W·cos2° + 1.25W·sin2° = 1.0430W wide. The horizontal
+   overhang per side is therefore 0.0215W, and the badge overhangs a further
+   fixed 12px at the lower-right.
+
+     required side clearance = max(0.0215 · W, 12px)
+
+   At phone widths W is small enough that the badge dominates: at 375px the
+   rotation contributes only ~6px while the badge needs 12px. The inset is
+   sized from that formula at each tier below rather than eyeballed, because
+   horizontal scroll on a phone is a hard fail. overflow-x: hidden is
+   deliberately NOT used — it would mask this and break position: sticky, which
+   would take the card stack down with it. */
 .frameWrap {
   position: relative;
   margin: 14px 16px 22px;
@@ -158,11 +169,50 @@
   margin: 16px 0 12px;
 }
 
+/* Left-aligned, not centred. The reference centres the year and the entry row,
+   but every other block on this page — bio, pull quote, section labels, meta
+   grid — hangs off a left edge, and a centred timeline in the middle of that
+   reads as a different page rather than a different section. */
 .timelineItem {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   gap: 12px;
+}
+
+/* ── Entrance ──
+   The hidden state is scoped to .armed, which Timeline.tsx adds after mount.
+   Server-rendered and no-JS output therefore has no .armed class and shows
+   every entry at full opacity: if the observer never runs, entries are visible
+   rather than permanently invisible. Reveal is one-way — the observer
+   unobserves each entry on first intersection, so scrolling back up does not
+   re-trigger and the list never jitters. */
+.armed .timelineItem {
+  opacity: 0;
+  transform: translateY(14px);
+  transition: opacity 450ms ease-out, transform 450ms ease-out;
+}
+
+.armed .timelineItemVisible {
+  opacity: 1;
+  transform: none;
+}
+
+/* Cascade rather than arriving as a block. The entries sit close enough
+   together that all three usually cross the threshold in the same frame. */
+.armed .timelineItem:nth-child(2) { transition-delay: 70ms; }
+.armed .timelineItem:nth-child(3) { transition-delay: 140ms; }
+.armed .timelineItem:nth-child(4) { transition-delay: 210ms; }
+.armed .timelineItem:nth-child(5) { transition-delay: 280ms; }
+
+@media (prefers-reduced-motion: reduce) {
+  .armed .timelineItem,
+  .armed .timelineItemVisible {
+    opacity: 1;
+    transform: none;
+    transition: none;
+    transition-delay: 0ms;
+  }
 }
 
 .timelineYear {
@@ -180,7 +230,7 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  height: 44px;
+  height: 48px;
   padding: 5px 8px;
   background: var(--white);
   border-radius: 8px;
@@ -198,8 +248,8 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 44px;
-  height: 44px;
+  width: 48px;
+  height: 48px;
   border: 1px solid var(--border-mid);
   border-radius: 8px;
   background: transparent;
@@ -270,16 +320,71 @@
 }
 
 /* ── RESPONSIVE ── */
+/* 900px: structure only. The bio keeps its source order and leads the column,
+   then the photo, then the timeline. The reference leads with the photo, but
+   the bio's opening carries the repositioning statement ("Creative director
+   ... now focused on AI-assisted product design and development"), and that is
+   the one thing a reader must not have to scroll past a portrait to reach. */
 @media (max-width: 900px) {
   .section {
     grid-template-columns: 1fr;
     gap: 48px;
-    padding: 64px 24px;
   }
 
-  /* Single-column stack — nothing to scroll past, so no sticky */
+  /* Single-column stack — nothing to scroll past, so no sticky. `top` is
+     cleared too, so nothing is left over to reapply if the property is
+     re-enabled higher up the cascade. */
   .left {
     position: static;
     top: auto;
+  }
+
+  /* A 4/5 portrait at the full single-column width would be ~770px tall at
+     this breakpoint and dominate the section. Capping it also keeps the tilt
+     overhang small: at 460px the rotation needs 0.0215 · 460 = 10px, well
+     inside the auto margins. */
+  .frameWrap {
+    max-width: 460px;
+    margin-inline: auto;
+  }
+}
+
+@media (max-width: 600px) {
+  .section {
+    padding: 64px 24px;
+  }
+
+  /* Below ~550px the 460px cap is inert and the frame is viewport-bound, so
+     the auto margins collapse to zero and the badge's fixed 12px overhang
+     would clip. 24px is the explicit floor: at 375px the frame is 279px wide,
+     needing max(0.0215 · 279, 12) = 12px, leaving 12px to spare. */
+  .frameWrap {
+    margin-inline: 24px;
+  }
+
+  /* Proportionally more room at phone width, and the marks are the anchor for
+     each entry. width stays auto so Birdview's 2.64 lockup is not squashed. */
+  .logoTile,
+  .monogram {
+    height: 56px;
+  }
+
+  .monogram {
+    width: 56px;
+  }
+
+  /* Birdview's lockup is 2.64:1, so a 56px tile needs 148px of width before
+     `contain` starts letterboxing it back down to the old height. */
+  .logoImg {
+    max-width: 160px;
+  }
+
+  /* Reads as a progression rather than a dense list */
+  .timeline {
+    gap: 56px;
+  }
+
+  .timelineItem {
+    gap: 14px;
   }
 }

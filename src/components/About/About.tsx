@@ -1,4 +1,5 @@
 import Image from 'next/image'
+import Timeline, { type TimelineEntry } from './Timeline'
 import styles from './About.module.css'
 
 const meta = [
@@ -7,14 +8,6 @@ const meta = [
   { key: 'Primary', value: 'Creative Director' },
   { key: 'Also',    value: 'Builds it with AI' },
 ]
-
-type TimelineEntry = {
-  year:     string
-  org:      string
-  role:     string
-  logo?:    string   // path under /public; falls back to monogram when absent
-  monogram: string   // 2-letter fallback tile
-}
 
 const timeline: TimelineEntry[] = [
   {
@@ -90,7 +83,7 @@ export default function About() {
               src="/photo.jpg"
               alt="Habib"
               fill
-              sizes="(max-width: 900px) 100vw, 45vw"
+              sizes="(max-width: 600px) calc(100vw - 96px), (max-width: 900px) 460px, 45vw"
               className={styles.photo}
             />
             {/* Bottom scrim keeps the caption legible regardless of what's in the photo */}
@@ -105,35 +98,7 @@ export default function About() {
           </div>
         </div>
 
-        <ol className={styles.timeline} role="list" aria-label="Career timeline">
-          {timeline.map((entry) => (
-            <li key={entry.org} className={styles.timelineItem}>
-              <p className={styles.timelineYear}>{entry.year}</p>
-
-              {entry.logo ? (
-                /* Tile is white because all the marks are transparent PNGs with
-                   dark or coloured artwork — they need a light backing to read
-                   against --black. Never tinted or inverted. */
-                <span className={styles.logoTile}>
-                  <Image
-                    src={entry.logo}
-                    alt=""
-                    width={130}
-                    height={44}
-                    className={styles.logoImg}
-                  />
-                </span>
-              ) : (
-                <span className={styles.monogram} aria-hidden="true">{entry.monogram}</span>
-              )}
-
-              <div>
-                <p className={styles.timelineOrg}>{entry.org}</p>
-                <p className={styles.timelineRole}>{entry.role}</p>
-              </div>
-            </li>
-          ))}
-        </ol>
+        <Timeline entries={timeline} />
 
         <div className={styles.metaGrid} role="list" aria-label="Profile details">
           {meta.map((row) => (

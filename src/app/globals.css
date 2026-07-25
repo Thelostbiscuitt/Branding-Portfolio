@@ -1,3 +1,23 @@
+/* ── Breakpoints ──
+   Three tiers, and only three. Custom properties are not allowed inside an
+   @media condition, so these cannot be centralised into a variable the way
+   --nav-offset is; the values are repeated literally in every module and this
+   block is the reference. Do not introduce a fourth value.
+
+     900px  layout  Two-column sections collapse to one. Below this a column
+                    would be under ~390px, which is the floor for the bio,
+                    contact form, and hero copy.
+     768px  tablet  Nav collapses to the hamburger, two-column grids and the
+                    stacked card go single-column. Measured: logo + 4 links +
+                    CTA need ~598px inside the 788px pill at iPad portrait
+                    (820px), so the full nav still fits above this.
+     600px  phone   Section padding steps 48px -> 24px, touch targets reach
+                    44px, the stacked card takes its phone structure, the
+                    timeline stacks, and the tilted photo takes its inset.
+
+   Every module steps its section padding at 600px. Nothing steps padding at
+   768px or 900px — those tiers are for structure only. */
+
 *, *::before, *::after {
   box-sizing: border-box;
   margin: 0;

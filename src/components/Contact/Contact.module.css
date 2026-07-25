@@ -56,11 +56,13 @@
   transition: border-color 0.15s ease;
 }
 
-.linkRow:hover {
+.linkRow:hover,
+.linkRow:focus-visible {
   border-bottom-color: var(--border-mid);
 }
 
-.linkRow:hover .linkArrow {
+.linkRow:hover .linkArrow,
+.linkRow:focus-visible .linkArrow {
   transform: translate(2px, -2px);
 }
 
@@ -167,12 +169,16 @@
   color: var(--gray);
   background: none;
   border: 1px solid #242424;
-  padding: 8px 14px;
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 0 16px;
   border-radius: 2px;
   transition: color 0.15s ease, border-color 0.15s ease, background 0.15s ease;
 }
 
-.pill:hover {
+.pill:hover,
+.pill:focus-visible {
   color: var(--white);
   border-color: #5e5e5e;
 }
@@ -310,6 +316,11 @@
   .section {
     grid-template-columns: 1fr;
     gap: 56px;
+  }
+}
+
+@media (max-width: 600px) {
+  .section {
     padding: 64px 24px;
   }
 }
