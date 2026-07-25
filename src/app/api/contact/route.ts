@@ -46,7 +46,7 @@ export async function POST(req: Request) {
     const safeBrief       = esc(brief)
     const safeProjectType = Array.isArray(projectType)
       ? projectType.map(esc).join(', ')
-      : '—'
+      : 'Not specified'
 
     const resend = getResend()
 
@@ -60,7 +60,7 @@ export async function POST(req: Request) {
       html: `
         <div style="font-family: monospace; max-width: 560px; color: #111;">
           <p style="font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: #888; margin-bottom: 24px;">
-            New project enquiry — habibcore.com
+            New project enquiry · habibcore.com
           </p>
 
           <table style="width: 100%; border-collapse: collapse; margin-bottom: 24px;">
@@ -76,11 +76,11 @@ export async function POST(req: Request) {
             </tr>
             <tr>
               <td style="padding: 10px 0; border-bottom: 1px solid #eee; color: #888; font-size: 11px;">Project type</td>
-              <td style="padding: 10px 0; border-bottom: 1px solid #eee; font-size: 13px;">${safeProjectType || '—'}</td>
+              <td style="padding: 10px 0; border-bottom: 1px solid #eee; font-size: 13px;">${safeProjectType || 'Not specified'}</td>
             </tr>
             <tr>
               <td style="padding: 10px 0; border-bottom: 1px solid #eee; color: #888; font-size: 11px;">Timeline</td>
-              <td style="padding: 10px 0; border-bottom: 1px solid #eee; font-size: 13px;">${safeTimeline || '—'}</td>
+              <td style="padding: 10px 0; border-bottom: 1px solid #eee; font-size: 13px;">${safeTimeline || 'Not specified'}</td>
             </tr>
           </table>
 

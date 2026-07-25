@@ -9,7 +9,7 @@ export default function Hero() {
       <div className={styles.left}>
         <p className={styles.status}>
           <span className={styles.statusDot} aria-hidden="true" />
-          Available for work — Lagos, NG
+          Available for work · Lagos, NG
         </p>
 
         <h1 className={styles.heading}>
@@ -20,7 +20,7 @@ export default function Hero() {
         <div className={styles.rule} aria-hidden="true" />
 
         <p className={styles.description}>
-          Brand identity, art direction, music packaging — designed and
+          Brand systems, web apps, and AI-driven tools. Designed and
           shipped without a team. No handoff. No translation loss between
           vision and execution.
         </p>
@@ -46,7 +46,7 @@ export default function Hero() {
           priority
           className={styles.logo}
         />
-        <span className={styles.geoTag}>Lagos — 2026</span>
+        <span className={styles.geoTag}>Lagos · 2026</span>
       </div>
     </section>
   )

@@ -1,20 +1,20 @@
 import ProjectLayout from '@/components/ProjectLayout/ProjectLayout'
 
 export const metadata = {
-  title: 'Skaame — Artist Web EPK | Habib',
+  title: 'Skaame: Artist Web EPK | Habib',
   description: 'A live web EPK for Lagos-based reggae-Afrobeat artist Skaame. Designed and built as a single shareable link for press, booking agents, and fans.',
   openGraph: {
-    title: 'Skaame — Artist Web EPK | Habib',
+    title: 'Skaame: Artist Web EPK | Habib',
     description: 'A live web EPK for Lagos-based reggae-Afrobeat artist Skaame. Designed and built as a single shareable link for press, booking agents, and fans.',
     url: 'https://habibcore.com/projects/skaame-epk',
     siteName: 'Habib',
     locale: 'en_NG',
     type: 'website',
-    images: [{ url: '/og-image.png', width: 1200, height: 630, alt: 'Skaame — Artist Web EPK | Habib' }],
+    images: [{ url: '/og-image.png', width: 1200, height: 630, alt: 'Skaame: Artist Web EPK | Habib' }],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Skaame — Artist Web EPK | Habib',
+    title: 'Skaame: Artist Web EPK | Habib',
     description: 'A live web EPK for Lagos-based reggae-Afrobeat artist Skaame. Designed and built as a single shareable link for press, booking agents, and fans.',
     images: ['/og-image.png'],
   },
@@ -23,7 +23,7 @@ export const metadata = {
 export default function SkaameEPK() {
   return (
     <ProjectLayout
-      title="Skaame — Artist Web EPK"
+      title="Skaame: Artist Web EPK"
       heroImage="/projects/skaame/hero.jpg"
       heroAlt="Skaame Artist Web EPK hero"
       meta={{
@@ -42,7 +42,7 @@ export default function SkaameEPK() {
             <>
               <p>
                 Skaame is a Lagos-based reggae-Afrobeat artist with a growing following and
-                real press momentum. But his professional assets were scattered — high-res
+                real press momentum. But his professional assets were scattered: high-res
                 press photos in a Google Drive folder, streaming links spread across four
                 platforms, a booking contact buried three taps deep in an Instagram bio.
               </p>
@@ -65,12 +65,12 @@ export default function SkaameEPK() {
                 before opening Figma, in order of importance:
               </p>
               <ul>
-                <li>Press photo download in one click — no login, no folder navigation</li>
+                <li>Press photo download in one click: no login, no folder navigation</li>
                 <li>Streaming links that go directly to platform, not a link aggregator</li>
                 <li>Booking contact that cannot be missed on any screen size</li>
               </ul>
               <p>
-                Typography and colour palette were matched to the music — warm, organic, with
+                Typography and colour palette were matched to the music: warm, organic, with
                 enough weight to hold up in a press context without feeling corporate. Not a
                 template. Not a theme. Built from scratch in Next.js for speed and full
                 control over the output.
@@ -99,15 +99,15 @@ export default function SkaameEPK() {
         },
       ]}
       screenshots={[
-        { src: '/projects/skaame/sc-hero.png',        alt: 'Skaame EPK — hero section' },
-        { src: '/projects/skaame/sc-afghanistan.png', alt: 'Skaame EPK — Afghanistan single release' },
-        { src: '/projects/skaame/sc-press.png',       alt: 'Skaame EPK — press photos section' },
-        { src: '/projects/skaame/sc-video.png',       alt: 'Skaame EPK — music video section' },
+        { src: '/projects/skaame/sc-hero.png',        alt: 'Skaame EPK: hero section' },
+        { src: '/projects/skaame/sc-afghanistan.png', alt: 'Skaame EPK: Afghanistan single release' },
+        { src: '/projects/skaame/sc-press.png',       alt: 'Skaame EPK: press photos section' },
+        { src: '/projects/skaame/sc-video.png',       alt: 'Skaame EPK: music video section' },
       ]}
       next={{
         slug:     'layo-isaac-epk',
         category: 'Design',
-        title:    'Layo Isaac — Artist EPK',
+        title:    'Layo Isaac: Artist EPK',
       }}
     />
   )

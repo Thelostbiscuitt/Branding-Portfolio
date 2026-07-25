@@ -1,21 +1,21 @@
 import ProjectLayout from '@/components/ProjectLayout/ProjectLayout'
 
 export const metadata = {
-  title: '1ETHFP — Creative Collaboration | Habib',
-  description: 'A complete creative package for a web3 music and culture project — roadmap design, a produced anthem, and a promo video, all from one person.',
+  title: '1ETHFP: Creative Collaboration | Habib',
+  description: 'A complete creative package for a web3 music and culture project: roadmap design, a produced anthem, and a promo video, all from one person.',
   openGraph: {
-    title: '1ETHFP — Creative Collaboration | Habib',
-    description: 'A complete creative package for a web3 music and culture project — roadmap design, a produced anthem, and a promo video, all from one person.',
+    title: '1ETHFP: Creative Collaboration | Habib',
+    description: 'A complete creative package for a web3 music and culture project: roadmap design, a produced anthem, and a promo video, all from one person.',
     url: 'https://habibcore.com/projects/1ethfp',
     siteName: 'Habib',
     locale: 'en_NG',
     type: 'website',
-    images: [{ url: '/og-image.png', width: 1200, height: 630, alt: '1ETHFP — Creative Collaboration | Habib' }],
+    images: [{ url: '/og-image.png', width: 1200, height: 630, alt: '1ETHFP: Creative Collaboration | Habib' }],
   },
   twitter: {
     card: 'summary_large_image',
-    title: '1ETHFP — Creative Collaboration | Habib',
-    description: 'A complete creative package for a web3 music and culture project — roadmap design, a produced anthem, and a promo video, all from one person.',
+    title: '1ETHFP: Creative Collaboration | Habib',
+    description: 'A complete creative package for a web3 music and culture project: roadmap design, a produced anthem, and a promo video, all from one person.',
     images: ['/og-image.png'],
   },
 }
@@ -23,7 +23,7 @@ export const metadata = {
 export default function OneEthFP() {
   return (
     <ProjectLayout
-      title="1ETHFP — Creative Collaboration"
+      title="1ETHFP: Creative Collaboration"
       heroImage="/projects/1ethfp/roadmap.jpg"
       heroAlt="1ETHFP roadmap design"
       meta={{
@@ -42,7 +42,7 @@ export default function OneEthFP() {
             <>
               <p>
                 1ETHFP is a web3 project building community through music and culture.
-                Phase 2 needed to launch with real momentum — and momentum requires assets
+                Phase 2 needed to launch with real momentum, and momentum requires assets
                 that match the energy of what's being built.
               </p>
               <p>
@@ -61,21 +61,21 @@ export default function OneEthFP() {
             <>
               <p>
                 Every piece had to feel like part of the same world. That constraint
-                came first — before any individual brief for each deliverable.
+                came first, before any individual brief for each deliverable.
               </p>
               <ul>
                 <li>
-                  <strong style={{color:'var(--white)'}}>Roadmap</strong> — clean and minimal but with a sense of motion.
+                  <strong style={{color:'var(--white)'}}>Roadmap</strong>: clean and minimal but with a sense of motion.
                   Designed to communicate direction without overwhelming the community with
                   complexity. Every milestone visible at a glance.
                 </li>
                 <li>
-                  <strong style={{color:'var(--white)'}}>Anthem</strong> — trap-influenced, high energy, anthemic.
+                  <strong style={{color:'var(--white)'}}>Anthem</strong>: trap-influenced, high energy, anthemic.
                   Written, produced, and performed entirely in-house. The brief was simple:
                   it needs to sound like a rallying cry, not a soundtrack.
                 </li>
                 <li>
-                  <strong style={{color:'var(--white)'}}>Promo video</strong> — quick cuts, glitch effects, pacing
+                  <strong style={{color:'var(--white)'}}>Promo video</strong>: quick cuts, glitch effects, pacing
                   locked to the music. Edited to match the anthem beat-for-beat so the two
                   pieces feel inseparable.
                 </li>
@@ -95,7 +95,7 @@ export default function OneEthFP() {
                 across social media ahead of launch.
               </p>
               <p>
-                All three pieces worked together because they were made together — the
+                All three pieces worked together because they were made together: the
                 advantage of having one creative directing across every medium rather than
                 briefing separate specialists and hoping for coherence.
               </p>
@@ -109,7 +109,7 @@ export default function OneEthFP() {
       next={{
         slug:     'olumayowa-nursing-home',
         category: 'Design',
-        title:    'Olumayowa Nursing Home — Healthcare Website',
+        title:    'Olumayowa Nursing Home: Healthcare Website',
       }}
     />
   )

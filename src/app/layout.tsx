@@ -25,23 +25,23 @@ const dmMono = DM_Mono({
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://habibcore.com'),
-  title: 'Habib — Creative Director. Ships software.',
+  title: 'Habib: Creative Director. Ships software.',
   description:
-    'Creative director and AI-assisted product builder based in Lagos. Brand systems, web apps, and AI-driven tools — designed and built by one person.',
+    'Creative director and AI-assisted product builder based in Lagos. Brand systems, web apps, and AI-driven tools, designed and built by one person.',
   openGraph: {
-    title: 'Habib — Creative Director. Ships software.',
+    title: 'Habib: Creative Director. Ships software.',
     description:
-      'Brand systems, web apps, and AI-driven tools — designed and shipped without a team.',
+      'Brand systems, web apps, and AI-driven tools. Designed and shipped without a team.',
     url: 'https://habibcore.com',
     siteName: 'Habib',
     locale: 'en_NG',
     type: 'website',
-    images: [{ url: '/og-image.png', width: 1200, height: 630, alt: 'Habib — Creative Director. Ships software.' }],
+    images: [{ url: '/og-image.png', width: 1200, height: 630, alt: 'Habib: Creative Director. Ships software.' }],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Habib — Creative Director. Ships software.',
-    description: 'Brand systems, web apps, and AI-driven tools — designed and shipped without a team.',
+    title: 'Habib: Creative Director. Ships software.',
+    description: 'Brand systems, web apps, and AI-driven tools. Designed and shipped without a team.',
     images: ['/og-image.png'],
   },
 }

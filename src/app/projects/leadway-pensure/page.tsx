@@ -1,20 +1,20 @@
 import ProjectLayout from '@/components/ProjectLayout/ProjectLayout'
 
 export const metadata = {
-  title: 'Leadway Pensure — Brand & Communications | Habib',
+  title: 'Leadway Pensure: Brand & Communications | Habib',
   description: 'A self-initiated brand extension pitch for Nigeria\'s most capitalised pension fund. Nine sections covering product redesigns, social system, identity guidelines, and brand voice.',
   openGraph: {
-    title: 'Leadway Pensure — Brand & Communications | Habib',
+    title: 'Leadway Pensure: Brand & Communications | Habib',
     description: 'A self-initiated brand extension pitch for Nigeria\'s most capitalised pension fund. Nine sections covering product redesigns, social system, identity guidelines, and brand voice.',
     url: 'https://habibcore.com/projects/leadway-pensure',
     siteName: 'Habib',
     locale: 'en_NG',
     type: 'website',
-    images: [{ url: '/og-image.png', width: 1200, height: 630, alt: 'Leadway Pensure — Brand & Communications | Habib' }],
+    images: [{ url: '/og-image.png', width: 1200, height: 630, alt: 'Leadway Pensure: Brand & Communications | Habib' }],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Leadway Pensure — Brand & Communications | Habib',
+    title: 'Leadway Pensure: Brand & Communications | Habib',
     description: 'A self-initiated brand extension pitch for Nigeria\'s most capitalised pension fund. Nine sections covering product redesigns, social system, identity guidelines, and brand voice.',
     images: ['/og-image.png'],
   },
@@ -23,12 +23,12 @@ export const metadata = {
 export default function LeadwayPensure() {
   return (
     <ProjectLayout
-      title="Leadway Pensure — Brand & Communications"
+      title="Leadway Pensure: Brand & Communications"
       heroImage="/projects/leadway/hero.jpg"
-      heroAlt="Leadway Pensure brand pitch hero — 'Your future, built with intention.'"
+      heroAlt="Leadway Pensure brand pitch hero: 'Your future, built with intention.'"
       meta={{
         category:   'Brand',
-        year:       '2024–2026',
+        year:       '2024-2026',
         client:     'Leadway Pensure PFA',
         role:       'Brand Designer · Copywriter · Strategist',
         tools:      ['Figma', 'Adobe Suite', 'Copywriting'],
@@ -43,9 +43,9 @@ export default function LeadwayPensure() {
             <>
               <p>
                 Leadway Pensure has spent over 20 years earning the trust of Nigerian
-                workers. The brand equity is real — the camel mark, the orange, two decades
+                workers. The brand equity is real: the camel mark, the orange, two decades
                 of authority in the pension space. But the brand materials hadn't evolved
-                to reach the workers who needed them most: employed Nigerians aged 25–45
+                to reach the workers who needed them most: employed Nigerians aged 25-45
                 who don't think about their pension until it's too late.
               </p>
               <p>
@@ -61,8 +61,8 @@ export default function LeadwayPensure() {
           body: (
             <>
               <p>
-                A full brand extension pitch built around the brand's existing equity —
-                not a rebrand, an evolution. Nine sections delivered as a designed web
+                A full brand extension pitch built around the brand's existing equity.
+                Not a rebrand, an evolution. Nine sections delivered as a designed web
                 document covering every surface where the brand needed to improve:
               </p>
               <ul>
@@ -75,7 +75,7 @@ export default function LeadwayPensure() {
               <p>
                 The brand voice work was as rigorous as the visual work. Every guideline
                 was written with a concrete example: lead with human outcome, never with
-                jargon. Make the abstract concrete — real numbers beat vague assurances.
+                jargon. Make the abstract concrete. Real numbers beat vague assurances.
                 Premium brands don't shout.
               </p>
             </>
@@ -87,8 +87,8 @@ export default function LeadwayPensure() {
           body: (
             <>
               <p>
-                A complete brand extension pitch delivered as a live web document —
-                not a PDF, not a slide deck. Interactive, shareable, designed to be read
+                A complete brand extension pitch delivered as a live web document.
+                Not a PDF, not a slide deck. Interactive, shareable, designed to be read
                 rather than skimmed.
               </p>
               <p>
@@ -103,21 +103,21 @@ export default function LeadwayPensure() {
         },
       ]}
       screenshots={[
-        { src: '/projects/leadway/sc-brief.jpg',      alt: 'Leadway Pensure pitch — the brief, with company stats' },
-        { src: '/projects/leadway/sc-products.jpg',   alt: 'Leadway Pensure pitch — product suite intro and Personal Pension Plan treatment' },
-        { src: '/projects/leadway/sc-products-2.jpg', alt: 'Leadway Pensure pitch — AVC, Asset & Fund Management, and Micro Pension Plan cards' },
-        { src: '/projects/leadway/sc-identity.jpg',   alt: 'Leadway Pensure pitch — brand colour palette with hex values and roles' },
-        { src: '/projects/leadway/sc-type.jpg',       alt: 'Leadway Pensure pitch — typography scale from display to CTA label' },
-        { src: '/projects/leadway/sc-principles.jpg', alt: 'Leadway Pensure pitch — six brand principles built around the camel mark' },
-        { src: '/projects/leadway/sc-voice.jpg',      alt: 'Leadway Pensure pitch — brand voice do/avoid examples' },
-        { src: '/projects/leadway/sc-social.jpg',     alt: 'Leadway Pensure pitch — social post templates for Instagram, LinkedIn, X, and Facebook' },
-        { src: '/projects/leadway/sc-logo.jpg',       alt: 'Leadway Pensure pitch — logo usage across approved and prohibited backgrounds' },
-        { src: '/projects/leadway/sc-guidelines.jpg', alt: 'Leadway Pensure pitch — spacing system on a base-8 grid' },
+        { src: '/projects/leadway/sc-brief.jpg',      alt: 'Leadway Pensure pitch: the brief, with company stats' },
+        { src: '/projects/leadway/sc-products.jpg',   alt: 'Leadway Pensure pitch: product suite intro and Personal Pension Plan treatment' },
+        { src: '/projects/leadway/sc-products-2.jpg', alt: 'Leadway Pensure pitch: AVC, Asset & Fund Management, and Micro Pension Plan cards' },
+        { src: '/projects/leadway/sc-identity.jpg',   alt: 'Leadway Pensure pitch: brand colour palette with hex values and roles' },
+        { src: '/projects/leadway/sc-type.jpg',       alt: 'Leadway Pensure pitch: typography scale from display to CTA label' },
+        { src: '/projects/leadway/sc-principles.jpg', alt: 'Leadway Pensure pitch: six brand principles built around the camel mark' },
+        { src: '/projects/leadway/sc-voice.jpg',      alt: 'Leadway Pensure pitch: brand voice do/avoid examples' },
+        { src: '/projects/leadway/sc-social.jpg',     alt: 'Leadway Pensure pitch: social post templates for Instagram, LinkedIn, X, and Facebook' },
+        { src: '/projects/leadway/sc-logo.jpg',       alt: 'Leadway Pensure pitch: logo usage across approved and prohibited backgrounds' },
+        { src: '/projects/leadway/sc-guidelines.jpg', alt: 'Leadway Pensure pitch: spacing system on a base-8 grid' },
       ]}
       next={{
         slug:     'olumayowa-nursing-home',
         category: 'Design',
-        title:    'Olumayowa Nursing Home — Healthcare Website',
+        title:    'Olumayowa Nursing Home: Healthcare Website',
       }}
     />
   )

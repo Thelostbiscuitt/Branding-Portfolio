@@ -45,7 +45,7 @@ export default function About() {
     <section className={styles.section} id="about" aria-label="About">
       {/* ── Left: text ── */}
       <div className={styles.left}>
-        <p className={styles.sectionLabel}>01 — About</p>
+        <p className={styles.sectionLabel}>01 · About</p>
 
         <h2 className={styles.heading}>
           Designer first.
@@ -55,7 +55,7 @@ export default function About() {
 
         <p className={styles.body}>
           Creative director based in Lagos, now focused on AI-assisted
-          product design and development — SaaS tools, web apps, and the
+          product design and development: SaaS tools, web apps, and the
           brand systems that sit around them.
         </p>
 
@@ -72,7 +72,7 @@ export default function About() {
 
         <p className={styles.body}>
           What makes the work different: I build it too. Landing pages, SaaS
-          tools, AI-assisted software — designed by me, shipped by me. No
+          tools, AI-assisted software. Designed by me, shipped by me. No
           handoff, no translation loss between vision and execution. Clients
           like Leadway Pensure get the full picture without assembling a team.
         </p>
@@ -95,7 +95,7 @@ export default function About() {
             />
             {/* Bottom scrim keeps the caption legible regardless of what's in the photo */}
             <div className={styles.scrim} aria-hidden="true" />
-            <p className={styles.caption}>Habib — Lagos</p>
+            <p className={styles.caption}>Habib · Lagos</p>
           </div>
 
           {/* Sibling of the frame, not a child — it can't overhang the corner

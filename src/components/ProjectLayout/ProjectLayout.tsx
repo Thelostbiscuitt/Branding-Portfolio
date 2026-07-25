@@ -134,7 +134,7 @@ export default function ProjectLayout({
               <div key={s.number} className={styles.section}>
                 <p className={styles.sectionNum}>
                   <span className={styles.sectionNumOrange}>{s.number}</span>
-                  {' — '}
+                  {' · '}
                   {s.heading}
                 </p>
                 <div className={styles.sectionBody}>

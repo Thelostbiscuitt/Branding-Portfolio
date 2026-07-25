@@ -18,7 +18,7 @@ const projectTypes = [
   'Something else',
 ]
 
-const timelines = ['ASAP', '1–2 months', '3+ months', 'Just exploring']
+const timelines = ['ASAP', '1-2 months', '3+ months', 'Just exploring']
 
 const socialLinks = [
   { platform: 'Behance',  handle: 'BlvckOreo',               href: 'https://www.behance.net/BlvckOreo' },
@@ -82,7 +82,7 @@ export default function Contact() {
   return (
     <section className={styles.section} id="contact" aria-label="Contact">
       <div className={styles.left}>
-        <p className={styles.sectionLabel}>03 — Contact</p>
+        <p className={styles.sectionLabel}>03 · Contact</p>
 
         <h2 className={styles.heading}>
           Start a<br />
@@ -91,7 +91,7 @@ export default function Contact() {
 
         <p className={styles.sub}>
           Whether you're building a brand from scratch, refreshing an existing
-          identity, or shipping a digital product — let's talk.
+          identity, or shipping a digital product, let's talk.
         </p>
 
         <ul className={styles.links} role="list">
@@ -113,7 +113,7 @@ export default function Contact() {
 
         <p className={styles.availability}>
           <span className={styles.availDot} aria-hidden="true" />
-          Currently available — open to brand projects, product design, and
+          Currently available. Open to brand projects, product design, and
           development work.
         </p>
       </div>

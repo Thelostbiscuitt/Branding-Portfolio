@@ -1,20 +1,20 @@
 import ProjectLayout from '@/components/ProjectLayout/ProjectLayout'
 
 export const metadata = {
-  title: 'Layo Isaac — Artist EPK | Habib',
+  title: 'Layo Isaac: Artist EPK | Habib',
   description: 'A 12-page EPK for indie alt singer-songwriter Layo Isaac. Muted tones, serif typography, structured as a narrative.',
   openGraph: {
-    title: 'Layo Isaac — Artist EPK | Habib',
+    title: 'Layo Isaac: Artist EPK | Habib',
     description: 'A 12-page EPK for indie alt singer-songwriter Layo Isaac. Muted tones, serif typography, structured as a narrative.',
     url: 'https://habibcore.com/projects/layo-isaac-epk',
     siteName: 'Habib',
     locale: 'en_NG',
     type: 'website',
-    images: [{ url: '/og-image.png', width: 1200, height: 630, alt: 'Layo Isaac — Artist EPK | Habib' }],
+    images: [{ url: '/og-image.png', width: 1200, height: 630, alt: 'Layo Isaac: Artist EPK | Habib' }],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Layo Isaac — Artist EPK | Habib',
+    title: 'Layo Isaac: Artist EPK | Habib',
     description: 'A 12-page EPK for indie alt singer-songwriter Layo Isaac. Muted tones, serif typography, structured as a narrative.',
     images: ['/og-image.png'],
   },
@@ -23,7 +23,7 @@ export const metadata = {
 export default function LayoIsaacEPK() {
   return (
     <ProjectLayout
-      title="Layo Isaac — Artist EPK"
+      title="Layo Isaac: Artist EPK"
       heroImage="/projects/layo-isaac/hero.jpg"
       heroAlt="Layo Isaac Artist EPK hero"
       meta={{
@@ -43,7 +43,7 @@ export default function LayoIsaacEPK() {
               <p>
                 Layo Isaac is an indie alt singer-songwriter with a distinct voice, a growing
                 following, and the kind of artistic identity that needs space to breathe. The
-                problem wasn't that he lacked material — it was that the material had nowhere
+                problem wasn't that he lacked material: it was that the material had nowhere
                 professional to live.
               </p>
               <p>
@@ -62,7 +62,7 @@ export default function LayoIsaacEPK() {
             <>
               <p>
                 The design directive was: match the music. Layo's sound is intimate,
-                thoughtful, not flashy. The EPK had to feel the same way — it couldn't look
+                thoughtful, not flashy. The EPK had to feel the same way. It couldn't look
                 like it belonged to a pop act or a corporate artist roster.
               </p>
               <p>
@@ -102,16 +102,16 @@ export default function LayoIsaacEPK() {
         },
       ]}
       screenshots={[
-        { src: '/projects/layo-isaac/sc-header.png',      alt: 'Layo Isaac EPK — cover and header' },
-        { src: '/projects/layo-isaac/sc-discography.png', alt: 'Layo Isaac EPK — discography section' },
-        { src: '/projects/layo-isaac/sc-7days.png',       alt: 'Layo Isaac EPK — 7 Days single release' },
-        { src: '/projects/layo-isaac/sc-press.png',       alt: 'Layo Isaac EPK — press photos' },
-        { src: '/projects/layo-isaac/sc-videos.png',      alt: 'Layo Isaac EPK — music videos section' },
+        { src: '/projects/layo-isaac/sc-header.png',      alt: 'Layo Isaac EPK: cover and header' },
+        { src: '/projects/layo-isaac/sc-discography.png', alt: 'Layo Isaac EPK: discography section' },
+        { src: '/projects/layo-isaac/sc-7days.png',       alt: 'Layo Isaac EPK: 7 Days single release' },
+        { src: '/projects/layo-isaac/sc-press.png',       alt: 'Layo Isaac EPK: press photos' },
+        { src: '/projects/layo-isaac/sc-videos.png',      alt: 'Layo Isaac EPK: music videos section' },
       ]}
       next={{
         slug:     'blvckoreo-epk',
         category: 'Design',
-        title:    'BlvckOreo — Personal EPK',
+        title:    'BlvckOreo: Personal EPK',
       }}
     />
   )

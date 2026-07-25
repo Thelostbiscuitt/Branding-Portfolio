@@ -10,7 +10,7 @@ export default function Work() {
     <section className={styles.section} id="work" aria-label="Selected work">
       <div className={styles.header}>
         <div>
-          <p className={styles.sectionLabel}>02 — Work</p>
+          <p className={styles.sectionLabel}>02 · Work</p>
           <h2 className={styles.heading}>
             <span className={styles.headingLight}>Selected </span>
             <em className={styles.headingItalic}>Projects.</em>
