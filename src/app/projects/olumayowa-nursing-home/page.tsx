@@ -95,9 +95,9 @@ export default function OlumayowaNursingHome() {
         { src: '/projects/olumayowa-nursing-home/sc-contact.png',  alt: 'Olumayowa Nursing Home: contact section with map' },
       ]}
       next={{
-        slug:     'skaame-epk',
+        slug:     'ai-workplace-training',
         category: 'Design',
-        title:    'Skaame: Artist Web EPK',
+        title:    'AI in the Workplace: Employee Training',
       }}
     />
   )

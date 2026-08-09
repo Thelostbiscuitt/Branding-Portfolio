@@ -52,6 +52,16 @@ export const projects: Project[] = [
     thumb:       '/projects/olumayowa-nursing-home/hero.jpg',
   },
   {
+    slug:        'ai-workplace-training',
+    index:       '05',
+    category:    'Design',
+    era:         'current',
+    title:       'AI in the Workplace: Employee Training',
+    description: 'A company-wide AI literacy programme for Birdview Travels & Tours, from a Monday talk on the fundamentals to a 90-minute session across eleven modules, delivered through a self-built web hub carrying the curriculum, the slides, and the flashcards on one link.',
+    tags:        ['Curriculum Design', 'Facilitation', 'Web Hub', 'Internal Comms', 'AI Literacy'],
+    thumb:       '/projects/ai-workplace-training/hero.jpg',
+  },
+  {
     slug:        'skaame-epk',
     index:       '01',
     category:    'Design',
