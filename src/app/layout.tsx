@@ -1,6 +1,5 @@
 import type { Metadata } from 'next'
 import { Syne, DM_Sans, DM_Mono } from 'next/font/google'
-import SiteBackground from '@/components/SiteBackground/SiteBackground'
 import Cursor from '@/components/Cursor/Cursor'
 import Loading from '@/components/Loading/Loading'
 import './globals.css'
@@ -57,7 +56,6 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${syne.variable} ${dmSans.variable} ${dmMono.variable}`}>
       <body>
-        <SiteBackground />
         <Loading />
         <Cursor />
         {children}
