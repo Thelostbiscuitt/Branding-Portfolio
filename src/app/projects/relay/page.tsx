@@ -66,11 +66,11 @@ export default function Relay() {
                 define it:
               </p>
               <ul>
-                <li><strong style={{color:'var(--white)'}}>Roles are a table, not a boolean.</strong> Admin, RM, quality assurance and final-level are seeded rows; what a role can see is a column on the role, so narrowing one later is a seed change instead of a rewrite of every query.</li>
-                <li><strong style={{color:'var(--white)'}}>A route&rsquo;s path prefix is not a permission.</strong> Every data-layer function that reads or writes on someone&rsquo;s behalf takes a request context and calls the permission check. A function that cannot be passed one cannot sit behind a guarded route.</li>
-                <li><strong style={{color:'var(--white)'}}>The audit trail is append-only, enforced by Postgres.</strong> A trigger rejects updates and deletes; corrections are appended, never edited — and a script proves the guarantee against the live database rather than taking it on trust.</li>
-                <li><strong style={{color:'var(--white)'}}>The SLA clock does not pause.</strong> Roadmap requests are due ten working days out — weekends and Nigerian public holidays excluded. Holidays are entered, not computed, because lunar-calendar dates are declared days in advance and a guessed holiday would silently shift every due date that spans it.</li>
-                <li><strong style={{color:'var(--white)'}}>The CRS point tables are data.</strong> Every published number lives in one table file, and the calculator runs entirely in the browser: nothing is sent anywhere, nothing is stored.</li>
+                <li><strong style={{color:'var(--black)'}}>Roles are a table, not a boolean.</strong> Admin, RM, quality assurance and final-level are seeded rows; what a role can see is a column on the role, so narrowing one later is a seed change instead of a rewrite of every query.</li>
+                <li><strong style={{color:'var(--black)'}}>A route&rsquo;s path prefix is not a permission.</strong> Every data-layer function that reads or writes on someone&rsquo;s behalf takes a request context and calls the permission check. A function that cannot be passed one cannot sit behind a guarded route.</li>
+                <li><strong style={{color:'var(--black)'}}>The audit trail is append-only, enforced by Postgres.</strong> A trigger rejects updates and deletes; corrections are appended, never edited — and a script proves the guarantee against the live database rather than taking it on trust.</li>
+                <li><strong style={{color:'var(--black)'}}>The SLA clock does not pause.</strong> Roadmap requests are due ten working days out — weekends and Nigerian public holidays excluded. Holidays are entered, not computed, because lunar-calendar dates are declared days in advance and a guessed holiday would silently shift every due date that spans it.</li>
+                <li><strong style={{color:'var(--black)'}}>The CRS point tables are data.</strong> Every published number lives in one table file, and the calculator runs entirely in the browser: nothing is sent anywhere, nothing is stored.</li>
               </ul>
             </>
           ),

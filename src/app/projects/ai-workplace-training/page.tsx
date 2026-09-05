@@ -93,12 +93,12 @@ export default function AIWorkplaceTraining() {
               </p>
               <p>Eleven modules, each written against a single stated outcome:</p>
               <ul>
-                <li><strong style={{color:'var(--white)'}}>Foundations</strong>: what AI is in plain language, narrow versus general, and the myths worth busting.</li>
-                <li><strong style={{color:'var(--white)'}}>Prompt writing</strong>: the RCTF framework, Role, Context, Task, Format, taught through a vague prompt rebuilt live into a full one.</li>
-                <li><strong style={{color:'var(--white)'}}>Applied work</strong>: communication and documentation, customer service delivery, reporting and research, each with the same standing rule that AI drafts and a person finalizes.</li>
-                <li><strong style={{color:'var(--white)'}}>Responsible use</strong>: hallucination explained as confident but not certain, plus the three rules on sensitive data, verification, and where accountability sits.</li>
-                <li><strong style={{color:'var(--white)'}}>Automation</strong>: the distinction between judgment-based assistance and rule-based action, and the three-part test for a genuine candidate.</li>
-                <li><strong style={{color:'var(--white)'}}>Adoption</strong>: daily habits and team practices, because consistency across a team beats individual cleverness.</li>
+                <li><strong style={{color:'var(--black)'}}>Foundations</strong>: what AI is in plain language, narrow versus general, and the myths worth busting.</li>
+                <li><strong style={{color:'var(--black)'}}>Prompt writing</strong>: the RCTF framework, Role, Context, Task, Format, taught through a vague prompt rebuilt live into a full one.</li>
+                <li><strong style={{color:'var(--black)'}}>Applied work</strong>: communication and documentation, customer service delivery, reporting and research, each with the same standing rule that AI drafts and a person finalizes.</li>
+                <li><strong style={{color:'var(--black)'}}>Responsible use</strong>: hallucination explained as confident but not certain, plus the three rules on sensitive data, verification, and where accountability sits.</li>
+                <li><strong style={{color:'var(--black)'}}>Automation</strong>: the distinction between judgment-based assistance and rule-based action, and the three-part test for a genuine candidate.</li>
+                <li><strong style={{color:'var(--black)'}}>Adoption</strong>: daily habits and team practices, because consistency across a team beats individual cleverness.</li>
               </ul>
             </>
           ),
@@ -115,9 +115,9 @@ export default function AIWorkplaceTraining() {
                 connected path of stops rather than a flat tab bar.
               </p>
               <ul>
-                <li><strong style={{color:'var(--white)'}}>Overview</strong>: objectives, a timed run of the session, and the full module breakdown as an accordion, cross-linked so clicking a point on the timeline opens the module it belongs to.</li>
-                <li><strong style={{color:'var(--white)'}}>Slides</strong>: eighteen presentation slides driven by arrow keys with a fullscreen mode, so the same file that documents the session also delivers it.</li>
-                <li><strong style={{color:'var(--white)'}}>Flashcards</strong>: ten flip cards mirroring the printed set handed out at close, kept online so people can review after the room empties.</li>
+                <li><strong style={{color:'var(--black)'}}>Overview</strong>: objectives, a timed run of the session, and the full module breakdown as an accordion, cross-linked so clicking a point on the timeline opens the module it belongs to.</li>
+                <li><strong style={{color:'var(--black)'}}>Slides</strong>: eighteen presentation slides driven by arrow keys with a fullscreen mode, so the same file that documents the session also delivers it.</li>
+                <li><strong style={{color:'var(--black)'}}>Flashcards</strong>: ten flip cards mirroring the printed set handed out at close, kept online so people can review after the room empties.</li>
               </ul>
               <p>
                 Built as one self-contained HTML file with no dependencies and no build

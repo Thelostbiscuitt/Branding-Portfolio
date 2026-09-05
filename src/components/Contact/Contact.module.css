@@ -22,7 +22,7 @@
   font-weight: 800;
   line-height: 1.05;
   letter-spacing: -0.025em;
-  color: var(--white);
+  color: var(--black);
   margin-bottom: 20px;
 }
 
@@ -79,7 +79,7 @@
 .linkHandle {
   font-family: var(--font-body);
   font-size: 13px;
-  color: var(--white);
+  color: var(--black);
   flex: 1;
 }
 
@@ -135,7 +135,7 @@
   font-family: var(--font-body);
   font-size: 13px;
   font-weight: 500;
-  color: var(--white);
+  color: var(--black);
   margin-bottom: 12px;
 }
 
@@ -168,7 +168,7 @@
   text-transform: uppercase;
   color: var(--gray);
   background: none;
-  border: 1px solid #242424;
+  border: 1px solid var(--border-mid);
   display: inline-flex;
   align-items: center;
   min-height: 44px;
@@ -179,7 +179,7 @@
 
 .pill:hover,
 .pill:focus-visible {
-  color: var(--white);
+  color: var(--black);
   border-color: #5e5e5e;
 }
 
@@ -192,13 +192,13 @@
 /* ── Text inputs ── */
 .input {
   width: 100%;
-  background: #111111;
-  border: 1px solid #242424;
+  background: #FFFFFF;
+  border: 1px solid var(--border-mid);
   border-radius: 2px;
   padding: 12px 16px;
   font-family: var(--font-body);
   font-size: 13px;
-  color: var(--white);
+  color: var(--black);
   outline: none;
   margin-bottom: 8px;
   transition: border-color 0.15s ease;
@@ -300,7 +300,7 @@
   font-family: var(--font-display);
   font-size: 28px;
   font-weight: 800;
-  color: var(--white);
+  color: var(--black);
   letter-spacing: -0.02em;
 }
 

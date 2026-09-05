@@ -65,17 +65,17 @@ export default function OneEthFP() {
               </p>
               <ul>
                 <li>
-                  <strong style={{color:'var(--white)'}}>Roadmap</strong>: clean and minimal but with a sense of motion.
+                  <strong style={{color:'var(--black)'}}>Roadmap</strong>: clean and minimal but with a sense of motion.
                   Designed to communicate direction without overwhelming the community with
                   complexity. Every milestone visible at a glance.
                 </li>
                 <li>
-                  <strong style={{color:'var(--white)'}}>Anthem</strong>: trap-influenced, high energy, anthemic.
+                  <strong style={{color:'var(--black)'}}>Anthem</strong>: trap-influenced, high energy, anthemic.
                   Written, produced, and performed entirely in-house. The brief was simple:
                   it needs to sound like a rallying cry, not a soundtrack.
                 </li>
                 <li>
-                  <strong style={{color:'var(--white)'}}>Promo video</strong>: quick cuts, glitch effects, pacing
+                  <strong style={{color:'var(--black)'}}>Promo video</strong>: quick cuts, glitch effects, pacing
                   locked to the music. Edited to match the anthem beat-for-beat so the two
                   pieces feel inseparable.
                 </li>

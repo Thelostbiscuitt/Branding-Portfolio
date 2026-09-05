@@ -69,13 +69,13 @@ export default function BiscuitAI() {
               </p>
               <p>The UX decisions that defined the product:</p>
               <ul>
-                <li><strong style={{color:'var(--white)'}}>Smart pagination</strong>: long responses split into navigable chunks. The conversation breathes rather than collapsing under a wall of text.</li>
-                <li><strong style={{color:'var(--white)'}}>Natural language triggers</strong>: say "books" or "library" to retrieve your saved shelf. The interface meets language, not the other way around.</li>
-                <li><strong style={{color:'var(--white)'}}>Memory you can inspect and erase</strong>: Biscuit only remembers what you say explicitly — never what it infers. <code style={{fontFamily:'var(--font-mono)',fontSize:'13px',color:'var(--orange)'}}>/memory</code> shows everything it holds, <code style={{fontFamily:'var(--font-mono)',fontSize:'13px',color:'var(--orange)'}}>/forget</code> removes any of it. A memory you can't see is a memory you can't trust.</li>
-                <li><strong style={{color:'var(--white)'}}>Honest uncertainty</strong>: if the bot can't verify a fact, it says so. Configured deliberately for trust, not just safety.</li>
-                <li><strong style={{color:'var(--white)'}}>Cost visibility</strong>: <code style={{fontFamily:'var(--font-mono)',fontSize:'13px',color:'var(--orange)'}}>/stats</code> surfaces token usage and estimated cost at any point. Users deserve to know what's happening on their behalf.</li>
-                <li><strong style={{color:'var(--white)'}}>Command architecture</strong>: power features behind slash commands. Casual conversation stays conversational.</li>
-                <li><strong style={{color:'var(--white)'}}>Multi-modal integration</strong>: image generation, PDF uploads, photo OCR, and Tavily web search within the same conversational flow.</li>
+                <li><strong style={{color:'var(--black)'}}>Smart pagination</strong>: long responses split into navigable chunks. The conversation breathes rather than collapsing under a wall of text.</li>
+                <li><strong style={{color:'var(--black)'}}>Natural language triggers</strong>: say "books" or "library" to retrieve your saved shelf. The interface meets language, not the other way around.</li>
+                <li><strong style={{color:'var(--black)'}}>Memory you can inspect and erase</strong>: Biscuit only remembers what you say explicitly — never what it infers. <code style={{fontFamily:'var(--font-mono)',fontSize:'13px',color:'var(--orange)'}}>/memory</code> shows everything it holds, <code style={{fontFamily:'var(--font-mono)',fontSize:'13px',color:'var(--orange)'}}>/forget</code> removes any of it. A memory you can't see is a memory you can't trust.</li>
+                <li><strong style={{color:'var(--black)'}}>Honest uncertainty</strong>: if the bot can't verify a fact, it says so. Configured deliberately for trust, not just safety.</li>
+                <li><strong style={{color:'var(--black)'}}>Cost visibility</strong>: <code style={{fontFamily:'var(--font-mono)',fontSize:'13px',color:'var(--orange)'}}>/stats</code> surfaces token usage and estimated cost at any point. Users deserve to know what's happening on their behalf.</li>
+                <li><strong style={{color:'var(--black)'}}>Command architecture</strong>: power features behind slash commands. Casual conversation stays conversational.</li>
+                <li><strong style={{color:'var(--black)'}}>Multi-modal integration</strong>: image generation, PDF uploads, photo OCR, and Tavily web search within the same conversational flow.</li>
               </ul>
             </>
           ),

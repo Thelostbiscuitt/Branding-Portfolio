@@ -50,7 +50,7 @@
   font-size: clamp(64px, 8vw, 128px);
   font-weight: 800;
   line-height: 0.9;
-  color: var(--white);
+  color: var(--black);
   letter-spacing: -0.03em;
 }
 
@@ -77,7 +77,7 @@
   font-family: var(--font-body);
   font-size: 16px;
   line-height: 1.75;
-  color: rgba(245, 241, 235, 0.7);
+  color: rgba(26, 24, 21, 0.65);
   max-width: 420px;
   margin-top: 20px;
 }
@@ -129,8 +129,8 @@
 
 .ctaSecondary:hover,
 .ctaSecondary:focus-visible {
-  color: var(--white);
-  border-color: rgba(245, 241, 235, 0.3);
+  color: var(--black);
+  border-color: rgba(26, 24, 21, 0.25);
 }
 
 .operator {
@@ -151,7 +151,7 @@
   justify-content: center;
   gap: 24px;
   overflow: hidden;
-  background: #181818;
+  background: #EDEAE4;
   min-height: 580px;
 }
 
@@ -189,7 +189,7 @@
   font-size: 12px;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: rgba(245, 241, 235, 0.55);
+  color: rgba(26, 24, 21, 0.5);
 }
 
 .buildConnector {

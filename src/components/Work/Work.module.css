@@ -39,7 +39,7 @@
   font-family: var(--font-display);
   font-size: 160px;
   font-weight: 800;
-  color: rgba(245, 241, 235, 0.025);
+  color: rgba(26, 24, 21, 0.03);
   line-height: 1;
   pointer-events: none;
   user-select: none;
@@ -47,7 +47,7 @@
 }
 
 .headingLight {
-  color: var(--white);
+  color: var(--black);
   font-weight: 400;
 }
 
@@ -68,7 +68,7 @@
 
 .archiveLink:hover,
 .archiveLink:focus-visible {
-  color: var(--white);
+  color: var(--black);
 }
 
 .pastHeader {
@@ -83,7 +83,7 @@
   font-size: 11px;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: var(--white);
+  color: var(--black);
   margin-bottom: 6px;
 }
 

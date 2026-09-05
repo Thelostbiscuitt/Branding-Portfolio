@@ -21,7 +21,7 @@
   font-size: clamp(40px, 5.5vw, 64px);
   font-weight: 800;
   line-height: 1;
-  color: var(--white);
+  color: var(--black);
   letter-spacing: -0.03em;
 }
 

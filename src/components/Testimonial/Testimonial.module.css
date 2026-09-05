@@ -47,7 +47,7 @@
   font-weight: 600;
   line-height: 1.55;
   letter-spacing: -0.01em;
-  color: var(--white);
+  color: var(--black);
 }
 
 .attribution {
@@ -64,7 +64,7 @@
   font-size: 11px;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: var(--white);
+  color: var(--black);
   font-weight: 600;
 }
 

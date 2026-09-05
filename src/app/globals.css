@@ -25,15 +25,15 @@
 }
 
 :root {
-  --black:      #0c0c0c;
-  --white:      #f5f1eb;
+  --black:      #1A1815;
+  --white:      #F5F3EE;
   --orange:     #E8660A;
   --orange-dim: #C4520A;
   --amber:      #F5A623;
   --offwhite:   #FAF7F2;
-  --gray:       #888888;
-  --border:     rgba(245, 241, 235, 0.08);
-  --border-mid: rgba(245, 241, 235, 0.14);
+  --gray:       #6B6862;
+  --border:     rgba(26, 24, 21, 0.07);
+  --border-mid: rgba(26, 24, 21, 0.12);
 
   /* ── Design tokens ──
      Space, duration, easing and radius exist so components stop inventing
@@ -97,8 +97,8 @@ html {
 }
 
 body {
-  background-color: var(--black);
-  color: var(--white);
+  background-color: var(--white);
+  color: var(--black);
   font-family: var(--font-body);
   font-size: 16px;
   line-height: 1.6;

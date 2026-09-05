@@ -21,7 +21,7 @@
 
 .back:hover,
 .back:focus-visible {
-  color: var(--white);
+  color: var(--black);
 }
 
 /* ── Header ── */
@@ -51,7 +51,7 @@
   font-family: var(--font-display);
   font-size: clamp(32px, 4.5vw, 56px);
   font-weight: 800;
-  color: var(--white);
+  color: var(--black);
   line-height: 1.05;
   letter-spacing: -0.025em;
   margin-bottom: 24px;
@@ -85,7 +85,7 @@
   position: relative;
   aspect-ratio: 16 / 7;
   overflow: hidden;
-  background: #181818;
+  background: #EDEAE4;
   margin: 0 -48px;
   width: calc(100% + 96px);
 }
@@ -135,7 +135,7 @@
 .asideVal {
   font-family: var(--font-body);
   font-size: 13px;
-  color: var(--white);
+  color: var(--black);
   line-height: 1.5;
 }
 
@@ -194,7 +194,7 @@
   font-family: var(--font-display);
   font-size: 20px;
   font-weight: 700;
-  color: var(--white);
+  color: var(--black);
   margin-bottom: 12px;
   letter-spacing: -0.02em;
 }
@@ -203,7 +203,7 @@
 .sectionBody blockquote {
   border-left: 2px solid var(--orange);
   padding-left: 20px;
-  color: var(--white);
+  color: var(--black);
   font-style: italic;
   margin: 20px 0;
 }
@@ -253,7 +253,7 @@
   font-family: var(--font-display);
   font-size: 15px;
   font-weight: 700;
-  color: var(--white);
+  color: var(--black);
   letter-spacing: -0.01em;
   line-height: 1.4;
 }
@@ -299,7 +299,7 @@
   font-family: var(--font-display);
   font-size: clamp(30px, 3.4vw, 44px);
   font-weight: 700;
-  color: var(--white);
+  color: var(--black);
   line-height: 1.05;
   letter-spacing: -0.02em;
   /* A figure that breaks across two lines stops being a figure */
@@ -349,7 +349,7 @@
   position: relative;
   aspect-ratio: 16 / 10;
   overflow: hidden;
-  background: #181818;
+  background: #EDEAE4;
   border: 1px solid var(--border);
   border-radius: 2px;
 }
@@ -397,7 +397,7 @@
   font-family: var(--font-display);
   font-size: 22px;
   font-weight: 700;
-  color: var(--white);
+  color: var(--black);
   letter-spacing: -0.02em;
   transition: color 0.15s ease;
 }
