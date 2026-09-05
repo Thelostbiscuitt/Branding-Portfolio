@@ -25,6 +25,7 @@ export default function Relay() {
     <ProjectLayout
       title="Relay: Operations Portal"
       heroImage="/projects/relay/cover.svg"
+      tone="dark"
       heroAlt="Relay: a typographic cover for an internal operations portal build"
       meta={{
         category:  'Product · Systems',

@@ -43,6 +43,10 @@ type Props = {
   aiWorkflow?: AiWorkflow
   impact?:     ImpactStat[]
   next?:       { slug: string; category: string; title: string }
+  /* Each project brings its own atmosphere to the opening band:
+     dark for AI/CRM interfaces, warm for food, brand for identity work.
+     The page body always returns to the neutral Habibcore shell. */
+  tone?:       'dark' | 'warm' | 'brand'
 }
 
 /* Rendered as the body of a normal numbered section, so it inherits
@@ -78,6 +82,7 @@ export default function ProjectLayout({
   aiWorkflow,
   impact,
   next,
+  tone,
 }: Props) {
   /* Section numbers are author-supplied, so with no AI workflow to insert the
      array is passed through untouched and every existing case study renders
@@ -104,7 +109,7 @@ export default function ProjectLayout({
       <a href="#project-content" className="skip-link">Skip to content</a>
       <Nav />
 
-      <article id="project-content" className={styles.article}>
+      <article id="project-content" className={`${styles.article} ${tone ? styles[`tone${tone.charAt(0).toUpperCase()}${tone.slice(1)}`] : ''}`}>
         {/* ── Back link ── */}
         <div className={styles.backRow}>
           <Link href="/#work" className={styles.back}>

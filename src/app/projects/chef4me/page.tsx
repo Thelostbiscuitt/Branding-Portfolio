@@ -25,6 +25,7 @@ export default function MealPlanningBot() {
     <ProjectLayout
       title="Chef4Me: Telegram Kitchen Assistant"
       heroImage="/projects/chef4me/hero.jpg"
+      tone="warm"
       heroAlt="Chef4Me Telegram interface"
       meta={{
         category:  'Design',

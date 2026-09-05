@@ -25,6 +25,7 @@ export default function BiscuitAI() {
     <ProjectLayout
       title="Biscuit AI: Telegram Bot Design"
       heroImage="/projects/biscuit-ai/hero.jpg"
+      tone="dark"
       heroAlt="Biscuit AI Telegram bot interface"
       meta={{
         category:   'Design',

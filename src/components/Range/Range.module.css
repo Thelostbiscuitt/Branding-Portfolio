@@ -67,3 +67,36 @@
     margin-left: 0 !important;
   }
 }
+
+/* ── The one strong typographic moment ──
+   Each word reveals as it enters the viewport — opacity and a small lift,
+   staggered by position so the poster assembles itself as you read down it.
+   Scroll-driven via animation-timeline: view(); zero JS, zero listeners.
+   Unsupported browsers render the words static. Reduced motion kills it. */
+@supports (animation-timeline: view()) {
+  .word {
+    animation: wordIn linear both;
+    animation-timeline: view();
+  }
+
+  .word:nth-child(1) { animation-range: entry 0% entry 40%; }
+  .word:nth-child(2) { animation-range: entry 5% entry 45%; }
+  .word:nth-child(3) { animation-range: entry 10% entry 50%; }
+  .word:nth-child(4) { animation-range: entry 15% entry 55%; }
+  .word:nth-child(5) { animation-range: entry 20% entry 60%; }
+  .word:nth-child(6) { animation-range: entry 25% entry 65%; }
+  .word:nth-child(7) { animation-range: entry 30% entry 70%; }
+
+  @keyframes wordIn {
+    from { opacity: 0.12; transform: translateY(28px); }
+    to   { opacity: 1; transform: none; }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .word {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+}

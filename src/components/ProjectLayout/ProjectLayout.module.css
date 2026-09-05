@@ -469,3 +469,78 @@
     gap: 4px;
   }
 }
+
+/* ── Project tones ─────────────────────────────────────────────────────────
+   Each project brings its own atmosphere to the opening block; the body of
+   the page always returns to the neutral Habibcore shell. The negative
+   margins match .heroWrap so the tone band is full-bleed, and the horizontal
+   padding keeps the text aligned with the rest of the article. */
+
+.toneDark .backRow,
+.toneDark .header {
+  margin-inline: -48px;
+  padding-inline: 48px;
+  background: #161513;
+}
+
+.toneDark .back {
+  color: rgba(248, 248, 246, 0.5);
+}
+
+.toneDark .back:hover,
+.toneDark .back:focus-visible {
+  color: #F8F8F6;
+}
+
+.toneDark .title {
+  color: #F8F8F6;
+}
+
+.toneDark .headerMeta {
+  color: var(--orange);
+}
+
+.toneDark .dot {
+  color: rgba(248, 248, 246, 0.4);
+}
+
+.toneDark .headerLink {
+  color: var(--orange);
+  border-color: rgba(232, 102, 10, 0.4);
+}
+
+.toneDark .heroWrap {
+  background: #161513;
+}
+
+.toneWarm .header,
+.toneWarm .heroWrap {
+  background: #F6EBDC;
+}
+
+.toneWarm .header {
+  margin-inline: -48px;
+  padding-inline: 48px;
+}
+
+.toneBrand .header,
+.toneBrand .heroWrap {
+  background: #FBEDE0;
+}
+
+.toneBrand .header {
+  margin-inline: -48px;
+  padding-inline: 48px;
+}
+
+/* At the narrow breakpoint the article padding is 24px, so the tone band
+   tracks it. */
+@media (max-width: 600px) {
+  .toneDark .backRow,
+  .toneDark .header,
+  .toneWarm .header,
+  .toneBrand .header {
+    margin-inline: -24px;
+    padding-inline: 24px;
+  }
+}

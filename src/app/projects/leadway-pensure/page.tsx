@@ -25,6 +25,7 @@ export default function LeadwayPensure() {
     <ProjectLayout
       title="Leadway Pensure: Brand & Communications"
       heroImage="/projects/leadway/hero.jpg"
+      tone="brand"
       heroAlt="Leadway Pensure brand pitch hero: 'Your future, built with intention.'"
       meta={{
         category:   'Brand',
