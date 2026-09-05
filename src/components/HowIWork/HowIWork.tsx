@@ -14,7 +14,7 @@ const steps = [
 export default function HowIWork() {
   return (
     <section className={styles.section} aria-label="How I work">
-      <p className={styles.sectionLabel}>04 / How I work</p>
+      <p className={styles.sectionLabel}>05 / How I work</p>
 
       <h2 className={styles.heading}>
         Designed.

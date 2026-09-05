@@ -6,7 +6,7 @@ import styles from './Position.module.css'
 export default function Position() {
   return (
     <section className={styles.section} aria-label="Position">
-      <p className={styles.sectionLabel}>01 / Position</p>
+      <p className={styles.sectionLabel}>02 / Position</p>
 
       <div className={styles.sequence}>
         <p className={styles.line}>

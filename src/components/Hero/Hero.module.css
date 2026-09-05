@@ -5,10 +5,15 @@
 .hero {
   position: relative;
   min-height: 100vh;
-  padding: calc(var(--nav-offset) + 72px) 48px 80px;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
+  padding: calc(var(--nav-offset) + 72px) 48px 120px;
+}
+
+/* The statement block: left-aligned, its own column, deliberately not
+   stretched — the lower-right belongs to the figure. */
+.statement {
+  position: relative;
+  z-index: 1;
+  max-width: 58vw;
 }
 
 /* Tiny editorial marker, top-left of the statement block */
@@ -127,10 +132,46 @@
   border-color: var(--black);
 }
 
-/* Discipline markers — bottom-right, vertical, almost silent. */
+/* ── The figure ──
+   A cropped project interface entering the spread from the bottom-right,
+   bleeding off both edges. It is the first evidence of work on the page. */
+.figure {
+  position: absolute;
+  right: -4vw;
+  bottom: -60px;
+  width: min(38vw, 520px);
+  height: min(60vh, 620px);
+  z-index: 0;
+}
+
+.figureFrame {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  border: 1px solid var(--border-mid);
+  background: #EDEAE4;
+}
+
+.figureImg {
+  object-fit: cover;
+  object-position: top center;
+}
+
+.figureCaption {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--gray);
+  margin-top: 12px;
+  text-align: right;
+}
+
+/* Discipline markers — bottom-left, vertical, almost silent. */
 .disciplines {
   position: absolute;
-  right: 48px;
+  left: 48px;
   bottom: 80px;
   display: flex;
   flex-direction: column;
@@ -182,8 +223,16 @@
     padding: calc(var(--nav-offset) + 48px) 24px 64px;
   }
 
+  .statement {
+    max-width: none;
+  }
+
   .marker {
     left: 24px;
+  }
+
+  .figure {
+    display: none;
   }
 
   .disciplines {

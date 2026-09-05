@@ -16,7 +16,7 @@ const disciplines = [
 export default function Range() {
   return (
     <section className={styles.section} aria-label="Range">
-      <p className={styles.sectionLabel}>03 / Range</p>
+      <p className={styles.sectionLabel}>04 / Range</p>
       <p className={styles.intro}>I work across</p>
 
       <div className={styles.poster}>

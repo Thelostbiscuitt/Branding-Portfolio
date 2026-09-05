@@ -12,6 +12,8 @@ type Props = {
   stacked?: boolean
   /** Puts the image on the left instead of the right; alternates down the stack */
   flip?: boolean
+  /** Per-project image crop — projects are not all the same shape */
+  ratio?: string
 }
 
 /* The card used to be a single <Link> wrapping everything, which left nowhere
@@ -24,7 +26,7 @@ type Props = {
    The stretched link is deliberately the FIRST child: the hover states below
    are mirrored on focus through `~` sibling selectors, which only reach
    forwards. */
-export default function ProjectCard({ project, stacked = false, flip = false }: Props) {
+export default function ProjectCard({ project, stacked = false, flip = false, ratio }: Props) {
   const videoRef = useRef<HTMLVideoElement>(null)
 
   const className = [
@@ -73,7 +75,7 @@ export default function ProjectCard({ project, stacked = false, flip = false }: 
 
       {/* Thumbnail — always visible when stacked, revealed on hover/keyboard
           focus in the grid (pure CSS, see .module.css) */}
-      <div className={styles.thumb}>
+      <div className={styles.thumb} style={ratio ? { aspectRatio: ratio } : undefined}>
         {project.video ? (
           <video
             ref={videoRef}
