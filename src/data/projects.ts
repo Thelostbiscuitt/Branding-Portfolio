@@ -122,4 +122,19 @@ export const projects: Project[] = [
     thumb:       '/projects/1ethfp/roadmap.jpg',
     year:        '2024',
   },
+  {
+    slug:        'relay',
+    index:       '06',
+    category:    'Product · Systems',
+    era:         'current',
+    title:       'Relay: Operations Portal',
+    description: 'A complete operations rebuild for an immigration firm\u2019s relationship managers: role-scoped data, an append-only audit trail enforced by the database, working-days SLA clocks, and an in-browser CRS calculator.',
+    positioning: 'A client pipeline whose audit trail the database itself enforces.',
+    tags:        ['CRM', 'RBAC', 'Audit Trail', 'SLA Systems', 'CRS Calculator', 'Next.js'],
+    thumb:       '/projects/relay/cover.svg',
+    year:        '2026',
+    /* Built and delivered, held off the homepage until Habib decides to
+       publish. Flip this flag to put it in the work stack and the sitemap. */
+    draft:       true,
+  },
 ]
