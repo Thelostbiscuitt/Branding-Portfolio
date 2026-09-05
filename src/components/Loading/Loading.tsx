@@ -34,7 +34,7 @@ export default function Loading() {
     const minTimer = setTimeout(() => {
       min = true
       done()
-    }, 900)
+    }, 1400)
 
     return () => {
       cancelAnimationFrame(paintTimer)

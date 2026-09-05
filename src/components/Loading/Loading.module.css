@@ -37,26 +37,31 @@
   position: relative;
   z-index: 1;
   opacity: 0;
-  animation: loadIn 0.6s var(--ease-out) 0.1s both;
+  animation: loadIn 0.5s var(--ease-out) 0.1s both;
 }
 
+/* Fallback first: a visible ring even if the conic-gradient query below doesn't
+   match this browser. The query overrides it with the travelling arc when it
+   can. */
 .beam {
   position: absolute;
   inset: -10px;
   border-radius: 50%;
-  padding: 2px;
+  border: 1.5px solid rgba(232, 102, 10, 0.35);
   opacity: 0;
-  animation: loadIn 0.6s var(--ease-out) 0.1s both, beamSpin 4s linear 0.7s infinite;
+  animation: loadIn 0.5s var(--ease-out) 0.1s both, beamSpin 2.8s linear 0.5s infinite;
 }
 
 @supports (background: conic-gradient(from 0deg, red, blue)) and
           ((mask-composite: exclude) or (-webkit-mask-composite: xor)) {
   .beam {
+    border: none;
+    padding: 2px;
     background: conic-gradient(
       from 0deg,
       transparent 0deg,
-      var(--orange) 24deg,
-      transparent 50deg,
+      var(--orange) 22deg,
+      transparent 46deg,
       transparent 360deg
     );
     -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
@@ -73,7 +78,7 @@
   text-transform: uppercase;
   color: var(--gray);
   opacity: 0;
-  animation: loadIn 0.5s var(--ease-out) 0.4s both;
+  animation: loadIn 0.4s var(--ease-out) 0.35s both;
 }
 
 @keyframes loadIn {
