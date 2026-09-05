@@ -133,8 +133,5 @@ export const projects: Project[] = [
     tags:        ['CRM', 'RBAC', 'Audit Trail', 'SLA Systems', 'CRS Calculator', 'Next.js'],
     thumb:       '/projects/relay/cover.svg',
     year:        '2026',
-    /* Built and delivered, held off the homepage until Habib decides to
-       publish. Flip this flag to put it in the work stack and the sitemap. */
-    draft:       true,
   },
 ]
