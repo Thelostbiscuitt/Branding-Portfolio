@@ -11,10 +11,10 @@ export default function Work() {
     <section className={styles.section} id="work" aria-label="Selected work">
       <div className={styles.header}>
         <div>
-          <p className={styles.sectionLabel}>01 · Selected work</p>
+          <p className={styles.sectionLabel}>02 / Selected work</p>
           <h2 className={styles.heading}>
-            <span className={styles.headingLight}>Things </span>
-            <em className={styles.headingItalic}>I&rsquo;ve built.</em>
+            <span className={styles.headingLight}>Selected</span>
+            <em className={styles.headingItalic}>work.</em>
           </h2>
         </div>
 
@@ -29,7 +29,7 @@ export default function Work() {
       </div>
 
       <p className={styles.lede}>
-        A selection of products, systems, brands, and experiments.
+        Products, systems, brands, and experiments — the strongest work first.
       </p>
 
       {/* Current work is a sticky scroll-stack of full-width cards; past work

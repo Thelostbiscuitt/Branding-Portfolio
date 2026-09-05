@@ -1,84 +1,80 @@
-/* Padding on the grid container, not on a column: it offsets both columns
-   including the full-bleed right panel, so at scroll 0 the band behind the
-   floating pill is uniform page background with no panel edge running through
-   it. +24px is breathing room below the pill, so it reads as floating rather
-   than sitting on the panel. */
-.hero {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  min-height: 560px;
-  padding-top: calc(var(--nav-offset) + 24px);
-}
+/* ── The opening page of a publication ──
+   One massive statement. Tiny metadata. The tension between the two scales
+   is the composition. Left-aligned, asymmetric — nothing is centred. */
 
-/* ── LEFT ── */
-.left {
-  padding: 72px 48px;
+.hero {
+  position: relative;
+  min-height: 100vh;
+  padding: calc(var(--nav-offset) + 72px) 48px 80px;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
 }
 
-.status {
+/* Tiny editorial marker, top-left of the statement block */
+.marker {
+  position: absolute;
+  top: calc(var(--nav-offset) + 24px);
+  left: 48px;
   font-family: var(--font-mono);
-  font-size: 10px;
-  letter-spacing: 0.14em;
+  font-size: 9px;
+  letter-spacing: 0.3em;
   text-transform: uppercase;
-  color: var(--orange);
-  margin-bottom: 32px;
-  display: flex;
-  align-items: center;
-  gap: 8px;
+  color: var(--gray);
 }
 
-.statusDot {
-  display: block;
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: var(--orange);
-  flex-shrink: 0;
-}
-
+/* The statement. Extreme scale, tight leading, negative tracking. Each line
+   is its own block so the rhythm reads vertically. */
 .heading {
   display: flex;
   flex-direction: column;
   gap: 0;
 }
 
-.headingMain {
+.line {
   font-family: var(--font-display);
-  font-size: clamp(64px, 8vw, 128px);
+  font-size: clamp(72px, 11vw, 172px);
   font-weight: 800;
-  line-height: 0.9;
+  line-height: 0.88;
+  letter-spacing: -0.045em;
   color: var(--black);
-  letter-spacing: -0.03em;
 }
 
-.headingItalic {
+/* The third line steps down a scale and takes the accent — it reads as the
+   thesis after the two titles. */
+.lineAccent {
   font-family: var(--font-display);
-  font-size: clamp(64px, 8vw, 128px);
-  font-weight: 800;
+  font-size: clamp(28px, 3.4vw, 52px);
+  font-weight: 400;
   font-style: italic;
-  line-height: 0.9;
+  line-height: 1.05;
+  letter-spacing: -0.02em;
   color: var(--orange);
-  letter-spacing: -0.03em;
-}
-
-.split {
-  font-family: var(--font-mono);
-  font-size: 10px;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: var(--gray);
   margin-top: 28px;
 }
 
+/* Tiny metadata row — the counterpoint to the display type */
+.meta {
+  display: flex;
+  gap: 24px;
+  margin-top: 40px;
+}
+
+.metaItem {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--gray);
+}
+
+/* One quiet line of prose. Small on purpose — the headline does the work. */
 .core {
   font-family: var(--font-body);
-  font-size: 16px;
-  line-height: 1.75;
-  color: rgba(26, 24, 21, 0.65);
-  max-width: 420px;
+  font-size: 15px;
+  line-height: 1.7;
+  color: var(--gray);
+  max-width: 400px;
   margin-top: 20px;
 }
 
@@ -87,20 +83,20 @@
   gap: 12px;
   align-items: center;
   flex-wrap: wrap;
-  margin-top: 32px;
+  margin-top: 36px;
 }
 
 .ctaPrimary {
   font-family: var(--font-mono);
   font-size: 11px;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: var(--black);
+  color: var(--white);
   background: var(--orange);
   display: inline-flex;
   align-items: center;
-  min-height: 44px;
-  padding: 0 24px;
+  min-height: 48px;
+  padding: 0 28px;
   border-radius: var(--radius-s);
   transition: background var(--dur-micro) var(--ease-standard);
 }
@@ -113,181 +109,94 @@
 .ctaSecondary {
   font-family: var(--font-mono);
   font-size: 11px;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: var(--gray);
+  color: var(--black);
   background: none;
   border: 1px solid var(--border-mid);
   display: inline-flex;
   align-items: center;
-  min-height: 44px;
-  padding: 0 24px;
+  min-height: 48px;
+  padding: 0 28px;
   border-radius: var(--radius-s);
-  transition: color var(--dur-micro) var(--ease-standard),
-              border-color var(--dur-micro) var(--ease-standard);
+  transition: border-color var(--dur-micro) var(--ease-standard);
 }
 
 .ctaSecondary:hover,
 .ctaSecondary:focus-visible {
-  color: var(--black);
-  border-color: rgba(26, 24, 21, 0.25);
+  border-color: var(--black);
 }
 
-.operator {
-  font-family: var(--font-mono);
-  font-size: 10px;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--gray);
-  margin-top: 40px;
-}
-
-/* ── RIGHT: the DESIGN/BUILD motif ── */
-.right {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 24px;
-  overflow: hidden;
-  background: #EDEAE4;
-  min-height: 580px;
-}
-
-.buildPanel {
-  display: flex;
-  align-items: center;
-  gap: 36px;
-}
-
-.buildColumn {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
-
-.buildHeading {
-  font-family: var(--font-display);
-  font-size: clamp(30px, 3.2vw, 42px);
-  font-weight: 800;
-  font-style: italic;
-  color: var(--orange);
-  letter-spacing: -0.02em;
-  margin-bottom: 10px;
-}
-
-.buildList {
-  list-style: none;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-
-.buildList li {
-  font-family: var(--font-mono);
-  font-size: 12px;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: rgba(26, 24, 21, 0.5);
-}
-
-.buildConnector {
-  font-family: var(--font-mono);
-  font-size: 26px;
-  color: var(--gray);
-  flex-shrink: 0;
-}
-
-.buildCaption {
-  font-family: var(--font-mono);
-  font-size: 10px;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--gray);
-}
-
-.geoTag {
+/* Discipline markers — bottom-right, vertical, almost silent. */
+.disciplines {
   position: absolute;
-  bottom: 28px;
-  right: 28px;
-  z-index: 3;
+  right: 48px;
+  bottom: 80px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 6px;
   font-family: var(--font-mono);
-  font-size: 10px;
-  letter-spacing: 0.1em;
+  font-size: 9px;
+  letter-spacing: 0.22em;
   text-transform: uppercase;
+  color: var(--gray);
+}
+
+.disciplineSep {
   color: var(--orange);
-  writing-mode: vertical-rl;
-  transform: rotate(180deg);
 }
 
 /* ── Entrance ──
-   Typography-led sequence: status, headline, split line, core line, CTAs,
-   operator. Pure CSS — a JS-less page still animates, and the reduced-motion
-   query below removes animation rather than pausing it (content first).
-   Delays are staggered from ~80ms to ~500ms so the whole read settles inside
-   the 900ms hero band. */
+   Typography-led: marker, then each line, then metadata, then prose.
+   CSS only; reduced-motion removes animation, never content. */
 @media not all and (prefers-reduced-motion: reduce) {
-  .status,
-  .heading,
-  .split,
+  .marker,
+  .line,
+  .lineAccent,
+  .meta,
   .core,
   .actions,
-  .operator {
-    animation: heroIn 0.7s var(--ease-out) both;
+  .disciplines {
+    animation: heroIn 0.8s var(--ease-out) both;
   }
 
-  .status  { animation-delay: 80ms; }
-  .heading { animation-delay: 160ms; }
-  .split   { animation-delay: 260ms; }
-  .core    { animation-delay: 340ms; }
-  .actions { animation-delay: 430ms; }
-  .operator{ animation-delay: 520ms; }
-
-  .right {
-    animation: heroIn 0.8s var(--ease-out) 220ms both;
-  }
+  .marker     { animation-delay: 60ms; }
+  .line       { animation-delay: 140ms; }
+  .lineAccent { animation-delay: 320ms; }
+  .meta       { animation-delay: 460ms; }
+  .core       { animation-delay: 540ms; }
+  .actions    { animation-delay: 620ms; }
+  .disciplines{ animation-delay: 700ms; }
 }
 
 @keyframes heroIn {
-  from { opacity: 0; transform: translateY(16px); }
+  from { opacity: 0; transform: translateY(20px); }
   to   { opacity: 1; transform: none; }
 }
 
-/* ── RESPONSIVE ── */
+/* ── Responsive ── */
 @media (max-width: 900px) {
   .hero {
-    grid-template-columns: 1fr;
-    min-height: unset;
+    min-height: auto;
+    padding: calc(var(--nav-offset) + 48px) 24px 64px;
   }
 
-  .right {
-    min-height: 0;
-    height: 400px;
+  .marker {
+    left: 24px;
   }
 
-  .geoTag {
-    writing-mode: horizontal-tb;
-    transform: none;
+  .disciplines {
+    position: static;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+    margin-top: 48px;
   }
 }
 
 @media (max-width: 600px) {
-  /* Tighter gap below the pill — 24px reads as dead space when the layout is
-     a single column and vertical room is scarce. */
   .hero {
-    padding-top: calc(var(--nav-offset) + 12px);
-  }
-
-  .left {
-    padding: 48px 24px;
-  }
-
-  .right {
-    height: 360px;
-  }
-
-  .buildPanel {
-    gap: 24px;
+    padding-top: calc(var(--nav-offset) + 32px);
   }
 }

@@ -1,0 +1,69 @@
+/* ── 03 / RANGE ──
+   An editorial poster: disciplines at shifting scales and offsets, like a
+   specimen page. No cards, no icons, no grid visible. */
+
+.section {
+  padding: 140px 48px;
+  border-top: 1px solid var(--border);
+}
+
+.sectionLabel {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--gray);
+  margin-bottom: 24px;
+}
+
+.intro {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--gray);
+  margin-bottom: 56px;
+}
+
+.poster {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.word {
+  font-family: var(--font-display);
+  font-weight: 800;
+  line-height: 0.95;
+  letter-spacing: -0.03em;
+  color: var(--black);
+  white-space: nowrap;
+}
+
+/* Three sizes — the poster rhythm. Like a type specimen: same face,
+   different scales, deliberate offsets. */
+.sizeL {
+  font-size: clamp(56px, 7vw, 112px);
+}
+
+.sizeM {
+  font-size: clamp(40px, 4.5vw, 72px);
+  color: var(--gray);
+}
+
+.sizeS {
+  font-size: clamp(24px, 2.6vw, 42px);
+  font-weight: 400;
+  font-style: italic;
+  color: var(--orange);
+}
+
+@media (max-width: 900px) {
+  .section {
+    padding: 80px 24px;
+  }
+
+  .word {
+    margin-left: 0 !important;
+  }
+}

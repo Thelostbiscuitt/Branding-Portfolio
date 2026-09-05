@@ -13,12 +13,14 @@ export default function About() {
     <section className={styles.section} id="about" aria-label="About">
       {/* ── Left: text ── */}
       <div className={styles.left}>
-        <p className={styles.sectionLabel}>06 · About</p>
+        <p className={styles.sectionLabel}>05 / About</p>
 
         <h2 className={styles.heading}>
-          Designer first.
+          Designer.
           <br />
-          <em className={styles.headingItalic}>Builder always.</em>
+          Builder.
+          <br />
+          <em className={styles.headingItalic}>Operator.</em>
         </h2>
 
         <p className={styles.body}>

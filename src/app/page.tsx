@@ -1,21 +1,25 @@
-import Nav          from '@/components/Nav/Nav'
-import Hero         from '@/components/Hero/Hero'
-import Stats        from '@/components/Stats/Stats'
-import Ticker       from '@/components/Ticker/Ticker'
-import Work         from '@/components/Work/Work'
-import Testimonial  from '@/components/Testimonial/Testimonial'
-import Capabilities from '@/components/Capabilities/Capabilities'
-import Systems      from '@/components/Systems/Systems'
-import Career       from '@/components/Career/Career'
-import Lab          from '@/components/Lab/Lab'
-import About        from '@/components/About/About'
-import Contact      from '@/components/Contact/Contact'
-import Footer       from '@/components/Footer/Footer'
+import Nav         from '@/components/Nav/Nav'
+import Hero        from '@/components/Hero/Hero'
+import Position    from '@/components/Position/Position'
+import Work        from '@/components/Work/Work'
+import Testimonial from '@/components/Testimonial/Testimonial'
+import Range       from '@/components/Range/Range'
+import HowIWork    from '@/components/HowIWork/HowIWork'
+import About       from '@/components/About/About'
+import Contact     from '@/components/Contact/Contact'
+import Footer      from '@/components/Footer/Footer'
 
-/* Narrative order: who I am (hero) → what I make (work) → how I think
-   (systems) → why I'm different (career) → what I'm building (lab) → who I am
-   now (about) → how to reach me (contact). Testimonial sits right after the
-   work so the proof follows the portfolio. */
+/* The homepage is a publication with chapters:
+
+     Opening     — Who is this?
+     Position    — What does designer-builder-operator mean?
+     Work        — Can you actually do it?
+     Range       — How broad is the practice?
+     How I work  — Why is the combination interesting?
+     About       — Who is the person behind it?
+     Contact     — What should I do next?
+
+   Every section answers one question. Nothing decorative. */
 export default function HomePage() {
   return (
     <>
@@ -23,14 +27,11 @@ export default function HomePage() {
       <main id="main">
         <Nav />
         <Hero />
-        <Stats />
-        <Ticker />
+        <Position />
         <Work />
         <Testimonial />
-        <Capabilities />
-        <Systems />
-        <Career />
-        <Lab />
+        <Range />
+        <HowIWork />
         <About />
         <Contact />
         <Footer />

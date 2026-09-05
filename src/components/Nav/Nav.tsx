@@ -6,11 +6,9 @@ import { Menu, X } from 'lucide-react'
 import styles from './Nav.module.css'
 
 const links = [
-  { href: '/#work',          label: 'Work' },
-  { href: '/#capabilities',  label: 'Capabilities' },
-  { href: '/#lab',           label: 'Lab' },
-  { href: '/#about',         label: 'About' },
-  { href: '/#contact',       label: 'Contact' },
+  { href: '/#work',    label: 'Work' },
+  { href: '/#about',   label: 'About' },
+  { href: '/#contact', label: 'Contact' },
 ]
 
 export default function Nav() {

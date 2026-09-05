@@ -87,10 +87,10 @@ export default function Contact() {
   return (
     <section className={styles.section} id="contact" aria-label="Contact">
       <div className={styles.left}>
-        <p className={styles.sectionLabel}>07 · Contact</p>
+        <p className={styles.sectionLabel}>06 / Contact</p>
 
         <h2 className={styles.heading}>
-          Let&rsquo;s build<br />
+          Let&rsquo;s make<br />
           <em className={styles.headingItalic}>something.</em>
         </h2>
 
