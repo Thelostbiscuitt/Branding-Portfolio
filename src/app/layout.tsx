@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import { Syne, DM_Sans, DM_Mono } from 'next/font/google'
+import Cursor from '@/components/Cursor/Cursor'
 import './globals.css'
 
 const syne = Syne({
@@ -25,23 +26,23 @@ const dmMono = DM_Mono({
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://habibcore.com'),
-  title: 'Habib: Creative Director. Ships software.',
+  title: 'Habib — Design thinking. Technical execution.',
   description:
-    'Creative director and AI-assisted product builder based in Lagos. Brand systems, web apps, and AI-driven tools, designed and built by one person.',
+    'I design brands, digital products, and AI-powered tools — then build them too. Designed and built by one person, in Lagos.',
   openGraph: {
-    title: 'Habib: Creative Director. Ships software.',
+    title: 'Habib — Design thinking. Technical execution.',
     description:
-      'Brand systems, web apps, and AI-driven tools. Designed and shipped without a team.',
+      'Brands, interfaces, software, AI. Designed and built by one person, with no handoff.',
     url: 'https://habibcore.com',
     siteName: 'Habib',
     locale: 'en_NG',
     type: 'website',
-    images: [{ url: '/og-image.png', width: 1200, height: 630, alt: 'Habib: Creative Director. Ships software.' }],
+    images: [{ url: '/og-image.png', width: 1200, height: 630, alt: 'Habib — Design thinking. Technical execution.' }],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Habib: Creative Director. Ships software.',
-    description: 'Brand systems, web apps, and AI-driven tools. Designed and shipped without a team.',
+    title: 'Habib — Design thinking. Technical execution.',
+    description: 'Brands, interfaces, software, AI. Designed and built by one person.',
     images: ['/og-image.png'],
   },
 }
@@ -54,6 +55,7 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${syne.variable} ${dmSans.variable} ${dmMono.variable}`}>
       <body>
+        <Cursor />
         {children}
       </body>
     </html>

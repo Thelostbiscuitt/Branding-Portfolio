@@ -8,9 +8,9 @@
                     would be under ~390px, which is the floor for the bio,
                     contact form, and hero copy.
      768px  tablet  Nav collapses to the hamburger, two-column grids and the
-                    stacked card go single-column. Measured: logo + 4 links +
-                    CTA need ~598px inside the 788px pill at iPad portrait
-                    (820px), so the full nav still fits above this.
+                    stacked card go single-column. Measured: logo + 5 links +
+                    CTA need ~730px inside the 737px pill at 769px viewport
+                    width, so the full nav just fits above this breakpoint.
      600px  phone   Section padding steps 48px -> 24px, touch targets reach
                     44px, the stacked card takes its phone structure, the
                     timeline stacks, and the tilted photo takes its inset.
@@ -34,6 +34,48 @@
   --gray:       #888888;
   --border:     rgba(245, 241, 235, 0.08);
   --border-mid: rgba(245, 241, 235, 0.14);
+
+  /* ── Design tokens ──
+     Space, duration, easing and radius exist so components stop inventing
+     their own numbers. Usage: margin/padding/gaps >> `var(--space-N)`;
+     animation/transitions >> `var(--dur-*)` + `var(--ease-*)`; radius
+     >> `var(--radius-*)`. These are defaults, not a straitjacket: a precise
+     effect may pick a close value, but nothing invents a new number without
+     reason.
+
+     Motion bands follow the animation chapter:
+       150-250ms  micro   hover, focus, pills, link arrows
+       250-450ms  ui      panels, mobile menu, form sent state
+       500-900ms  major   section reveals, card entrances
+       700-1200ms hero    the entrance sequence
+
+     The global easing suits a dark, precise interface: fast out, slow settle.
+
+     Space is base-4. Sections pad with --space-8/9 (64/96) on desktop,
+     stepping to --space-7 (48) at 600px. */
+
+  --space-1:  4px;
+  --space-2:  8px;
+  --space-3:  12px;
+  --space-4:  16px;
+  --space-5:  24px;
+  --space-6:  32px;
+  --space-7:  48px;
+  --space-8:  64px;
+  --space-9:  96px;
+
+  --dur-micro: 150ms;
+  --dur-ui:     250ms;
+  --dur-major:  600ms;
+  --dur-hero:   900ms;
+
+  --ease-out:      cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-standard: cubic-bezier(0.4, 0, 0.2, 1);
+
+  --radius-s:    2px;    /* buttons, inputs, select pills */
+  --radius-m:    8px;    /* screenshots, media frames */
+  --radius-l:    12px;   /* portraits, large panels */
+  --radius-full: 999px;  /* nav pill, capsule CTAs */
 
   /* Floating pill nav. The nav is position: fixed and takes no flow space,
      so page content offsets itself with --nav-offset. Nav.module.css sets an
