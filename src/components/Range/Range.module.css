@@ -25,10 +25,69 @@
   margin-bottom: 56px;
 }
 
+.hint {
+  color: var(--gray);
+  opacity: 0.55;
+}
+
 .poster {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 14px;
+}
+
+/* Each row is an interactive reference: hover or keyboard-focus it and the
+   discipline's real use cases trail out beside it. */
+.item {
+  display: flex;
+  align-items: baseline;
+  gap: 20px;
+  flex-wrap: wrap;
+  outline: none;
+}
+
+.item:focus-visible .word {
+  outline: 2px solid var(--orange);
+  outline-offset: 6px;
+}
+
+/* The use cases: quiet mono text preceded by a short orange rule. Hidden
+   until the row is hovered or focused — the reveal is visual only; the text
+   stays in the DOM for screen readers. */
+.uses {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 12px;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--gray);
+  opacity: 0;
+  transform: translateX(10px);
+  transition: opacity 0.3s var(--ease-out), transform 0.3s var(--ease-out);
+}
+
+.uses::before {
+  content: '';
+  width: 28px;
+  height: 1px;
+  background: var(--orange);
+  flex-shrink: 0;
+  align-self: center;
+}
+
+.item:hover .uses,
+.item:focus-within .uses,
+.item:focus .uses {
+  opacity: 1;
+  transform: none;
+}
+
+/* The word itself reacts: orange on hover, like a struck reference. */
+.item:hover .word,
+.item:focus-within .word {
+  color: var(--orange);
 }
 
 .word {
@@ -56,6 +115,15 @@
   font-weight: 400;
   font-style: italic;
   color: var(--orange);
+}
+
+/* Touch devices get the clean poster — the interactive reference is a
+   pointer-led delight and would read as clutter under a thumb. */
+@media (hover: none) {
+  .hint,
+  .uses {
+    display: none;
+  }
 }
 
 @media (max-width: 900px) {
@@ -98,5 +166,9 @@
     animation: none;
     opacity: 1;
     transform: none;
+  }
+
+  .uses {
+    transition: none;
   }
 }
