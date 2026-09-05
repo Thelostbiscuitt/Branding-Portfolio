@@ -2,7 +2,7 @@
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 80px;
-  padding: 96px 48px;
+  padding: 160px 48px;
   border-top: 1px solid var(--border);
 }
 
@@ -321,6 +321,6 @@
 
 @media (max-width: 600px) {
   .section {
-    padding: 64px 24px;
+    padding: 96px 24px;
   }
 }

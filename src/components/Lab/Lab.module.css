@@ -1,5 +1,5 @@
 .section {
-  padding: 96px 48px;
+  padding: 160px 48px;
   border-top: 1px solid var(--border);
 }
 
@@ -14,7 +14,7 @@
 
 .heading {
   font-family: var(--font-display);
-  font-size: clamp(32px, 4vw, 48px);
+  font-size: clamp(40px, 5vw, 72px);
   font-weight: 800;
   line-height: 1;
   letter-spacing: -0.025em;
@@ -58,7 +58,7 @@
 
 @media (max-width: 600px) {
   .section {
-    padding: 64px 24px;
+    padding: 96px 24px;
   }
 
   .empty {

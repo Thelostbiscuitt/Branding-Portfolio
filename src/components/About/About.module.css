@@ -2,7 +2,7 @@
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 80px;
-  padding: 96px 48px;
+  padding: 160px 48px;
   border-top: 1px solid var(--border);
   /* Required for the sticky left column — stretch (the default) would make it
      as tall as the row and there'd be nothing left to stick. */
@@ -351,7 +351,7 @@
 
 @media (max-width: 600px) {
   .section {
-    padding: 64px 24px;
+    padding: 96px 24px;
   }
 
   /* Below ~550px the 460px cap is inert and the frame is viewport-bound, so
