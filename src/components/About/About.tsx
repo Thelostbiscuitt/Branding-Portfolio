@@ -25,7 +25,7 @@ const timeline: TimelineEntry[] = [
     monogram: 'LP',
   },
   {
-    year:     '2020',   // TODO: confirm the year the design practice started
+    year:     '2020',
     org:      'Habibcore',
     role:     'Brand & art direction',
     logo:     '/logo.png',

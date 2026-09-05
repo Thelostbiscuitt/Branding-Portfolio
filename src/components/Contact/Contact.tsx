@@ -21,9 +21,12 @@ const projectTypes = [
 const timelines = ['ASAP', '1-2 months', '3+ months', 'Just exploring']
 
 const socialLinks = [
-  { platform: 'Behance',  handle: 'BlvckOreo',               href: 'https://www.behance.net/BlvckOreo' },
-  { platform: 'GitHub',   handle: 'Thelostbiscuitt',          href: 'https://github.com/Thelostbiscuitt' },
-  { platform: 'LinkedIn', handle: 'habib-oguntimehin',        href: 'https://www.linkedin.com/in/michael-oguntimehin-480751398' },
+  { platform: 'Behance',  handle: 'BlvckOreo',           href: 'https://www.behance.net/BlvckOreo' },
+  { platform: 'GitHub',   handle: 'Thelostbiscuitt',     href: 'https://github.com/Thelostbiscuitt' },
+  // The profile slug is michael-oguntimehin-480751398, which reads as noise in
+  // the handle column, so the row shows an action instead of a mismatched handle.
+  { platform: 'LinkedIn', handle: 'View profile',        href: 'https://www.linkedin.com/in/michael-oguntimehin-480751398' },
+  { platform: 'WhatsApp', handle: 'Message directly',    href: 'https://wa.me/2347013573240' },
   { platform: 'Email',    handle: 'habib@habibcore.com', href: 'mailto:habib@habibcore.com' },
 ]
 

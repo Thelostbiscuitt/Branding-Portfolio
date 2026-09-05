@@ -8,6 +8,8 @@ export type Project = {
   tags:        string[]
   thumb:       string       // path to hero image used as card hover thumbnail
   featured?:   boolean      // if true, card spans full grid width
+  liveUrl?:    string       // public URL of the built thing, when one exists
+  video?:      string       // path under /public; replaces the thumb image when set
 }
 
 export const projects: Project[] = [
@@ -17,19 +19,19 @@ export const projects: Project[] = [
     category:    'Design',
     era:         'current',
     title:       'Biscuit AI: Telegram Bot Design',
-    description: 'A production-ready Telegram bot built on GLM-4.7 with intelligent chat, image generation via Stability AI, a Notion-backed library system, and real-time cost tracking, all in one conversational interface.',
+    description: 'A production-ready Telegram assistant built on OpenRouter with layered memory you can inspect and erase, Tavily web search, a local book library, image generation, and real-time cost tracking, all in one conversational interface.',
     tags:        ['Telegram Bot', 'AI Interface', 'LLM Integration', 'Image Generation', 'UX Design', 'Python'],
     thumb:       '/projects/biscuit-ai/hero.jpg',
   },
   {
-    slug:        'meal-planning-bot',
+    slug:        'chef4me',
     index:       '02',
     category:    'Design',
     era:         'current',
-    title:       'Meal Planning Bot: Telegram Kitchen Assistant',
+    title:       'Chef4Me: Telegram Kitchen Assistant',
     description: 'An AI kitchen assistant for Telegram. Tracks ingredients and expiry dates, and suggests meals from 40+ cuisines via Google Gemini, all through chat commands.',
     tags:        ['Telegram Bot', 'AI Interface', 'LLM Integration', 'UX Design', 'Python'],
-    thumb:       '/projects/meal-planning-bot/hero.jpg',
+    thumb:       '/projects/chef4me/hero.jpg',
   },
   {
     slug:        'leadway-pensure',
@@ -50,6 +52,7 @@ export const projects: Project[] = [
     description: "A local healthcare provider's website: six services, full licensing credentials, and every way to reach them, on one page a patient can scan in seconds.",
     tags:        ['Web Design', 'Development', 'Healthcare', 'Local Business'],
     thumb:       '/projects/olumayowa-nursing-home/hero.jpg',
+    liveUrl:     'https://olumayowanursinghome.com',
   },
   {
     slug:        'ai-workplace-training',
@@ -57,7 +60,7 @@ export const projects: Project[] = [
     category:    'Design',
     era:         'current',
     title:       'AI in the Workplace: Employee Training',
-    description: 'A company-wide AI literacy programme for Birdview Travels & Tours, from a Monday talk on the fundamentals to a 90-minute session across eleven modules, delivered through a self-built web hub carrying the curriculum, the slides, and the flashcards on one link.',
+    description: 'A company-wide AI literacy programme for Birdview Travels & Tours: eleven modules delivered in one 90-minute session, with a self-built web hub carrying the curriculum, slides, and flashcards on one link.',
     tags:        ['Curriculum Design', 'Facilitation', 'Web Hub', 'Internal Comms', 'AI Literacy'],
     thumb:       '/projects/ai-workplace-training/hero.jpg',
   },

@@ -22,6 +22,17 @@ export type ProjectSection = {
   body:    ReactNode // string or JSX — both are valid ReactNode
 }
 
+export type AiWorkflow = {
+  intro?:  string
+  tools:   { name: string; use: string }[]
+  outcome?: string
+}
+
+export type ImpactStat = {
+  value: string
+  label: string
+}
+
 type Props = {
   title:       string
   heroImage:   string
@@ -29,7 +40,32 @@ type Props = {
   meta:        ProjectMeta
   sections:    ProjectSection[]
   screenshots: { src: string; alt: string }[]
+  aiWorkflow?: AiWorkflow
+  impact?:     ImpactStat[]
   next?:       { slug: string; category: string; title: string }
+}
+
+/* Rendered as the body of a normal numbered section, so it inherits
+   .sectionBody and needs no heading of its own. A <dl> rather than a <ul>:
+   these are term/description pairs, and .sectionBody ul already carries the
+   orange bullet treatment that would fight with the rows. */
+function AiWorkflowBody({ workflow }: { workflow: AiWorkflow }) {
+  return (
+    <>
+      {workflow.intro && <p>{workflow.intro}</p>}
+
+      <dl className={styles.aiToolList}>
+        {workflow.tools.map((tool) => (
+          <div key={tool.name} className={styles.aiToolRow}>
+            <dt className={styles.aiToolName}>{tool.name}</dt>
+            <dd className={styles.aiToolUse}>{tool.use}</dd>
+          </div>
+        ))}
+      </dl>
+
+      {workflow.outcome && <p className={styles.aiOutcome}>{workflow.outcome}</p>}
+    </>
+  )
 }
 
 export default function ProjectLayout({
@@ -39,8 +75,30 @@ export default function ProjectLayout({
   meta,
   sections,
   screenshots,
+  aiWorkflow,
+  impact,
   next,
 }: Props) {
+  /* Section numbers are author-supplied, so with no AI workflow to insert the
+     array is passed through untouched and every existing case study renders
+     byte-identically. When there is one, it goes in ahead of the outcome —
+     method belongs between how it was approached and what resulted — and the
+     run is renumbered so the sequence stays 01, 02, 03 without a collision. */
+  const flow: ProjectSection[] = (() => {
+    if (!aiWorkflow) return sections
+
+    const outcomeAt = sections.findIndex((s) => /outcome/i.test(s.heading))
+    const at = outcomeAt === -1 ? sections.length : outcomeAt
+
+    const merged: ProjectSection[] = [
+      ...sections.slice(0, at),
+      { number: '', heading: 'AI workflow', body: <AiWorkflowBody workflow={aiWorkflow} /> },
+      ...sections.slice(at),
+    ]
+
+    return merged.map((s, i) => ({ ...s, number: String(i + 1).padStart(2, '0') }))
+  })()
+
   return (
     <>
       <a href="#project-content" className="skip-link">Skip to content</a>
@@ -130,8 +188,8 @@ export default function ProjectLayout({
 
           {/* Right: numbered sections */}
           <div className={styles.sections}>
-            {sections.map((s) => (
-              <div key={s.number} className={styles.section}>
+            {flow.map((s) => (
+              <div key={`${s.number}-${s.heading}`} className={styles.section}>
                 <p className={styles.sectionNum}>
                   <span className={styles.sectionNumOrange}>{s.number}</span>
                   {' · '}
@@ -144,6 +202,31 @@ export default function ProjectLayout({
             ))}
           </div>
         </div>
+
+        {/* ── Impact ── */}
+        {impact && impact.length > 0 && (
+          <section className={styles.impactWrap} aria-label="Impact">
+            <p className={styles.impactLabel}>Impact</p>
+            <dl className={styles.impactGrid}>
+              {impact.map((stat) => {
+                // Trailing non-digits (%, +, x, k) take the accent; the number does not
+                const match = stat.value.match(/^(.*?)([^0-9]*)$/)
+                const num = match?.[1] ?? stat.value
+                const symbol = match?.[2] ?? ''
+
+                return (
+                  <div key={stat.label} className={styles.impactItem}>
+                    <dt className={styles.impactValue}>
+                      {num}
+                      {symbol && <span className={styles.impactSymbol}>{symbol}</span>}
+                    </dt>
+                    <dd className={styles.impactStatLabel}>{stat.label}</dd>
+                  </div>
+                )
+              })}
+            </dl>
+          </section>
+        )}
 
         {/* ── Screenshots grid ── */}
         {screenshots.length > 0 && (

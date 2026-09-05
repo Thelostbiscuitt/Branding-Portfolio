@@ -24,6 +24,52 @@
   min-height: 280px;
 }
 
+/* ── Links ──
+   The case-study link is stretched over the whole card, so the card reads as
+   one target while remaining a single anchor. It sits above .content (which
+   deliberately has no z-index of its own, so it creates no stacking context)
+   and below .liveLink, which is what lets a sibling link sit on top of it. */
+.cardLink {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+}
+
+.cardLink:focus-visible {
+  outline: 2px solid var(--orange);
+  /* Inset — .card clips with overflow: hidden, so an outset ring would vanish */
+  outline-offset: -2px;
+}
+
+/* Quiet secondary action. Deliberately not competing with the card link: mono,
+   small, --gray at rest, and only picking up --orange on hover/focus. */
+.liveLink {
+  position: relative;
+  z-index: 3;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  /* 44px touch target without adding a visible box */
+  min-height: 44px;
+  margin-top: 4px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--gray);
+  transition: color 0.15s ease;
+}
+
+.liveLink:hover,
+.liveLink:focus-visible {
+  color: var(--orange);
+}
+
+.liveLink:focus-visible {
+  outline: 2px solid var(--orange);
+  outline-offset: 3px;
+}
+
 /* ── Thumbnail ── */
 .thumb {
   position: absolute;
@@ -34,7 +80,7 @@
 }
 
 .card:hover .thumb,
-.card:focus-visible .thumb {
+.cardLink:focus-visible ~ .thumb {
   opacity: 1;
 }
 
@@ -46,8 +92,17 @@
 }
 
 .card:hover .thumbImg,
-.card:focus-visible .thumbImg {
+.cardLink:focus-visible ~ .thumb .thumbImg {
   transform: scale(1);
+}
+
+/* next/image with `fill` positions itself; a raw <video> does not, so it is
+   given the same geometry to keep image and video cards identical. */
+.thumbVideo {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
 }
 
 .thumbOverlay {
@@ -57,9 +112,11 @@
 }
 
 /* ── Content ── */
+/* No z-index here on purpose: a stacking context would trap .liveLink below
+   the stretched .cardLink. Being positioned and later in the DOM is enough to
+   paint it above .thumb. */
 .content {
   position: relative;
-  z-index: 1;
   padding: 28px 32px;
   display: flex;
   flex-direction: column;
@@ -158,11 +215,11 @@
   font-size: 18px;
   color: var(--orange);
   transition: transform 0.25s ease;
-  z-index: 2;
+  z-index: 1;
 }
 
 .card:hover .arrow,
-.card:focus-visible .arrow {
+.cardLink:focus-visible ~ .content .arrow {
   transform: translate(3px, -3px);
 }
 
@@ -226,7 +283,7 @@
 }
 
 .stacked:hover .thumbImg,
-.stacked:focus-visible .thumbImg {
+.stacked .cardLink:focus-visible ~ .thumb .thumbImg {
   transform: scale(1.04);
 }
 
@@ -373,8 +430,12 @@
 @media (prefers-reduced-motion: reduce) {
   .stacked .thumbImg,
   .stacked:hover .thumbImg,
-  .stacked:focus-visible .thumbImg {
+  .stacked .cardLink:focus-visible ~ .thumb .thumbImg {
     transform: none;
+    transition: none;
+  }
+
+  .liveLink {
     transition: none;
   }
 }

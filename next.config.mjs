@@ -8,6 +8,17 @@ const nextConfig = {
   // ─────────────────────────────────────────────────────────────────────────────
   // SECURITY HEADERS
   // ─────────────────────────────────────────────────────────────────────────────
+  async redirects() {
+    return [
+      // The Chef4Me case study was renamed from 'meal-planning-bot' to 'chef4me';
+      // the old URL is indexed (sitemap, back links), so keep it resolving.
+      {
+        source: "/projects/meal-planning-bot",
+        destination: "/projects/chef4me",
+        permanent: true,
+      },
+    ];
+  },
   async headers() {
     return [
       {

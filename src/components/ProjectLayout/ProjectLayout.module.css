@@ -230,6 +230,96 @@
   color: var(--orange);
 }
 
+/* ── AI workflow ──
+   Lives inside .sectionBody, so it inherits the section's colour and measure.
+   Dividers sit strictly between rows via the adjacent-sibling selector, which
+   avoids capping the list top and bottom. */
+.aiToolList {
+  margin: 20px 0 0;
+}
+
+.aiToolRow {
+  display: grid;
+  grid-template-columns: 160px 1fr;
+  gap: 20px;
+  padding: 14px 0;
+}
+
+.aiToolRow + .aiToolRow {
+  border-top: 1px solid var(--border);
+}
+
+.aiToolName {
+  font-family: var(--font-display);
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--white);
+  letter-spacing: -0.01em;
+  line-height: 1.4;
+}
+
+.aiToolUse {
+  font-family: var(--font-body);
+  font-size: 14px;
+  line-height: 1.7;
+  color: var(--gray);
+}
+
+.aiOutcome {
+  margin-top: 20px;
+}
+
+/* ── Impact ── */
+.impactWrap {
+  padding: 64px 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.impactLabel {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--gray);
+  margin-bottom: 20px;
+}
+
+.impactGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+}
+
+.impactItem {
+  border: 1px solid var(--border);
+  padding: 24px 20px;
+}
+
+.impactValue {
+  font-family: var(--font-display);
+  font-size: clamp(30px, 3.4vw, 44px);
+  font-weight: 700;
+  color: var(--white);
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  /* A figure that breaks across two lines stops being a figure */
+  white-space: nowrap;
+}
+
+.impactSymbol {
+  color: var(--orange);
+}
+
+.impactStatLabel {
+  margin-top: 8px;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--gray);
+  line-height: 1.5;
+}
+
 /* ── Screenshots ── */
 .screenshotsWrap {
   padding: 64px 0;
@@ -338,6 +428,12 @@
   .screenshotsGrid {
     grid-template-columns: 1fr;
   }
+
+  /* Four figures need ~180px each to stay legible; below this tier they get
+     two rows of two rather than four cramped columns. */
+  .impactGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
 
 @media (max-width: 600px) {
@@ -355,5 +451,21 @@
 
   .aside {
     grid-template-columns: 1fr;
+  }
+
+  /* Held at two across rather than stacked: the values are short and a single
+     column would run the section down the page for no gain. */
+  .impactGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .impactItem {
+    padding: 20px 16px;
+  }
+
+  /* The name column has nothing to align to once the measure is this narrow */
+  .aiToolRow {
+    grid-template-columns: 1fr;
+    gap: 4px;
   }
 }

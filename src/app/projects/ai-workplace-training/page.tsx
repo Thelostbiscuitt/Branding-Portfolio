@@ -147,6 +147,26 @@ export default function AIWorkplaceTraining() {
           ),
         },
       ]}
+      aiWorkflow={{
+        intro:
+          'The subject and the method were the same thing. The session teaches a prompt framework and a verification habit, so the materials had to be built the way the session says to build things.',
+        tools: [
+          {
+            name: 'Claude Code',
+            use:  'Built the hub from a written spec: the three-mode interface, the slide engine, and the flashcard flips.',
+          },
+          {
+            name: 'RCTF prompting',
+            use:  'Drafted module outlines and first-pass slide copy, then rewritten by hand so it sounded like a person briefing colleagues rather than a document.',
+          },
+          {
+            name: 'Manual verification',
+            use:  'Every factual claim in the deck checked against source before it went in front of staff.',
+          },
+        ],
+        outcome:
+          'The curriculum is mine and the scaffolding was generated. The rule that did not bend is the one taught in Module 8: nothing factual or customer-facing ships without a person checking it first.',
+      }}
       screenshots={[
         { src: '/projects/ai-workplace-training/sc-curriculum.png', alt: 'Training hub: session timeline and the eleven-module breakdown, with the prompt writing module expanded' },
         { src: '/projects/ai-workplace-training/sc-slides.png',     alt: 'Training hub slides mode: the RCTF prompt framework broken into Role, Context, Task, and Format' },
