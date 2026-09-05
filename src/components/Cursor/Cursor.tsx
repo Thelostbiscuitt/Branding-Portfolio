@@ -23,7 +23,10 @@ export default function Cursor() {
     const fine = window.matchMedia('(pointer: fine)')
     const reduced = window.matchMedia('(prefers-reduced-motion: reduce)')
     if (!fine.matches || reduced.matches) return
-    setSupported(true)
+    /* Deferred by a frame, same as Stats: a synchronous setState in an effect
+       body cascades renders, and this only has to land before first paint. */
+    const raf = requestAnimationFrame(() => setSupported(true))
+    return () => cancelAnimationFrame(raf)
   }, [])
 
   useEffect(() => {

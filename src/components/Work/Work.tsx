@@ -3,17 +3,18 @@ import { projects } from '@/data/projects'
 import styles from './Work.module.css'
 
 export default function Work() {
-  const current = projects.filter((p) => p.era === 'current')
-  const past = projects.filter((p) => p.era === 'past')
+  const visible = projects.filter((p) => !p.draft)
+  const current = visible.filter((p) => p.era === 'current')
+  const past = visible.filter((p) => p.era === 'past')
 
   return (
     <section className={styles.section} id="work" aria-label="Selected work">
       <div className={styles.header}>
         <div>
-          <p className={styles.sectionLabel}>02 · Work</p>
+          <p className={styles.sectionLabel}>01 · Selected work</p>
           <h2 className={styles.heading}>
-            <span className={styles.headingLight}>Selected </span>
-            <em className={styles.headingItalic}>Projects.</em>
+            <span className={styles.headingLight}>Things </span>
+            <em className={styles.headingItalic}>I&rsquo;ve built.</em>
           </h2>
         </div>
 
@@ -26,6 +27,10 @@ export default function Work() {
           Full archive →
         </a>
       </div>
+
+      <p className={styles.lede}>
+        A selection of products, systems, brands, and experiments.
+      </p>
 
       {/* Current work is a sticky scroll-stack of full-width cards; past work
           stays a plain grid. The difference between the two reinforces which

@@ -439,3 +439,40 @@
     transition: none;
   }
 }
+
+/* ── Year ──
+   Sits far-right in the top row (index far-left, category centred between them
+   via space-between). */
+.year {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  color: var(--gray);
+}
+
+/* ── Positioning ──
+   The one-line product pitch. Display-face italic to separate it from the
+   description below without competing with the title above. */
+.positioning {
+  font-family: var(--font-display);
+  font-size: 14px;
+  font-style: italic;
+  color: var(--orange);
+  letter-spacing: -0.01em;
+  margin-bottom: 10px;
+}
+
+.stacked .positioning {
+  font-size: clamp(20px, 2.6vw, 30px);
+  margin-bottom: 14px;
+}
+
+/* ── Links row ──
+   Room for both a Live link and a Code link on product cards. The .liveLink
+   rules already carry the hover colour and touch target. */
+.links {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}

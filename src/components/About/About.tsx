@@ -1,36 +1,11 @@
 import Image from 'next/image'
-import Timeline, { type TimelineEntry } from './Timeline'
 import styles from './About.module.css'
 
 const meta = [
   { key: 'Base',    value: 'Lagos, NG' },
-  { key: 'Status',  value: 'Open to work', highlight: true },
-  { key: 'Primary', value: 'Creative Director' },
-  { key: 'Also',    value: 'Builds it with AI' },
-]
-
-const timeline: TimelineEntry[] = [
-  {
-    year:     '2026',
-    org:      'Birdview Travels & Tours',
-    role:     'CRM development, process automation & AI training',
-    logo:     '/timeline/birdview.png',
-    monogram: 'BV',
-  },
-  {
-    year:     '2022',
-    org:      'Leadway Pensure',
-    role:     'Operations & process automation',
-    logo:     '/timeline/leadway.png',
-    monogram: 'LP',
-  },
-  {
-    year:     '2020',
-    org:      'Habibcore',
-    role:     'Brand & art direction',
-    logo:     '/logo.png',
-    monogram: 'HC',
-  },
+  { key: 'Status',  value: 'Available for select projects', highlight: true },
+  { key: 'Primary', value: 'Operator' },
+  { key: 'Also',    value: 'Designs & builds' },
 ]
 
 export default function About() {
@@ -38,7 +13,7 @@ export default function About() {
     <section className={styles.section} id="about" aria-label="About">
       {/* ── Left: text ── */}
       <div className={styles.left}>
-        <p className={styles.sectionLabel}>01 · About</p>
+        <p className={styles.sectionLabel}>06 · About</p>
 
         <h2 className={styles.heading}>
           Designer first.
@@ -47,9 +22,10 @@ export default function About() {
         </h2>
 
         <p className={styles.body}>
-          Creative director based in Lagos, now focused on AI-assisted
-          product design and development: SaaS tools, web apps, and the
-          brand systems that sit around them.
+          Creative director by training, builder by practice. I designed
+          brands and art direction first, then spent four years inside
+          financial services operations building the automation systems that
+          keep the work moving.
         </p>
 
         <blockquote className={styles.pull}>
@@ -58,16 +34,10 @@ export default function About() {
         </blockquote>
 
         <p className={styles.body}>
-          Spent four years in financial services operations, building automation
-          systems and running process improvement at scale. The two practices
-          feed each other.
-        </p>
-
-        <p className={styles.body}>
-          What makes the work different: I build it too. Landing pages, SaaS
-          tools, AI-assisted software. Designed by me, shipped by me. No
-          handoff, no translation loss between vision and execution. Clients
-          like Leadway Pensure get the full picture without assembling a team.
+          Today that means product. Interfaces, web apps, and AI-assisted
+          software — designed by me, shipped by me. No handoff, no translation
+          loss between vision and execution, and one person answerable for the
+          whole thing.
         </p>
 
         <p className={styles.location}>
@@ -97,8 +67,6 @@ export default function About() {
             <Image src="/logo.png" alt="" width={28} height={28} className={styles.badgeLogo} />
           </div>
         </div>
-
-        <Timeline entries={timeline} />
 
         <div className={styles.metaGrid} role="list" aria-label="Profile details">
           {meta.map((row) => (

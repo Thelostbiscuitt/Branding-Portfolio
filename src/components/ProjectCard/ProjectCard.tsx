@@ -104,10 +104,14 @@ export default function ProjectCard({ project, stacked = false, flip = false }: 
         <div className={styles.top}>
           <span className={styles.index}>{project.index}</span>
           <span className={styles.category}>{project.category}</span>
+          {project.year && <span className={styles.year}>{project.year}</span>}
         </div>
 
         <div className={styles.bottom}>
           <h3 className={styles.title}>{project.title}</h3>
+          {project.positioning && (
+            <p className={styles.positioning}>{project.positioning}</p>
+          )}
           {project.description && (
             <p className={styles.description}>{project.description}</p>
           )}
@@ -117,15 +121,29 @@ export default function ProjectCard({ project, stacked = false, flip = false }: 
             ))}
           </ul>
 
-          {project.liveUrl && (
-            <a
-              href={project.liveUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className={styles.liveLink}
-            >
-              Live <span aria-hidden="true">↗</span>
-            </a>
+          {(project.liveUrl || project.githubUrl) && (
+            <div className={styles.links}>
+              {project.liveUrl && (
+                <a
+                  href={project.liveUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={styles.liveLink}
+                >
+                  Live <span aria-hidden="true">↗</span>
+                </a>
+              )}
+              {project.githubUrl && (
+                <a
+                  href={project.githubUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={styles.liveLink}
+                >
+                  Code <span aria-hidden="true">↗</span>
+                </a>
+              )}
+            </div>
           )}
         </div>
 

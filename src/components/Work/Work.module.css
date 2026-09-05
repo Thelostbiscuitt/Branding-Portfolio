@@ -32,7 +32,7 @@
 
 /* Ghost section number — typographic texture */
 .heading::before {
-  content: '02';
+  content: '01';
   position: absolute;
   top: -16px;
   right: 48px;
@@ -175,4 +175,17 @@
   .stackItem {
     position: static;
   }
+}
+
+/* ── Lede ──
+   One line under the header that says what the section is, not just what it
+   contains. Negative top margin pulls it up beneath the title row; the header
+   keeps its own bottom spacing for spacing balance. */
+.lede {
+  font-family: var(--font-body);
+  font-size: 15px;
+  line-height: 1.7;
+  color: var(--gray);
+  max-width: 46ch;
+  margin: -28px 0 48px;
 }

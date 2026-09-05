@@ -2,8 +2,7 @@
    including the full-bleed right panel, so at scroll 0 the band behind the
    floating pill is uniform page background with no panel edge running through
    it. +24px is breathing room below the pill, so it reads as floating rather
-   than sitting on the panel. Horizontal edges are untouched — the right panel
-   still bleeds to the viewport edge. */
+   than sitting on the panel. */
 .hero {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -48,38 +47,39 @@
 
 .headingMain {
   font-family: var(--font-display);
-  font-size: clamp(52px, 6vw, 80px);
+  font-size: clamp(52px, 6vw, 84px);
   font-weight: 800;
   line-height: 0.92;
   color: var(--white);
   letter-spacing: -0.03em;
 }
 
-.headingSub {
+.headingItalic {
   font-family: var(--font-display);
-  font-size: clamp(18px, 2vw, 26px);
-  font-weight: 400;
+  font-size: clamp(52px, 6vw, 84px);
+  font-weight: 800;
   font-style: italic;
+  line-height: 0.92;
   color: var(--orange);
-  letter-spacing: -0.01em;
-  margin-top: 12px;
+  letter-spacing: -0.03em;
 }
 
-.rule {
-  width: 40px;
-  height: 1px;
-  background: var(--orange);
-  margin: 32px 0;
-  flex-shrink: 0;
+.split {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--gray);
+  margin-top: 24px;
 }
 
-.description {
+.core {
   font-family: var(--font-body);
   font-size: 15px;
-  line-height: 1.75;
+  line-height: 1.7;
   color: var(--gray);
-  max-width: 360px;
-  margin-bottom: 40px;
+  max-width: 400px;
+  margin-top: 16px;
 }
 
 .actions {
@@ -87,6 +87,7 @@
   gap: 12px;
   align-items: center;
   flex-wrap: wrap;
+  margin-top: 32px;
 }
 
 .ctaPrimary {
@@ -100,8 +101,8 @@
   align-items: center;
   min-height: 44px;
   padding: 0 24px;
-  border-radius: 3px;
-  transition: background 0.15s ease;
+  border-radius: var(--radius-s);
+  transition: background var(--dur-micro) var(--ease-standard);
 }
 
 .ctaPrimary:hover,
@@ -116,13 +117,14 @@
   text-transform: uppercase;
   color: var(--gray);
   background: none;
-  border: 1px solid rgba(245, 241, 235, 0.12);
+  border: 1px solid var(--border-mid);
   display: inline-flex;
   align-items: center;
   min-height: 44px;
   padding: 0 24px;
-  border-radius: 3px;
-  transition: color 0.15s ease, border-color 0.15s ease;
+  border-radius: var(--radius-s);
+  transition: color var(--dur-micro) var(--ease-standard),
+              border-color var(--dur-micro) var(--ease-standard);
 }
 
 .ctaSecondary:hover,
@@ -131,30 +133,78 @@
   border-color: rgba(245, 241, 235, 0.3);
 }
 
-/* ── RIGHT ── */
+.operator {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--gray);
+  margin-top: 40px;
+}
+
+/* ── RIGHT: the DESIGN/BUILD motif ── */
 .right {
   position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
   overflow: hidden;
   background: #181818;
   min-height: 580px;
+}
+
+.buildPanel {
   display: flex;
   align-items: center;
-  justify-content: center;
+  gap: 36px;
 }
 
-/* Soft brand-color glow behind the mark so the panel doesn't read as empty */
-.logoGlow {
-  position: absolute;
-  inset: 0;
-  background: radial-gradient(circle at center, rgba(232, 102, 10, 0.16) 0%, transparent 60%);
-  pointer-events: none;
+.buildColumn {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
 }
 
-.logo {
-  position: relative;
-  z-index: 1;
-  width: min(38%, 280px);
-  height: auto;
+.buildHeading {
+  font-family: var(--font-display);
+  font-size: clamp(30px, 3.2vw, 42px);
+  font-weight: 800;
+  font-style: italic;
+  color: var(--orange);
+  letter-spacing: -0.02em;
+  margin-bottom: 10px;
+}
+
+.buildList {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.buildList li {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(245, 241, 235, 0.55);
+}
+
+.buildConnector {
+  font-family: var(--font-mono);
+  font-size: 26px;
+  color: var(--gray);
+  flex-shrink: 0;
+}
+
+.buildCaption {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--gray);
 }
 
 .geoTag {
@@ -171,6 +221,39 @@
   transform: rotate(180deg);
 }
 
+/* ── Entrance ──
+   Typography-led sequence: status, headline, split line, core line, CTAs,
+   operator. Pure CSS — a JS-less page still animates, and the reduced-motion
+   query below removes animation rather than pausing it (content first).
+   Delays are staggered from ~80ms to ~500ms so the whole read settles inside
+   the 900ms hero band. */
+@media not all and (prefers-reduced-motion: reduce) {
+  .status,
+  .heading,
+  .split,
+  .core,
+  .actions,
+  .operator {
+    animation: heroIn 0.7s var(--ease-out) both;
+  }
+
+  .status  { animation-delay: 80ms; }
+  .heading { animation-delay: 160ms; }
+  .split   { animation-delay: 260ms; }
+  .core    { animation-delay: 340ms; }
+  .actions { animation-delay: 430ms; }
+  .operator{ animation-delay: 520ms; }
+
+  .right {
+    animation: heroIn 0.8s var(--ease-out) 220ms both;
+  }
+}
+
+@keyframes heroIn {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: none; }
+}
+
 /* ── RESPONSIVE ── */
 @media (max-width: 900px) {
   .hero {
@@ -179,7 +262,8 @@
   }
 
   .right {
-    height: 420px;
+    min-height: 0;
+    height: 400px;
   }
 
   .geoTag {
@@ -189,8 +273,8 @@
 }
 
 @media (max-width: 600px) {
-  /* Tighter gap below the pill — the same 24px reads as dead space when the
-     layout is a single column and vertical room is scarce. */
+  /* Tighter gap below the pill — 24px reads as dead space when the layout is
+     a single column and vertical room is scarce. */
   .hero {
     padding-top: calc(var(--nav-offset) + 12px);
   }
@@ -201,5 +285,9 @@
 
   .right {
     height: 360px;
+  }
+
+  .buildPanel {
+    gap: 24px;
   }
 }

@@ -15,6 +15,8 @@ const projectTypes = [
   'Artist EPK',
   'Website / app',
   'Design system',
+  'AI / automation',
+  'Product / software',
   'Something else',
 ]
 
@@ -85,16 +87,16 @@ export default function Contact() {
   return (
     <section className={styles.section} id="contact" aria-label="Contact">
       <div className={styles.left}>
-        <p className={styles.sectionLabel}>03 · Contact</p>
+        <p className={styles.sectionLabel}>07 · Contact</p>
 
         <h2 className={styles.heading}>
-          Start a<br />
-          <em className={styles.headingItalic}>project.</em>
+          Let&rsquo;s build<br />
+          <em className={styles.headingItalic}>something.</em>
         </h2>
 
         <p className={styles.sub}>
-          Whether you're building a brand from scratch, refreshing an existing
-          identity, or shipping a digital product, let's talk.
+          Have an idea, a problem, or something that should exist but
+          doesn&rsquo;t yet?
         </p>
 
         <ul className={styles.links} role="list">

@@ -1,0 +1,89 @@
+.section {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  padding: 96px 48px;
+  border-top: 1px solid var(--border);
+}
+
+.sectionLabel {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--gray);
+  margin-bottom: 10px;
+}
+
+.heading {
+  font-family: var(--font-display);
+  font-size: clamp(32px, 4vw, 48px);
+  font-weight: 800;
+  line-height: 1.05;
+  letter-spacing: -0.025em;
+  color: var(--white);
+}
+
+.headingItalic {
+  font-style: italic;
+  color: var(--orange);
+}
+
+.body {
+  font-family: var(--font-body);
+  font-size: 15px;
+  line-height: 1.8;
+  color: var(--gray);
+  max-width: 44ch;
+}
+
+/* The chain is the section's thesis rendered as structure: the five practices
+   connected in the order they actually feed each other. Underlined tokens with
+   orange arrows — quiet on purpose, no pills, no icons. */
+.chain {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  row-gap: 14px;
+  margin-top: 36px;
+}
+
+.chainItem {
+  display: inline-flex;
+  align-items: center;
+}
+
+.chainText {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--white);
+  padding: 6px 0;
+  border-bottom: 1px solid var(--border-mid);
+}
+
+.chainArrow {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: var(--orange);
+  margin: 0 14px;
+}
+
+@media (max-width: 900px) {
+  .section {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+}
+
+@media (max-width: 600px) {
+  .section {
+    padding: 64px 24px;
+  }
+
+  .chainArrow {
+    margin: 0 10px;
+  }
+}
