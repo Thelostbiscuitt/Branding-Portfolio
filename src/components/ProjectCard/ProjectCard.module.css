@@ -476,3 +476,17 @@
   gap: 20px;
   flex-wrap: wrap;
 }
+
+
+/* ── Lead treatment ──
+   The first project in the stack reads like a product reveal: a larger
+   title, more presence, a wider frame. */
+.large .title {
+  font-size: clamp(36px, 5vw, 76px);
+  line-height: 0.95;
+}
+
+.large .description {
+  font-size: 17px;
+  max-width: 52ch;
+}

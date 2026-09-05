@@ -1,12 +1,13 @@
 import ProjectCard from '@/components/ProjectCard/ProjectCard'
 import Interlude from '@/components/Interlude/Interlude'
+import Archive from '@/components/Archive/Archive'
 import { projects } from '@/data/projects'
 import styles from './Work.module.css'
 
 /* Per-project crops. Wide for systems, tall for interfaces, square for
    brands — the stack reads like a publication, not a template. */
 const ratios: Record<string, string> = {
-  'biscuit-ai':            '3 / 2',
+  'biscuit-ai':            '16 / 9',
   'chef4me':               '4 / 5',
   'relay':                 '16 / 9',
   'leadway-pensure':       '4 / 3',
@@ -56,6 +57,7 @@ export default function Work() {
               stacked
               flip={i % 2 === 1}
               ratio={ratios[project.slug]}
+              large={i === 0}
             />
           </div>
         ))}
@@ -63,16 +65,7 @@ export default function Work() {
 
       <Interlude />
 
-      <div className={styles.pastHeader}>
-        <p className={styles.pastLabel}>Past work</p>
-        <p className={styles.pastNote}>Brand and music work from before the shift into tech.</p>
-      </div>
-
-      <div className={styles.grid}>
-        {past.map((project) => (
-          <ProjectCard key={project.slug} project={project} />
-        ))}
-      </div>
+      <Archive projects={past} />
     </section>
   )
 }

@@ -13,7 +13,7 @@ export default function About() {
     <section className={styles.section} id="about" aria-label="About">
       {/* ── Left: text ── */}
       <div className={styles.left}>
-        <p className={styles.sectionLabel}>06 / About</p>
+        <p className={styles.sectionLabel}>07 / About</p>
 
         <h2 className={styles.heading}>
           Designer.
@@ -41,6 +41,16 @@ export default function About() {
           loss between vision and execution, and one person answerable for the
           whole thing.
         </p>
+
+        <ul className={styles.breadth} role="list" aria-label="Practice breadth">
+          <li>Graphic design</li>
+          <li>Creative direction</li>
+          <li>Product design</li>
+          <li>Software</li>
+          <li>AI</li>
+          <li>Systems</li>
+          <li>Automation</li>
+        </ul>
 
         <p className={styles.location}>
           Based in Lagos, working globally.

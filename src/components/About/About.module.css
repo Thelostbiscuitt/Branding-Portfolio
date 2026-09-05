@@ -246,3 +246,34 @@
     margin-inline: 24px;
   }
 }
+
+
+/* ── Breadth sequence ──
+   The practice in one breath — seven disciplines as a quiet list, each row
+   carrying a hairline. Reads like a table of contents for the range. */
+.breadth {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 24px;
+  margin: 32px 0 8px;
+  max-width: 420px;
+}
+
+.breadth li {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--gray);
+  padding: 6px 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.breadth li:nth-child(4) {
+  color: var(--black);
+}
+
+.breadth li:nth-child(5) {
+  color: var(--orange);
+}

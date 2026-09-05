@@ -32,7 +32,7 @@
 
 /* Ghost section number — typographic texture */
 .heading::before {
-  content: '01';
+  content: '03';
   position: absolute;
   top: -16px;
   right: 48px;
@@ -71,28 +71,6 @@
   color: var(--black);
 }
 
-.pastHeader {
-  margin-top: 64px;
-  padding-top: 28px;
-  border-top: 1px solid var(--border);
-  margin-bottom: 24px;
-}
-
-.pastLabel {
-  font-family: var(--font-mono);
-  font-size: 11px;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--black);
-  margin-bottom: 6px;
-}
-
-.pastNote {
-  font-family: var(--font-body);
-  font-size: 13px;
-  color: var(--gray);
-}
-
 /* ── Stack (current work) ──
    Each card pins a little lower than the one before it, so they overlap as the
    page scrolls. Pure CSS position: sticky — no scroll listeners, no observer.
@@ -114,33 +92,7 @@
 .stackItem:nth-child(5) { top: calc(var(--nav-offset) + 120px); }
 .stackItem:nth-child(6) { top: calc(var(--nav-offset) + 144px); }
 
-.stackItem:nth-child(1) > a { animation-delay: 0ms; }
-.stackItem:nth-child(2) > a { animation-delay: 60ms; }
-.stackItem:nth-child(3) > a { animation-delay: 120ms; }
-.stackItem:nth-child(4) > a { animation-delay: 180ms; }
-.stackItem:nth-child(5) > a { animation-delay: 240ms; }
-.stackItem:nth-child(6) > a { animation-delay: 300ms; }
-
-/* ── Grid ── */
-.grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 1px;
-  background: var(--border);
-  border: 1px solid var(--border);
-}
-
-.grid > a:nth-child(1) { animation-delay: 0ms; }
-.grid > a:nth-child(2) { animation-delay: 60ms; }
-.grid > a:nth-child(3) { animation-delay: 120ms; }
-.grid > a:nth-child(4) { animation-delay: 180ms; }
-.grid > a:nth-child(5) { animation-delay: 240ms; }
-.grid > a:nth-child(6) { animation-delay: 300ms; }
-
 @media (max-width: 768px) {
-  .grid {
-    grid-template-columns: 1fr;
-  }
 
   .header {
     flex-direction: column;

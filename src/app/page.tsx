@@ -5,6 +5,7 @@ import Work        from '@/components/Work/Work'
 import Testimonial from '@/components/Testimonial/Testimonial'
 import Range       from '@/components/Range/Range'
 import HowIWork    from '@/components/HowIWork/HowIWork'
+import Story       from '@/components/Story/Story'
 import About       from '@/components/About/About'
 import Contact     from '@/components/Contact/Contact'
 import Footer      from '@/components/Footer/Footer'
@@ -32,6 +33,7 @@ export default function HomePage() {
         <Testimonial />
         <Range />
         <HowIWork />
+        <Story />
         <About />
         <Contact />
         <Footer />

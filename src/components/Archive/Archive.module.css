@@ -1,0 +1,106 @@
+/* ── Before software ──
+   Image-led archive. Each entry leads with its visual at full column width;
+   the title and year hang beneath like a caption. No cards, no boxes. */
+
+.archive {
+  margin-top: 72px;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 24px;
+  flex-wrap: wrap;
+  padding-top: 28px;
+  border-top: 1px solid var(--border);
+  margin-bottom: 32px;
+}
+
+.label {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--black);
+}
+
+.note {
+  font-family: var(--font-body);
+  font-size: 13px;
+  color: var(--gray);
+  max-width: 360px;
+}
+
+.entries {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 48px 48px;
+}
+
+.entry {
+  display: block;
+}
+
+.imageWrap {
+  position: relative;
+  aspect-ratio: 16 / 10;
+  overflow: hidden;
+  background: #EDEAE4;
+}
+
+.image {
+  object-fit: cover;
+  object-position: center;
+  transition: transform 0.6s var(--ease-out);
+}
+
+.entry:hover .image,
+.entry:focus-visible .image {
+  transform: scale(1.03);
+}
+
+.entry:focus-visible {
+  outline: 2px solid var(--orange);
+  outline-offset: 4px;
+}
+
+/* Caption row: title left, year right, hairline above. */
+.meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 16px;
+  padding-top: 12px;
+  border-top: 1px solid var(--border);
+  margin-top: 14px;
+}
+
+.title {
+  font-family: var(--font-display);
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--black);
+  letter-spacing: -0.01em;
+}
+
+.year {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: 0.16em;
+  color: var(--gray);
+  flex-shrink: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .image {
+    transition: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .entries {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+}
