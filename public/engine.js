@@ -411,14 +411,16 @@
     rows.forEach((row) => {
       row.addEventListener("mouseenter", () => {
         const panelImg = row.querySelector(".p-fig img");
-        if (row.classList.contains("open") || !panelImg) { host.classList.remove("show"); active = false; return; }
+        if (row.classList.contains("open") || !panelImg) { host.classList.remove("show"); img.classList.remove("on"); active = false; return; }
         if (img.getAttribute("src") !== panelImg.getAttribute("src")) img.setAttribute("src", panelImg.getAttribute("src"));
         cap.textContent = row.dataset.cap || "";
         active = true;
         host.classList.add("show");
+        /* The CSS fades the image in via .on — src alone leaves it at opacity 0 */
+        img.classList.add("on");
       });
-      row.addEventListener("mouseleave", () => { active = false; host.classList.remove("show"); });
-      row.addEventListener("click", () => { active = false; host.classList.remove("show"); });
+      row.addEventListener("mouseleave", () => { active = false; host.classList.remove("show"); img.classList.remove("on"); });
+      row.addEventListener("click", () => { active = false; host.classList.remove("show"); img.classList.remove("on"); });
     });
   })();
 
