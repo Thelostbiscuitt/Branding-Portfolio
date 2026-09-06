@@ -1,46 +1,50 @@
 import type { Metadata } from 'next'
-import { Fraunces, Archivo, Space_Mono } from 'next/font/google'
-import Script from 'next/script'
+import { Syne, DM_Sans, DM_Mono } from 'next/font/google'
+import Cursor from '@/components/Cursor/Cursor'
+import Loading from '@/components/Loading/Loading'
 import './globals.css'
 
-const fraunces = Fraunces({
+const syne = Syne({
   subsets: ['latin'],
-  style: ['normal', 'italic'],
+  weight: ['400', '600', '700', '800'],
   variable: '--font-display',
   display: 'swap',
 })
 
-const archivo = Archivo({
+const dmSans = DM_Sans({
   subsets: ['latin'],
+  weight: ['300', '400', '500'],
   variable: '--font-body',
   display: 'swap',
 })
 
-const spaceMono = Space_Mono({
+const dmMono = DM_Mono({
   subsets: ['latin'],
-  weight: ['400', '700'],
+  weight: ['300', '400', '500'],
   variable: '--font-mono',
   display: 'swap',
 })
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://habibcore.com'),
-  title: 'Habib — Designer & Builder, Lagos',
+  title: 'Habib — Design thinking. Technical execution.',
   description:
-    'Brands, digital products and AI tools — drawn, coded and shipped by the same pair of hands in Lagos. No handoff, no translation loss between vision and execution.',
+    'I design brands, digital products, and AI-powered tools — then build them too. Designed and built by one person, in Lagos.',
   openGraph: {
-    title: 'Habib — Designer & Builder, Lagos',
+    title: 'Habib — Design thinking. Technical execution.',
     description:
-      'I design it. I build it. I answer for it. Portfolio of Habib — Habibcore, Lagos.',
+      'Brands, interfaces, software, AI. Designed and built by one person, with no handoff.',
     url: 'https://habibcore.com',
     siteName: 'Habib',
     locale: 'en_NG',
     type: 'website',
+    images: [{ url: '/og-image.png', width: 1200, height: 630, alt: 'Habib — Design thinking. Technical execution.' }],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Habib — Designer & Builder, Lagos',
-    description: 'I design it. I build it. I answer for it. Portfolio of Habib — Habibcore, Lagos.',
+    title: 'Habib — Design thinking. Technical execution.',
+    description: 'Brands, interfaces, software, AI. Designed and built by one person.',
+    images: ['/og-image.png'],
   },
 }
 
@@ -50,10 +54,11 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en" className={`${fraunces.variable} ${archivo.variable} ${spaceMono.variable}`}>
+    <html lang="en" className={`${syne.variable} ${dmSans.variable} ${dmMono.variable}`}>
       <body>
+        <Loading />
+        <Cursor />
         {children}
-        <Script src="/engine.js" strategy="afterInteractive" />
       </body>
     </html>
   )

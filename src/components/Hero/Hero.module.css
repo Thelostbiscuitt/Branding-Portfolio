@@ -1,0 +1,251 @@
+/* ── The opening page of a publication ──
+   One massive statement. Tiny metadata. The tension between the two scales
+   is the composition. Left-aligned, asymmetric — nothing is centred. */
+
+.hero {
+  position: relative;
+  min-height: 100vh;
+  padding: calc(var(--nav-offset) + 72px) 48px 120px;
+}
+
+/* The statement block: left-aligned, its own column, deliberately not
+   stretched — the lower-right belongs to the figure. */
+.statement {
+  position: relative;
+  z-index: 1;
+  max-width: 58vw;
+}
+
+/* Tiny editorial marker, top-left of the statement block */
+.marker {
+  position: absolute;
+  top: calc(var(--nav-offset) + 24px);
+  left: 48px;
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--gray);
+}
+
+/* The statement. Extreme scale, tight leading, negative tracking. Each line
+   is its own block so the rhythm reads vertically. */
+.heading {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.line {
+  font-family: var(--font-display);
+  font-size: clamp(72px, 11vw, 172px);
+  font-weight: 800;
+  line-height: 0.88;
+  letter-spacing: -0.045em;
+  color: var(--black);
+}
+
+/* The third line steps down a scale and takes the accent — it reads as the
+   thesis after the two titles. */
+.lineAccent {
+  font-family: var(--font-display);
+  font-size: clamp(28px, 3.4vw, 52px);
+  font-weight: 400;
+  font-style: italic;
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  color: var(--orange);
+  margin-top: 28px;
+}
+
+/* Tiny metadata row — the counterpoint to the display type */
+.meta {
+  display: flex;
+  gap: 24px;
+  margin-top: 40px;
+}
+
+.metaItem {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--gray);
+}
+
+/* One quiet line of prose. Small on purpose — the headline does the work. */
+.core {
+  font-family: var(--font-body);
+  font-size: 15px;
+  line-height: 1.7;
+  color: var(--gray);
+  max-width: 400px;
+  margin-top: 20px;
+}
+
+.actions {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-top: 36px;
+}
+
+.ctaPrimary {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--white);
+  background: var(--orange);
+  display: inline-flex;
+  align-items: center;
+  min-height: 48px;
+  padding: 0 28px;
+  border-radius: var(--radius-s);
+  transition: background var(--dur-micro) var(--ease-standard);
+}
+
+.ctaPrimary:hover,
+.ctaPrimary:focus-visible {
+  background: var(--orange-dim);
+}
+
+.ctaSecondary {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--black);
+  background: none;
+  border: 1px solid var(--border-mid);
+  display: inline-flex;
+  align-items: center;
+  min-height: 48px;
+  padding: 0 28px;
+  border-radius: var(--radius-s);
+  transition: border-color var(--dur-micro) var(--ease-standard);
+}
+
+.ctaSecondary:hover,
+.ctaSecondary:focus-visible {
+  border-color: var(--black);
+}
+
+/* ── The figure ──
+   A cropped project interface entering the spread from the bottom-right,
+   bleeding off both edges. It is the first evidence of work on the page. */
+.figure {
+  position: absolute;
+  right: -4vw;
+  bottom: -60px;
+  width: min(38vw, 520px);
+  height: min(60vh, 620px);
+  z-index: 0;
+}
+
+.figureFrame {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  border: 1px solid var(--border-mid);
+  background: #EDEAE4;
+}
+
+.figureImg {
+  object-fit: cover;
+  object-position: top center;
+}
+
+.figureCaption {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--gray);
+  margin-top: 12px;
+  text-align: right;
+}
+
+/* Discipline markers — bottom-left, vertical, almost silent. */
+.disciplines {
+  position: absolute;
+  left: 48px;
+  bottom: 80px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 6px;
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--gray);
+}
+
+.disciplineSep {
+  color: var(--orange);
+}
+
+/* ── Entrance ──
+   Typography-led: marker, then each line, then metadata, then prose.
+   CSS only; reduced-motion removes animation, never content. */
+@media not all and (prefers-reduced-motion: reduce) {
+  .marker,
+  .line,
+  .lineAccent,
+  .meta,
+  .core,
+  .actions,
+  .disciplines {
+    animation: heroIn 0.8s var(--ease-out) both;
+  }
+
+  .marker     { animation-delay: 60ms; }
+  .line       { animation-delay: 140ms; }
+  .lineAccent { animation-delay: 320ms; }
+  .meta       { animation-delay: 460ms; }
+  .core       { animation-delay: 540ms; }
+  .actions    { animation-delay: 620ms; }
+  .disciplines{ animation-delay: 700ms; }
+}
+
+@keyframes heroIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: none; }
+}
+
+/* ── Responsive ── */
+@media (max-width: 900px) {
+  .hero {
+    min-height: auto;
+    padding: calc(var(--nav-offset) + 48px) 24px 64px;
+  }
+
+  .statement {
+    max-width: none;
+  }
+
+  .marker {
+    left: 24px;
+  }
+
+  .figure {
+    display: none;
+  }
+
+  .disciplines {
+    position: static;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+    margin-top: 48px;
+  }
+}
+
+@media (max-width: 600px) {
+  .hero {
+    padding-top: calc(var(--nav-offset) + 32px);
+  }
+}
