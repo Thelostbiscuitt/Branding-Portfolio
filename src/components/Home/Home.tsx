@@ -406,6 +406,7 @@ export default function Home() {
   <section className="block range" data-folio="05 — RANGE">
     <div className="range-pin">
       <div className="range-sticky">
+        <img className="range-mark" src="/logo.png" alt="" aria-hidden="true" />
         <div className="container">
           <div className="sec-head rv">
             <p><span className="sh-idx">05</span> / RANGE</p>

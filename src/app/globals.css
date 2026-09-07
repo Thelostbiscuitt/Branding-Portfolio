@@ -339,10 +339,10 @@ html.has-fine-pointer.has-cursor-fx button { cursor: none; }
   line-height: 1; letter-spacing: -0.02em;
   color: var(--ink); text-align: center;
 }
-.preloader .pl-word.swap { animation: plWordIn 160ms var(--ease-out) both; }
+.preloader .pl-word.swap { animation: plWordIn 260ms var(--ease-out) both; }
 @keyframes plWordIn {
-  from { opacity: 0; transform: translateY(18px); }
-  to   { opacity: 1; transform: none; }
+  from { opacity: 0; transform: translateY(14px); filter: blur(7px); }
+  to   { opacity: 1; transform: none; filter: blur(0); }
 }
 .preloader .pl-lang {
   position: absolute; left: 0; right: 0; bottom: clamp(44px, 9vh, 84px);
@@ -350,13 +350,18 @@ html.has-fine-pointer.has-cursor-fx button { cursor: none; }
   font-family: var(--font-m); font-size: 10px; letter-spacing: 0.24em; color: var(--fog);
 }
 .preloader .pl-lang b { font-weight: 400; }
-.preloader .pl-lang b.swap { animation: plLangIn 200ms var(--ease-out) both; }
+.preloader .pl-lang b.swap { animation: plLangIn 260ms var(--ease-out) both; }
 @keyframes plLangIn {
   from { opacity: 0; }
   to   { opacity: 1; }
 }
 @media (prefers-reduced-motion: reduce) {
   .preloader .pl-word.swap, .preloader .pl-lang b.swap { animation: none; }
+}
+/* touch cadence is quick — give the entrance room by shortening it */
+@media (pointer: coarse) {
+  .preloader .pl-word.swap { animation-duration: 120ms; }
+  .preloader .pl-lang b.swap { animation-duration: 120ms; }
 }
 .preloader .pl-bar {
   position: absolute; left: 0; bottom: 0; height: 3px; width: 100%;
@@ -815,7 +820,17 @@ section.block { padding-top: clamp(88px, 12vw, 128px); }
   padding-top: clamp(88px, 12vw, 128px);
 }
 .range-pin { position: relative; margin-top: clamp(28px, 4vw, 44px); }
-.range-sticky { display: flex; flex-direction: column; }
+.range-sticky { position: relative; display: flex; flex-direction: column; }
+.range-sticky .container { position: relative; z-index: 1; } /* ride above the watermark */
+/* faint house mark floating in the chapter background */
+.range-mark {
+  position: absolute; left: 50%; top: 50%;
+  width: clamp(240px, 27vw, 460px); height: auto;
+  transform: translate(-50%, -50%);
+  opacity: 0.055;
+  filter: grayscale(1);
+  pointer-events: none; user-select: none;
+}
 .range-stage { margin-top: clamp(28px, 5vw, 56px); }
 .range-word { border-top: 1px solid var(--line); padding: 18px 0; }
 .range-word:last-of-type { border-bottom: 1px solid var(--line); }

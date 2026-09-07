@@ -65,11 +65,18 @@
     start() {
       if (!this.on || this.raf) return;
       this.measure();
+      let last = performance.now();
       const loop = () => {
         try {
+          /* time-normalized glide: identical feel on 60Hz and 144Hz screens,
+             no rubber-band trail once the wheel stops (τ = 100ms) */
+          const now = performance.now();
+          const dt = Math.min(50, now - last);
+          last = now;
           this.target = clamp(this.target, 0, this.max);
           const prev = this.current;
-          this.current = lerp(this.current, this.target, 0.095);
+          const a = 1 - Math.exp(-dt / 100);
+          this.current = lerp(this.current, this.target, a);
           if (Math.abs(this.current - this.target) < 0.4) this.current = this.target;
           this.velocity = this.current - prev;
           if (this.current !== prev) window.scrollTo(0, this.current);
@@ -113,7 +120,7 @@
   };
   const wheelScale = (e) => {
     const d = e.deltaMode === 1 ? e.deltaY * 16 : e.deltaY;
-    return clamp(d, -160, 160);
+    return clamp(d, -240, 240); /* fast flicks shouldn't feel damped */
   };
 
   /* anchor links route through the engine */
@@ -236,9 +243,10 @@
       const mid = r.top + r.height / 2 - window.innerHeight / 2;
       el.style.transform = `translate3d(0, ${(-mid * speed).toFixed(1)}px, 0)`;
     });
-    /* velocity skew on display headlines */
+    /* velocity skew on display headlines — kept whisper-quiet so type only
+       leans while it is genuinely in motion */
     if (!REDUCED) {
-      const sk = clamp(velocity * 0.016, -0.7, 0.7);
+      const sk = clamp(velocity * 0.01, -0.45, 0.45);
       skewEls.forEach((el) => (el.style.transform = `skewY(${sk.toFixed(3)}deg)`));
     }
     /* footer wordmark settles as footer approaches */
@@ -435,9 +443,8 @@
       ["Jambo", "12 — KISWAHILI", "sw"],
     ];
     const fast = !FINE; /* touch devices: keep it quick, just not rushed */
-    const HOME_MS = fast ? 220 : 420;   /* nigerian greetings get room to land */
-    const WORLD_MS = fast ? 120 : 220;
-    const FINAL_MS = fast ? 450 : 700;
+    const WORD_MS = fast ? 150 : 290;  /* one metronome for every greeting */
+    const FINAL_MS = fast ? 420 : 650;
     const FINAL = ["HELLO.", "13 — LAGOS → WORLD", "en"];
     let i = 0;
     const show = ([text, tag, lang, dir]) => {
@@ -452,7 +459,7 @@
       wordEl.classList.add("swap");
       if (langEl) langEl.classList.add("swap");
     };
-    const DUR = 4 * HOME_MS + (GREET.length - 4) * WORLD_MS + FINAL_MS;
+    const DUR = GREET.length * WORD_MS + FINAL_MS;
     if (barEl) {
       barEl.style.transition = `transform ${DUR + 120}ms linear`;
       requestAnimationFrame(() => (barEl.style.transform = "scaleX(1)"));
@@ -470,7 +477,7 @@
       if (i < GREET.length) {
         show(GREET[i]);
         i += 1;
-        setTimeout(step, i <= 4 ? HOME_MS : WORLD_MS);
+        setTimeout(step, WORD_MS);
       } else if (i === GREET.length) {
         show(FINAL);
         i += 1;
