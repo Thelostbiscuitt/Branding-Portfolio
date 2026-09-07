@@ -29,7 +29,6 @@ export default function Home() {
     <b className="pl-word">Hello</b>
   </div>
   <p className="pl-lang"><b>01 — ENGLISH · LAGOS</b></p>
-  <div className="pl-bar"></div>
 </div>
 
 {/* custom cursor  */}
@@ -101,7 +100,7 @@ export default function Home() {
       <div className="facts" data-stagger="90">
         <div className="rv"><p className="fk">DISCIPLINES</p><p className="fv">Design → Build</p></div>
         <div className="rv"><p className="fk">CURRENTLY</p><p className="fv">Biscuit AI · Relay</p></div>
-        <div className="rv"><p className="fk">SINCE</p><p className="fv">2020 — five years deep</p></div>
+        <div className="rv"><p className="fk">SINCE</p><p className="fv">2020 — six years deep</p></div>
         <div className="rv"><p className="fk">STATUS</p><p className="fv">Taking select projects</p></div>
       </div>
     </div>
@@ -448,13 +447,14 @@ export default function Home() {
           <h3>Leadway Pensure</h3>
           <p className="path-role">OPERATIONS &amp; AUTOMATION</p>
           <p className="path-desc">Four years inside one of Nigeria&rsquo;s largest pension funds, building the systems that keep the work moving.</p>
-          <p className="path-stat">250+ CLIENTS MANAGED · 18-STAGE PIPELINE · 10,000+ CLIENTS MOVED TO SELF-SERVICE</p>
+          <p className="path-stat">10,000+ CLIENTS MOVED TO SELF-SERVICE</p>
         </div>
         <div className="path-row rv" style={{ '--d': '180ms' } as React.CSSProperties}>
           <p className="path-year">2026</p>
           <h3>Birdview</h3>
           <p className="path-role">CRM · AI · PROCESS SYSTEMS</p>
-          <p className="path-desc">Systems work at Birdview Travels &amp; Tours — role-scoped data, audit trails, SLA clocks, and an eleven-module AI literacy programme for the whole company.</p>
+          <p className="path-desc">Built and improved the systems behind a Canadian immigration operation: an AI-assisted CRM spanning an 18-stage client pipeline, workflow automations, process documentation, AI evaluation, and an eleven-module company-wide AI literacy programme.</p>
+          <p className="path-stat">18-STAGE CLIENT PIPELINE · 250+ CLIENTS MANAGED · 11-MODULE AI PROGRAMME</p>
         </div>
         <div className="path-row rv" style={{ '--d': '270ms' } as React.CSSProperties}>
           <p className="path-year">NOW</p>
@@ -488,7 +488,7 @@ export default function Home() {
           <h2 className="h-display skewable rv" style={{ '--d': '100ms' } as React.CSSProperties}>Designer. Builder. <em>Operator.</em></h2>
           <div className="about-cols rv" style={{ '--d': '160ms' } as React.CSSProperties}>
             <p>Creative director by training, builder by practice. I designed brands and art direction first, then spent four years inside financial-services operations building the automation that keeps the work moving. Each step made the next one possible.</p>
-            <p>Today that means product: interfaces, web apps and AI-assisted software — designed by me, shipped by me. One person answerable for the whole thing, from the first sketch to the production logs.</p>
+            <p>Today that means product: interfaces, web apps and AI-assisted software — designed by me, shipped by me. One person answerable for the whole thing, from the first sketch to the production logs. The email at the bottom of this page reaches the same pair of hands — 2am included.</p>
           </div>
           <blockquote className="about-quote rv" style={{ '--d': '220ms' } as React.CSSProperties}>&ldquo;Design is the primary work. The ability to build it is what makes it real.&rdquo;</blockquote>
           <div className="rv" style={{ '--d': '280ms' } as React.CSSProperties}>

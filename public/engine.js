@@ -436,8 +436,9 @@
     });
     const wordEl = $(".pl-word", pl);
     const langEl = $(".pl-lang b", pl);
-    const barEl = $(".pl-bar", pl);
-    /* Lagos → Nigeria → World */
+    /* Lagos → Nigeria → World, resolving into the identity lockup.
+       Ten beats at ~150ms — the whole introduction reads in under 2s.
+       No progress bar, no spinner: the greeting IS the opening. */
     const GREET = [
       ["Hello", "01 — ENGLISH · LAGOS", "en"],
       ["Pẹ̀lẹ́ o", "02 — YORÙBÁ · NIGERIA", "yo"],
@@ -449,13 +450,11 @@
       ["مرحبا", "08 — ARABIC · MARHABAN", "ar", "rtl"],
       ["こんにちは", "09 — JAPANESE · KONNICHIWA", "ja"],
       ["你好", "10 — CHINESE · NǏ HǍO", "zh"],
-      ["안녕하세요", "11 — KOREAN · ANNYEONG", "ko"],
-      ["Jambo", "12 — KISWAHILI", "sw"],
     ];
     const fast = !FINE; /* touch devices: keep it quick, just not rushed */
-    const WORD_MS = fast ? 150 : 290;  /* one metronome for every greeting */
-    const FINAL_MS = fast ? 420 : 650;
-    const FINAL = ["HELLO.", "13 — LAGOS → WORLD", "en"];
+    const WORD_MS = fast ? 110 : 150;  /* one metronome for every greeting */
+    const FINAL_MS = fast ? 380 : 480; /* hold the identity lockup a beat longer */
+    const FINAL = ["HABIBCORE®", "LAGOS → WORLD", "en"];
     let i = 0;
     const show = ([text, tag, lang, dir]) => {
       if (!wordEl) return;
@@ -469,11 +468,6 @@
       wordEl.classList.add("swap");
       if (langEl) langEl.classList.add("swap");
     };
-    const DUR = GREET.length * WORD_MS + FINAL_MS;
-    if (barEl) {
-      barEl.style.transition = `transform ${DUR + 120}ms linear`;
-      requestAnimationFrame(() => (barEl.style.transform = "scaleX(1)"));
-    }
     const finish = () => {
       setTimeout(() => {
         pl.classList.add("done");
