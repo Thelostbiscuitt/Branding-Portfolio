@@ -58,11 +58,41 @@ section[id], article[id], main[id] {
    ============================================================ */
 
 /* ————— fonts (embedded latin subsets; Fraunces & Archivo variable) ————— */
-
-
-
-
-
+@font-face {
+  font-family: 'Fraunces';
+  src: url('/fonts/fraunces-100-900-normal.woff2') format('woff2');
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Fraunces';
+  src: url('/fonts/fraunces-100-900-italic.woff2') format('woff2');
+  font-weight: 100 900;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Archivo';
+  src: url('/fonts/archivo-100-900-normal.woff2') format('woff2');
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Space Mono';
+  src: url('/fonts/space-mono-400-normal.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Space Mono';
+  src: url('/fonts/space-mono-700-normal.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
 
 /* ————— tokens ————— */
 :root {
@@ -79,9 +109,14 @@ section[id], article[id], main[id] {
   --nightfog:#a79e8d;
   --ember:   #e05a24;
 
-  --font-d: var(--font-display), Georgia, serif;
-  --font-b: var(--font-body), Helvetica, Arial, sans-serif;
-  --font-m: var(--font-mono), 'Courier New', monospace;
+  --font-d: 'Fraunces', Georgia, serif;
+  --font-b: 'Archivo', Helvetica, Arial, sans-serif;
+  --font-m: 'Space Mono', 'Courier New', monospace;
+
+  /* aliases kept for module css (About, Loading, …) */
+  --font-display: 'Fraunces', Georgia, serif;
+  --font-body: 'Archivo', Helvetica, Arial, sans-serif;
+  --font-mono: 'Space Mono', 'Courier New', monospace;
 
   --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
   --ease-io:  cubic-bezier(0.65, 0, 0.35, 1);

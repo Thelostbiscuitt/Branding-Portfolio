@@ -1,27 +1,6 @@
 import type { Metadata } from 'next'
-import { Fraunces, Archivo, Space_Mono } from 'next/font/google'
 import Script from 'next/script'
 import './globals.css'
-
-const fraunces = Fraunces({
-  subsets: ['latin'],
-  style: ['normal', 'italic'],
-  variable: '--font-display',
-  display: 'swap',
-})
-
-const archivo = Archivo({
-  subsets: ['latin'],
-  variable: '--font-body',
-  display: 'swap',
-})
-
-const spaceMono = Space_Mono({
-  subsets: ['latin'],
-  weight: ['400', '700'],
-  variable: '--font-mono',
-  display: 'swap',
-})
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://habibcore.com'),
@@ -50,7 +29,7 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en" className={`${fraunces.variable} ${archivo.variable} ${spaceMono.variable}`}>
+    <html lang="en">
       <body>
         {children}
         <Script src="/engine.js" strategy="afterInteractive" />
