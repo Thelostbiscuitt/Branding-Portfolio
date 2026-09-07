@@ -1,8 +1,10 @@
 import type * as React from 'react'
+import { rangeNodes } from '@/data/range'
 
 /* Habibcore — the homepage, ported from the 2026 index.html design.
    Warm paper / ink / rust. Fraunces / Archivo / Space Mono.
    Interaction engine lives in public/engine.js. */
+
 export default function Home() {
   return (
     <>
@@ -409,8 +411,9 @@ export default function Home() {
         <div className="container">
           <div className="sec-head rv">
             <p><span className="sh-idx">05</span> / RANGE</p>
-            <p className="sh-note">ONE PRACTICE — SEVEN EXPRESSIONS</p>
+            <p className="sh-note">ONE PRACTICE — MANY EXPRESSIONS</p>
           </div>
+
           <div className="range-stage">
             <p className="range-word" data-i="1"><span className="rw">Design.</span><span className="rm">BRAND · IDENTITY · ART DIRECTION</span></p>
             <p className="range-word" data-i="2"><span className="rw">Product.</span><span className="rm">INTERFACES · WEB APPS · TOOLS</span></p>
@@ -420,8 +423,41 @@ export default function Home() {
             <p className="range-word" data-i="6"><span className="rw">Software.</span><span className="rm">DESIGNED, BUILT &amp; SHIPPED END TO END</span></p>
             <p className="range-word" data-i="7"><span className="rw"><em>Habibcore.</em></span><span className="rm">ALL OF IT — ONE PAIR OF HANDS</span></p>
             <div className="range-graph" aria-hidden="true"></div>
+            {/* creative dataset — read by public/engine.js to extend the
+                graph with practice → project → artifact relationships */}
+            <script
+              type="application/json"
+              id="range-data"
+              dangerouslySetInnerHTML={{ __html: JSON.stringify(rangeNodes) }}
+            />
           </div>
           <p className="range-foot"><span className="range-count">01 / 07</span>DESIGN → OPERATIONS → AUTOMATION → SYSTEMS → AI → PRODUCT → SOFTWARE</p>
+          {/* mobile / no-pin route through the same dataset — focused
+              exploration, not a squeezed graph */}
+          <div className="range-index" aria-label="Creative practice index">
+            {rangeNodes
+              .filter((n) => n.kind === 'discipline')
+              .map((d) => {
+                const children = rangeNodes.filter((n) => n.kind === 'project' && (n.parent === d.id || d.related.includes(n.id)))
+                return (
+                  <details key={d.id} className="ri-item">
+                    <summary>
+                      <span className="ri-name">{d.title}</span>
+                      <span className="ri-meta">{d.meta}</span>
+                    </summary>
+                    <p className="ri-desc">{d.description}</p>
+                    <ul className="ri-list">
+                      {children.map((c) => (
+                        <li key={c.id}>
+                          <a href={c.sourceUrl ?? '#'}>{c.title}<i>{c.meta}</i></a>
+                        </li>
+                      ))}
+                    </ul>
+                  </details>
+                )
+              })}
+          </div>
+
         </div>
       </div>
     </div>

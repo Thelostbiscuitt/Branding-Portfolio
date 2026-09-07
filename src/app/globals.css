@@ -673,8 +673,8 @@ section.block { padding-top: clamp(88px, 12vw, 128px); }
   padding: 4px 0 36px;
 }
 @media (min-width: 768px) { .p-panel-inner { grid-template-columns: 7fr 5fr; gap: 24px; padding-bottom: 40px; } }
-.p-fig { border: 1px solid var(--line); background: var(--paper2); overflow: hidden; }
-.p-fig img { width: 100%; height: auto; object-fit: cover; }
+.p-fig { border: 1px solid var(--line); background: var(--paper2); overflow: hidden; aspect-ratio: 16 / 10; max-height: 560px; }
+.p-fig img { width: 100%; height: 100%; object-fit: cover; object-position: top center; }
 .p-figcap { margin-top: 8px; font-family: var(--font-m); font-size: 10px; letter-spacing: 0.18em; color: var(--fog); }
 .p-body { display: flex; flex-direction: column; }
 @media (min-width: 768px) { .p-body { padding-left: 16px; } }
@@ -917,8 +917,98 @@ section.block { padding-top: clamp(88px, 12vw, 128px); }
   html.has-js .range-graph .rg-bubble:focus-visible {
     border-color: var(--rust); color: var(--ink); background: var(--paper);
   }
-  html.has-js .range-graph.on:has(.rg-bubble:hover) .rg-bubble:not(:hover) { opacity: 0.35; }
+  /* relationship-aware hover — engine marks the connected bubbles/lines */
+  html.has-js .range-graph.dim .rg-bubble:not(.is-rel) { opacity: 0.22; }
+  html.has-js .range-graph.dim line:not(.is-rel) { opacity: 0.06; }
+  html.has-js .range-graph line.is-rel { opacity: 0.85; stroke: var(--rust); }
+  html.has-js .range-graph .rg-bubble.is-rel { border-color: var(--rust); }
+
+  /* creative practice layer — hub + unfolding constellation */
+  html.has-js .range-graph .rg-bubble.rg-hub {
+    border-color: var(--rust); color: var(--rust); z-index: 4;
+    transition: left 0.7s var(--ease-out), top 0.7s var(--ease-out),
+      transform 0.55s cubic-bezier(0.3, 1.4, 0.45, 1) var(--rd, 0ms),
+      opacity 0.4s var(--ease-out) var(--rd, 0ms), border-color 0.25s, background-color 0.25s, color 0.25s;
+  }
+  html.has-js .range-graph .rg-bubble.rg-hub:hover,
+  html.has-js .range-graph .rg-bubble.rg-hub:focus-visible { background: var(--rust); color: var(--paper); }
+  html.has-js .range-graph .rg-bubble.rg-md { min-width: clamp(112px, 9vw, 140px); min-height: clamp(80px, 6.5vw, 104px); padding: 10px; }
+  html.has-js .range-graph .rg-bubble.rg-sm { min-width: clamp(96px, 7.5vw, 120px); min-height: clamp(68px, 5.5vw, 88px); padding: 8px; }
+  html.has-js .range-graph .rg-bubble.rg-sm b { font-size: 9px; }
+  html.has-js .range-graph .rg-bubble.rg-xs { min-width: 84px; min-height: 56px; padding: 6px; }
+  html.has-js .range-graph .rg-bubble.rg-xs b { font-size: 8px; letter-spacing: 0.1em; }
+  html.has-js .range-graph .rg-bubble.rg-xs i { display: none; }
+  html.has-js .range-stage.creative-open .range-word { opacity: 0.14; }
+  html.has-js .range-stage.creative-open .range-graph > .rg-bubble:not(.rg-hub):not([data-lvl]) { opacity: 0; pointer-events: none; }
+
+  /* detail view — compact paper panel, same visual system, no cards */
+  html.has-js .rg-detail {
+    position: absolute; right: 0; top: 50%; transform: translateY(-50%) translateX(16px);
+    width: min(400px, 42%); max-height: 86%;
+    overflow: auto; background: var(--paper); border: 1px solid var(--line);
+    padding: 20px 22px 18px;
+    opacity: 0; visibility: hidden;
+    transition: opacity 0.35s var(--ease-out), transform 0.35s var(--ease-out), visibility 0s 0.35s;
+    z-index: 5;
+  }
+  html.has-js .rg-detail.on {
+    opacity: 1; visibility: visible; transform: translateY(-50%) translateX(0);
+    transition: opacity 0.35s var(--ease-out), transform 0.35s var(--ease-out);
+  }
+  .rg-detail .rg-x {
+    position: absolute; top: 8px; right: 10px;
+    border: 0; background: none; cursor: pointer; padding: 6px;
+    font-family: var(--font-m); font-size: 14px; color: var(--fog); line-height: 1;
+  }
+  .rg-detail .rg-x:hover, .rg-detail .rg-x:focus-visible { color: var(--rust); }
+  .rg-detail .rg-kind { font-family: var(--font-m); font-size: 9px; letter-spacing: 0.22em; color: var(--rust); }
+  .rg-detail .rg-title { margin-top: 8px; font-family: var(--font-d); font-weight: 500; font-size: clamp(1.25rem, 1.6vw, 1.5rem); letter-spacing: -0.01em; }
+  .rg-detail .rg-meta { margin-top: 6px; font-family: var(--font-m); font-size: 9px; letter-spacing: 0.18em; color: var(--fog); }
+  .rg-detail img { width: 100%; aspect-ratio: 16 / 10; object-fit: cover; border: 1px solid var(--line); margin-top: 14px; }
+  .rg-detail .rg-desc { margin-top: 14px; font-size: 13.5px; line-height: 1.65; color: var(--ink2); }
+  .rg-detail .rg-chips { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 14px; }
+  .rg-detail .rg-chip {
+    border: 1px solid var(--line); background: var(--paper2); cursor: pointer;
+    font-family: var(--font-m); font-size: 9px; letter-spacing: 0.14em; color: var(--ink2);
+    padding: 5px 9px; transition: border-color 0.25s, color 0.25s;
+  }
+  .rg-detail .rg-chip:hover, .rg-detail .rg-chip:focus-visible { border-color: var(--rust); color: var(--rust); }
+  .rg-detail .rg-src {
+    display: inline-block; margin-top: 16px;
+    font-family: var(--font-m); font-size: 10px; letter-spacing: 0.18em; color: var(--ink);
+    border-bottom: 1px solid var(--ink); padding-bottom: 2px;
+  }
+  .rg-detail .rg-src:hover { color: var(--rust); border-color: var(--rust); }
+
 }
+
+/* ————— range creative index (mobile / reduced-motion route through
+   the same dataset — the desktop graph is never squeezed down) ————— */
+.range-index { display: block; margin-top: clamp(28px, 5vw, 48px); }
+@media (min-width: 1024px) {
+  html.has-js:not(.is-reduced) .range-index { display: none; }
+}
+.ri-item { border-top: 1px solid var(--line); }
+.ri-item:last-child { border-bottom: 1px solid var(--line); }
+.ri-item summary {
+  display: flex; align-items: baseline; justify-content: space-between; gap: 16px;
+  padding: 16px 0; cursor: pointer; list-style: none;
+}
+.ri-item summary::-webkit-details-marker { display: none; }
+.ri-item .ri-name { font-family: var(--font-d); font-weight: 500; font-size: 1.25rem; letter-spacing: -0.01em; transition: color 0.3s; }
+.ri-item summary:hover .ri-name, .ri-item summary:focus-visible .ri-name { color: var(--rust); }
+.ri-item .ri-meta { font-family: var(--font-m); font-size: 9px; letter-spacing: 0.2em; color: var(--fog); }
+.ri-item .ri-desc { font-size: 14px; line-height: 1.65; color: var(--ink2); padding-bottom: 4px; }
+.ri-item .ri-list { list-style: none; padding: 4px 0 16px; margin: 0; }
+.ri-item .ri-list a {
+  display: flex; align-items: baseline; justify-content: space-between; gap: 12px;
+  padding: 10px 0; border-top: 1px solid var(--line);
+  font-family: var(--font-m); font-size: 11px; letter-spacing: 0.14em; color: var(--ink);
+  text-decoration: none;
+}
+.ri-item .ri-list a i { font-style: normal; font-size: 8px; letter-spacing: 0.18em; color: var(--fog); }
+.ri-item .ri-list a:hover, .ri-item .ri-list a:focus-visible { color: var(--rust); }
+
 
 /* ————— path ————— */
 .path-wrap { position: relative; margin-top: 16px; }

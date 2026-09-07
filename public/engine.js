@@ -16,6 +16,7 @@
   const FINE = window.matchMedia("(pointer: fine)").matches;
 
   document.documentElement.classList.add("has-js");
+  if (REDUCED) document.documentElement.classList.add("is-reduced");
   if (FINE && !REDUCED) document.documentElement.classList.add("has-fine-pointer");
 
   /* ————— lagos clock (WAT, UTC+1) ————— */
@@ -173,6 +174,268 @@
   /* orbit positions (percent of stage) so bubbles never sit on the word */
   const RANGE_POS = { 2: [[10, 48], [90, 52]], 3: [[14, 18], [86, 20], [50, 86]], 6: [[12, 16], [86, 18], [8, 60], [90, 58], [30, 86], [70, 86]] };
 
+  /* ————— creative practice layer —————
+     Home.tsx injects src/data/range.ts as a JSON island; the graph and the
+     mobile index both read from it. Progressive disclosure: hub → discipline
+     → project → artifact, one branch at a time, so the initial composition
+     stays quiet. Desktop (pinned) only; mobile uses the .range-index list. */
+  const R_BY_ID = new Map();
+  try { JSON.parse($("#range-data")?.textContent || "[]").forEach((n) => R_BY_ID.set(n.id, n)); } catch (e) { /* island missing — graph simply stays as-is */ }
+  const CREATIVE_HUB_POS = { 0: [26, 86], 6: [50, 10] };
+  const rgState = { open: false, level: 0, disc: null, proj: null, hub: null, lastFocus: null };
+
+  const rgDetail = (() => {
+    if (!rangeGraph) return null;
+    const d = document.createElement("aside");
+    d.className = "rg-detail";
+    d.setAttribute("role", "dialog");
+    d.setAttribute("aria-label", "Work detail");
+    d.hidden = true;
+    /* live on the stage, not inside range-graph — the graph is wiped on
+       every word change, the detail panel survives those rebuilds */
+    rangeGraph.parentElement.appendChild(d);
+    return d;
+  })();
+
+  const openRgDetail = (id, from) => {
+    const n = R_BY_ID.get(id);
+    if (!n || !rgDetail) return;
+    const img = n.imageUrl ? `<img src="${n.imageUrl}" alt="" width="640" height="400" loading="lazy" />` : "";
+    const chips = (n.related || [])
+      .filter((r) => R_BY_ID.has(r))
+      .map((r) => `<button type="button" class="rg-chip" data-go="${r}">${R_BY_ID.get(r).title}</button>`)
+      .join("");
+    rgDetail.innerHTML = `
+      <button type="button" class="rg-x" aria-label="Close detail">&times;</button>
+      <p class="rg-kind">${n.kind.toUpperCase()}</p>
+      <h3 class="rg-title">${n.title}</h3>
+      <p class="rg-meta">${n.meta}</p>
+      ${img}
+      <p class="rg-desc">${n.description}</p>
+      ${chips ? `<div class="rg-chips">${chips}</div>` : ""}
+      ${n.sourceUrl ? `<a class="rg-src" href="${n.sourceUrl}">${(n.source || "OPEN").toUpperCase()} &nearr;</a>` : ""}`;
+    rgDetail.hidden = false;
+    /* force reflow so the panel animates in */
+    void rgDetail.offsetHeight;
+    rgDetail.classList.add("on");
+    rgState.lastFocus = from || rgState.lastFocus;
+    const x = $(".rg-x", rgDetail);
+    x.addEventListener("click", closeRgDetail);
+    $$(".rg-chip", rgDetail).forEach((c) => c.addEventListener("click", () => openRgDetail(c.dataset.go, from)));
+    x.focus({ preventScroll: true });
+  };
+
+  function closeRgDetail() {
+    if (!rgDetail || rgDetail.hidden) return;
+    rgDetail.classList.remove("on");
+    rgDetail.hidden = true;
+    if (rgState.lastFocus) { rgState.lastFocus.focus({ preventScroll: true }); rgState.lastFocus = null; }
+  }
+
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") closeRgDetail();
+  });
+
+  /* small bubble/line builder shared by the creative layers */
+  const NS = "http://www.w3.org/2000/svg";
+  const rgLayer = [];
+  /* discipline ring — vertices rotated 30° so no node sits straight above
+     or below the hub */
+  const DISC_ANGLES = [-60, 0, 60, 120, 180, 240].map((d) => (d * Math.PI) / 180);
+  /* child ring around a parent, rotated so no node points straight at the
+     hub (they would land between parent and hub and eventually cover it) */
+  const ringAround = (px, py, rx, ry, k) => {
+    const toHub = Math.atan2(50 - py, 50 - px);
+    const step = (2 * Math.PI) / Math.max(k, 3);
+    return Array.from({ length: k }, (_, i) => {
+      const a = k === 1 ? toHub + Math.PI : toHub + step * (i + 0.5);
+      return [clamp(px + rx * Math.cos(a), 7, 93), clamp(py + ry * Math.sin(a), 10, 90)];
+    });
+  };
+  /* collision resolution: nudge new nodes apart from each other and from
+     every fixed bubble (hub, disciplines, projects, detail panel) until
+     nothing overlaps — guaranteed clean layout regardless of viewport */
+  const layoutLevel = (centers, hw, hh) => {
+    const stage = rangeGraph.parentElement;
+    const W = stage.getBoundingClientRect().width, H = stage.getBoundingClientRect().height;
+    if (!W || !H) return centers;
+    const mov = centers.map((c) => ({ cx: (c[0] / 100) * W, cy: (c[1] / 100) * H, hw, hh }));
+    const fix = rgLayer.filter((el) => el.tagName !== "LINE").map((el) => ({
+      cx: el.offsetLeft + el.offsetWidth / 2, cy: el.offsetTop + el.offsetHeight / 2,
+      hw: el.offsetWidth / 2 + 14, hh: el.offsetHeight / 2 + 14, fixed: true,
+    }));
+    if (rgDetail && !rgDetail.hidden) {
+      fix.push({ cx: rgDetail.offsetLeft + rgDetail.offsetWidth / 2, cy: rgDetail.offsetTop + rgDetail.offsetHeight / 2, hw: rgDetail.offsetWidth / 2 + 14, hh: rgDetail.offsetHeight / 2 + 14, fixed: true });
+    }
+    for (let iter = 0; iter < 120; iter++) {
+      let moved = false;
+      const all = fix.concat(mov);
+      for (let i = 0; i < all.length; i++) for (let j = i + 1; j < all.length; j++) {
+        const a = all[i], b = all[j];
+        if (a.fixed && b.fixed) continue;
+        const dx = b.cx - a.cx, dy = b.cy - a.cy;
+        const px = a.hw + b.hw - Math.abs(dx);
+        const py = a.hh + b.hh - Math.abs(dy);
+        if (px > 0 && py > 0) {
+          const dir = dx >= 0 ? 1 : -1;
+          if (px <= py) {
+            if (a.fixed) b.cx += dir * (px + 2);
+            else if (b.fixed) a.cx -= dir * (px + 2);
+            else { a.cx -= (dir * (px + 2)) / 2; b.cx += (dir * (px + 2)) / 2; }
+          } else {
+            const dirY = dy >= 0 ? 1 : -1;
+            if (a.fixed) b.cy += dirY * (py + 2);
+            else if (b.fixed) a.cy -= dirY * (py + 2);
+            else { a.cy -= (dirY * (py + 2)) / 2; b.cy += (dirY * (py + 2)) / 2; }
+          }
+          moved = true;
+        }
+      }
+      mov.forEach((m) => {
+        const nx = clamp(m.cx, m.hw + 6, W - m.hw - 6);
+        const ny = clamp(m.cy, m.hh + 6, H - m.hh - 6);
+        if (nx !== m.cx || ny !== m.cy) { m.cx = nx; m.cy = ny; moved = true; }
+      });
+      if (!moved) break;
+    }
+    return mov.map((m) => [(m.cx / W) * 100, (m.cy / H) * 100]);
+  };
+  const NODE_HALF = { "rg-md": [76, 60], "rg-sm": [68, 50], "rg-xs": [62, 38] };
+  const neighborsOf = (id) => {
+    const n = R_BY_ID.get(id);
+    if (!n) return new Set();
+    const s = new Set(n.related || []);
+    R_BY_ID.forEach((o) => {
+      if ((o.related || []).includes(id)) s.add(o.id);
+      if (o.parent === id) s.add(o.id);
+      if (n.parent === o.id) s.add(o.id);
+    });
+    return s;
+  };
+
+  const rgSpawn = (svg, n, fromPct, toPct, cls, lvl, onClick) => {
+    const line = document.createElementNS(NS, "line");
+    line.setAttribute("x1", `${fromPct[0]}%`); line.setAttribute("y1", `${fromPct[1]}%`);
+    line.setAttribute("x2", `${toPct[0]}%`); line.setAttribute("y2", `${toPct[1]}%`);
+    line.style.strokeDasharray = "1400";
+    line.style.strokeDashoffset = "1400";
+    line.dataset.a = ""; line.dataset.b = n.id;
+    line.dataset.lvl = String(lvl);
+    line.classList.add("rg-line");
+    svg.appendChild(line);
+    const b = document.createElement("button");
+    b.type = "button";
+    b.className = `rg-bubble ${cls || ""}`.trim();
+    b.tabIndex = 0;
+    b.dataset.id = n.id;
+    b.dataset.lvl = String(lvl);
+    if (n.kind !== "discipline") b.setAttribute("aria-haspopup", "dialog");
+    b.style.left = `${toPct[0]}%`;
+    b.style.top = `${toPct[1]}%`;
+    b.style.setProperty("--rd", `${Math.min(120 + rgLayer.length * 70, 900)}ms`);
+    b.innerHTML = `<b>${n.title}</b><i>${n.kind === "discipline" ? "PRACTICE" : n.meta.split("·").slice(-1)[0].trim()}</i>`;
+    b.addEventListener("mouseenter", () => {
+      rangeGraph.classList.add("dim");
+      const near = neighborsOf(n.id);
+      b.classList.add("is-rel");
+      rgLayer.forEach((el) => {
+        if (el.tagName === "line") {
+          if ((near.has(el.dataset.b) && el.dataset.a === n.id) || (near.has(el.dataset.a) && el.dataset.b === n.id)) el.classList.add("is-rel");
+        } else if (near.has(el.dataset.id)) el.classList.add("is-rel");
+      });
+    });
+    b.addEventListener("mouseleave", () => {
+      rangeGraph.classList.remove("dim");
+      rgLayer.forEach((el) => el.classList.remove("is-rel"));
+    });
+    b.addEventListener("click", onClick);
+    rangeGraph.appendChild(b);
+    rgLayer.push(line, b);
+    return b;
+  };
+
+  const rgCollapse = (fromLevel) => {
+    /* remove nodes/lines deeper than fromLevel */
+    for (let i = rgLayer.length - 1; i >= 0; i--) {
+      const el = rgLayer[i];
+      const lvl = Number(el.dataset.lvl || 0);
+      if (lvl >= fromLevel) { el.remove(); rgLayer.splice(i, 1); }
+    }
+  };
+
+  const rgOpenCreative = (idx) => {
+    rgState.open = true;
+    rgState.idx = idx;
+    const stage = rangeGraph.parentElement;
+    stage.classList.add("creative-open");
+    if (rgState.hub) { rgState.hub.style.left = "50%"; rgState.hub.style.top = "50%"; rgState.hub.classList.add("is-hub"); }
+    rgState.anchor = [50, 50];
+    const disc = [...R_BY_ID.values()].filter((n) => n.kind === "discipline" && n.parent === "n-design");
+    const ring = DISC_ANGLES.map((a) => [clamp(50 + 27 * Math.cos(a), 7, 93), clamp(50 + 34 * Math.sin(a), 10, 90)]);
+    disc.forEach((d, i) => {
+      rgSpawn(rangeGraph.querySelector("svg"), d, [50, 50], ring[i], "rg-md", 1, () => rgOpenDiscipline(d.id));
+    });
+  };
+
+  const rgOpenDiscipline = (id) => {
+    const d = R_BY_ID.get(id);
+    if (!d) return;
+    closeRgDetail();
+    if (rgState.disc === id) { /* same discipline — collapse its branch */
+      rgCollapse(2);
+      rgState.disc = null; rgState.proj = null;
+      return;
+    }
+    rgCollapse(2);
+    rgState.disc = id; rgState.proj = null;
+    const el = rgLayer.find((x) => x.dataset && x.dataset.id === id);
+    const from = el ? [parseFloat(el.style.left), parseFloat(el.style.top)] : [50, 50];
+    const projIds = [...new Set((d.related || []).filter((r) => R_BY_ID.get(r)?.kind === "project"))].slice(0, 4);
+    const ring = ringAround(from[0], from[1], 19, 22, projIds.length);
+    const placed = layoutLevel(ring, NODE_HALF["rg-sm"][0], NODE_HALF["rg-sm"][1]);
+    projIds.forEach((pid, i) => {
+      const p = R_BY_ID.get(pid);
+      rgSpawn(rangeGraph.querySelector("svg"), p, from, placed[i], "rg-sm", 2, () => rgOpenProject(pid));
+    });
+  };
+
+  const rgOpenProject = (id) => {
+    const p = R_BY_ID.get(id);
+    if (!p) return;
+    if (rgState.proj !== id) {
+      rgCollapse(3);
+      rgState.proj = id;
+      const el = rgLayer.find((x) => x.dataset && x.dataset.id === id);
+      if (el) {
+        const from = [parseFloat(el.style.left), parseFloat(el.style.top)];
+        const artIds = [...R_BY_ID.values()].filter((n) => n.parent === id).map((n) => n.id).slice(0, 6);
+        const ring = ringAround(from[0], from[1], 15, 18, artIds.length);
+        const placed = layoutLevel(ring, NODE_HALF["rg-xs"][0], NODE_HALF["rg-xs"][1]);
+        artIds.forEach((aid, i) => {
+          const a = R_BY_ID.get(aid);
+          const b = rgSpawn(rangeGraph.querySelector("svg"), a, from, placed[i], "rg-xs", 3, () => openRgDetail(aid, b));
+        });
+      }
+    }
+    openRgDetail(id, rgLayer.find((x) => x.dataset && x.dataset.id === id));
+  };
+
+  const rgCloseCreative = () => {
+    rgState.open = false;
+    rgState.disc = null; rgState.proj = null;
+    closeRgDetail();
+    rgCollapse(1);
+    const stage = rangeGraph.parentElement;
+    stage.classList.remove("creative-open");
+    if (rgState.hub && rgState.idx != null) {
+      const [hx, hy] = CREATIVE_HUB_POS[rgState.idx];
+      rgState.hub.style.left = `${hx}%`; rgState.hub.style.top = `${hy}%`;
+      rgState.hub.classList.remove("is-hub");
+    }
+  };
+
+
+
   const buildRangeGraph = (idx) => {
     if (!rangeGraph) return;
     const nodes = RANGE_NODES[idx];
@@ -183,6 +446,10 @@
     rangeGraphW = r.width;
     rangeGraph.classList.remove("on");
     rangeGraph.innerHTML = "";
+    rgLayer.length = 0;
+    rgState.open = false; rgState.disc = null; rgState.proj = null; rgState.hub = null;
+    stage.classList.remove("creative-open");
+    closeRgDetail();
     const NS = "http://www.w3.org/2000/svg";
     const svg = document.createElementNS(NS, "svg");
     rangeGraph.appendChild(svg);
@@ -217,6 +484,28 @@
       });
       rangeGraph.appendChild(b);
     });
+    /* creative practice hub — quiet third participant on the Design and
+       Habibcore chapters; everything else stays exactly as it was */
+    const hubPos = CREATIVE_HUB_POS[idx];
+    if (hubPos && R_BY_ID.size) {
+      const hub = document.createElement("button");
+      hub.type = "button";
+      hub.className = "rg-bubble rg-hub";
+      hub.tabIndex = 0;
+      hub.style.left = `${hubPos[0]}%`;
+      hub.style.top = `${hubPos[1]}%`;
+      hub.style.setProperty("--rd", `${140 + nodes.length * 90}ms`);
+      hub.innerHTML = `<b>Creative</b><i>PRACTICE · TAP TO EXPLORE</i>`;
+      hub.setAttribute("aria-expanded", "false");
+      hub.addEventListener("click", () => {
+        if (rgState.open) rgCloseCreative();
+        else rgOpenCreative(idx);
+        hub.setAttribute("aria-expanded", String(rgState.open));
+      });
+      rangeGraph.appendChild(hub);
+      rgState.hub = hub;
+      rgState.idx = idx;
+    }
     requestAnimationFrame(() => requestAnimationFrame(() => rangeGraph.classList.add("on")));
   };
 
