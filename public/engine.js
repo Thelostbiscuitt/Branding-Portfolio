@@ -144,10 +144,74 @@
   const rangeSec = $(".range");
   const rangeWords = $$(".range-word");
   const rangeCount = $(".range-count");
+  const rangeGraph = $(".range-graph");
   const pathWrap = $(".path-wrap");
   const pathLine = $(".path-line");
   let lastY = window.scrollY;
   let navTick = 0;
+  let rangeIdx = -1;
+  let rangeGraphW = 0;
+
+  /* ————— range graph: the active discipline hub, real projects orbiting it ————— */
+  const P_ROW = (n) => `.p-row[data-idx="${n}"]`;
+  const RANGE_NODES = [
+    /* Design */ [["Leadway Pensure", "BRAND · SYSTEMS", P_ROW("03")], ["Skaame EPK", "BRAND · 2024", ".epk-head"], ["Olumayowa", "CLIENT · WEB", P_ROW("04")]],
+    /* Product */ [["Biscuit AI", "AI · PRODUCT", P_ROW("01")], ["Relay", "PRODUCT · SYSTEMS", P_ROW("06")], ["Leadway Pensure", "BRAND · SYSTEMS", P_ROW("03")]],
+    /* Systems */ [["Relay", "AUDIT TRAILS", P_ROW("06")], ["AI in the Workplace", "CURRICULUM", P_ROW("05")], ["Leadway Pensure", "OPERATIONS", P_ROW("03")]],
+    /* Automation */ [["Leadway Pensure", "18-STAGE PIPELINE", P_ROW("03")], ["Relay", "SLA CLOCKS", P_ROW("06")]],
+    /* AI */ [["Biscuit AI", "TELEGRAM ASSISTANT", P_ROW("01")], ["Chef4me", "KITCHEN ASSISTANT", P_ROW("02")], ["AI in the Workplace", "11 MODULES", P_ROW("05")]],
+    /* Software */ [["Biscuit AI", "SHIPPED", P_ROW("01")], ["Relay", "IN PRODUCTION", P_ROW("06")], ["Chef4me", "IN CONVERSATION", P_ROW("02")]],
+    /* Habibcore — all of it */ [["Biscuit AI", "AI · PRODUCT", P_ROW("01")], ["Chef4me", "CONSUMER · AI", P_ROW("02")], ["Leadway Pensure", "BRAND · SYSTEMS", P_ROW("03")], ["Olumayowa", "CLIENT · WEB", P_ROW("04")], ["AI in the Workplace", "OPS · TRAINING", P_ROW("05")], ["Relay", "PRODUCT · SYSTEMS", P_ROW("06")]],
+  ];
+  /* orbit positions (percent of stage) so bubbles never sit on the word */
+  const RANGE_POS = { 2: [[10, 48], [90, 52]], 3: [[14, 18], [86, 20], [50, 86]], 6: [[12, 16], [86, 18], [8, 60], [90, 58], [30, 86], [70, 86]] };
+
+  const buildRangeGraph = (idx) => {
+    if (!rangeGraph) return;
+    const nodes = RANGE_NODES[idx];
+    if (!nodes) return;
+    const stage = rangeGraph.parentElement;
+    stage.classList.add("has-graph");
+    const r = stage.getBoundingClientRect();
+    rangeGraphW = r.width;
+    rangeGraph.classList.remove("on");
+    rangeGraph.innerHTML = "";
+    const NS = "http://www.w3.org/2000/svg";
+    const svg = document.createElementNS(NS, "svg");
+    rangeGraph.appendChild(svg);
+    const cx = r.width / 2, cy = r.height / 2;
+    const pos = RANGE_POS[nodes.length] || RANGE_POS[3];
+    nodes.forEach(([label, kind, sel], i) => {
+      const [px, py] = pos[i];
+      const x = (r.width * px) / 100, y = (r.height * py) / 100;
+      const line = document.createElementNS(NS, "line");
+      line.setAttribute("x1", cx); line.setAttribute("y1", cy);
+      line.setAttribute("x2", x); line.setAttribute("y2", y);
+      const len = Math.hypot(x - cx, y - cy);
+      line.style.strokeDasharray = `${len}`;
+      line.style.strokeDashoffset = `${len}`;
+      svg.appendChild(line);
+      const b = document.createElement("button");
+      b.type = "button";
+      b.className = "rg-bubble";
+      b.tabIndex = -1; /* the keyboard route is the real work list below */
+      b.style.left = `${px}%`;
+      b.style.top = `${py}%`;
+      b.style.setProperty("--rd", `${140 + i * 90}ms`);
+      b.innerHTML = `<b>${label}</b><i>${kind}</i>`;
+      b.addEventListener("click", () => {
+        const target = $(sel);
+        if (!target) return;
+        if (target.classList.contains("p-row")) {
+          const btn = $(".p-btn", target);
+          if (btn && btn.getAttribute("aria-expanded") !== "true") btn.click();
+        }
+        engine.to(target.getBoundingClientRect().top + window.scrollY - 72);
+      });
+      rangeGraph.appendChild(b);
+    });
+    requestAnimationFrame(() => requestAnimationFrame(() => rangeGraph.classList.add("on")));
+  };
 
   const effects = (velocity) => {
     const y = window.scrollY;
@@ -196,6 +260,13 @@
         w.classList.toggle("is-past", i < idx);
       });
       if (rangeCount) rangeCount.textContent = `${String(idx + 1).padStart(2, "0")} / ${String(rangeWords.length).padStart(2, "0")}`;
+      /* rebuild the project graph only when the word actually changes */
+      if (idx !== rangeIdx) {
+        rangeIdx = idx;
+        buildRangeGraph(idx);
+      } else if (rangeGraph && Math.abs(rangeGraph.parentElement.getBoundingClientRect().width - rangeGraphW) > 2) {
+        buildRangeGraph(idx);
+      }
     }
     /* path: the career line grows as the trajectory is read */
     if (pathLine && pathWrap && window.matchMedia("(min-width: 768px)").matches) {
@@ -363,10 +434,10 @@
       ["안녕하세요", "11 — KOREAN · ANNYEONG", "ko"],
       ["Jambo", "12 — KISWAHILI", "sw"],
     ];
-    const fast = !FINE; /* touch devices: keep it extremely quick */
-    const HOME_MS = fast ? 120 : 170;   /* nigerian greetings get room to land */
-    const WORLD_MS = fast ? 70 : 90;
-    const FINAL_MS = fast ? 280 : 380;
+    const fast = !FINE; /* touch devices: keep it quick, just not rushed */
+    const HOME_MS = fast ? 220 : 420;   /* nigerian greetings get room to land */
+    const WORLD_MS = fast ? 120 : 220;
+    const FINAL_MS = fast ? 450 : 700;
     const FINAL = ["HELLO.", "13 — LAGOS → WORLD", "en"];
     let i = 0;
     const show = ([text, tag, lang, dir]) => {

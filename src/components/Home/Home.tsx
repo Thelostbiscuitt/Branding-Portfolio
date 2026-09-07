@@ -24,7 +24,10 @@ export default function Home() {
     <span>HABIBCORE® — PORTFOLIO, 2026</span>
     <span>6°27′N, 3°24′E — LAGOS, NG</span>
   </div>
-  <div className="pl-greet"><b className="pl-word">Hello</b></div>
+  <div className="pl-greet">
+    <span className="pl-mark"><img src="/logo.png" alt="" /></span>
+    <b className="pl-word">Hello</b>
+  </div>
   <p className="pl-lang"><b>01 — ENGLISH · LAGOS</b></p>
   <div className="pl-bar"></div>
 </div>
@@ -416,6 +419,7 @@ export default function Home() {
             <p className="range-word" data-i="5"><span className="rw">AI.</span><span className="rm">ASSISTANTS · LITERACY · INTEGRATION</span></p>
             <p className="range-word" data-i="6"><span className="rw">Software.</span><span className="rm">DESIGNED, BUILT &amp; SHIPPED END TO END</span></p>
             <p className="range-word" data-i="7"><span className="rw"><em>Habibcore.</em></span><span className="rm">ALL OF IT — ONE PAIR OF HANDS</span></p>
+            <div className="range-graph" aria-hidden="true"></div>
           </div>
           <p className="range-foot"><span className="range-count">01 / 07</span>DESIGN → OPERATIONS → AUTOMATION → SYSTEMS → AI → PRODUCT → SOFTWARE</p>
         </div>

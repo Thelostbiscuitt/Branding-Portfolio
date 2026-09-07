@@ -313,8 +313,25 @@ html.has-fine-pointer.has-cursor-fx button { cursor: none; }
 }
 .pl-greet {
   position: absolute; left: 0; right: 0; top: 0; bottom: 12%;
-  display: flex; align-items: center; justify-content: center;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: clamp(18px, 4vh, 40px);
   pointer-events: none;
+}
+.pl-mark {
+  animation: plMarkIn 0.9s var(--ease-out) 0.1s both;
+  opacity: 0.92;
+}
+.pl-mark img {
+  width: clamp(56px, 7vw, 96px);
+  height: auto;
+  display: block;
+}
+@keyframes plMarkIn {
+  from { opacity: 0; transform: translateY(-10px); }
+  to   { opacity: 0.92; transform: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .pl-mark { animation: none; }
 }
 .preloader .pl-word {
   font-family: var(--font-d); font-weight: 500;
@@ -821,6 +838,7 @@ section.block { padding-top: clamp(88px, 12vw, 128px); }
   font-family: var(--font-m); font-size: 10px; letter-spacing: 0.18em; color: var(--fog);
 }
 .range-count { color: var(--rust); white-space: nowrap; }
+.range-graph { display: none; }
 
 /* desktop: pin the section, swap the words with scroll */
 @media (min-width: 1024px) and (prefers-reduced-motion: no-preference) {
@@ -832,11 +850,12 @@ section.block { padding-top: clamp(88px, 12vw, 128px); }
   html.has-js .range-sticky .container {
     display: flex; flex-direction: column;
     height: 100%; justify-content: space-between;
+    width: 100%; /* auto margins + flex item = fit-content shrink; keep the pinned layout full-width */
   }
   html.has-js .range-stage { margin-top: 0; flex: 1; display: flex; align-items: center; position: relative; }
   html.has-js .range-word {
     position: absolute; left: 0; right: 0;
-    border-top: 0; padding: 0;
+    border-top: 0; padding: 0; text-align: center;
     opacity: 0; transform: translateY(30px);
     transition: opacity 0.45s var(--ease-out), transform 0.55s var(--ease-out);
     pointer-events: none;
@@ -847,6 +866,48 @@ section.block { padding-top: clamp(88px, 12vw, 128px); }
   html.has-js .range-word .rw { font-size: clamp(4rem, 12.5vw, 12.5rem); letter-spacing: -0.025em; line-height: 0.95; }
   html.has-js .range-word .rm { margin-top: 14px; }
   html.has-js .range-foot { margin-top: 0; padding-bottom: 0; }
+
+  /* graph bubbles: the active word is the hub, projects orbit it */
+  html.has-js .range-stage.has-graph .range-word .rw { font-size: clamp(3.4rem, 9.5vw, 9.5rem); }
+  html.has-js .range-graph {
+    display: block;
+    position: absolute; inset: 0; pointer-events: none;
+  }
+  html.has-js .range-graph svg {
+    position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible;
+  }
+  html.has-js .range-graph line {
+    stroke: var(--ink); stroke-width: 1; opacity: 0.28;
+    transition: stroke-dashoffset 0.65s var(--ease-out);
+  }
+  html.has-js .range-graph .rg-bubble {
+    position: absolute; transform: translate(-50%, -50%) scale(0.55);
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    gap: 5px; text-align: center; padding: 12px;
+    min-width: clamp(128px, 11vw, 168px); min-height: clamp(96px, 8.5vw, 128px);
+    border: 1px solid var(--line); border-radius: 50%;
+    background: var(--paper2); color: var(--ink2);
+    opacity: 0; pointer-events: auto; cursor: pointer;
+    transition:
+      transform 0.55s cubic-bezier(0.3, 1.4, 0.45, 1) var(--rd, 0ms),
+      opacity 0.4s var(--ease-out) var(--rd, 0ms),
+      border-color 0.25s, background-color 0.25s, color 0.25s;
+  }
+  html.has-js .range-graph .rg-bubble b {
+    font-family: var(--font-m); font-weight: 400; font-size: 10px; letter-spacing: 0.14em; line-height: 1.5;
+  }
+  html.has-js .range-graph .rg-bubble i {
+    font-style: normal; font-family: var(--font-m); font-size: 8px; letter-spacing: 0.18em; color: var(--fog);
+  }
+  html.has-js .range-graph.on .rg-bubble {
+    opacity: 1; transform: translate(-50%, -50%) scale(1);
+  }
+  html.has-js .range-graph.on line { stroke-dashoffset: 0 !important; }
+  html.has-js .range-graph .rg-bubble:hover,
+  html.has-js .range-graph .rg-bubble:focus-visible {
+    border-color: var(--rust); color: var(--ink); background: var(--paper);
+  }
+  html.has-js .range-graph.on:has(.rg-bubble:hover) .rg-bubble:not(:hover) { opacity: 0.35; }
 }
 
 /* ————— path ————— */
