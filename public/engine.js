@@ -424,6 +424,16 @@
     if (!pl) { heroEntrance(); return; }
     if (REDUCED) { pl.remove(); heroEntrance(); return; }
     document.body.classList.add("is-locked");
+    /* Warm the graphics pipeline while the curtain is up: kick decode on
+       every image so the scroll glide and cursor never stall on a decode
+       spike after reveal. (The reference page ships its images inline;
+       this is the network equivalent — all ~476KB is fetched and decoded
+       during the greeting sequence.) */
+    $$("img").forEach((img) => {
+      img.setAttribute("loading", "eager");
+      img.setAttribute("decoding", "async");
+      if (typeof img.decode === "function") img.decode().catch(() => {});
+    });
     const wordEl = $(".pl-word", pl);
     const langEl = $(".pl-lang b", pl);
     const barEl = $(".pl-bar", pl);

@@ -31,6 +31,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
+        <link rel="preload" href="/fonts/fraunces-100-900-normal.woff2" as="font" type="font/woff2" crossOrigin="anonymous" />
+        <link rel="preload" href="/fonts/fraunces-100-900-italic.woff2" as="font" type="font/woff2" crossOrigin="anonymous" />
+        <link rel="preload" href="/fonts/archivo-100-900-normal.woff2" as="font" type="font/woff2" crossOrigin="anonymous" />
+        <link rel="preload" href="/fonts/space-mono-400-normal.woff2" as="font" type="font/woff2" crossOrigin="anonymous" />
+        <link rel="preload" href="/fonts/space-mono-700-normal.woff2" as="font" type="font/woff2" crossOrigin="anonymous" />
         {children}
         <Script src="/engine.js" strategy="afterInteractive" />
       </body>
