@@ -18,16 +18,14 @@ export default function Home() {
 {/* running folio  */}
 <div className="folio" aria-hidden="true">SECTION <b>00 — COVER</b></div>
 
-{/* preloader  */}
+{/* preloader — multilingual greeting: Lagos → Nigeria → World */}
 <div className="preloader" aria-hidden="true">
   <div className="pl-top">
     <span>HABIBCORE® — PORTFOLIO, 2026</span>
     <span>6°27′N, 3°24′E — LAGOS, NG</span>
   </div>
-  <div className="pl-mark">
-    <img src="/logo.png" alt="" />
-  </div>
-  <p className="pl-count"><b>0</b><em>%</em></p>
+  <div className="pl-greet"><b className="pl-word">Hello</b></div>
+  <p className="pl-lang"><b>01 — ENGLISH · LAGOS</b></p>
   <div className="pl-bar"></div>
 </div>
 
@@ -55,8 +53,8 @@ export default function Home() {
 {/* mobile menu  */}
 <div className="mobile-menu" id="mmenu">
   <a className="mm-link" style={{ '--d': '120ms' } as React.CSSProperties} href="#work">Work<span>01</span></a>
-  <a className="mm-link" style={{ '--d': '200ms' } as React.CSSProperties} href="#about">About<span>06</span></a>
-  <a className="mm-link" style={{ '--d': '280ms' } as React.CSSProperties} href="#contact">Contact<span>07</span></a>
+  <a className="mm-link" style={{ '--d': '200ms' } as React.CSSProperties} href="#about">About<span>07</span></a>
+  <a className="mm-link" style={{ '--d': '280ms' } as React.CSSProperties} href="#contact">Contact<span>08</span></a>
   <p className="mm-foot">HABIB@HABIBCORE.COM — LAGOS, NG</p>
 </div>
 
@@ -401,11 +399,35 @@ export default function Home() {
     </div>
   </section>
 
-  {/* ————— 05 path —————  */}
-  <section className="block" data-folio="05 — PATH">
+  {/* ————— 05 range —————  */}
+  <section className="block range" data-folio="05 — RANGE">
+    <div className="range-pin">
+      <div className="range-sticky">
+        <div className="container">
+          <div className="sec-head rv">
+            <p><span className="sh-idx">05</span> / RANGE</p>
+            <p className="sh-note">ONE PRACTICE — SEVEN EXPRESSIONS</p>
+          </div>
+          <div className="range-stage">
+            <p className="range-word" data-i="1"><span className="rw">Design.</span><span className="rm">BRAND · IDENTITY · ART DIRECTION</span></p>
+            <p className="range-word" data-i="2"><span className="rw">Product.</span><span className="rm">INTERFACES · WEB APPS · TOOLS</span></p>
+            <p className="range-word" data-i="3"><span className="rw">Systems.</span><span className="rm">PROCESS · STRUCTURE · DOCUMENTATION</span></p>
+            <p className="range-word" data-i="4"><span className="rw">Automation.</span><span className="rm">WORKFLOWS · PIPELINES · SLAS</span></p>
+            <p className="range-word" data-i="5"><span className="rw">AI.</span><span className="rm">ASSISTANTS · LITERACY · INTEGRATION</span></p>
+            <p className="range-word" data-i="6"><span className="rw">Software.</span><span className="rm">DESIGNED, BUILT &amp; SHIPPED END TO END</span></p>
+            <p className="range-word" data-i="7"><span className="rw"><em>Habibcore.</em></span><span className="rm">ALL OF IT — ONE PAIR OF HANDS</span></p>
+          </div>
+          <p className="range-foot"><span className="range-count">01 / 07</span>DESIGN → OPERATIONS → AUTOMATION → SYSTEMS → AI → PRODUCT → SOFTWARE</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {/* ————— 06 path —————  */}
+  <section className="block" data-folio="06 — PATH">
     <div className="container">
       <div className="sec-head">
-        <p><span className="sh-idx">05</span> / PATH</p>
+        <p><span className="sh-idx">06</span> / PATH</p>
         <p className="sh-note">2020 — NOW</p>
       </div>
       <div className="path-wrap">
@@ -421,8 +443,15 @@ export default function Home() {
           <h3>Leadway Pensure</h3>
           <p className="path-role">OPERATIONS &amp; AUTOMATION</p>
           <p className="path-desc">Four years inside one of Nigeria&rsquo;s largest pension funds, building the systems that keep the work moving.</p>
+          <p className="path-stat">250+ CLIENTS MANAGED · 18-STAGE PIPELINE · 10,000+ CLIENTS MOVED TO SELF-SERVICE</p>
         </div>
         <div className="path-row rv" style={{ '--d': '180ms' } as React.CSSProperties}>
+          <p className="path-year">2026</p>
+          <h3>Birdview</h3>
+          <p className="path-role">CRM · AI · PROCESS SYSTEMS</p>
+          <p className="path-desc">Systems work at Birdview Travels &amp; Tours — role-scoped data, audit trails, SLA clocks, and an eleven-module AI literacy programme for the whole company.</p>
+        </div>
+        <div className="path-row rv" style={{ '--d': '270ms' } as React.CSSProperties}>
           <p className="path-year">NOW</p>
           <h3>Independent</h3>
           <p className="path-role">PRODUCT · AI · SOFTWARE</p>
@@ -432,11 +461,11 @@ export default function Home() {
     </div>
   </section>
 
-  {/* ————— 06 about —————  */}
-  <section className="block" id="about" data-folio="06 — ABOUT">
+  {/* ————— 07 about —————  */}
+  <section className="block" id="about" data-folio="07 — ABOUT">
     <div className="container">
       <div className="sec-head">
-        <p><span className="sh-idx">06</span> / ABOUT</p>
+        <p><span className="sh-idx">07</span> / ABOUT</p>
         <p className="sh-note">THE OPERATOR</p>
       </div>
       <div className="about-grid">
@@ -448,7 +477,7 @@ export default function Home() {
               </div>
             </div>
           </div>
-          <figcaption>FIG. 06 — THE OPERATOR. LAGOS, NATURAL LIGHT.</figcaption>
+          <figcaption>FIG. 07 — THE OPERATOR. LAGOS, NATURAL LIGHT.</figcaption>
         </figure>
         <div className="about-body">
           <h2 className="h-display skewable rv" style={{ '--d': '100ms' } as React.CSSProperties}>Designer. Builder. <em>Operator.</em></h2>
@@ -473,11 +502,11 @@ export default function Home() {
     </div>
   </section>
 
-  {/* ————— 07 contact —————  */}
-  <section className="contact" id="contact" data-folio="07 — CONTACT">
+  {/* ————— 08 contact —————  */}
+  <section className="contact" id="contact" data-folio="08 — CONTACT">
     <div className="container">
       <div className="sec-head">
-        <p><span className="sh-idx">07</span> / CONTACT</p>
+        <p><span className="sh-idx">08</span> / CONTACT</p>
         <p className="sh-note">RESPONDS WITHIN 24H</p>
       </div>
       <div className="contact-grid">

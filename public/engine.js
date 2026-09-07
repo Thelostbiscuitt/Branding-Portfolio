@@ -141,6 +141,11 @@
   const parallaxEls = $$("[data-speed]").map((el) => ({ el, speed: parseFloat(el.dataset.speed) || 0.1 }));
   const skewEls = $$(".skewable");
   const wordmark = $(".wordmark p");
+  const rangeSec = $(".range");
+  const rangeWords = $$(".range-word");
+  const rangeCount = $(".range-count");
+  const pathWrap = $(".path-wrap");
+  const pathLine = $(".path-line");
   let lastY = window.scrollY;
   let navTick = 0;
 
@@ -179,6 +184,24 @@
         const p = clamp(1 - r.top / window.innerHeight, 0, 1);
         wordmark.style.transform = `translateY(${(16 - p * 20).toFixed(2)}%)`;
       }
+    }
+    /* range: pinned chapter — swap the big word with scroll progress */
+    if (rangeSec && rangeWords.length && window.matchMedia("(min-width: 1024px)").matches && !REDUCED) {
+      const r = rangeSec.getBoundingClientRect();
+      const total = r.height - window.innerHeight;
+      const p = total > 0 ? clamp(-r.top / total, 0, 1) : 1;
+      const idx = Math.min(rangeWords.length - 1, Math.floor(p * rangeWords.length * 0.9999));
+      rangeWords.forEach((w, i) => {
+        w.classList.toggle("is-on", i === idx);
+        w.classList.toggle("is-past", i < idx);
+      });
+      if (rangeCount) rangeCount.textContent = `${String(idx + 1).padStart(2, "0")} / ${String(rangeWords.length).padStart(2, "0")}`;
+    }
+    /* path: the career line grows as the trajectory is read */
+    if (pathLine && pathWrap && window.matchMedia("(min-width: 768px)").matches) {
+      const r = pathWrap.getBoundingClientRect();
+      const p = clamp((window.innerHeight * 0.78 - r.top) / r.height, 0, 1);
+      pathLine.style.transform = `scaleY(${p.toFixed(3)})`;
     }
   };
   const effects2 = effects; // single implementation
@@ -322,28 +345,68 @@
     if (!pl) { heroEntrance(); return; }
     if (REDUCED) { pl.remove(); heroEntrance(); return; }
     document.body.classList.add("is-locked");
-    const countEl = $(".pl-count b");
-    const barEl = $(".pl-bar");
-    const DUR = 1050;
-    const t0 = performance.now();
-    const step = (t) => {
-      const p = clamp((t - t0) / DUR, 0, 1);
-      const eased = 1 - Math.pow(1 - p, 3);
-      const n = Math.round(eased * 100);
-      if (countEl) countEl.textContent = n;
-      if (barEl) barEl.style.transform = `scaleX(${eased})`;
-      if (p < 1) requestAnimationFrame(step);
-      else {
-        setTimeout(() => {
-          pl.classList.add("done");
-          document.body.classList.remove("is-locked");
-          heroEntrance();
-          engine.measure();
-          setTimeout(() => pl.remove(), 1000);
-        }, 160);
+    const wordEl = $(".pl-word", pl);
+    const langEl = $(".pl-lang b", pl);
+    const barEl = $(".pl-bar", pl);
+    /* Lagos → Nigeria → World */
+    const GREET = [
+      ["Hello", "01 — ENGLISH · LAGOS", "en"],
+      ["Pẹ̀lẹ́ o", "02 — YORÙBÁ · NIGERIA", "yo"],
+      ["Ndewo", "03 — IGBO · NIGERIA", "ig"],
+      ["Sannu", "04 — HAUSA · NIGERIA", "ha"],
+      ["Bonjour", "05 — FRANÇAIS", "fr"],
+      ["Hola", "06 — ESPAÑOL", "es"],
+      ["Olá", "07 — PORTUGUÊS", "pt"],
+      ["مرحبا", "08 — ARABIC · MARHABAN", "ar", "rtl"],
+      ["こんにちは", "09 — JAPANESE · KONNICHIWA", "ja"],
+      ["你好", "10 — CHINESE · NǏ HǍO", "zh"],
+      ["안녕하세요", "11 — KOREAN · ANNYEONG", "ko"],
+      ["Jambo", "12 — KISWAHILI", "sw"],
+    ];
+    const fast = !FINE; /* touch devices: keep it extremely quick */
+    const HOME_MS = fast ? 120 : 170;   /* nigerian greetings get room to land */
+    const WORLD_MS = fast ? 70 : 90;
+    const FINAL_MS = fast ? 280 : 380;
+    const FINAL = ["HELLO.", "13 — LAGOS → WORLD", "en"];
+    let i = 0;
+    const show = ([text, tag, lang, dir]) => {
+      if (!wordEl) return;
+      wordEl.textContent = text;
+      wordEl.lang = lang || "en";
+      if (dir) wordEl.setAttribute("dir", dir); else wordEl.removeAttribute("dir");
+      if (langEl) langEl.textContent = tag;
+      wordEl.classList.remove("swap");
+      if (langEl) langEl.classList.remove("swap");
+      void wordEl.offsetWidth; /* restart the entrance animation */
+      wordEl.classList.add("swap");
+      if (langEl) langEl.classList.add("swap");
+    };
+    const DUR = 4 * HOME_MS + (GREET.length - 4) * WORLD_MS + FINAL_MS;
+    if (barEl) {
+      barEl.style.transition = `transform ${DUR + 120}ms linear`;
+      requestAnimationFrame(() => (barEl.style.transform = "scaleX(1)"));
+    }
+    const finish = () => {
+      setTimeout(() => {
+        pl.classList.add("done");
+        document.body.classList.remove("is-locked");
+        heroEntrance();
+        engine.measure();
+        setTimeout(() => pl.remove(), 1000);
+      }, 140);
+    };
+    const step = () => {
+      if (i < GREET.length) {
+        show(GREET[i]);
+        i += 1;
+        setTimeout(step, i <= 4 ? HOME_MS : WORLD_MS);
+      } else if (i === GREET.length) {
+        show(FINAL);
+        i += 1;
+        setTimeout(finish, FINAL_MS);
       }
     };
-    requestAnimationFrame(step);
+    step();
   })();
 
   /* ————— velocity-reactive marquee ————— */
