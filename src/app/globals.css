@@ -311,20 +311,57 @@ html.has-fine-pointer.has-cursor-fx button { cursor: none; }
   display: flex; justify-content: space-between; align-items: baseline;
   font-family: var(--font-m); font-size: 11px; letter-spacing: 0.22em; color: var(--fog);
 }
-.preloader .pl-count {
-  font-family: var(--font-d);
-  font-weight: 600;
-  font-size: clamp(4.5rem, 14vw, 11rem);
-  line-height: 0.85;
-  letter-spacing: -0.03em;
-  align-self: flex-start;
-  font-variant-numeric: tabular-nums;
+.pl-greet {
+  position: absolute; left: 0; right: 0; top: 0; bottom: 12%;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: clamp(18px, 4vh, 40px);
+  pointer-events: none;
 }
-.preloader .pl-count em { color: var(--rust); font-weight: 300; }
-.preloader .pl-bar {
-  position: absolute; left: 0; bottom: 0; height: 3px; width: 100%;
-  background: var(--rust);
-  transform: scaleX(0); transform-origin: 0 50%;
+.pl-mark {
+  animation: plMarkIn 0.9s var(--ease-out) 0.1s both;
+  opacity: 0.92;
+}
+.pl-mark img {
+  width: clamp(56px, 7vw, 96px);
+  height: auto;
+  display: block;
+}
+@keyframes plMarkIn {
+  from { opacity: 0; transform: translateY(-10px); }
+  to   { opacity: 0.92; transform: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .pl-mark { animation: none; }
+}
+.preloader .pl-word {
+  font-family: var(--font-d); font-weight: 500;
+  font-size: clamp(3.2rem, 10vw, 8.5rem);
+  line-height: 1; letter-spacing: -0.02em;
+  color: var(--ink); text-align: center;
+}
+.preloader .pl-word.swap { animation: plWordIn 170ms var(--ease-out) both; }
+@keyframes plWordIn {
+  from { opacity: 0; transform: translateY(12px); filter: blur(5px); }
+  to   { opacity: 1; transform: none; filter: blur(0); }
+}
+.preloader .pl-lang {
+  position: absolute; left: 0; right: 0; bottom: clamp(44px, 9vh, 84px);
+  display: flex; justify-content: center;
+  font-family: var(--font-m); font-size: 10px; letter-spacing: 0.24em; color: var(--fog);
+}
+.preloader .pl-lang b { font-weight: 400; }
+.preloader .pl-lang b.swap { animation: plLangIn 170ms var(--ease-out) both; }
+@keyframes plLangIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .preloader .pl-word.swap, .preloader .pl-lang b.swap { animation: none; }
+}
+/* touch cadence is quick — give the entrance room by shortening it */
+@media (pointer: coarse) {
+  .preloader .pl-word.swap { animation-duration: 110ms; }
+  .preloader .pl-lang b.swap { animation-duration: 110ms; }
 }
 
 /* ————— nav ————— */
@@ -636,8 +673,8 @@ section.block { padding-top: clamp(88px, 12vw, 128px); }
   padding: 4px 0 36px;
 }
 @media (min-width: 768px) { .p-panel-inner { grid-template-columns: 7fr 5fr; gap: 24px; padding-bottom: 40px; } }
-.p-fig { border: 1px solid var(--line); background: var(--paper2); overflow: hidden; }
-.p-fig img { width: 100%; height: auto; object-fit: cover; }
+.p-fig { border: 1px solid var(--line); background: var(--paper2); overflow: hidden; aspect-ratio: 16 / 10; max-height: 560px; }
+.p-fig img { width: 100%; height: 100%; object-fit: cover; object-position: top center; }
 .p-figcap { margin-top: 8px; font-family: var(--font-m); font-size: 10px; letter-spacing: 0.18em; color: var(--fog); }
 .p-body { display: flex; flex-direction: column; }
 @media (min-width: 768px) { .p-body { padding-left: 16px; } }

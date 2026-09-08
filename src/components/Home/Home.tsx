@@ -20,14 +20,17 @@ export default function Home() {
 {/* running folio  */}
 <div className="folio" aria-hidden="true">SECTION <b>00 — COVER</b></div>
 
-{/* preloader */}
+{/* preloader — multilingual greeting: Lagos → Nigeria → World */}
 <div className="preloader" aria-hidden="true">
   <div className="pl-top">
     <span>HABIBCORE® — PORTFOLIO, 2026</span>
     <span>6°27′N, 3°24′E — LAGOS, NG</span>
   </div>
-  <p className="pl-count"><b>0</b><em>%</em></p>
-  <div className="pl-bar"></div>
+  <div className="pl-greet">
+    <span className="pl-mark"><img src="/logo.png" alt="" width={1378} height={1378} decoding="async" /></span>
+    <b className="pl-word">Hello</b>
+  </div>
+  <p className="pl-lang"><b>01 — ENGLISH · LAGOS</b></p>
 </div>
 
 {/* custom cursor  */}

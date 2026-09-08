@@ -790,28 +790,61 @@
       img.setAttribute("decoding", "async");
       if (typeof img.decode === "function") img.decode().catch(() => {});
     });
-    const countEl = $(".pl-count b", pl);
-    const barEl = $(".pl-bar", pl);
-    const DUR = 1050;
-    const t0 = performance.now();
-    const step = (t) => {
-      const p = clamp((t - t0) / DUR, 0, 1);
-      const eased = 1 - Math.pow(1 - p, 3);
-      const n = Math.round(eased * 100);
-      if (countEl) countEl.textContent = n;
-      if (barEl) barEl.style.transform = `scaleX(${eased})`;
-      if (p < 1) requestAnimationFrame(step);
-      else {
-        setTimeout(() => {
-          pl.classList.add("done");
-          document.body.classList.remove("is-locked");
-          heroEntrance();
-          engine.measure();
-          setTimeout(() => pl.remove(), 1000);
-        }, 160);
+    const wordEl = $(".pl-word", pl);
+    const langEl = $(".pl-lang b", pl);
+    /* Lagos → Nigeria → World, resolving into the identity lockup.
+       Ten beats at ~150ms — the whole introduction reads in under 2s.
+       No progress bar, no spinner: the greeting IS the opening. */
+    const GREET = [
+      ["Hello", "01 — ENGLISH · LAGOS", "en"],
+      ["Pẹ̀lẹ́ o", "02 — YORÙBÁ · NIGERIA", "yo"],
+      ["Ndewo", "03 — IGBO · NIGERIA", "ig"],
+      ["Sannu", "04 — HAUSA · NIGERIA", "ha"],
+      ["Bonjour", "05 — FRANÇAIS", "fr"],
+      ["Hola", "06 — ESPAÑOL", "es"],
+      ["Olá", "07 — PORTUGUÊS", "pt"],
+      ["مرحبا", "08 — ARABIC · MARHABAN", "ar", "rtl"],
+      ["こんにちは", "09 — JAPANESE · KONNICHIWA", "ja"],
+      ["你好", "10 — CHINESE · NǏ HǍO", "zh"],
+    ];
+    const fast = !FINE; /* touch devices: keep it quick, just not rushed */
+    const WORD_MS = fast ? 110 : 150;  /* one metronome for every greeting */
+    const FINAL_MS = fast ? 380 : 480; /* hold the identity lockup a beat longer */
+    const FINAL = ["HABIBCORE®", "LAGOS → WORLD", "en"];
+    let i = 0;
+    const show = ([text, tag, lang, dir]) => {
+      if (!wordEl) return;
+      wordEl.textContent = text;
+      wordEl.lang = lang || "en";
+      if (dir) wordEl.setAttribute("dir", dir); else wordEl.removeAttribute("dir");
+      if (langEl) langEl.textContent = tag;
+      wordEl.classList.remove("swap");
+      if (langEl) langEl.classList.remove("swap");
+      void wordEl.offsetWidth; /* restart the entrance animation */
+      wordEl.classList.add("swap");
+      if (langEl) langEl.classList.add("swap");
+    };
+    const finish = () => {
+      setTimeout(() => {
+        pl.classList.add("done");
+        document.body.classList.remove("is-locked");
+        heroEntrance();
+        engine.measure();
+        setTimeout(() => pl.remove(), 1000);
+      }, 140);
+    };
+    const step = () => {
+      if (i < GREET.length) {
+        show(GREET[i]);
+        i += 1;
+        setTimeout(step, WORD_MS);
+      } else if (i === GREET.length) {
+        show(FINAL);
+        i += 1;
+        setTimeout(finish, FINAL_MS);
       }
     };
-    requestAnimationFrame(step);
+    step();
   })();
 
   /* ————— velocity-reactive marquee ————— */

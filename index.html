@@ -152,7 +152,7 @@ html { scrollbar-width: thin; scrollbar-color: var(--ink) var(--paper2); }
   font-size: 11px;
   letter-spacing: 0.2em;
 }
-.container { max-width: 1440px; margin-inline: auto; padding-inline: var(--gutter); }
+.container { max-width: 1216px; margin-inline: auto; padding-inline: var(--gutter); }
 
 .u-line {
   background-image: linear-gradient(currentColor, currentColor);
@@ -266,20 +266,56 @@ html.has-fine-pointer.has-cursor-fx button { cursor: none; }
   display: flex; justify-content: space-between; align-items: baseline;
   font-family: var(--font-m); font-size: 11px; letter-spacing: 0.22em; color: var(--fog);
 }
-.preloader .pl-count {
-  font-family: var(--font-d);
-  font-weight: 600;
-  font-size: clamp(4.5rem, 14vw, 11rem);
-  line-height: 0.85;
-  letter-spacing: -0.03em;
-  align-self: flex-start;
-  font-variant-numeric: tabular-nums;
+.pl-greet {
+  position: absolute; left: 0; right: 0; top: 0; bottom: 12%;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: clamp(18px, 4vh, 40px);
+  pointer-events: none;
 }
-.preloader .pl-count em { color: var(--rust); font-weight: 300; }
-.preloader .pl-bar {
-  position: absolute; left: 0; bottom: 0; height: 3px; width: 100%;
-  background: var(--rust);
-  transform: scaleX(0); transform-origin: 0 50%;
+.pl-mark {
+  animation: plMarkIn 0.9s var(--ease-out) 0.1s both;
+  opacity: 0.92;
+}
+.pl-mark img {
+  width: clamp(56px, 7vw, 96px);
+  height: auto;
+  display: block;
+}
+@keyframes plMarkIn {
+  from { opacity: 0; transform: translateY(-10px); }
+  to   { opacity: 0.92; transform: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .pl-mark { animation: none; }
+}
+.preloader .pl-word {
+  font-family: var(--font-d); font-weight: 500;
+  font-size: clamp(3.2rem, 10vw, 8.5rem);
+  line-height: 1; letter-spacing: -0.02em;
+  color: var(--ink); text-align: center;
+}
+.preloader .pl-word.swap { animation: plWordIn 170ms var(--ease-out) both; }
+@keyframes plWordIn {
+  from { opacity: 0; transform: translateY(12px); filter: blur(5px); }
+  to   { opacity: 1; transform: none; filter: blur(0); }
+}
+.preloader .pl-lang {
+  position: absolute; left: 0; right: 0; bottom: clamp(44px, 9vh, 84px);
+  display: flex; justify-content: center;
+  font-family: var(--font-m); font-size: 10px; letter-spacing: 0.24em; color: var(--fog);
+}
+.preloader .pl-lang b { font-weight: 400; }
+.preloader .pl-lang b.swap { animation: plLangIn 170ms var(--ease-out) both; }
+@keyframes plLangIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .preloader .pl-word.swap, .preloader .pl-lang b.swap { animation: none; }
+}
+@media (pointer: coarse) {
+  .preloader .pl-word.swap { animation-duration: 110ms; }
+  .preloader .pl-lang b.swap { animation-duration: 110ms; }
 }
 
 /* ————— nav ————— */
@@ -294,16 +330,16 @@ html.has-fine-pointer.has-cursor-fx button { cursor: none; }
 .nav.scrolled { border-bottom-color: var(--line); }
 .nav.hidden { transform: translateY(-100%); }
 .nav-inner {
-  max-width: 1440px; margin-inline: auto;
+  max-width: 1216px; margin-inline: auto;
   height: 56px; padding-inline: var(--gutter);
   display: flex; align-items: center; justify-content: space-between; gap: 20px;
 }
 .brand {
-  font-family: var(--font-d); font-size: 22px; font-weight: 640;
+  font-family: var(--font-d); font-size: 22px; font-weight: 560;
   letter-spacing: -0.02em; line-height: 1;
   display: inline-flex;
 }
-.brand b { color: var(--rust); font-weight: 640; transition: transform 0.3s var(--ease-b, var(--ease-out)); display: inline-block; }
+.brand b { color: var(--rust); font-weight: 560; transition: transform 0.3s var(--ease-b, var(--ease-out)); display: inline-block; }
 .brand:hover b { transform: translateY(-3px); }
 .nav-links { display: none; align-items: center; gap: 32px; }
 @media (min-width: 768px) { .nav-links { display: flex; } }
@@ -377,7 +413,7 @@ html.has-fine-pointer.has-cursor-fx button { cursor: none; }
 .mobile-menu .mm-foot { margin-top: 34px; font-family: var(--font-m); font-size: 10px; letter-spacing: 0.2em; color: var(--fog); }
 
 /* ————— hero ————— */
-.hero { position: relative; padding-top: clamp(96px, 13vh, 150px); overflow: hidden; }
+.hero { position: relative; padding-top: clamp(88px, 11vh, 120px); overflow: hidden; }
 .hero-meta {
   display: flex; justify-content: space-between; align-items: baseline; gap: 16px;
   border-bottom: 1px solid var(--line); padding-bottom: 12px;
@@ -388,13 +424,13 @@ html.has-fine-pointer.has-cursor-fx button { cursor: none; }
 .hero-grid {
   position: relative;
   display: grid; grid-template-columns: 1fr; gap: 40px 24px;
-  padding-top: clamp(40px, 6vw, 64px);
+  padding-top: clamp(28px, 3.5vw, 44px);
 }
-@media (min-width: 1024px) { .hero-grid { grid-template-columns: 3fr 1fr; } }
+@media (min-width: 1024px) { .hero-grid { grid-template-columns: 1fr minmax(300px, 384px); } }
 .hero h1 {
   font-family: var(--font-d);
   font-weight: 500;
-  font-size: clamp(3.3rem, 10.5vw, 9.5rem);
+  font-size: clamp(2.6rem, 6.5vw, 7rem);
   line-height: 0.94;
   letter-spacing: -0.02em;
   font-optical-sizing: auto;
@@ -402,7 +438,7 @@ html.has-fine-pointer.has-cursor-fx button { cursor: none; }
 .hero h1 em { font-weight: 300; color: var(--rust); }
 .hero-aside { position: relative; }
 .hero-aside p { max-width: 448px; font-size: 15px; line-height: 1.65; color: var(--ink2); }
-@media (min-width: 1024px) { .hero-aside p { margin-top: 118px; } }
+@media (min-width: 1024px) { .hero-aside p { margin-top: clamp(64px, 7vw, 96px); } }
 .hero-ctas { display: flex; flex-wrap: wrap; gap: 16px; margin-top: 32px; }
 .btn {
   display: inline-block;
@@ -443,19 +479,20 @@ html.has-fine-pointer.has-cursor-fx button { cursor: none; }
 
 /* facts strip */
 .facts {
-  margin-top: clamp(56px, 8vw, 96px);
+  margin-top: clamp(40px, 5vw, 64px);
   display: grid; grid-template-columns: 1fr 1fr;
   gap: 1px; background: var(--line);
   border-top: 1px solid var(--line);
 }
 @media (min-width: 768px) { .facts { grid-template-columns: repeat(4, 1fr); } }
-.facts > div { background: var(--paper); padding: 16px 16px 16px 0; }
+.facts > div { background: var(--paper); padding: 16px; }
+.facts > div:first-child { padding-left: 0; }
 .facts .fk { font-family: var(--font-m); font-size: 10px; letter-spacing: 0.22em; color: var(--fog); }
 .facts .fv { margin-top: 4px; font-size: 14px; }
 
 /* ————— marquee ————— */
 .marquee {
-  margin-top: clamp(72px, 10vw, 112px);
+  margin-top: clamp(56px, 7vw, 80px);
   border-block: 1px solid var(--line);
   padding: 14px 0;
   overflow: hidden;
@@ -483,14 +520,6 @@ html.has-fine-pointer.has-cursor-fx button { cursor: none; }
 .cropmarks b:nth-child(2) { right: 14px; top: 74px; }
 .cropmarks b:nth-child(3) { left: 14px; bottom: 14px; }
 .cropmarks b:nth-child(4) { right: 14px; bottom: 14px; }
-.folio {
-  position: fixed; left: var(--gutter); bottom: 16px; z-index: 60;
-  display: none;
-  font-family: var(--font-m); font-size: 9px; letter-spacing: 0.22em; color: var(--fog);
-  pointer-events: none;
-}
-@media (min-width: 768px) { .folio { display: block; } }
-.folio b { color: var(--rust); font-weight: 400; }
 
 /* ————— section scaffolding ————— */
 section.block { padding-top: clamp(88px, 12vw, 128px); }
@@ -591,8 +620,8 @@ section.block { padding-top: clamp(88px, 12vw, 128px); }
   padding: 4px 0 36px;
 }
 @media (min-width: 768px) { .p-panel-inner { grid-template-columns: 7fr 5fr; gap: 24px; padding-bottom: 40px; } }
-.p-fig { border: 1px solid var(--line); background: var(--paper2); overflow: hidden; }
-.p-fig img { width: 100%; height: auto; object-fit: cover; }
+.p-fig { border: 1px solid var(--line); background: var(--paper2); overflow: hidden; aspect-ratio: 16 / 10; max-height: 560px; }
+.p-fig img { width: 100%; height: 100%; object-fit: cover; object-position: top center; }
 .p-figcap { margin-top: 8px; font-family: var(--font-m); font-size: 10px; letter-spacing: 0.18em; color: var(--fog); }
 .p-body { display: flex; flex-direction: column; }
 @media (min-width: 768px) { .p-body { padding-left: 16px; } }
@@ -994,8 +1023,6 @@ section.block { padding-top: clamp(88px, 12vw, 128px); }
 <div class="progress" aria-hidden="true"></div>
 <!-- crop marks -->
 <div class="cropmarks" aria-hidden="true"><b></b><b></b><b></b><b></b></div>
-<!-- running folio -->
-<div class="folio" aria-hidden="true">SECTION <b>00 — COVER</b></div>
 
 <!-- preloader -->
 <div class="preloader" aria-hidden="true">
@@ -1003,8 +1030,11 @@ section.block { padding-top: clamp(88px, 12vw, 128px); }
     <span>HABIBCORE® — PORTFOLIO, 2026</span>
     <span>6°27′N, 3°24′E — LAGOS, NG</span>
   </div>
-  <p class="pl-count"><b>0</b><em>%</em></p>
-  <div class="pl-bar"></div>
+  <div class="pl-greet">
+    <span class="pl-mark"><img src="data:image/png;base64,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" alt="" width="128" height="128" decoding="async"></span>
+    <b class="pl-word">Hello</b>
+  </div>
+  <p class="pl-lang"><b>01 — ENGLISH · LAGOS</b></p>
 </div>
 
 <!-- custom cursor -->
@@ -1076,7 +1106,7 @@ section.block { padding-top: clamp(88px, 12vw, 128px); }
       <div class="facts" data-stagger="90">
         <div class="rv"><p class="fk">DISCIPLINES</p><p class="fv">Design → Build</p></div>
         <div class="rv"><p class="fk">CURRENTLY</p><p class="fv">Biscuit AI · Relay</p></div>
-        <div class="rv"><p class="fk">SINCE</p><p class="fv">2020 — five years deep</p></div>
+        <div class="rv"><p class="fk">SINCE</p><p class="fv">2020 — six years deep</p></div>
         <div class="rv"><p class="fk">STATUS</p><p class="fv">Taking select projects</p></div>
       </div>
     </div>
@@ -1663,8 +1693,7 @@ section.block { padding-top: clamp(88px, 12vw, 128px); }
   /* ————— scroll-linked effects (progress, nav, parallax, skew, wordmark) ————— */
   const nav = $(".nav");
   const progressBar = $(".progress");
-  const folio = $(".folio b");
-  const parallaxEls = $$("[data-speed]").map((el) => ({ el, speed: parseFloat(el.dataset.speed) || 0.1 }));
+    const parallaxEls = $$("[data-speed]").map((el) => ({ el, speed: parseFloat(el.dataset.speed) || 0.1 }));
   const skewEls = $$(".skewable");
   const wordmark = $(".wordmark p");
   let lastY = window.scrollY;
@@ -1708,18 +1737,6 @@ section.block { padding-top: clamp(88px, 12vw, 128px); }
     }
   };
   const effects2 = effects; // single implementation
-
-  /* running folio: current section label */
-  const folioMap = [];
-  $$("section[data-folio]").forEach((s) => folioMap.push({ el: s, label: s.dataset.folio }));
-  if (folio && folioMap.length) {
-    const folioIO = new IntersectionObserver((entries) => {
-      entries.forEach((en) => {
-        if (en.isIntersecting) folio.textContent = en.target.dataset.folio;
-      });
-    }, { rootMargin: "-40% 0px -50% 0px" });
-    folioMap.forEach(({ el }) => folioIO.observe(el));
-  }
 
   /* active nav link */
   const navLinks = $$(".nav-links a");
@@ -1848,28 +1865,61 @@ section.block { padding-top: clamp(88px, 12vw, 128px); }
     if (!pl) { heroEntrance(); return; }
     if (REDUCED) { pl.remove(); heroEntrance(); return; }
     document.body.classList.add("is-locked");
-    const countEl = $(".pl-count b");
-    const barEl = $(".pl-bar");
-    const DUR = 1050;
-    const t0 = performance.now();
-    const step = (t) => {
-      const p = clamp((t - t0) / DUR, 0, 1);
-      const eased = 1 - Math.pow(1 - p, 3);
-      const n = Math.round(eased * 100);
-      if (countEl) countEl.textContent = n;
-      if (barEl) barEl.style.transform = `scaleX(${eased})`;
-      if (p < 1) requestAnimationFrame(step);
-      else {
-        setTimeout(() => {
-          pl.classList.add("done");
-          document.body.classList.remove("is-locked");
-          heroEntrance();
-          engine.measure();
-          setTimeout(() => pl.remove(), 1000);
-        }, 160);
+    const wordEl = $(".pl-word", pl);
+    const langEl = $(".pl-lang b", pl);
+    /* Lagos → Nigeria → World, resolving into the identity lockup.
+       Ten beats at ~150ms — the whole introduction reads in under 2s.
+       No progress bar, no spinner: the greeting IS the opening. */
+    const GREET = [
+      ["Hello", "01 — ENGLISH · LAGOS", "en"],
+      ["Pẹ̀lẹ́ o", "02 — YORÙBÁ · NIGERIA", "yo"],
+      ["Ndewo", "03 — IGBO · NIGERIA", "ig"],
+      ["Sannu", "04 — HAUSA · NIGERIA", "ha"],
+      ["Bonjour", "05 — FRANÇAIS", "fr"],
+      ["Hola", "06 — ESPAÑOL", "es"],
+      ["Olá", "07 — PORTUGUÊS", "pt"],
+      ["مرحبا", "08 — ARABIC · MARHABAN", "ar", "rtl"],
+      ["こんにちは", "09 — JAPANESE · KONNICHIWA", "ja"],
+      ["你好", "10 — CHINESE · NǏ HǍO", "zh"],
+    ];
+    const fast = !FINE; /* touch devices: keep it quick, just not rushed */
+    const WORD_MS = fast ? 110 : 150;  /* one metronome for every greeting */
+    const FINAL_MS = fast ? 380 : 480; /* hold the identity lockup a beat longer */
+    const FINAL = ["HABIBCORE®", "LAGOS → WORLD", "en"];
+    let i = 0;
+    const show = ([text, tag, lang, dir]) => {
+      if (!wordEl) return;
+      wordEl.textContent = text;
+      wordEl.lang = lang || "en";
+      if (dir) wordEl.setAttribute("dir", dir); else wordEl.removeAttribute("dir");
+      if (langEl) langEl.textContent = tag;
+      wordEl.classList.remove("swap");
+      if (langEl) langEl.classList.remove("swap");
+      void wordEl.offsetWidth; /* restart the entrance animation */
+      wordEl.classList.add("swap");
+      if (langEl) langEl.classList.add("swap");
+    };
+    const finish = () => {
+      setTimeout(() => {
+        pl.classList.add("done");
+        document.body.classList.remove("is-locked");
+        heroEntrance();
+        engine.measure();
+        setTimeout(() => pl.remove(), 1000);
+      }, 140);
+    };
+    const step = () => {
+      if (i < GREET.length) {
+        show(GREET[i]);
+        i += 1;
+        setTimeout(step, WORD_MS);
+      } else if (i === GREET.length) {
+        show(FINAL);
+        i += 1;
+        setTimeout(finish, FINAL_MS);
       }
     };
-    requestAnimationFrame(step);
+    step();
   })();
 
   /* ————— velocity-reactive marquee ————— */
