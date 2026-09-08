@@ -20,17 +20,14 @@ export default function Home() {
 {/* running folio  */}
 <div className="folio" aria-hidden="true">SECTION <b>00 — COVER</b></div>
 
-{/* preloader — multilingual greeting: Lagos → Nigeria → World */}
+{/* preloader */}
 <div className="preloader" aria-hidden="true">
   <div className="pl-top">
     <span>HABIBCORE® — PORTFOLIO, 2026</span>
     <span>6°27′N, 3°24′E — LAGOS, NG</span>
   </div>
-  <div className="pl-greet">
-    <span className="pl-mark"><img src="/logo.png" alt="" width={1378} height={1378} decoding="async" /></span>
-    <b className="pl-word">Hello</b>
-  </div>
-  <p className="pl-lang"><b>01 — ENGLISH · LAGOS</b></p>
+  <p className="pl-count"><b>0</b><em>%</em></p>
+  <div className="pl-bar"></div>
 </div>
 
 {/* custom cursor  */}
@@ -361,56 +358,14 @@ export default function Home() {
     </div>
   </section>
 
-  {/* ————— 03 voices —————  */}
-  <section className="block" data-folio="03 — VOICES">
-    <div className="container">
-      <div className="sec-head">
-        <p><span className="sh-idx">03</span> / VOICES</p>
-        <p className="sh-note">CLIENTS &amp; COLLEAGUES</p>
-      </div>
-      <div className="voices-grid" data-stagger="110">
-        <figure className="v-lead rv">
-          <blockquote><span className="q">&ldquo;</span>These designs were exactly what I needed. It&rsquo;s rare to be able to describe what I want and have someone actually deliver that.<span className="q">&rdquo;</span></blockquote>
-          <figcaption><span className="v-name">SKAAME</span><span className="v-role">— ARTIST</span></figcaption>
-        </figure>
-        <figure className="rv" style={{ '--d': '110ms' } as React.CSSProperties}>
-          <blockquote><span className="q">&ldquo;</span>Michael is a solution thinker — he came into the company and within two months had already thought of effective solutions to optimise our workflow and positioned us to become more AI-inclined.<span className="q">&rdquo;</span></blockquote>
-          <figcaption><span className="v-name">ABIDEMI AMODU</span><span className="v-role">— MANAGING DIRECTOR</span></figcaption>
-        </figure>
-        <figure className="rv" style={{ '--d': '220ms' } as React.CSSProperties}>
-          <blockquote><span className="q">&ldquo;</span>As someone who uses AI, it&rsquo;s refreshing to see and hear someone with more insight expand on troubling topics.<span className="q">&rdquo;</span></blockquote>
-          <figcaption><span className="v-name">ADEBAYO ADEBANJO</span><span className="v-role">— FINANCE DEPT</span></figcaption>
-        </figure>
-      </div>
-    </div>
-  </section>
-
-  {/* ————— 04 how i work —————  */}
-  <section className="block" data-folio="04 — HOW I WORK">
-    <div className="container">
-      <div className="sec-head">
-        <p><span className="sh-idx">04</span> / HOW I WORK</p>
-        <p className="sh-note">IDEA → SHIP</p>
-      </div>
-      <h2 className="h-display process-h skewable rv">Designed. Built. <em>Shipped.</em></h2>
-      <div className="steps" data-stagger="90">
-        <div className="step rv" data-n="01"><p className="st-n">01</p><h3>Idea</h3><p>The problem, seen clearly.</p></div>
-        <div className="step rv" data-n="02"><p className="st-n">02</p><h3>Design</h3><p>The interface, the identity, the system.</p></div>
-        <div className="step rv" data-n="03"><p className="st-n">03</p><h3>Structure</h3><p>What the user never sees, but always feels.</p></div>
-        <div className="step rv" data-n="04"><p className="st-n">04</p><h3>Code</h3><p>Built with the tools the product itself uses.</p></div>
-        <div className="step rv" data-n="05"><p className="st-n">05</p><h3>Ship</h3><p>Deployed, running, answerable to one person.</p></div>
-      </div>
-    </div>
-  </section>
-
-  {/* ————— 05 range —————  */}
-  <section className="block range" data-folio="05 — RANGE">
+  {/* ————— 03 range —————  */}
+  <section className="block range" data-folio="03 — RANGE">
     <div className="range-pin">
       <div className="range-sticky">
         <img className="range-mark" src="/logo.png" alt="" aria-hidden="true" width={1378} height={1378} decoding="async" />
         <div className="container">
           <div className="sec-head rv">
-            <p><span className="sh-idx">05</span> / RANGE</p>
+            <p><span className="sh-idx">03</span> / RANGE</p>
             <p className="sh-note">ONE PRACTICE — MANY EXPRESSIONS</p>
           </div>
 
@@ -459,6 +414,48 @@ export default function Home() {
           </div>
 
         </div>
+      </div>
+    </div>
+  </section>
+
+  {/* ————— 04 how i work —————  */}
+  <section className="block" data-folio="04 — HOW I WORK">
+    <div className="container">
+      <div className="sec-head">
+        <p><span className="sh-idx">04</span> / HOW I WORK</p>
+        <p className="sh-note">IDEA → SHIP</p>
+      </div>
+      <h2 className="h-display process-h skewable rv">Designed. Built. <em>Shipped.</em></h2>
+      <div className="steps" data-stagger="90">
+        <div className="step rv" data-n="01"><p className="st-n">01</p><h3>Idea</h3><p>The problem, seen clearly.</p></div>
+        <div className="step rv" data-n="02"><p className="st-n">02</p><h3>Design</h3><p>The interface, the identity, the system.</p></div>
+        <div className="step rv" data-n="03"><p className="st-n">03</p><h3>Structure</h3><p>What the user never sees, but always feels.</p></div>
+        <div className="step rv" data-n="04"><p className="st-n">04</p><h3>Code</h3><p>Built with the tools the product itself uses.</p></div>
+        <div className="step rv" data-n="05"><p className="st-n">05</p><h3>Ship</h3><p>Deployed, running, answerable to one person.</p></div>
+      </div>
+    </div>
+  </section>
+
+  {/* ————— 05 voices —————  */}
+  <section className="block" data-folio="05 — VOICES">
+    <div className="container">
+      <div className="sec-head">
+        <p><span className="sh-idx">05</span> / VOICES</p>
+        <p className="sh-note">CLIENTS &amp; COLLEAGUES</p>
+      </div>
+      <div className="voices-grid" data-stagger="110">
+        <figure className="v-lead rv">
+          <blockquote><span className="q">&ldquo;</span>These designs were exactly what I needed. It&rsquo;s rare to be able to describe what I want and have someone actually deliver that.<span className="q">&rdquo;</span></blockquote>
+          <figcaption><span className="v-name">SKAAME</span><span className="v-role">— ARTIST</span></figcaption>
+        </figure>
+        <figure className="rv" style={{ '--d': '110ms' } as React.CSSProperties}>
+          <blockquote><span className="q">&ldquo;</span>Michael is a solution thinker — he came into the company and within two months had already thought of effective solutions to optimise our workflow and positioned us to become more AI-inclined.<span className="q">&rdquo;</span></blockquote>
+          <figcaption><span className="v-name">ABIDEMI AMODU</span><span className="v-role">— MANAGING DIRECTOR</span></figcaption>
+        </figure>
+        <figure className="rv" style={{ '--d': '220ms' } as React.CSSProperties}>
+          <blockquote><span className="q">&ldquo;</span>As someone who uses AI, it&rsquo;s refreshing to see and hear someone with more insight expand on troubling topics.<span className="q">&rdquo;</span></blockquote>
+          <figcaption><span className="v-name">ADEBAYO ADEBANJO</span><span className="v-role">— FINANCE DEPT</span></figcaption>
+        </figure>
       </div>
     </div>
   </section>

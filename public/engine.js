@@ -257,13 +257,23 @@
      nothing overlaps — guaranteed clean layout regardless of viewport */
   const layoutLevel = (centers, hw, hh) => {
     const stage = rangeGraph.parentElement;
-    const W = stage.getBoundingClientRect().width, H = stage.getBoundingClientRect().height;
+    const sr = stage.getBoundingClientRect();
+    const W = sr.width, H = sr.height;
     if (!W || !H) return centers;
     const mov = centers.map((c) => ({ cx: (c[0] / 100) * W, cy: (c[1] / 100) * H, hw, hh }));
     const fix = rgLayer.filter((el) => el.tagName !== "LINE").map((el) => ({
       cx: el.offsetLeft + el.offsetWidth / 2, cy: el.offsetTop + el.offsetHeight / 2,
       hw: el.offsetWidth / 2 + 14, hh: el.offsetHeight / 2 + 14, fixed: true,
     }));
+    /* the active display word is sacred ground — bubbles route around it */
+    const wordEl = stage.querySelector(".range-word.is-on .rw");
+    if (wordEl) {
+      const wr = wordEl.getBoundingClientRect();
+      fix.push({
+        cx: wr.left - sr.left + wr.width / 2, cy: wr.top - sr.top + wr.height / 2,
+        hw: wr.width / 2 + 6, hh: wr.height / 2 + 6, fixed: true,
+      });
+    }
     if (rgDetail && !rgDetail.hidden) {
       fix.push({ cx: rgDetail.offsetLeft + rgDetail.offsetWidth / 2, cy: rgDetail.offsetTop + rgDetail.offsetHeight / 2, hw: rgDetail.offsetWidth / 2 + 14, hh: rgDetail.offsetHeight / 2 + 14, fixed: true });
     }
@@ -372,8 +382,10 @@
     rgState.anchor = [50, 50];
     const disc = [...R_BY_ID.values()].filter((n) => n.kind === "discipline" && n.parent === "n-design");
     const ring = DISC_ANGLES.map((a) => [clamp(50 + 27 * Math.cos(a), 7, 93), clamp(50 + 34 * Math.sin(a), 10, 90)]);
+    /* resolve the ring against the hub/flagship/word so nothing spawns on top */
+    const placed = layoutLevel(ring, NODE_HALF["rg-md"][0], NODE_HALF["rg-md"][1]);
     disc.forEach((d, i) => {
-      rgSpawn(rangeGraph.querySelector("svg"), d, [50, 50], ring[i], "rg-md", 1, () => rgOpenDiscipline(d.id));
+      rgSpawn(rangeGraph.querySelector("svg"), d, [50, 50], placed[i], "rg-md", 1, () => rgOpenDiscipline(d.id));
     });
   };
 
@@ -485,9 +497,22 @@
       rangeGraph.appendChild(b);
     });
     /* creative practice hub — quiet third participant on the Design and
-       Habibcore chapters; everything else stays exactly as it was */
+       Habibcore chapters; everything else stays exactly as it was.
+       The hub is tethered to the centre word by a line, and carries its
+       flagship expression (1ETHFP) as a connected satellite, so the chain
+       reads: centre word → Creative → 1ETHFP. */
     const hubPos = CREATIVE_HUB_POS[idx];
     if (hubPos && R_BY_ID.size) {
+      const hubLine = document.createElementNS(NS, "line");
+      hubLine.setAttribute("x1", cx); hubLine.setAttribute("y1", cy);
+      hubLine.setAttribute("x2", (r.width * hubPos[0]) / 100);
+      hubLine.setAttribute("y2", (r.height * hubPos[1]) / 100);
+      const hl = Math.hypot(hubLine.getAttribute("x2") - cx, hubLine.getAttribute("y2") - cy);
+      hubLine.style.strokeDasharray = `${hl}`;
+      hubLine.style.strokeDashoffset = `${hl}`;
+      hubLine.dataset.lvl = "0";
+      svg.appendChild(hubLine);
+
       const hub = document.createElement("button");
       hub.type = "button";
       hub.className = "rg-bubble rg-hub";
@@ -503,6 +528,48 @@
         hub.setAttribute("aria-expanded", String(rgState.open));
       });
       rangeGraph.appendChild(hub);
+      rgLayer.push(hubLine, hub);
+
+      /* flagship satellite — Creative → 1ETHFP */
+      const flagship = R_BY_ID.get("p-oneethfp");
+      let flagLine = null, flagBtn = null;
+      if (flagship) {
+        const fpos = [clamp(hubPos[0] + 15, 7, 93), clamp(hubPos[1] + 13, 10, 90)];
+        flagLine = document.createElementNS(NS, "line");
+        flagLine.setAttribute("x1", `${hubPos[0]}%`); flagLine.setAttribute("y1", `${hubPos[1]}%`);
+        flagLine.setAttribute("x2", `${fpos[0]}%`); flagLine.setAttribute("y2", `${fpos[1]}%`);
+        flagLine.style.strokeDasharray = "1400";
+        flagLine.style.strokeDashoffset = "1400";
+        flagLine.dataset.lvl = "0";
+        svg.appendChild(flagLine);
+        flagBtn = document.createElement("button");
+        flagBtn.type = "button";
+        flagBtn.className = "rg-bubble rg-sm rg-flag";
+        flagBtn.tabIndex = 0;
+        flagBtn.dataset.id = flagship.id;
+        flagBtn.style.left = `${fpos[0]}%`;
+        flagBtn.style.top = `${fpos[1]}%`;
+        flagBtn.style.setProperty("--rd", `${200 + nodes.length * 90}ms`);
+        flagBtn.innerHTML = `<b>${flagship.title}</b><i>${flagship.meta.split("·").slice(-1)[0].trim()}</i>`;
+        flagBtn.addEventListener("click", () => openRgDetail(flagship.id, flagBtn));
+        rangeGraph.appendChild(flagBtn);
+        rgLayer.push(flagLine, flagBtn);
+      }
+
+      /* hovering any part of the chain lights the whole tether */
+      const lightChain = (on) => {
+        hubLine.classList.toggle("is-rel", on);
+        if (flagLine) flagLine.classList.toggle("is-rel", on);
+        if (flagBtn) flagBtn.classList.toggle("is-rel", on);
+        rangeGraph.classList.toggle("dim", on);
+      };
+      hub.addEventListener("mouseenter", () => lightChain(true));
+      hub.addEventListener("mouseleave", () => lightChain(false));
+      if (flagBtn) {
+        flagBtn.addEventListener("mouseenter", () => lightChain(true));
+        flagBtn.addEventListener("mouseleave", () => lightChain(false));
+      }
+
       rgState.hub = hub;
       rgState.idx = idx;
     }
@@ -723,61 +790,28 @@
       img.setAttribute("decoding", "async");
       if (typeof img.decode === "function") img.decode().catch(() => {});
     });
-    const wordEl = $(".pl-word", pl);
-    const langEl = $(".pl-lang b", pl);
-    /* Lagos → Nigeria → World, resolving into the identity lockup.
-       Ten beats at ~150ms — the whole introduction reads in under 2s.
-       No progress bar, no spinner: the greeting IS the opening. */
-    const GREET = [
-      ["Hello", "01 — ENGLISH · LAGOS", "en"],
-      ["Pẹ̀lẹ́ o", "02 — YORÙBÁ · NIGERIA", "yo"],
-      ["Ndewo", "03 — IGBO · NIGERIA", "ig"],
-      ["Sannu", "04 — HAUSA · NIGERIA", "ha"],
-      ["Bonjour", "05 — FRANÇAIS", "fr"],
-      ["Hola", "06 — ESPAÑOL", "es"],
-      ["Olá", "07 — PORTUGUÊS", "pt"],
-      ["مرحبا", "08 — ARABIC · MARHABAN", "ar", "rtl"],
-      ["こんにちは", "09 — JAPANESE · KONNICHIWA", "ja"],
-      ["你好", "10 — CHINESE · NǏ HǍO", "zh"],
-    ];
-    const fast = !FINE; /* touch devices: keep it quick, just not rushed */
-    const WORD_MS = fast ? 110 : 150;  /* one metronome for every greeting */
-    const FINAL_MS = fast ? 380 : 480; /* hold the identity lockup a beat longer */
-    const FINAL = ["HABIBCORE®", "LAGOS → WORLD", "en"];
-    let i = 0;
-    const show = ([text, tag, lang, dir]) => {
-      if (!wordEl) return;
-      wordEl.textContent = text;
-      wordEl.lang = lang || "en";
-      if (dir) wordEl.setAttribute("dir", dir); else wordEl.removeAttribute("dir");
-      if (langEl) langEl.textContent = tag;
-      wordEl.classList.remove("swap");
-      if (langEl) langEl.classList.remove("swap");
-      void wordEl.offsetWidth; /* restart the entrance animation */
-      wordEl.classList.add("swap");
-      if (langEl) langEl.classList.add("swap");
-    };
-    const finish = () => {
-      setTimeout(() => {
-        pl.classList.add("done");
-        document.body.classList.remove("is-locked");
-        heroEntrance();
-        engine.measure();
-        setTimeout(() => pl.remove(), 1000);
-      }, 140);
-    };
-    const step = () => {
-      if (i < GREET.length) {
-        show(GREET[i]);
-        i += 1;
-        setTimeout(step, WORD_MS);
-      } else if (i === GREET.length) {
-        show(FINAL);
-        i += 1;
-        setTimeout(finish, FINAL_MS);
+    const countEl = $(".pl-count b", pl);
+    const barEl = $(".pl-bar", pl);
+    const DUR = 1050;
+    const t0 = performance.now();
+    const step = (t) => {
+      const p = clamp((t - t0) / DUR, 0, 1);
+      const eased = 1 - Math.pow(1 - p, 3);
+      const n = Math.round(eased * 100);
+      if (countEl) countEl.textContent = n;
+      if (barEl) barEl.style.transform = `scaleX(${eased})`;
+      if (p < 1) requestAnimationFrame(step);
+      else {
+        setTimeout(() => {
+          pl.classList.add("done");
+          document.body.classList.remove("is-locked");
+          heroEntrance();
+          engine.measure();
+          setTimeout(() => pl.remove(), 1000);
+        }, 160);
       }
     };
-    step();
+    requestAnimationFrame(step);
   })();
 
   /* ————— velocity-reactive marquee ————— */
