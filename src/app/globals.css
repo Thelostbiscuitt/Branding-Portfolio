@@ -1282,3 +1282,213 @@ section.block { padding-top: clamp(88px, 12vw, 128px); }
 @media (min-width: 1024px) { .nav-clock { display: inline-flex; } }
 @media (min-width: 768px) { .mobile-menu { display: none; } }
 
+
+/* ZOOM-UNIFORM OVERRIDE — re-expresses every fixed px cap as a viewport
+   proportion anchored to the approved 1916px-wide rendering.
+   Append AFTER the existing global CSS. Changes nothing else. */
+
+:root{--gutter:max(20px, 2.509vw)}
+
+/* ————— tokens ————— */
+:root{--gutter:max(20px, 2.509vw) !important}
+body{font-size:max(12px, 0.836vw) !important}
+.skip-link{padding:max(8px, 0.523vw) max(10px, 0.732vw) !important}
+/* ————— shared type utilities ————— */
+.mono{font-size:max(8.5px, 0.575vw) !important}
+.container{max-width:min(1440px, 75.274vw) !important}
+/* ————— preloader ————— */
+.preloader{padding:max(20px, 2.3vw) !important}
+.preloader .pl-top{font-size:max(8.5px, 0.575vw) !important}
+.preloader .pl-count{font-size:max(4.5rem, 9.2vw) !important}
+.nav-inner{max-width:min(1440px, 75.274vw) !important;height:max(44px, 2.927vw) !important;gap:max(15px, 1.045vw) !important}
+.brand{font-size:max(17px, 1.15vw) !important}
+.nav-links{gap:max(24px, 1.673vw) !important}
+.nav-links a{font-size:max(8.5px, 0.575vw) !important}
+.nav-right{gap:max(15px, 1.045vw) !important}
+.nav-clock{gap:max(7px, 0.47vw) !important;font-size:max(8.5px, 0.575vw) !important}
+.btn-solid{font-size:max(8.5px, 0.575vw) !important;padding:max(7px, 0.47vw) max(12px, 0.836vw) !important}
+.mobile-menu a.mm-link{font-size:max(2.6rem, 3.68vw) !important;padding:max(10px, 0.732vw) 2px !important}
+.mobile-menu a.mm-link span{font-size:max(9.5px, 0.627vw) !important}
+.mobile-menu .mm-foot{margin-top:max(26px, 1.777vw) !important;font-size:max(8px, 0.523vw) !important}
+.hero-meta{gap:max(12px, 0.836vw) !important;padding-bottom:max(9px, 0.627vw) !important;font-size:max(8.5px, 0.575vw) !important}
+.hero-grid{gap:max(28px, 2.091vw) max(14px, 1.255vw) !important;padding-top:max(40px, 3.345vw) !important}
+.hero h1{font-size:max(3.3rem, 7.946vw) !important}
+.hero-aside p{max-width:min(448px, 23.419vw) !important;font-size:max(11.5px, 0.784vw) !important}
+@media (min-width: 1024px){.hero-aside p{margin-top:max(70px, 6.169vw) !important}}
+.hero-ctas{gap:max(12px, 0.836vw) !important;margin-top:max(20px, 1.673vw) !important}
+.btn{font-size:max(8.5px, 0.575vw) !important;padding:max(10px, 0.68vw) max(16px, 1.098vw) !important}
+@media (min-width: 1024px){.stamp-wrap{width:max(112px, 7.527vw) !important;height:max(112px, 7.527vw) !important}}
+/* facts strip */
+.facts{margin-top:max(56px, 5.018vw) !important}
+.facts > div{padding:max(12px, 0.836vw) max(12px, 0.836vw) max(12px, 0.836vw) 0 !important}
+.facts .fk{font-size:max(8px, 0.523vw) !important}
+.facts .fv{font-size:max(11px, 0.732vw) !important}
+/* ————— marquee ————— */
+.marquee{margin-top:max(72px, 5.855vw) !important;padding:max(10px, 0.732vw) 0 !important}
+.marquee-row span{font-size:max(8.5px, 0.575vw) !important}
+.marquee-row i{font-size:max(7px, 0.47vw) !important;padding:0 max(20px, 1.464vw) !important}
+.folio{font-size:max(7px, 0.47vw) !important}
+/* ————— section scaffolding ————— */
+section.block{padding-top:max(88px, 6.691vw) !important}
+.sec-head{gap:max(12px, 0.836vw) !important;padding-top:max(9px, 0.627vw) !important;font-size:max(8.5px, 0.575vw) !important}
+/* ————— position ————— */
+.pos-grid{gap:max(18px, 1.255vw) !important;padding-top:max(36px, 2.927vw) !important}
+@media (min-width: 1024px){.pos-grid{gap:max(18px, 1.255vw) !important}}
+.pos-grid h2{font-size:max(2.1rem, 3.513vw) !important}
+.pos-grid .pos-copy{max-width:min(448px, 23.419vw) !important;font-size:max(11.5px, 0.784vw) !important}
+.pos-lists{margin-top:max(44px, 3.345vw) !important;gap:max(30px, 2.091vw) !important}
+@media (min-width: 768px){.pos-lists{gap:max(30px, 2.091vw) !important}}
+.pos-label{font-size:max(8.5px, 0.575vw) !important;padding-bottom:max(9px, 0.627vw) !important}
+.pos-lists li a, .pos-lists li .row-link{gap:max(12px, 0.836vw) !important;padding:max(10px, 0.732vw) 0 !important}
+.pos-lists .it{font-size:clamp(1.1rem, 1.6vw, 1.375rem) !important}
+.pos-lists .ar{font-size:max(9.5px, 0.627vw) !important}
+/* ————— work ————— */
+.work-intro{gap:max(18px, 1.255vw) !important;padding:max(36px, 2.927vw) 0 max(32px, 2.509vw) !important}
+.work-intro h2{font-size:max(2.4rem, 4.6vw) !important}
+.work-intro .archive{font-size:max(8.5px, 0.575vw) !important}
+.p-btn{gap:max(12px, 0.836vw) !important;padding:max(16px, 1.15vw) 0 !important}
+@media (min-width: 768px){.p-btn{gap:max(24px, 1.673vw) !important;padding:max(21px, 1.464vw) 0 !important}}
+.p-idx{font-size:max(8.5px, 0.575vw) !important}
+.p-title{font-size:max(1.35rem, 2.175vw) !important}
+.p-kmeta{gap:max(24px, 1.673vw) !important}
+.p-kind, .p-year{font-size:max(8px, 0.523vw) !important}
+.p-plus{font-size:max(14px, 0.941vw) !important}
+.p-kmeta-m{font-size:max(8px, 0.523vw) !important}
+.p-panel-inner{gap:max(18px, 1.255vw) !important;padding:4px 0 max(27px, 1.882vw) !important}
+@media (min-width: 768px){.p-panel-inner{gap:max(18px, 1.255vw) !important;padding-bottom:max(30px, 2.091vw) !important}}
+.p-figcap{margin-top:max(6px, 0.418vw) !important;font-size:max(8px, 0.523vw) !important}
+@media (min-width: 768px){.p-body{padding-left:max(12px, 0.836vw) !important}}
+.p-blurb{font-size:max(1.125rem, 1.045vw) !important}
+.p-desc{margin-top:max(12px, 0.836vw) !important;max-width:min(448px, 23.419vw) !important;font-size:max(11.5px, 0.784vw) !important}
+.p-tags{gap:max(6px, 0.418vw) !important;margin-top:max(18px, 1.255vw) !important}
+.p-tags span{padding:5px max(8px, 0.523vw) !important;font-size:max(8px, 0.523vw) !important}
+.p-actions{gap:max(18px, 1.255vw) !important;padding-top:max(24px, 1.673vw) !important}
+.p-actions a{font-size:max(8.5px, 0.575vw) !important}
+/* cursor-following preview */
+.work-preview{width:min(340px, 26vw) !important}
+.work-preview .wp-cap{font-size:max(7px, 0.47vw) !important}
+/* EPK archive */
+.epk-head{padding-top:max(9px, 0.627vw) !important;margin-top:max(56px, 4.6vw) !important;font-size:max(8.5px, 0.575vw) !important}
+.epk-copy{margin-top:max(15px, 1.045vw) !important;max-width:min(512px, 26.764vw) !important;font-size:max(11.5px, 0.784vw) !important}
+.epk-grid{margin-top:max(24px, 1.673vw) !important;gap:max(15px, 1.045vw) !important}
+@media (min-width: 768px){.epk-grid{gap:max(18px, 1.255vw) !important}}
+.epk-grid figcaption{margin-top:max(8px, 0.523vw) !important;gap:max(6px, 0.418vw) !important;font-size:max(10px, 0.68vw) !important}
+.epk-grid .epk-year{font-size:max(8px, 0.523vw) !important}
+/* ————— voices ————— */
+.voices-grid{margin-top:max(40px, 2.927vw) !important}
+.voices-grid figure{padding:max(21px, 1.464vw) !important;gap:max(24px, 1.673vw) !important}
+@media (min-width: 768px){.voices-grid figure{padding:max(36px, 2.509vw) !important}}
+.voices-grid .v-lead blockquote{font-size:max(1.5rem, 2.258vw) !important}
+.voices-grid figcaption{gap:max(9px, 0.627vw) !important}
+.voices-grid .v-lead figcaption{font-size:max(8.5px, 0.575vw) !important}
+.voices-grid figure:not(.v-lead) blockquote{font-size:max(1.125rem, 1.045vw) !important}
+.voices-grid figure:not(.v-lead) figcaption{font-size:max(8px, 0.523vw) !important}
+/* ————— process ————— */
+.process-h{font-size:max(2.2rem, 4.182vw) !important;padding-top:max(36px, 2.927vw) !important}
+.steps{margin-top:max(44px, 3.345vw) !important}
+.step{padding:max(18px, 1.255vw) !important}
+@media (min-width: 768px){.step{padding:max(21px, 1.464vw) !important}}
+.step::after{font-size:max(3.5rem, 5.855vw) !important}
+.step .st-n{font-size:max(8.5px, 0.575vw) !important}
+.step h3{padding-top:max(42px, 2.927vw) !important;font-size:max(1.1rem, 1.255vw) !important}
+.step p{margin-top:max(6px, 0.418vw) !important;font-size:max(10px, 0.68vw) !important}
+/* ————— path ————— */
+.path-wrap{margin-top:max(12px, 0.836vw) !important}
+.path-row{gap:max(6px, 0.418vw) max(18px, 1.255vw) !important;padding:max(18px, 1.255vw) 0 !important}
+@media (min-width: 768px){.path-row{gap:max(18px, 1.255vw) !important;padding:max(24px, 1.673vw) 0 max(24px, 1.673vw) max(18px, 1.255vw) !important}}
+.path-year{font-size:max(8.5px, 0.575vw) !important}
+.path-row h3{font-size:max(1.375rem, 1.568vw) !important}
+.path-role{font-size:max(8px, 0.523vw) !important}
+.path-desc{font-size:max(11px, 0.732vw) !important;max-width:min(560px, 29.274vw) !important}
+@media (min-width: 768px){.path-desc{font-size:max(11.5px, 0.784vw) !important}}
+/* ————— about ————— */
+.about-grid{gap:max(28px, 2.091vw) max(14px, 1.255vw) !important;padding-top:max(36px, 2.927vw) !important}
+.about-fig .fig-frame{padding:max(6px, 0.418vw) !important}
+.about-fig figcaption{margin-top:max(8px, 0.523vw) !important;font-size:max(8px, 0.523vw) !important}
+.about-body h2{font-size:max(2.1rem, 3.513vw) !important}
+.about-cols{margin-top:max(24px, 1.673vw) !important;max-width:min(672px, 35.128vw) !important;gap:max(15px, 1.045vw) !important;font-size:max(11.5px, 0.784vw) !important}
+@media (min-width: 768px){.about-cols{margin-top:max(24px, 1.673vw) !important}}
+.about-quote{margin-top:max(32px, 2.091vw) !important;max-width:min(672px, 35.128vw) !important;padding-left:max(15px, 1.045vw) !important;font-size:max(1.25rem, 1.255vw) !important}
+.about-facts{margin-top:max(40px, 2.509vw) !important;max-width:min(672px, 35.128vw) !important}
+.about-facts > div{padding:max(12px, 0.836vw) !important}
+.about-facts .fk{font-size:max(8px, 0.523vw) !important}
+.about-facts .fv{font-size:max(11px, 0.732vw) !important}
+.caps{gap:max(6px, 0.418vw) !important;margin-top:max(18px, 1.255vw) !important;max-width:min(672px, 35.128vw) !important}
+.caps span{padding:6px max(8px, 0.523vw) !important;font-size:max(8px, 0.523vw) !important}
+/* ————— contact (inverted) ————— */
+.contact{margin-top:max(88px, 6.691vw) !important}
+.contact-grid{gap:max(40px, 2.927vw) max(14px, 1.255vw) !important;padding-top:max(36px, 2.927vw) !important;padding-bottom:max(64px, 5.855vw) !important}
+.contact h2{font-size:max(2.6rem, 5.018vw) !important}
+.contact .c-copy{margin-top:max(18px, 1.255vw) !important;max-width:min(384px, 20.073vw) !important;font-size:max(11.5px, 0.784vw) !important}
+.c-links{margin-top:max(40px, 2.927vw) !important}
+.c-links li{gap:max(12px, 0.836vw) !important;padding:max(12px, 0.836vw) 0 !important}
+.c-links .ck{font-size:max(8px, 0.523vw) !important}
+.c-links .cv{gap:max(12px, 0.836vw) !important}
+.c-links a{font-size:max(10px, 0.68vw) !important}
+.copy-btn{padding:5px max(8px, 0.523vw) !important;font-size:max(8px, 0.523vw) !important}
+.c-avail{margin-top:max(18px, 1.255vw) !important;gap:max(8px, 0.523vw) !important;font-size:max(8px, 0.523vw) !important}
+/* form */
+.c-form{padding:max(18px, 1.255vw) !important}
+@media (min-width: 768px){.c-form{padding:max(30px, 2.091vw) !important}}
+.f-legend{font-size:max(8px, 0.523vw) !important}
+.chips{gap:max(6px, 0.418vw) !important;margin-top:max(12px, 0.836vw) !important}
+.chip{padding:max(6px, 0.418vw) max(9px, 0.627vw) !important;font-size:max(8px, 0.523vw) !important}
+.chip .tick{font-size:max(7px, 0.47vw) !important}
+.f-row{gap:max(21px, 1.464vw) !important;margin-top:max(27px, 1.882vw) !important}
+.f-field input, .f-field textarea{padding:max(8px, 0.523vw) 0 !important;font-size:max(11.5px, 0.784vw) !important}
+.f-submit{margin-top:max(30px, 2.091vw) !important;font-size:max(8.5px, 0.575vw) !important;padding:max(12px, 0.836vw) 0 !important}
+.f-submit > span{gap:max(8px, 0.523vw) !important}
+.f-note{margin-top:max(9px, 0.627vw) !important;font-size:max(8px, 0.523vw) !important}
+/* ————— footer ————— */
+.footer{padding-top:max(72px, 5.855vw) !important}
+.foot-row{padding:max(18px, 1.255vw) 0 !important;gap:max(12px, 0.836vw) !important;font-size:max(8px, 0.523vw) !important}
+.foot-right{gap:max(18px, 1.255vw) !important}
+/* ————— toasts ————— */
+.toasts{gap:max(8px, 0.523vw) !important}
+.toast{padding:max(10px, 0.68vw) max(14px, 0.941vw) max(10px, 0.68vw) max(12px, 0.836vw) !important}
+.toast .t-title{font-size:max(8.5px, 0.575vw) !important}
+.toast .t-desc{font-size:max(10px, 0.68vw) !important}
+/* ————— path stat line (2026 rows) ————— */
+.path-stat{font-size:max(8px, 0.523vw) !important}
+/* ————— 03 range — one practice, many expressions —————
+   Pinned chapter: desktop scrubs seven discipline words while a
+   constellation graph grows around them; mobile / no-JS / reduced-motion
+   get the same content as a quiet bordered index. */
+.range{padding-top:max(88px, 6.691vw) !important}
+.range-pin{margin-top:max(28px, 2.3vw) !important}
+.range-mark{width:max(240px, 24.046vw) !important}
+.range-stage{margin-top:max(28px, 2.927vw) !important}
+.range-word{padding:max(14px, 0.941vw) 0 !important}
+.range-word .rw{font-size:max(2.5rem, 3.554vw) !important}
+.range-word .rm{margin-top:max(6px, 0.418vw) !important;font-size:max(8px, 0.523vw) !important}
+.range-foot{gap:max(18px, 1.255vw) !important;margin-top:max(27px, 1.882vw) !important;padding-bottom:max(40px, 3.345vw) !important;font-size:max(8px, 0.523vw) !important}
+.range-index{margin-top:max(28px, 2.509vw) !important}
+.ri-item summary{gap:max(12px, 0.836vw) !important;padding:max(12px, 0.836vw) 0 !important}
+.ri-item .ri-name{font-size:max(0.95rem, 1.046vw) !important}
+.ri-item .ri-meta{font-size:max(7px, 0.47vw) !important}
+.ri-item .ri-desc{font-size:max(11px, 0.732vw) !important}
+.ri-item .ri-list{padding:4px 0 max(12px, 0.836vw) !important}
+.ri-item .ri-list a{gap:max(9px, 0.627vw) !important;padding:max(8px, 0.523vw) 0 !important;font-size:max(8.5px, 0.575vw) !important}
+.ri-item .ri-list a i{font-size:max(6px, 0.418vw) !important}
+/* — detail panel (child styles safe at any width) — */
+.rg-detail .rg-x{font-size:max(11px, 0.732vw) !important}
+.rg-detail .rg-kind{font-size:max(7px, 0.47vw) !important}
+.rg-detail .rg-title{margin-top:max(6px, 0.418vw) !important;font-size:max(1.25rem, 1.255vw) !important}
+.rg-detail .rg-meta{font-size:max(7px, 0.47vw) !important}
+.rg-detail img{margin-top:max(10px, 0.732vw) !important}
+.rg-detail .rg-desc{margin-top:max(10px, 0.732vw) !important;font-size:max(10px, 0.706vw) !important}
+.rg-detail .rg-chips{margin-top:max(10px, 0.732vw) !important}
+.rg-detail .rg-chip{padding:5px max(7px, 0.47vw) !important;font-size:max(7px, 0.47vw) !important}
+.rg-detail .rg-src{margin-top:max(12px, 0.836vw) !important;font-size:max(8px, 0.523vw) !important}
+@media (min-width: 1024px) and (prefers-reduced-motion: no-preference){html.has-js .range-sticky{padding:max(88px, 6.691vw) 0 40px !important}}
+@media (min-width: 1024px) and (prefers-reduced-motion: no-preference){html.has-js .range-word .rw{font-size:max(4rem, 10.455vw) !important}}
+@media (min-width: 1024px) and (prefers-reduced-motion: no-preference){html.has-js .range-word .rm{margin-top:max(10px, 0.732vw) !important}}
+@media (min-width: 1024px) and (prefers-reduced-motion: no-preference){html.has-js .range-stage.has-graph .range-word .rw{font-size:max(3.4rem, 7.946vw) !important}}
+@media (min-width: 1024px) and (prefers-reduced-motion: no-preference){html.has-js .range-graph .rg-bubble{min-width:max(128px, 8.782vw) !important;min-height:max(96px, 6.691vw) !important;padding:max(9px, 0.627vw) !important}}
+@media (min-width: 1024px) and (prefers-reduced-motion: no-preference){html.has-js .range-graph .rg-bubble b{font-size:max(8px, 0.523vw) !important}}
+@media (min-width: 1024px) and (prefers-reduced-motion: no-preference){html.has-js .range-graph .rg-bubble i{font-size:max(6px, 0.418vw) !important}}
+@media (min-width: 1024px) and (prefers-reduced-motion: no-preference){html.has-js .range-graph .rg-bubble.rg-md{min-width:max(112px, 7.318vw) !important;min-height:max(80px, 5.436vw) !important;padding:max(8px, 0.523vw) !important}}
+@media (min-width: 1024px) and (prefers-reduced-motion: no-preference){html.has-js .range-graph .rg-bubble.rg-sm{min-width:max(96px, 6.273vw) !important;min-height:max(68px, 4.6vw) !important;padding:max(6px, 0.418vw) !important}}
+@media (min-width: 1024px) and (prefers-reduced-motion: no-preference){html.has-js .range-graph .rg-bubble.rg-sm b{font-size:max(7px, 0.47vw) !important}}
+@media (min-width: 1024px) and (prefers-reduced-motion: no-preference){html.has-js .range-graph .rg-bubble.rg-xs b{font-size:max(6px, 0.418vw) !important}}
+@media (min-width: 1024px) and (prefers-reduced-motion: no-preference){html.has-js .rg-detail{padding:max(15px, 1.045vw) max(16px, 1.15vw) max(14px, 0.941vw) !important}}
