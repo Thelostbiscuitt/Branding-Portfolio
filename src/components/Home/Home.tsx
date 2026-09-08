@@ -27,7 +27,7 @@ export default function Home() {
     <span>6°27′N, 3°24′E — LAGOS, NG</span>
   </div>
   <div className="pl-greet">
-    <span className="pl-mark"><img src="/logo.png" alt="" width={1378} height={1378} decoding="async" /></span>
+    <span className="pl-mark"><img src="/logo-mark.png" alt="" width={128} height={128} decoding="async" /></span>
     <b className="pl-word">Hello</b>
   </div>
   <p className="pl-lang"><b>01 — ENGLISH · LAGOS</b></p>
