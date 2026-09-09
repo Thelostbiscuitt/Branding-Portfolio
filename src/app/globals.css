@@ -1492,3 +1492,14 @@ section.block{padding-top:max(88px, 6.691vw) !important}
 @media (min-width: 1024px) and (prefers-reduced-motion: no-preference){html.has-js .range-graph .rg-bubble.rg-sm b{font-size:max(7px, 0.47vw) !important}}
 @media (min-width: 1024px) and (prefers-reduced-motion: no-preference){html.has-js .range-graph .rg-bubble.rg-xs b{font-size:max(6px, 0.418vw) !important}}
 @media (min-width: 1024px) and (prefers-reduced-motion: no-preference){html.has-js .rg-detail{padding:max(15px, 1.045vw) max(16px, 1.15vw) max(14px, 0.941vw) !important}}
+
+/* ————— MEASURED GEOMETRY LOCK — glyph-verified @1916 (cap 107px · baseline step 143.111px ·
+   tracking −3.045px · container 1440px · gutter 48.07px) —————
+   Converts the last height-anchored (vh) rules to the width-anchored scale so vertical
+   rhythm matches horizontal scale at any display scaling / browser zoom.
+   All values are identical to the approved rendering at 1916px. */
+.hero{padding-top:clamp(96px, 6.513vw, 150px) !important}
+@media (min-width: 1024px){.stamp-wrap{right:max(-14px, -0.731vw) !important;top:max(-56px, -2.923vw) !important}}
+/* greeting intro (transient overlay) — same conversion */
+.pl-greet{gap:clamp(18px, 2.004vw, 40px) !important}
+.preloader .pl-lang{bottom:clamp(44px, 4.384vw, 84px) !important}
