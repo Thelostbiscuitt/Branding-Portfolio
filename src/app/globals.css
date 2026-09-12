@@ -1523,7 +1523,30 @@ section.block{padding-top:max(88px, 6.691vw) !important}
 .pl-count{font-size:max(7px, 0.47vw) !important;color:var(--gray);white-space:nowrap}
 .pl-bar{position:absolute;left:0;right:0;bottom:-1px;height:2px;background:var(--border)}
 .pl-bar i{display:block;height:100%;width:100%;background:var(--orange);transform:scaleX(0);transform-origin:0 50%}
-@media (max-width: 560px){.pl-artist{display:none}.pl-title{max-width:112px !important}}
+@media (max-width: 640px){
+  .player{left:auto !important;right:max(12px, 2.509vw) !important;bottom:calc(max(10px, 0.522vw) + env(safe-area-inset-bottom, 0px)) !important;gap:8px !important;padding:8px 10px !important;max-width:min(82vw, 360px);border-radius:8px}
+  .pl-meta{flex:1 1 auto;min-width:0;gap:0}
+  .pl-title{max-width:none !important;white-space:nowrap;font-size:11px !important;line-height:1.2}
+  .pl-artist{display:none}
+  .pl-count{display:none}
+  .pl-controls{gap:4px !important}
+  .pl-btn{width:32px !important;height:32px !important;border-radius:6px}
+  .pl-bar{height:4px;bottom:-4px;border-radius:0 0 6px 6px;background:var(--border)}
+  .pl-bar::before{top:-12px;bottom:-12px}
+  /* mini-player: collapsed = play + expand only, rest hides in a pop-up row */
+  .player .pl-more{display:grid !important}
+  .player .pl-extra{display:none !important}
+  .player.pl-open .pl-extra{display:flex !important;position:absolute;right:0;bottom:calc(100% + 8px);background:var(--white);border:1px solid var(--border-mid);border-radius:8px;padding:6px !important;gap:6px !important;box-shadow:0 8px 24px rgba(0,0,0,0.12)}
+  .player.pl-open .pl-more .pl-i-more{transform:rotate(180deg)}
+  .player .pl-i-more{transition:transform var(--dur-micro) var(--ease-out)}
+  .pl-now{font-size:7px !important}
+  .rg-sound{left:max(12px, 2.509vw);right:max(12px, 2.509vw);width:auto !important;bottom:max(120px, 6.3vw) !important;max-height:60vh !important}
+}
+@media (min-width: 641px){
+  /* desktop + tablet keep the full strip — the caret only exists for phones */
+  .player .pl-more{display:none !important}
+  .player .pl-extra{display:contents}
+}
 /* the strip rides the right gutter, one breath above the marquee banner —
    the running folio keeps its natural bottom-left seat */
 .rg-sound{position:fixed;right:var(--gutter);bottom:max(60px, 3.132vw) !important;z-index:120;width:max(300px, 15.655vw) !important;max-height:max(440px, 22.96vw) !important;overflow:auto;background:var(--white);border:1px solid var(--border-mid);padding:max(14px, 0.731vw) !important;font-family:var(--font-m)}
@@ -1561,9 +1584,6 @@ section.block{padding-top:max(88px, 6.691vw) !important}
 .pl-bar:focus-visible{outline:1px solid var(--rust);outline-offset:max(2px, 0.1vw)}
 .pl-bar:hover i{background:var(--rustdeep)}
 .rg-sound{bottom:max(152px, 7.932vw) !important;overscroll-behavior:contain}
-@media (max-width: 640px){
-  .rg-sound{left:max(12px, 2.509vw);right:max(12px, 2.509vw);width:auto !important;bottom:max(120px, 6.3vw) !important;max-height:60vh !important}
-}
 .pl-count,.range-count,.nav-clock,.facts .fv,.sec-head,.hero-meta,.rg-sound-n,.pl-now,.mono{font-variant-numeric:tabular-nums}
 .hero h1,.h-display,.pos-grid h2,.mm-link,.p-title{text-wrap:balance}
 :root{color-scheme:light}

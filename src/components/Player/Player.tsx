@@ -1,5 +1,5 @@
 import { tracks } from '../../data/tracks'
-import { Shuffle, SkipBack, Play, Pause, SkipForward, Repeat } from 'lucide-react'
+import { Shuffle, SkipBack, Play, Pause, SkipForward, Repeat, ChevronUp } from 'lucide-react'
 
 /**
  * Site-wide background music strip (bottom-right).
@@ -12,22 +12,27 @@ export default function Player() {
   return (
     <aside className="player" aria-label="Background music — BlvckOreo">
       <div className="pl-controls">
-        <button type="button" className="pl-btn pl-shuffle" data-act="shuffle" aria-label="Shuffle" aria-pressed="true">
-          <Shuffle size={10} strokeWidth={2} aria-hidden="true" />
-        </button>
-        <button type="button" className="pl-btn" data-act="prev" aria-label="Previous track">
-          <SkipBack size={10} strokeWidth={2} aria-hidden="true" />
-        </button>
         <button type="button" className="pl-btn pl-toggle" data-act="toggle" aria-label="Play music" aria-pressed="false">
           <Play className="pl-i-play" size={10} strokeWidth={2} aria-hidden="true" />
           <Pause className="pl-i-pause" size={10} strokeWidth={2} aria-hidden="true" />
         </button>
-        <button type="button" className="pl-btn" data-act="next" aria-label="Next track">
-          <SkipForward size={10} strokeWidth={2} aria-hidden="true" />
+        <button type="button" className="pl-btn pl-more" data-act="more" aria-label="More player controls" aria-expanded="false" aria-controls="pl-extra">
+          <ChevronUp className="pl-i-more" size={10} strokeWidth={2} aria-hidden="true" />
         </button>
-        <button type="button" className="pl-btn pl-repeat" data-act="repeat" aria-label="Repeat this song: off" aria-pressed="false">
-          <Repeat size={10} strokeWidth={2} aria-hidden="true" />
-        </button>
+        <span className="pl-extra" id="pl-extra">
+          <button type="button" className="pl-btn pl-shuffle" data-act="shuffle" aria-label="Shuffle" aria-pressed="true">
+            <Shuffle size={10} strokeWidth={2} aria-hidden="true" />
+          </button>
+          <button type="button" className="pl-btn" data-act="prev" aria-label="Previous track">
+            <SkipBack size={10} strokeWidth={2} aria-hidden="true" />
+          </button>
+          <button type="button" className="pl-btn" data-act="next" aria-label="Next track">
+            <SkipForward size={10} strokeWidth={2} aria-hidden="true" />
+          </button>
+          <button type="button" className="pl-btn pl-repeat" data-act="repeat" aria-label="Repeat this song: off" aria-pressed="false">
+            <Repeat size={10} strokeWidth={2} aria-hidden="true" />
+          </button>
+        </span>
       </div>
       <button
         type="button"

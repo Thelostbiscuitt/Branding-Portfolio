@@ -1200,6 +1200,17 @@
     const prevBtn = $('[data-act="prev"]', player);
     if (nextBtn) nextBtn.addEventListener("click", () => skip(1));
     if (prevBtn) prevBtn.addEventListener("click", () => skip(-1));
+    /* mobile mini-player: the caret expands the full control row above the strip */
+    const moreBtn = $('[data-act="more"]', player);
+    const setMore = (v) => {
+      player.classList.toggle("pl-open", v);
+      if (moreBtn) {
+        moreBtn.setAttribute("aria-expanded", String(v));
+        moreBtn.setAttribute("aria-label", v ? "Fewer player controls" : "More player controls");
+      }
+      emit();
+    };
+    if (moreBtn) moreBtn.addEventListener("click", () => setMore(!player.classList.contains("pl-open")));
     if (shBtn) shBtn.addEventListener("click", () => { prefs.shuffle = !prefs.shuffle; savePrefs(); buildDeck(started ? ti : null); paintPrefs(); emit(); });
     if (rpBtn) rpBtn.addEventListener("click", () => { prefs.repeat = !prefs.repeat; savePrefs(); paintPrefs(); emit(); });
     /* API for the strip and the Creative chapter's sound node */
