@@ -1,6 +1,8 @@
 import type { MetadataRoute } from 'next'
 import { projects } from '@/data/projects'
 
+export const dynamic = 'force-static'
+
 const BASE_URL = 'https://habibcore.com'
 
 export default function sitemap(): MetadataRoute.Sitemap {

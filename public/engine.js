@@ -259,18 +259,45 @@
   /* collision resolution: nudge new nodes apart from each other and from
      every fixed bubble (hub, disciplines, projects, detail panel) until
      nothing overlaps — guaranteed clean layout regardless of viewport */
-  const layoutLevel = (centers, hw, hh) => {
-    const stage = rangeGraph.parentElement;
-    const sr = stage.getBoundingClientRect();
-    const W = sr.width, H = sr.height;
-    if (!W || !H) return centers;
-    const mov = centers.map((c) => ({ cx: (c[0] / 100) * W, cy: (c[1] / 100) * H, hw, hh }));
+  /* collision physics for the constellation — the solver stays readable by
+     splitting what it does: overlapOf measures a pair, nudge resolves one,
+     clampToStage keeps nodes inside the stage. */
+  const overlapOf = (a, b) => {
+    const dx = b.cx - a.cx, dy = b.cy - a.cy;
+    const px = a.hw + b.hw - Math.abs(dx);
+    const py = a.hh + b.hh - Math.abs(dy);
+    if (px <= 0 || py <= 0) return null;
+    return px <= py
+      ? { axis: "x", dir: dx >= 0 ? 1 : -1, amount: px + 2 }
+      : { axis: "y", dir: dy >= 0 ? 1 : -1, amount: py + 2 };
+  };
+  const nudge = (a, b, o) => {
+    const d = o.amount;
+    const moveX = () => {
+      if (a.fixed) b.cx += o.dir * d;
+      else if (b.fixed) a.cx -= o.dir * d;
+      else { a.cx -= (o.dir * d) / 2; b.cx += (o.dir * d) / 2; }
+    };
+    const moveY = () => {
+      if (a.fixed) b.cy += o.dir * d;
+      else if (b.fixed) a.cy -= o.dir * d;
+      else { a.cy -= (o.dir * d) / 2; b.cy += (o.dir * d) / 2; }
+    };
+    o.axis === "x" ? moveX() : moveY();
+  };
+  const clampToStage = (m, W, H) => {
+    const nx = clamp(m.cx, m.hw + 6, W - m.hw - 6);
+    const ny = clamp(m.cy, m.hh + 6, H - m.hh - 6);
+    m.cx = nx; m.cy = ny;
+    return nx !== m.cx || ny !== m.cy;
+  };
+  /* fixed bubbles + the active display word — nodes must route around them */
+  const fixedNodes = (sr) => {
     const fix = rgLayer.filter((el) => el.tagName !== "LINE").map((el) => ({
       cx: el.offsetLeft + el.offsetWidth / 2, cy: el.offsetTop + el.offsetHeight / 2,
       hw: el.offsetWidth / 2 + 14, hh: el.offsetHeight / 2 + 14, fixed: true,
     }));
-    /* the active display word is sacred ground — bubbles route around it */
-    const wordEl = stage.querySelector(".range-word.is-on .rw");
+    const wordEl = sr.querySelector(".range-word.is-on .rw");
     if (wordEl) {
       const wr = wordEl.getBoundingClientRect();
       fix.push({
@@ -279,37 +306,31 @@
       });
     }
     if (rgDetail && !rgDetail.hidden) {
-      fix.push({ cx: rgDetail.offsetLeft + rgDetail.offsetWidth / 2, cy: rgDetail.offsetTop + rgDetail.offsetHeight / 2, hw: rgDetail.offsetWidth / 2 + 14, hh: rgDetail.offsetHeight / 2 + 14, fixed: true });
+      fix.push({
+        cx: rgDetail.offsetLeft + rgDetail.offsetWidth / 2, cy: rgDetail.offsetTop + rgDetail.offsetHeight / 2,
+        hw: rgDetail.offsetWidth / 2 + 14, hh: rgDetail.offsetHeight / 2 + 14, fixed: true,
+      });
     }
+    return fix;
+  };
+  const layoutLevel = (centers, hw, hh) => {
+    const stage = rangeGraph.parentElement;
+    const sr = stage.getBoundingClientRect();
+    const W = sr.width, H = sr.height;
+    if (!W || !H || !centers.length) return centers;
+    const mov = centers.map((c) => ({ cx: (c[0] / 100) * W, cy: (c[1] / 100) * H, hw, hh }));
+    const fix = fixedNodes(sr);
     for (let iter = 0; iter < 120; iter++) {
       let moved = false;
-      const all = fix.concat(mov);
-      for (let i = 0; i < all.length; i++) for (let j = i + 1; j < all.length; j++) {
-        const a = all[i], b = all[j];
-        if (a.fixed && b.fixed) continue;
-        const dx = b.cx - a.cx, dy = b.cy - a.cy;
-        const px = a.hw + b.hw - Math.abs(dx);
-        const py = a.hh + b.hh - Math.abs(dy);
-        if (px > 0 && py > 0) {
-          const dir = dx >= 0 ? 1 : -1;
-          if (px <= py) {
-            if (a.fixed) b.cx += dir * (px + 2);
-            else if (b.fixed) a.cx -= dir * (px + 2);
-            else { a.cx -= (dir * (px + 2)) / 2; b.cx += (dir * (px + 2)) / 2; }
-          } else {
-            const dirY = dy >= 0 ? 1 : -1;
-            if (a.fixed) b.cy += dirY * (py + 2);
-            else if (b.fixed) a.cy -= dirY * (py + 2);
-            else { a.cy -= (dirY * (py + 2)) / 2; b.cy += (dirY * (py + 2)) / 2; }
-          }
-          moved = true;
-        }
+      for (const m of mov) for (const f of fix) {
+        const o = overlapOf(m, f);
+        if (o) { nudge(m, f, o); moved = true; }
       }
-      mov.forEach((m) => {
-        const nx = clamp(m.cx, m.hw + 6, W - m.hw - 6);
-        const ny = clamp(m.cy, m.hh + 6, H - m.hh - 6);
-        if (nx !== m.cx || ny !== m.cy) { m.cx = nx; m.cy = ny; moved = true; }
-      });
+      for (let i = 0; i < mov.length; i++) for (let j = i + 1; j < mov.length; j++) {
+        const o = overlapOf(mov[i], mov[j]);
+        if (o) { nudge(mov[i], mov[j], o); moved = true; }
+      }
+      for (const m of mov) if (clampToStage(m, W, H)) moved = true;
       if (!moved) break;
     }
     return mov.map((m) => [(m.cx / W) * 100, (m.cy / H) * 100]);
@@ -604,70 +625,73 @@
     requestAnimationFrame(() => requestAnimationFrame(() => rangeGraph.classList.add("on")));
   };
 
-  const effects = (velocity) => {
-    const y = window.scrollY;
-    /* progress hairline */
-    if (progressBar) {
-      const p = engine.max ? y / engine.max : 0;
-      progressBar.style.transform = `scaleX(${p})`;
-    }
-    /* nav hide/show + scrolled state */
-    const now = performance.now();
-    if (now - navTick > 90) {
-      navTick = now;
-      const dy = y - lastY;
-      if (y > 90 && dy > 2) nav.classList.add("hidden");
-      else if (dy < -2 || y <= 90) nav.classList.remove("hidden");
-      nav.classList.toggle("scrolled", y > 24);
-      lastY = y;
-    }
-    /* lerped parallax */
+  const paintProgress = (y) => {
+    if (!progressBar) return;
+    const p = engine.max ? y / engine.max : 0;
+    progressBar.style.transform = `scaleX(${p})`;
+  };
+  const paintNav = (y, now) => {
+    if (now - navTick <= 90) return;
+    navTick = now;
+    const dy = y - lastY;
+    if (y > 90 && dy > 2) nav.classList.add("hidden");
+    else if (dy < -2 || y <= 90) nav.classList.remove("hidden");
+    nav.classList.toggle("scrolled", y > 24);
+    lastY = y;
+  };
+  const paintParallax = () => {
     parallaxEls.forEach(({ el, speed }) => {
       const r = el.getBoundingClientRect();
       const mid = r.top + r.height / 2 - window.innerHeight / 2;
       el.style.transform = `translate3d(0, ${(-mid * speed).toFixed(1)}px, 0)`;
     });
-    /* velocity skew on display headlines — kept whisper-quiet so type only
-       leans while it is genuinely in motion */
-    if (!REDUCED) {
-      const sk = clamp(velocity * 0.01, -0.45, 0.45);
-      skewEls.forEach((el) => (el.style.transform = `skewY(${sk.toFixed(3)}deg)`));
-    }
-    /* footer wordmark settles as footer approaches */
-    if (wordmark) {
-      const r = wordmark.parentElement.getBoundingClientRect();
-      if (r.top < window.innerHeight) {
-        const p = clamp(1 - r.top / window.innerHeight, 0, 1);
-        wordmark.style.transform = `translateY(${(16 - p * 20).toFixed(2)}%)`;
-      }
-    }
-    /* range: pinned chapter — swap the big word with scroll progress */
-    if (rangeSec && rangeWords.length && window.matchMedia("(min-width: 1024px)").matches && !REDUCED) {
-      const r = rangeSec.getBoundingClientRect();
-      const total = r.height - window.innerHeight;
-      const p = total > 0 ? clamp(-r.top / total, 0, 1) : 1;
-      const idx = Math.min(rangeWords.length - 1, Math.floor(p * rangeWords.length * 0.9999));
-      rangeWords.forEach((w, i) => {
-        w.classList.toggle("is-on", i === idx);
-        w.classList.toggle("is-past", i < idx);
-      });
-      if (rangeCount) rangeCount.textContent = `${String(idx + 1).padStart(2, "0")} / ${String(rangeWords.length).padStart(2, "0")}`;
-      /* rebuild the project graph only when the word actually changes */
-      if (idx !== rangeIdx) {
-        rangeIdx = idx;
-        buildRangeGraph(idx);
-      } else if (rangeGraph && Math.abs(rangeGraph.parentElement.getBoundingClientRect().width - rangeGraphW) > 2) {
-        buildRangeGraph(idx);
-      }
-    }
-    /* path: the career line grows as the trajectory is read */
-    if (pathLine && pathWrap && window.matchMedia("(min-width: 768px)").matches) {
-      const r = pathWrap.getBoundingClientRect();
-      const p = clamp((window.innerHeight * 0.78 - r.top) / r.height, 0, 1);
-      pathLine.style.transform = `scaleY(${p.toFixed(3)})`;
-    }
   };
-  const effects2 = effects; // single implementation
+  const paintSkew = (velocity) => {
+    if (REDUCED) return;
+    const sk = clamp(velocity * 0.01, -0.45, 0.45);
+    skewEls.forEach((el) => (el.style.transform = `skewY(${sk.toFixed(3)}deg)`));
+  };
+  const paintWordmark = () => {
+    if (!wordmark) return;
+    const r = wordmark.parentElement.getBoundingClientRect();
+    if (r.top >= window.innerHeight) return;
+    const p = clamp(1 - r.top / window.innerHeight, 0, 1);
+    wordmark.style.transform = `translateY(${(16 - p * 20).toFixed(2)}%)`;
+  };
+  const isRangeActive = () =>
+    !!rangeSec && !!rangeWords.length &&
+    window.matchMedia("(min-width: 1024px)").matches && !REDUCED;
+  const paintRange = () => {
+    if (!isRangeActive()) return;
+    const r = rangeSec.getBoundingClientRect();
+    const total = r.height - window.innerHeight;
+    const p = total > 0 ? clamp(-r.top / total, 0, 1) : 1;
+    const idx = Math.min(rangeWords.length - 1, Math.floor(p * rangeWords.length * 0.9999));
+    rangeWords.forEach((w, i) => {
+      w.classList.toggle("is-on", i === idx);
+      w.classList.toggle("is-past", i < idx);
+    });
+    if (rangeCount) rangeCount.textContent = `${String(idx + 1).padStart(2, "0")} / ${String(rangeWords.length).padStart(2, "0")}`;
+    /* rebuild the project graph only when the word actually changes */
+    if (idx !== rangeIdx) { rangeIdx = idx; buildRangeGraph(idx); }
+    else if (rangeGraph && Math.abs(rangeGraph.parentElement.getBoundingClientRect().width - rangeGraphW) > 2) buildRangeGraph(idx);
+  };
+  const paintPath = () => {
+    if (!pathLine || !pathWrap || !window.matchMedia("(min-width: 768px)").matches) return;
+    const r = pathWrap.getBoundingClientRect();
+    const p = clamp((window.innerHeight * 0.78 - r.top) / r.height, 0, 1);
+    pathLine.style.transform = `scaleY(${p.toFixed(3)})`;
+  };
+  const effects = (velocity) => {
+    const y = window.scrollY;
+    paintProgress(y);
+    paintNav(y, performance.now());
+    paintParallax();
+    paintSkew(velocity);
+    paintWordmark();
+    paintRange();
+    paintPath();
+  };
 
   /* running folio: current section label */
   const folioMap = [];
@@ -1076,6 +1100,7 @@
     const artistEl = $(".pl-artist", player);
     const countEl = $(".pl-count", player);
     const barEl = $(".pl-bar i", player);
+    const bar = $(".pl-bar", player);
     const pad = (n) => String(n + 1).padStart(2, "0");
     function emit() { document.dispatchEvent(new CustomEvent("soundchange", { detail: { index: ti, playing: started && !audio.paused, mood: prefs.mood, shuffle: prefs.shuffle, repeat: prefs.repeat, deck: deck.length, pos: di } })); }
     const paintPrefs = () => {
@@ -1110,23 +1135,51 @@
     });
     audio.addEventListener("timeupdate", () => {
       if (!barEl || !audio.duration || !isFinite(audio.duration)) return;
-      barEl.style.transform = `scaleX(${(audio.currentTime / audio.duration).toFixed(4)})`;
+      const p = audio.currentTime / audio.duration;
+      barEl.style.transform = `scaleX(${p.toFixed(4)})`;
+      if (bar) bar.setAttribute("aria-valuenow", String(Math.round(p * 100)));
     });
+    /* the progress hairline doubles as a seek control (drag, tap, arrows) */
+    const seekTo = (e) => {
+      if (!bar || !audio.duration || !isFinite(audio.duration) || !audio.duration) return;
+      const r = bar.getBoundingClientRect();
+      if (!r.width) return;
+      audio.currentTime = Math.max(0, Math.min(1, (e.clientX - r.left) / r.width)) * audio.duration;
+      emit();
+    };
+    if (bar) {
+      bar.addEventListener("pointerdown", (e) => {
+        e.preventDefault();
+        seekTo(e);
+        try { bar.setPointerCapture(e.pointerId); } catch (_) { /* synthetic or already-released pointer */ }
+      });
+      bar.addEventListener("pointermove", (e) => { if (e.buttons > 0) seekTo(e); });
+      bar.addEventListener("keydown", (e) => {
+        const step = e.key === "ArrowRight" ? 0.05 : e.key === "ArrowLeft" ? -0.05 : 0;
+        if (step && isFinite(audio.duration) && audio.duration > 0) {
+          e.preventDefault();
+          audio.currentTime = Math.max(0, Math.min(audio.duration, audio.currentTime + step * audio.duration));
+          emit();
+        }
+      });
+    }
     audio.addEventListener("error", () => player.classList.remove("playing"));
     /* the gate — first genuine interaction anywhere starts the set, unless
        that interaction IS the strip, whose own buttons decide */
     const wheelOpts = { passive: true };
     const engage = (e) => {
+      if (started) return;
+      if (e && e.target && e.target.closest && e.target.closest(".player")) return; /* the strip's own buttons decide */
+      if (e.type === "keydown" && e.key !== "Enter" && e.key !== " ") return; /* typing / Escape don't open the set */
       document.removeEventListener("pointerdown", engage);
       document.removeEventListener("wheel", engage, wheelOpts);
       document.removeEventListener("keydown", keyEngage);
-      if (started || (e && e.target && e.target.closest && e.target.closest(".player"))) return;
       firstPlay();
     };
     const keyEngage = (e) => {
       const t = e.target;
       if (t && (t.tagName === "INPUT" || t.tagName === "TEXTAREA" || t.tagName === "SELECT" || t.isContentEditable)) return;
-      engage();
+      engage(e);
     };
     document.addEventListener("pointerdown", engage);
     document.addEventListener("wheel", engage, wheelOpts);
@@ -1213,7 +1266,12 @@
     const setOpen = (v) => {
       overlay.hidden = !v;
       if (metaBtn) metaBtn.setAttribute("aria-expanded", String(v));
-      if (v) paintList();
+      if (v) {
+        paintList();
+        const head = overlay.querySelector(".rg-sound-head");
+        head.tabIndex = -1;
+        head.focus({ preventScroll: true });
+      }
     };
     overlay.querySelector(".rg-x").addEventListener("click", () => setOpen(false));
     overlay.addEventListener("click", (e) => {
@@ -1229,6 +1287,15 @@
     const openList = () => setOpen(overlay.hidden);
     window.__SOUND.openList = openList;
     if (metaBtn) metaBtn.addEventListener("click", () => openList());
+    /* sheet behaviour: Escape or a tap outside the overlay/player closes it */
+    const onDocDown = (e) => {
+      if (overlay.hidden) return;
+      if (e.target.closest && e.target.closest(".rg-sound, .player, .rg-sound-b")) return;
+      setOpen(false);
+    };
+    const onDocKey = (e) => { if (e.key === "Escape") setOpen(false); };
+    document.addEventListener("pointerdown", onDocDown);
+    document.addEventListener("keydown", onDocKey);
   })();
 
   /* ————— boot ————— */

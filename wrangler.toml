@@ -1,0 +1,12 @@
+# Habibcore — Cloudflare Pages project
+# Build: `next build` (static export → ./out), then `npx wrangler pages deploy`.
+# Bindings here are also what `wrangler pages dev` uses locally.
+name = "habibcore"
+compatibility_date = "2025-09-01"
+pages_build_output_dir = "./out"
+
+# Habibcore Sound — the 26-track set streams from R2 (zero egress, Range-aware)
+# via the Pages Function at functions/Music/[file].js.
+[[r2_buckets]]
+binding = "SOUND_BUCKET"
+bucket_name = "habibcore-sound"

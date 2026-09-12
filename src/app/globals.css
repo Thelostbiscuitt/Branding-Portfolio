@@ -1549,3 +1549,31 @@ section.block{padding-top:max(88px, 6.691vw) !important}
 /* the strip's song name is a button — tap it, anywhere, for the full tracklist */
 .player .pl-meta{background:none;border:0;padding:0;cursor:pointer;text-align:left;font-family:var(--font-m)}
 .player .pl-meta:hover .pl-title, .player .pl-meta:focus-visible .pl-title{color:var(--rust)}
+/* ————— SOUND UI + READABILITY PASS — appended overrides, zoom-uniform —————
+   lucide icons are stroke-drawn (clear the legacy fill); the tracklist sheet
+   rides just above the strip instead of covering it; the progress hairline
+   is now a real seek target; numbers use tabular figures; tiny-type floors
+   rise below 1100px without touching the approved 1916/1532 rendering. */
+.pl-btn svg{width:max(9px, 0.47vw) !important;height:max(9px, 0.47vw) !important;fill:none !important;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.player{bottom:max(60px, calc(3.132vw + env(safe-area-inset-bottom, 0px))) !important}
+.pl-bar{height:max(2px, 0.104vw) !important;cursor:pointer;touch-action:manipulation;border-radius:1px}
+.pl-bar::before{content:"";position:absolute;left:0;right:0;top:max(-8px, -0.418vw);bottom:max(-8px, -0.418vw);border-radius:1px}
+.pl-bar:focus-visible{outline:1px solid var(--rust);outline-offset:max(2px, 0.1vw)}
+.pl-bar:hover i{background:var(--rustdeep)}
+.rg-sound{bottom:max(152px, 7.932vw) !important;overscroll-behavior:contain}
+@media (max-width: 640px){
+  .rg-sound{left:max(12px, 2.509vw);right:max(12px, 2.509vw);width:auto !important;bottom:max(120px, 6.3vw) !important;max-height:60vh !important}
+}
+.pl-count,.range-count,.nav-clock,.facts .fv,.sec-head,.hero-meta,.rg-sound-n,.pl-now,.mono{font-variant-numeric:tabular-nums}
+.hero h1,.h-display,.pos-grid h2,.mm-link,.p-title{text-wrap:balance}
+:root{color-scheme:light}
+button,.pl-bar,.rg-chip-m,.rg-sound-list button,.menu-btn,.f-submit,.chip{touch-action:manipulation;-webkit-tap-highlight-color:transparent}
+.mobile-menu,.rg-sound,.rg-detail{overscroll-behavior:contain}
+@media (max-width: 1100px){
+  .hero-aside p,.pos-copy{font-size:max(14px, 0.784vw) !important;line-height:1.6 !important}
+  .nav-links a,.btn,.btn-solid,.brand,.nav-clock,.hero-meta,.sec-head,.mono,.pos-label,.archive{font-size:max(10px, 0.575vw) !important;letter-spacing:0.16em !important}
+  .facts .fv,.p-title,.pos-lists .it{font-size:max(13px, 1.045vw) !important}
+  .pl-title{font-size:max(12px, 0.678vw) !important}
+  .pl-now,.pl-artist,.pl-count{font-size:max(9px, 0.418vw) !important}
+  .pl-btn svg{width:max(10px, 0.47vw) !important;height:max(10px, 0.47vw) !important}
+}

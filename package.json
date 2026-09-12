@@ -29,7 +29,9 @@
     "eslint": "^9",
     "eslint-config-next": "^16.1.6",
     "jest": "^30.2.0",
+    "playwright-core": "^1.63.0",
     "ts-jest": "^29.4.6",
-    "typescript": "^5.9.3"
+    "typescript": "^5.9.3",
+    "wrangler": "^4.131.1"
   }
 }

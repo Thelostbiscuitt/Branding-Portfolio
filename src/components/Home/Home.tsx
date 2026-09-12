@@ -56,7 +56,7 @@ export default function Home() {
 
 {/* mobile menu  */}
 <div className="mobile-menu" id="mmenu">
-  <a className="mm-link" style={{ '--d': '120ms' } as React.CSSProperties} href="#work">Work<span>01</span></a>
+  <a className="mm-link" style={{ '--d': '120ms' } as React.CSSProperties} href="#work">Work<span>02</span></a>
   <a className="mm-link" style={{ '--d': '200ms' } as React.CSSProperties} href="#about">About<span>07</span></a>
   <a className="mm-link" style={{ '--d': '280ms' } as React.CSSProperties} href="#contact">Contact<span>08</span></a>
   <p className="mm-foot">HABIB@HABIBCORE.COM — LAGOS, NG</p>
@@ -390,7 +390,7 @@ export default function Home() {
               dangerouslySetInnerHTML={{ __html: JSON.stringify(rangeNodes) }}
             />
           </div>
-          <p className="range-foot"><span className="range-count">01 / 08</span>DESIGN → CREATIVE → OPERATIONS → AUTOMATION → SYSTEMS → AI → PRODUCT → SOFTWARE</p>
+          <p className="range-foot"><span className="range-count">01 / 08</span>DESIGN → CREATIVE → PRODUCT → SYSTEMS → AUTOMATION → AI → SOFTWARE → HABIBCORE</p>
           {/* mobile / no-pin route through the same dataset — focused
               exploration, not a squeezed graph */}
           <div className="range-index" aria-label="Creative practice index">

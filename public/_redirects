@@ -1,0 +1,3 @@
+# The Chef4Me case study was renamed from 'meal-planning-bot' to 'chef4me';
+# the old URL is indexed (sitemap, back links), so keep it resolving.
+/projects/meal-planning-bot /projects/chef4me 301
