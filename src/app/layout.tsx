@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import Script from 'next/script'
+import Player from '../components/Player/Player'
 import './globals.css'
 
 export const metadata: Metadata = {
@@ -38,6 +39,7 @@ export default function RootLayout({
         <link rel="preload" href="/fonts/space-mono-700-normal.woff2" as="font" type="font/woff2" crossOrigin="anonymous" />
         <link rel="preload" href="/logo-mark.png" as="image" fetchPriority="high" />
         {children}
+        <Player />
         <Script src="/engine.js" strategy="afterInteractive" />
       </body>
     </html>

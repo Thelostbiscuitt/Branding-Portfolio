@@ -47,3 +47,12 @@ plans/
 # archives
 *.zip
 *.tar.gz
+
+
+# audio: only the curated playlist derivatives are committed — masters and
+# raw downloads in public/Music stay local (add a ! line per new playlist file)
+public/Music/*
+!public/Music/afro-woo.mp3
+!public/Music/finer-things.mp3
+!public/Music/vibes-inshallah.mp3
+!public/Music/whats-up.mp3

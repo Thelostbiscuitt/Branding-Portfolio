@@ -1503,3 +1503,26 @@ section.block{padding-top:max(88px, 6.691vw) !important}
 /* greeting intro (transient overlay) — same conversion */
 .pl-greet{gap:clamp(18px, 2.004vw, 40px) !important}
 .preloader .pl-lang{bottom:clamp(44px, 4.384vw, 84px) !important}
+
+/* ————— BACKGROUND SOUND STRIP — bottom-left, site-wide (Player.tsx + engine.js) —————
+   One <audio>, play/pause/prev/next/auto-advance; starts on the visitor's
+   first interaction at volume 0.25. Sizing follows the zoom-uniform rule:
+   max(mobile floor px, vw) with vw = approved px / 19.16. */
+.player{position:fixed;left:var(--gutter);bottom:max(12px, 0.836vw) !important;z-index:94;display:flex;align-items:center;gap:max(9px, 0.627vw) !important;background:var(--white);border:1px solid var(--border-mid);padding:max(8px, 0.522vw) max(12px, 0.627vw) !important;font-family:var(--font-m)}
+.pl-controls{display:flex;align-items:center;gap:max(3px, 0.209vw) !important}
+.pl-btn{display:grid;place-items:center;width:max(26px, 1.357vw) !important;height:max(26px, 1.357vw) !important;border:1px solid var(--border-mid);border-radius:var(--radius-s);color:var(--black);transition:background var(--dur-micro) var(--ease-out), color var(--dur-micro) var(--ease-out)}
+.pl-btn:hover, .pl-btn:focus-visible{background:var(--black);color:var(--white)}
+.pl-btn svg{width:max(8px, 0.522vw) !important;height:max(8px, 0.522vw) !important;fill:currentColor}
+.pl-toggle .pl-i-pause{display:none}
+.player.playing .pl-i-pause{display:block}
+.player.playing .pl-i-play{display:none}
+.pl-meta{display:flex;flex-direction:column;gap:1px;min-width:0}
+.pl-now{font-size:max(6px, 0.418vw) !important;letter-spacing:0.16em;color:var(--rust)}
+.pl-title{font-size:max(11px, 0.678vw) !important;font-weight:700;color:var(--black);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:max(150px, 9.395vw) !important}
+.pl-artist{font-size:max(7px, 0.47vw) !important;letter-spacing:0.08em;color:var(--gray);white-space:nowrap}
+.pl-count{font-size:max(7px, 0.47vw) !important;color:var(--gray);white-space:nowrap}
+.pl-bar{position:absolute;left:0;right:0;bottom:-1px;height:2px;background:var(--border)}
+.pl-bar i{display:block;height:100%;width:100%;background:var(--orange);transform:scaleX(0);transform-origin:0 50%}
+@media (max-width: 560px){.pl-artist{display:none}.pl-title{max-width:112px !important}}
+/* the running folio rides just above the strip instead of colliding */
+.folio{bottom:max(64px, 3.966vw) !important}

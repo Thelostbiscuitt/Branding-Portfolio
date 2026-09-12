@@ -353,10 +353,10 @@ export default function Home() {
       <div className="epk-head rv"><span className="rust">—</span> BEFORE THE SOFTWARE <span className="fog">/ BRAND &amp; CREATIVE DIRECTION, 2023–2024</span></div>
       <p className="epk-copy rv" style={{ '--d': '100ms' } as React.CSSProperties}>Before systems and software there was music and image — EPKs, cover art and creative direction for artists. The foundation everything else stands on.</p>
       <div className="epk-grid" data-stagger="90">
-        <figure className="rv"><a className="epk-link" href="mailto:habib@habibcore.com?subject=Full%20archive%20request"><div className="epk-frame img-reveal"><img src="/generated/skaame.webp" alt="Skaame artist web EPK" width={640} height={800} decoding="async" /></div></a><figcaption><span>Skaame — Artist Web EPK</span><span className="epk-year">2024</span></figcaption></figure>
-        <figure className="rv"><a className="epk-link" href="mailto:habib@habibcore.com?subject=Full%20archive%20request"><div className="epk-frame img-reveal"><img src="/generated/layo.webp" alt="Layo Isaac artist EPK" width={640} height={427} decoding="async" /></div></a><figcaption><span>Layo Isaac — Artist EPK</span><span className="epk-year">2024</span></figcaption></figure>
-        <figure className="rv"><a className="epk-link" href="mailto:habib@habibcore.com?subject=Full%20archive%20request"><div className="epk-frame img-reveal"><img src="/generated/blvckoreo.webp" alt="BlvckOreo personal EPK" width={640} height={640} decoding="async" /></div></a><figcaption><span>BlvckOreo — Personal EPK</span><span className="epk-year">2023</span></figcaption></figure>
-        <figure className="rv"><a className="epk-link" href="mailto:habib@habibcore.com?subject=Full%20archive%20request"><div className="epk-frame img-reveal"><img src="/generated/1ethfp.webp" alt="1ETHFP creative collaboration" width={600} height={1500} decoding="async" /></div></a><figcaption><span>1ETHFP — Creative Collaboration</span><span className="epk-year">2023</span></figcaption></figure>
+        <figure className="rv" id="epk-skaame"><a className="epk-link" href="mailto:habib@habibcore.com?subject=Full%20archive%20request"><div className="epk-frame img-reveal"><img src="/generated/skaame.webp" alt="Skaame artist web EPK" width={640} height={800} decoding="async" /></div></a><figcaption><span>Skaame — Artist Web EPK</span><span className="epk-year">2024</span></figcaption></figure>
+        <figure className="rv" id="epk-layo"><a className="epk-link" href="mailto:habib@habibcore.com?subject=Full%20archive%20request"><div className="epk-frame img-reveal"><img src="/generated/layo.webp" alt="Layo Isaac artist EPK" width={640} height={427} decoding="async" /></div></a><figcaption><span>Layo Isaac — Artist EPK</span><span className="epk-year">2024</span></figcaption></figure>
+        <figure className="rv" id="epk-blvckoreo"><a className="epk-link" href="mailto:habib@habibcore.com?subject=Full%20archive%20request"><div className="epk-frame img-reveal"><img src="/generated/blvckoreo.webp" alt="BlvckOreo personal EPK" width={640} height={640} decoding="async" /></div></a><figcaption><span>BlvckOreo — Personal EPK</span><span className="epk-year">2023</span></figcaption></figure>
+        <figure className="rv" id="epk-1ethfp"><a className="epk-link" href="mailto:habib@habibcore.com?subject=Full%20archive%20request"><div className="epk-frame img-reveal"><img src="/generated/1ethfp.webp" alt="1ETHFP creative collaboration" width={600} height={1500} decoding="async" /></div></a><figcaption><span>1ETHFP — Creative Collaboration</span><span className="epk-year">2023</span></figcaption></figure>
       </div>
     </div>
   </section>
@@ -373,13 +373,14 @@ export default function Home() {
           </div>
 
           <div className="range-stage">
-            <p className="range-word" data-i="1"><span className="rw">Design.</span><span className="rm">BRAND · IDENTITY · ART DIRECTION</span></p>
-            <p className="range-word" data-i="2"><span className="rw">Product.</span><span className="rm">INTERFACES · WEB APPS · TOOLS</span></p>
-            <p className="range-word" data-i="3"><span className="rw">Systems.</span><span className="rm">PROCESS · STRUCTURE · DOCUMENTATION</span></p>
-            <p className="range-word" data-i="4"><span className="rw">Automation.</span><span className="rm">WORKFLOWS · PIPELINES · SLAS</span></p>
-            <p className="range-word" data-i="5"><span className="rw">AI.</span><span className="rm">ASSISTANTS · LITERACY · INTEGRATION</span></p>
-            <p className="range-word" data-i="6"><span className="rw">Software.</span><span className="rm">DESIGNED, BUILT &amp; SHIPPED END TO END</span></p>
-            <p className="range-word" data-i="7"><span className="rw"><em>Habibcore.</em></span><span className="rm">ALL OF IT — ONE PAIR OF HANDS</span></p>
+            <p className="range-word" data-i="1"><span className="rw">Design.</span><span className="rm">BRAND · IDENTITY · GRAPHIC</span></p>
+            <p className="range-word" data-i="2"><span className="rw">Creative.</span><span className="rm">ART DIRECTION · IMAGE · VIDEO · MUSIC</span></p>
+            <p className="range-word" data-i="3"><span className="rw">Product.</span><span className="rm">INTERFACES · WEB APPS · TOOLS</span></p>
+            <p className="range-word" data-i="4"><span className="rw">Systems.</span><span className="rm">PROCESS · STRUCTURE · DOCUMENTATION</span></p>
+            <p className="range-word" data-i="5"><span className="rw">Automation.</span><span className="rm">WORKFLOWS · PIPELINES · SLAS</span></p>
+            <p className="range-word" data-i="6"><span className="rw">AI.</span><span className="rm">ASSISTANTS · LITERACY · INTEGRATION</span></p>
+            <p className="range-word" data-i="7"><span className="rw">Software.</span><span className="rm">DESIGNED, BUILT &amp; SHIPPED END TO END</span></p>
+            <p className="range-word" data-i="8"><span className="rw"><em>Habibcore.</em></span><span className="rm">ALL OF IT — ONE PAIR OF HANDS</span></p>
             <div className="range-graph" aria-hidden="true"></div>
             {/* creative dataset — read by public/engine.js to extend the
                 graph with practice → project → artifact relationships */}
@@ -389,7 +390,7 @@ export default function Home() {
               dangerouslySetInnerHTML={{ __html: JSON.stringify(rangeNodes) }}
             />
           </div>
-          <p className="range-foot"><span className="range-count">01 / 07</span>DESIGN → OPERATIONS → AUTOMATION → SYSTEMS → AI → PRODUCT → SOFTWARE</p>
+          <p className="range-foot"><span className="range-count">01 / 08</span>DESIGN → CREATIVE → OPERATIONS → AUTOMATION → SYSTEMS → AI → PRODUCT → SOFTWARE</p>
           {/* mobile / no-pin route through the same dataset — focused
               exploration, not a squeezed graph */}
           <div className="range-index" aria-label="Creative practice index">

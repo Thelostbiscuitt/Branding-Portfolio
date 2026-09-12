@@ -164,6 +164,7 @@
   const P_ROW = (n) => `.p-row[data-idx="${n}"]`;
   const RANGE_NODES = [
     /* Design */ [["Leadway Pensure", "BRAND · SYSTEMS", P_ROW("03")], ["Skaame EPK", "BRAND · 2024", ".epk-head"], ["Olumayowa", "CLIENT · WEB", P_ROW("04")]],
+    /* Creative */ [["BlvckOreo", "EPK · 2023", "#epk-blvckoreo"], ["Skaame", "WEB EPK · 2024", "#epk-skaame"], ["Layo Isaac", "EPK · 2024", "#epk-layo"], ["1ETHFP", "MUSIC · CULTURE", "#epk-1ethfp"]],
     /* Product */ [["Biscuit AI", "AI · PRODUCT", P_ROW("01")], ["Relay", "PRODUCT · SYSTEMS", P_ROW("06")], ["Leadway Pensure", "BRAND · SYSTEMS", P_ROW("03")]],
     /* Systems */ [["Relay", "AUDIT TRAILS", P_ROW("06")], ["AI in the Workplace", "CURRICULUM", P_ROW("05")], ["Leadway Pensure", "OPERATIONS", P_ROW("03")]],
     /* Automation */ [["Leadway Pensure", "18-STAGE PIPELINE", P_ROW("03")], ["Relay", "SLA CLOCKS", P_ROW("06")]],
@@ -172,7 +173,7 @@
     /* Habibcore — all of it */ [["Biscuit AI", "AI · PRODUCT", P_ROW("01")], ["Chef4me", "CONSUMER · AI", P_ROW("02")], ["Leadway Pensure", "BRAND · SYSTEMS", P_ROW("03")], ["Olumayowa", "CLIENT · WEB", P_ROW("04")], ["AI in the Workplace", "OPS · TRAINING", P_ROW("05")], ["Relay", "PRODUCT · SYSTEMS", P_ROW("06")]],
   ];
   /* orbit positions (percent of stage) so bubbles never sit on the word */
-  const RANGE_POS = { 2: [[10, 48], [90, 52]], 3: [[14, 18], [86, 20], [50, 86]], 6: [[12, 16], [86, 18], [8, 60], [90, 58], [30, 86], [70, 86]] };
+  const RANGE_POS = { 2: [[10, 48], [90, 52]], 3: [[14, 18], [86, 20], [50, 86]], 4: [[12, 20], [88, 22], [10, 64], [90, 66]], 6: [[12, 16], [86, 18], [8, 60], [90, 58], [30, 86], [70, 86]] };
 
   /* ————— creative practice layer —————
      Home.tsx injects src/data/range.ts as a JSON island; the graph and the
@@ -181,7 +182,7 @@
      stays quiet. Desktop (pinned) only; mobile uses the .range-index list. */
   const R_BY_ID = new Map();
   try { JSON.parse($("#range-data")?.textContent || "[]").forEach((n) => R_BY_ID.set(n.id, n)); } catch (e) { /* island missing — graph simply stays as-is */ }
-  const CREATIVE_HUB_POS = { 0: [26, 86], 6: [50, 10] };
+  const CREATIVE_HUB_POS = { 0: [26, 86], 7: [50, 10] };
   const rgState = { open: false, level: 0, disc: null, proj: null, hub: null, lastFocus: null };
 
   const rgDetail = (() => {
@@ -380,7 +381,7 @@
     stage.classList.add("creative-open");
     if (rgState.hub) { rgState.hub.style.left = "50%"; rgState.hub.style.top = "50%"; rgState.hub.classList.add("is-hub"); }
     rgState.anchor = [50, 50];
-    const disc = [...R_BY_ID.values()].filter((n) => n.kind === "discipline" && n.parent === "n-design");
+    const disc = [...R_BY_ID.values()].filter((n) => n.kind === "discipline" && n.parent === "n-creative");
     const ring = DISC_ANGLES.map((a) => [clamp(50 + 27 * Math.cos(a), 7, 93), clamp(50 + 34 * Math.sin(a), 10, 90)]);
     /* resolve the ring against the hub/flagship/word so nothing spawns on top */
     const placed = layoutLevel(ring, NODE_HALF["rg-md"][0], NODE_HALF["rg-md"][1]);
@@ -1003,6 +1004,82 @@
       toast("COPIED", `${EMAIL} is on your clipboard.`);
       setTimeout(() => { copyBtn.textContent = "COPY"; copyBtn.classList.remove("ok"); }, 2000);
     });
+  })();
+
+  /* ————— background sound —————
+     One <audio>, wired by hand: play/pause/prev/next/auto-advance.
+     Browsers refuse autoplay before the visitor interacts, so the set
+     starts on the first click / key / scroll — and stays quiet (0.25)
+     so it sits under the work, never over it. */
+  (() => {
+    const player = $(".player");
+    if (!player) return;
+    let tracks = [];
+    try { tracks = JSON.parse($("#sound-data")?.textContent || "[]"); } catch (e) { tracks = []; }
+    if (!tracks.length) return;
+    const audio = new Audio();
+    audio.preload = "none";
+    audio.volume = 0.25;
+    let ti = 0, started = false;
+    const tBtn = $('[data-act="toggle"]', player);
+    const titleEl = $(".pl-title", player);
+    const artistEl = $(".pl-artist", player);
+    const countEl = $(".pl-count", player);
+    const barEl = $(".pl-bar i", player);
+    const pad = (n) => String(n + 1).padStart(2, "0");
+    const load = (i) => {
+      ti = ((i % tracks.length) + tracks.length) % tracks.length;
+      const t = tracks[ti];
+      audio.src = t.file;
+      if (titleEl) titleEl.textContent = t.title;
+      if (artistEl) artistEl.textContent = t.artist;
+      if (countEl) countEl.textContent = `${pad(ti)} / ${String(tracks.length).padStart(2, "0")}`;
+      if (barEl) barEl.style.transform = "scaleX(0)";
+    };
+    const play = () => { const p = audio.play(); if (p && p.catch) p.catch(() => { /* gesture gate — stay silent until it lifts */ }); };
+    const firstPlay = () => { if (started) return; started = true; load(0); play(); };
+    audio.addEventListener("play", () => {
+      player.classList.add("playing");
+      if (tBtn) { tBtn.setAttribute("aria-pressed", "true"); tBtn.setAttribute("aria-label", "Pause music"); }
+    });
+    audio.addEventListener("pause", () => {
+      player.classList.remove("playing");
+      if (tBtn) { tBtn.setAttribute("aria-pressed", "false"); tBtn.setAttribute("aria-label", "Play music"); }
+    });
+    audio.addEventListener("ended", () => { load(ti + 1); play(); });
+    audio.addEventListener("timeupdate", () => {
+      if (!barEl || !audio.duration || !isFinite(audio.duration)) return;
+      barEl.style.transform = `scaleX(${(audio.currentTime / audio.duration).toFixed(4)})`;
+    });
+    audio.addEventListener("error", () => player.classList.remove("playing"));
+    /* the gate — first genuine interaction anywhere starts the set, unless
+       that interaction IS the strip, whose own buttons decide */
+    const wheelOpts = { passive: true };
+    const engage = (e) => {
+      document.removeEventListener("pointerdown", engage);
+      document.removeEventListener("wheel", engage, wheelOpts);
+      document.removeEventListener("keydown", keyEngage);
+      if (started || (e && e.target && e.target.closest && e.target.closest(".player"))) return;
+      firstPlay();
+    };
+    const keyEngage = (e) => {
+      const t = e.target;
+      if (t && (t.tagName === "INPUT" || t.tagName === "TEXTAREA" || t.tagName === "SELECT" || t.isContentEditable)) return;
+      engage();
+    };
+    document.addEventListener("pointerdown", engage);
+    document.addEventListener("wheel", engage, wheelOpts);
+    document.addEventListener("keydown", keyEngage);
+    if (tBtn) tBtn.addEventListener("click", () => {
+      if (!started) firstPlay();
+      else if (audio.paused) play();
+      else audio.pause();
+    });
+    const skip = (d) => { if (!started) { firstPlay(); return; } load(ti + d); play(); };
+    const nextBtn = $('[data-act="next"]', player);
+    const prevBtn = $('[data-act="prev"]', player);
+    if (nextBtn) nextBtn.addEventListener("click", () => skip(1));
+    if (prevBtn) prevBtn.addEventListener("click", () => skip(-1));
   })();
 
   /* ————— boot ————— */
