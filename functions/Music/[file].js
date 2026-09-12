@@ -4,11 +4,27 @@
    edge for a year, bytes never touch an app origin. Masters stay private
    in a separate "habibcore-masters" bucket. */
 export async function onRequest({ request, env, params }) {
-  const key = `${params.file ?? ''}.mp3`;
+  const raw = params.file ?? '';
+  const key = raw.endsWith('.mp3') ? raw : `${raw}.mp3`;
   if (!/^[a-z0-9-]+\.mp3$/.test(key)) return new Response("Bad Request", { status: 400 });
 
-  const range = request.headers.get("Range") || undefined;
-  const obj = await env.SOUND_BUCKET.get(key, { range });
+  // R2 get() needs { offset, length } — parse the Range header ourselves
+  // ("bytes=0-1023", "bytes=512-", "bytes=-500" all handled).
+  let range;
+  const m = /^bytes=(\d*)-(\d*)$/.exec(request.headers.get("Range") ?? '');
+  if (m) {
+    const [, a, b] = m;
+    if (a === '' && b !== '') range = { offset: undefined, length: Number(b), suffix: true };
+    else if (a !== '') range = { offset: Number(a), length: b !== '' ? Number(b) - Number(a) + 1 : undefined };
+  }
+  if (range?.suffix) {
+    const head = await env.SOUND_BUCKET.head(key);
+    if (!head) return new Response("Not Found", { status: 404 });
+    range = { offset: Math.max(0, head.size - range.length), length: Math.min(range.length, head.size) };
+  }
+  const obj = range
+    ? await env.SOUND_BUCKET.get(key, { range })
+    : await env.SOUND_BUCKET.get(key);
   if (!obj) return new Response("Not Found", { status: 404 });
 
   const headers = new Headers({
