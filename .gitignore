@@ -29,6 +29,9 @@ yarn-error.log*
 # vercel
 .vercel
 
+# cloudflare / wrangler local state (miniflare caches, R2 + KV sqlite)
+/.wrangler
+
 # typescript
 *.tsbuildinfo
 next-env.d.ts

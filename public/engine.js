@@ -1021,23 +1021,55 @@
       setTimeout(() => field.classList.remove("err"), 700);
     };
 
-    submit.addEventListener("click", (e) => {
+    const openMailApp = (name, email, types, brief) => {
+      const subject = `Project enquiry${types.length ? ` — ${types.join(", ")}` : ""} — ${name}`;
+      const body = [
+        `Name: ${name}`,
+        `Email: ${email}`,
+        `Building: ${types.length ? types.join(", ") : "—"}`,
+        "",
+        brief || "(no brief yet)",
+      ].join("\n");
+      window.location.href = `mailto:${EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+      toast("OPENING YOUR MAIL APP", "Prefer to stay here? Copy the address instead.");
+    };
+
+    submit.addEventListener("click", async (e) => {
       e.preventDefault();
+      if (submit.dataset.busy === "1") return;
       let ok = true;
       if (!nameF.value.trim()) { flagErr(nameF); ok = false; }
       if (!mailF.value.trim() || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(mailF.value.trim())) { flagErr(mailF); ok = false; }
       if (!ok) { toast("ALMOST THERE", "Add your name and a valid email so I can reply."); return; }
+
       const types = selected();
-      const subject = `Project enquiry${types.length ? ` — ${types.join(", ")}` : ""} — ${nameF.value.trim()}`;
-      const body = [
-        `Name: ${nameF.value.trim()}`,
-        `Email: ${mailF.value.trim()}`,
-        `Building: ${types.length ? types.join(", ") : "—"}`,
-        "",
-        briefF.value.trim() || "(no brief yet)",
-      ].join("\n");
-      window.location.href = `mailto:${EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-      toast("OPENING YOUR MAIL APP", "Prefer to stay here? Copy the address instead.");
+      const name = nameF.value.trim();
+      const email = mailF.value.trim();
+      const brief = briefF.value.trim();
+
+      /* Send it from the edge so it actually lands, and so the visitor can be
+         acknowledged automatically (a mailto handoff teaches the server nothing,
+         so no follow-up is possible through it). If the endpoint is unreachable
+         the form still works: fall back to the mail client. A down endpoint must
+         never cost an enquiry, and this path needs no mail client configured. */
+      submit.dataset.busy = "1";
+      submit.disabled = true;
+      try {
+        const res = await fetch("/api/contact", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ name, email, projectType: types, brief }),
+        });
+        if (!res.ok) throw new Error(`send failed (${res.status})`);
+        nameF.value = ""; mailF.value = ""; briefF.value = "";
+        chips.forEach((c) => c.setAttribute("aria-pressed", "false"));
+        toast("MESSAGE RECEIVED", "A confirmation is on its way. I usually reply within 24h.");
+      } catch {
+        openMailApp(name, email, types, brief);
+      } finally {
+        submit.disabled = false;
+        delete submit.dataset.busy;
+      }
     });
 
     /* copy email */

@@ -1,7 +1,7 @@
 const nextConfig = {
-  // Fully static build (Cloudflare Pages). The homepage, all project pages
-  // and the contact flow (mailto) are static; audio streams from R2 via the
-  // Pages Function in /functions (see wrangler.toml). No server runtime.
+  // Fully static build (Cloudflare Pages). The homepage and every project page
+  // are prerendered; audio streams from R2 and the enquiry endpoint runs in the
+  // Pages Function under /functions (see wrangler.toml). No Next server runtime.
   output: "export",
   images: {
     // Static export ships plain <img> — no image optimizer API route.

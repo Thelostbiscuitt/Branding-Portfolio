@@ -601,7 +601,7 @@ export default function Home() {
             <span className="f-underline"></span>
           </div>
           <button type="submit" className="f-submit magnetic"><span>SEND IT <i>→</i></span></button>
-          <p className="f-note">OPENS YOUR MAIL APP — USUALLY RESPONDS WITHIN 24H</p>
+          <p className="f-note">SENDS DIRECTLY - USUALLY RESPONDS WITHIN 24H</p>
         </form>
       </div>
     </div>

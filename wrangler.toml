@@ -10,3 +10,11 @@ pages_build_output_dir = "./out"
 [[r2_buckets]]
 binding = "SOUND_BUCKET"
 bucket_name = "habibcore-sound"
+
+# Enquiry endpoint — functions/api/contact.js delivers the contact form through
+# Resend. The API key is a Pages SECRET, not a var:
+#     npx wrangler pages secret put RESEND_API_KEY
+# Optional: once habibcore.com is verified in Resend, set CONTACT_FROM to
+# "Habib <contact@habibcore.com>" — that also lets the automatic acknowledgement
+# deliver to the enquirer (unverified accounts can only send to the owner).
+
