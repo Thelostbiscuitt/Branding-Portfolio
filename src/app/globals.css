@@ -1508,7 +1508,7 @@ section.block{padding-top:max(88px, 6.691vw) !important}
    One <audio>, play/pause/prev/next/auto-advance; starts on the visitor's
    first interaction at volume 0.25. Sizing follows the zoom-uniform rule:
    max(mobile floor px, vw) with vw = approved px / 19.16. */
-.player{position:fixed;left:var(--gutter);bottom:max(12px, 0.836vw) !important;z-index:94;display:flex;align-items:center;gap:max(9px, 0.627vw) !important;background:var(--white);border:1px solid var(--border-mid);padding:max(8px, 0.522vw) max(12px, 0.627vw) !important;font-family:var(--font-m)}
+.player{position:fixed;right:var(--gutter);bottom:max(60px, 3.132vw) !important;z-index:94;display:flex;align-items:center;gap:max(9px, 0.627vw) !important;background:var(--white);border:1px solid var(--border-mid);padding:max(8px, 0.522vw) max(12px, 0.627vw) !important;font-family:var(--font-m)}
 .pl-controls{display:flex;align-items:center;gap:max(3px, 0.209vw) !important}
 .pl-btn{display:grid;place-items:center;width:max(26px, 1.357vw) !important;height:max(26px, 1.357vw) !important;border:1px solid var(--border-mid);border-radius:var(--radius-s);color:var(--black);transition:background var(--dur-micro) var(--ease-out), color var(--dur-micro) var(--ease-out)}
 .pl-btn:hover, .pl-btn:focus-visible{background:var(--black);color:var(--white)}
@@ -1524,5 +1524,18 @@ section.block{padding-top:max(88px, 6.691vw) !important}
 .pl-bar{position:absolute;left:0;right:0;bottom:-1px;height:2px;background:var(--border)}
 .pl-bar i{display:block;height:100%;width:100%;background:var(--orange);transform:scaleX(0);transform-origin:0 50%}
 @media (max-width: 560px){.pl-artist{display:none}.pl-title{max-width:112px !important}}
-/* the running folio rides just above the strip instead of colliding */
-.folio{bottom:max(64px, 3.966vw) !important}
+/* the strip rides the right gutter, one breath above the marquee banner —
+   the running folio keeps its natural bottom-left seat */
+.rg-sound{position:fixed;right:var(--gutter);bottom:max(60px, 3.132vw) !important;z-index:120;width:max(300px, 15.655vw) !important;max-height:max(440px, 22.96vw) !important;overflow:auto;background:var(--white);border:1px solid var(--border-mid);padding:max(14px, 0.731vw) !important;font-family:var(--font-m)}
+.rg-sound .rg-x{position:absolute;top:max(8px, 0.418vw);right:max(10px, 0.522vw);font-size:max(12px, 0.627vw) !important;color:var(--black);line-height:1}
+.rg-sound .rg-x:hover{color:var(--rust)}
+.rg-sound-head{display:block;font-size:max(7px, 0.418vw) !important;letter-spacing:0.18em;color:var(--rust)}
+.rg-sound-sub{display:block;font-style:normal;font-size:max(6px, 0.363vw) !important;letter-spacing:0.14em;color:var(--gray);margin-top:2px}
+.rg-sound-list{margin-top:max(10px, 0.522vw) !important}
+.rg-sound-list button{display:flex;align-items:baseline;gap:max(8px, 0.418vw) !important;width:100%;text-align:left;padding:max(4px, 0.209vw) 0 !important;border-top:1px solid var(--line);transition:color var(--dur-micro) var(--ease-out)}
+.rg-sound-list button:hover, .rg-sound-list button:focus-visible{color:var(--rust)}
+.rg-sound-n{font-size:max(6px, 0.363vw) !important;color:var(--gray);letter-spacing:0.1em;min-width:max(16px, 0.835vw) !important}
+.rg-sound-t{font-size:max(9px, 0.522vw) !important;font-weight:700;color:var(--black);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.rg-sound-a{font-size:max(6px, 0.363vw) !important;color:var(--gray);letter-spacing:0.08em;white-space:nowrap}
+.rg-sound li.is-cur .rg-sound-t, .rg-sound li.is-cur .rg-sound-n{color:var(--rust)}
+.rg-sound li.is-playing .rg-sound-t::after{content:" · PLAYING";font-weight:400;font-size:max(6px, 0.363vw) !important;color:var(--rust);letter-spacing:0.12em}

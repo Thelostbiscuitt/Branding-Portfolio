@@ -39,5 +39,7 @@ export const tracks: Track[] = [
   { title: 'Vice City', artist: 'BLVCK OREO', file: '/Music/vice-city.mp3' },
   { title: 'VPN Visa', artist: 'BLVCK OREO', file: '/Music/vpn-visa.mp3' },
   { title: 'Wild Wild West', artist: 'BLVCK OREO', file: '/Music/wild-wild-west.mp3' },
+  { title: 'Ends', artist: 'BLVCK OREO', file: '/Music/ends.mp3' },
+  { title: 'HOPE (Cover)', artist: 'BLVCK OREO', file: '/Music/hope-cover.mp3' },
 ]
 

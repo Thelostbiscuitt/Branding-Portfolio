@@ -185,6 +185,65 @@
   const CREATIVE_HUB_POS = { 0: [26, 86], 7: [50, 10] };
   const rgState = { open: false, level: 0, disc: null, proj: null, hub: null, lastFocus: null };
 
+  /* ————— sound tracklist overlay —————
+     The Creative chapter's sound node opens this: the whole Habibcore set,
+     one row per song, tap a row to play. Lives on the stage (not inside
+     range-graph) so word-change wipes can't eat it mid-read. */
+  const rgSound = (() => {
+    if (!rangeGraph) return null;
+    let tracks = [];
+    try { tracks = JSON.parse($("#sound-data")?.textContent || "[]"); } catch (e) { tracks = []; }
+    if (!tracks.length) return null;
+    const d = document.createElement("aside");
+    d.className = "rg-sound";
+    d.setAttribute("role", "dialog");
+    d.setAttribute("aria-label", "Habibcore sound tracklist");
+    d.hidden = true;
+    d.innerHTML = `
+      <button type="button" class="rg-x" aria-label="Close tracklist">&times;</button>
+      <b class="rg-sound-head">HABIBCORE® SOUND</b>
+      <i class="rg-sound-sub">${String(tracks.length).padStart(2, "0")} SONGS · TAP A ROW TO PLAY</i>
+      <ol class="rg-sound-list">${tracks.map((t, i) => `
+        <li><button type="button" data-play="${i}">
+          <span class="rg-sound-n">${String(i + 1).padStart(2, "0")}</span>
+          <span class="rg-sound-t">${t.title}</span>
+          <span class="rg-sound-a">${t.artist}</span>
+        </button></li>`).join("")}</ol>`;
+    rangeGraph.parentElement.appendChild(d);
+    d.querySelector(".rg-x").addEventListener("click", () => { d.hidden = true; });
+    d.addEventListener("click", (e) => {
+      const btn = e.target.closest("[data-play]");
+      if (!btn || !window.__SOUND) return;
+      const i = Number(btn.dataset.play);
+      if (i === window.__SOUND.index()) window.__SOUND.toggle();
+      else window.__SOUND.play(i);
+    });
+    const paint = (e) => {
+      const idx = e && e.detail ? e.detail.index : (window.__SOUND ? window.__SOUND.index() : -1);
+      const playing = e && e.detail ? e.detail.playing : (window.__SOUND ? window.__SOUND.playing() : false);
+      d.querySelectorAll("li").forEach((li, i) => {
+        li.classList.toggle("is-cur", i === idx);
+        li.classList.toggle("is-playing", i === idx && playing);
+      });
+    };
+    document.addEventListener("soundchange", paint);
+    return d;
+  })();
+  const openSoundList = () => {
+    if (!rgSound) return;
+    rgSound.hidden = !rgSound.hidden;
+    if (!rgSound.hidden) paintSound();
+  };
+  function paintSound() {
+    if (!rgSound || rgSound.hidden) return;
+    const idx = window.__SOUND ? window.__SOUND.index() : -1;
+    const playing = window.__SOUND ? window.__SOUND.playing() : false;
+    rgSound.querySelectorAll("li").forEach((li, i) => {
+      li.classList.toggle("is-cur", i === idx);
+      li.classList.toggle("is-playing", i === idx && playing);
+    });
+  }
+
   const rgDetail = (() => {
     if (!rangeGraph) return null;
     const d = document.createElement("aside");
@@ -463,6 +522,7 @@
     rgState.open = false; rgState.disc = null; rgState.proj = null; rgState.hub = null;
     stage.classList.remove("creative-open");
     closeRgDetail();
+    if (rgSound) rgSound.hidden = true;
     const NS = "http://www.w3.org/2000/svg";
     const svg = document.createElementNS(NS, "svg");
     rangeGraph.appendChild(svg);
@@ -555,6 +615,29 @@
         flagBtn.addEventListener("click", () => openRgDetail(flagship.id, flagBtn));
         rangeGraph.appendChild(flagBtn);
         rgLayer.push(flagLine, flagBtn);
+      }
+
+      /* sound satellite — Creative → the Habibcore set; opens the tracklist */
+      if (rgSound) {
+        const spos = [clamp(hubPos[0] - 17, 7, 93), clamp(hubPos[1] + 15, 10, 90)];
+        const sLine = document.createElementNS(NS, "line");
+        sLine.setAttribute("x1", `${hubPos[0]}%`); sLine.setAttribute("y1", `${hubPos[1]}%`);
+        sLine.setAttribute("x2", `${spos[0]}%`); sLine.setAttribute("y2", `${spos[1]}%`);
+        sLine.style.strokeDasharray = "1400";
+        sLine.style.strokeDashoffset = "1400";
+        sLine.dataset.lvl = "0";
+        svg.appendChild(sLine);
+        const sBtn = document.createElement("button");
+        sBtn.type = "button";
+        sBtn.className = "rg-bubble rg-sm rg-flag rg-sound-b";
+        sBtn.tabIndex = 0;
+        sBtn.style.left = `${spos[0]}%`;
+        sBtn.style.top = `${spos[1]}%`;
+        sBtn.style.setProperty("--rd", `${260 + nodes.length * 90}ms`);
+        sBtn.innerHTML = `<b>Habibcore Sound</b><i>MY SONGS · TAP TO LIST</i>`;
+        sBtn.addEventListener("click", () => openSoundList());
+        rangeGraph.appendChild(sBtn);
+        rgLayer.push(sLine, sBtn);
       }
 
       /* hovering any part of the chain lights the whole tether */
@@ -1027,6 +1110,7 @@
     const countEl = $(".pl-count", player);
     const barEl = $(".pl-bar i", player);
     const pad = (n) => String(n + 1).padStart(2, "0");
+    function emit() { document.dispatchEvent(new CustomEvent("soundchange", { detail: { index: ti, playing: started && !audio.paused } })); }
     const load = (i) => {
       ti = ((i % tracks.length) + tracks.length) % tracks.length;
       const t = tracks[ti];
@@ -1035,16 +1119,19 @@
       if (artistEl) artistEl.textContent = t.artist;
       if (countEl) countEl.textContent = `${pad(ti)} / ${String(tracks.length).padStart(2, "0")}`;
       if (barEl) barEl.style.transform = "scaleX(0)";
+      emit();
     };
     const play = () => { const p = audio.play(); if (p && p.catch) p.catch(() => { /* gesture gate — stay silent until it lifts */ }); };
     const firstPlay = () => { if (started) return; started = true; load(0); play(); };
     audio.addEventListener("play", () => {
       player.classList.add("playing");
       if (tBtn) { tBtn.setAttribute("aria-pressed", "true"); tBtn.setAttribute("aria-label", "Pause music"); }
+      emit();
     });
     audio.addEventListener("pause", () => {
       player.classList.remove("playing");
       if (tBtn) { tBtn.setAttribute("aria-pressed", "false"); tBtn.setAttribute("aria-label", "Play music"); }
+      emit();
     });
     audio.addEventListener("ended", () => { load(ti + 1); play(); });
     audio.addEventListener("timeupdate", () => {
@@ -1080,6 +1167,13 @@
     const prevBtn = $('[data-act="prev"]', player);
     if (nextBtn) nextBtn.addEventListener("click", () => skip(1));
     if (prevBtn) prevBtn.addEventListener("click", () => skip(-1));
+    /* read-only API for the Creative chapter's sound node (tracklist overlay) */
+    window.__SOUND = {
+      play: (i) => { started = true; load(i); play(); },
+      toggle: () => { if (!started) { firstPlay(); return; } if (audio.paused) play(); else audio.pause(); },
+      index: () => ti,
+      playing: () => started && !audio.paused,
+    };
   })();
 
   /* ————— boot ————— */
