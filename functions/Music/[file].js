@@ -4,7 +4,7 @@
    edge for a year, bytes never touch an app origin. Masters stay private
    in a separate "habibcore-masters" bucket. */
 export async function onRequest({ request, env, params }) {
-  const key = params.file;
+  const key = `${params.file ?? ''}.mp3`;
   if (!/^[a-z0-9-]+\.mp3$/.test(key)) return new Response("Bad Request", { status: 400 });
 
   const range = request.headers.get("Range") || undefined;
@@ -16,14 +16,15 @@ export async function onRequest({ request, env, params }) {
     "Cache-Control": "public, max-age=31536000, immutable",
     "Accept-Ranges": "bytes",
     "ETag": obj.httpEtag,
-    "Content-Length": String(obj.size),
   });
 
   if (obj.range) {
     const start = obj.range.offset;
     const end = obj.range.end ?? obj.size - 1;
     headers.set("Content-Range", `bytes ${start}-${end}/${obj.size}`);
+    headers.set("Content-Length", String(end - start + 1));
     return new Response(obj.body, { status: 206, headers });
   }
+  headers.set("Content-Length", String(obj.size));
   return new Response(obj.body, { status: 200, headers });
 }
