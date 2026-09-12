@@ -1523,30 +1523,8 @@ section.block{padding-top:max(88px, 6.691vw) !important}
 .pl-count{font-size:max(7px, 0.47vw) !important;color:var(--gray);white-space:nowrap}
 .pl-bar{position:absolute;left:0;right:0;bottom:-1px;height:2px;background:var(--border)}
 .pl-bar i{display:block;height:100%;width:100%;background:var(--orange);transform:scaleX(0);transform-origin:0 50%}
-@media (max-width: 640px){
-  .player{left:auto !important;right:max(12px, 2.509vw) !important;bottom:calc(max(10px, 0.522vw) + env(safe-area-inset-bottom, 0px)) !important;gap:8px !important;padding:8px 10px !important;max-width:min(82vw, 360px);border-radius:8px}
-  .pl-meta{flex:1 1 auto;min-width:0;gap:0}
-  .pl-title{max-width:none !important;white-space:nowrap;font-size:11px !important;line-height:1.2}
-  .pl-artist{display:none}
-  .pl-count{display:none}
-  .pl-controls{gap:4px !important}
-  .pl-btn{width:32px !important;height:32px !important;border-radius:6px}
-  .pl-bar{height:4px;bottom:-4px;border-radius:0 0 6px 6px;background:var(--border)}
-  .pl-bar::before{top:-12px;bottom:-12px}
-  /* mini-player: collapsed = play + expand only, rest hides in a pop-up row */
-  .player .pl-more{display:grid !important}
-  .player .pl-extra{display:none !important}
-  .player.pl-open .pl-extra{display:flex !important;position:absolute;right:0;bottom:calc(100% + 8px);background:var(--white);border:1px solid var(--border-mid);border-radius:8px;padding:6px !important;gap:6px !important;box-shadow:0 8px 24px rgba(0,0,0,0.12)}
-  .player.pl-open .pl-more .pl-i-more{transform:rotate(180deg)}
-  .player .pl-i-more{transition:transform var(--dur-micro) var(--ease-out)}
-  .pl-now{font-size:7px !important}
-  .rg-sound{left:max(12px, 2.509vw);right:max(12px, 2.509vw);width:auto !important;bottom:max(120px, 6.3vw) !important;max-height:60vh !important}
-}
-@media (min-width: 641px){
-  /* desktop + tablet keep the full strip — the caret only exists for phones */
-  .player .pl-more{display:none !important}
-  .player .pl-extra{display:contents}
-}
+/* PHONES: the docked sound bar is defined in the appended override at the END of
+   this file, so it wins the cascade against the later .player / .pl-bar rules. */
 /* the strip rides the right gutter, one breath above the marquee banner —
    the running folio keeps its natural bottom-left seat */
 .rg-sound{position:fixed;right:var(--gutter);bottom:max(60px, 3.132vw) !important;z-index:120;width:max(300px, 15.655vw) !important;max-height:max(440px, 22.96vw) !important;overflow:auto;background:var(--white);border:1px solid var(--border-mid);padding:max(14px, 0.731vw) !important;font-family:var(--font-m)}
@@ -1597,3 +1575,29 @@ button,.pl-bar,.rg-chip-m,.rg-sound-list button,.menu-btn,.f-submit,.chip{touch-
   .pl-now,.pl-artist,.pl-count{font-size:max(9px, 0.418vw) !important}
   .pl-btn svg{width:max(10px, 0.47vw) !important;height:max(10px, 0.47vw) !important}
 }
+/* ————— PHONES: the sound strip docks as a full-width bottom bar —————
+   Deliberately last: the rules above re-declare .player{bottom} and
+   .pl-bar{height/border-radius} with !important, so this block has to win on
+   source order. No caret and no pop-up — every transport control stays visible.
+   The bar owns the bottom strip (body padding keeps the last line clear) and its
+   top edge lands below the hero CTAs, so no page control sits under it. */
+@media (max-width: 640px){
+  .player{left:0 !important;right:0 !important;bottom:0 !important;width:auto !important;max-width:none !important;gap:10px !important;padding:10px max(12px, 4vw) calc(10px + env(safe-area-inset-bottom, 0px)) !important;border-radius:0;border-left:0;border-right:0;border-bottom:0;border-top:1px solid var(--border-mid);box-shadow:0 -6px 24px rgba(26, 21, 17, 0.06)}
+  .pl-controls{flex:0 0 auto;gap:6px !important}
+  .pl-btn{width:34px !important;height:34px !important;border-radius:8px}
+  .pl-meta{flex:1 1 auto;min-width:0;gap:0}
+  .pl-now{font-size:8px !important}
+  .pl-title{max-width:none !important;white-space:nowrap;font-size:12px !important;line-height:1.2}
+  .pl-artist{display:none}
+  .pl-count{display:none}
+  /* progress reads as a hairline along the bar's top edge, with a real hit area */
+  .pl-bar{top:0 !important;bottom:auto !important;height:3px !important;border-radius:0 !important;background:var(--border) !important}
+  .pl-bar::before{top:0 !important;bottom:auto !important;height:14px !important;border-radius:0}
+  /* the docked bar owns the bottom strip — keep the page's last line clear of it */
+  body{padding-bottom:calc(60px + env(safe-area-inset-bottom, 0px))}
+  .rg-sound{left:max(12px, 2.509vw);right:max(12px, 2.509vw);width:auto !important;bottom:calc(66px + env(safe-area-inset-bottom, 0px)) !important;max-height:60vh !important}
+}
+/* while the mobile menu (or the preloader) owns the screen, the bar steps aside —
+   it outranks the menu's z-index, so without this it would float over it */
+body.is-locked .player{visibility:hidden;opacity:0;pointer-events:none}
+
