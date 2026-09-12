@@ -52,7 +52,27 @@ plans/
 # audio: only the curated playlist derivatives are committed — masters and
 # raw downloads in public/Music stay local (add a ! line per new playlist file)
 public/Music/*
+!public/Music/1-love-drill.mp3
+!public/Music/234drill.mp3
 !public/Music/afro-woo.mp3
+!public/Music/calm-down-cover.mp3
+!public/Music/cheques.mp3
+!public/Music/fake-heads.mp3
 !public/Music/finer-things.mp3
+!public/Music/gidi-anthem.mp3
+!public/Music/good-days.mp3
+!public/Music/i-deserve-it.mp3
+!public/Music/im-that-og.mp3
+!public/Music/lagos-party.mp3
+!public/Music/marceline.mp3
+!public/Music/money-wahala.mp3
+!public/Music/oyoon-your-own.mp3
+!public/Music/return-of-the-dead.mp3
+!public/Music/set-me-free.mp3
+!public/Music/spazzing-hard.mp3
+!public/Music/trap-lan-je.mp3
 !public/Music/vibes-inshallah.mp3
+!public/Music/vice-city.mp3
+!public/Music/vpn-visa.mp3
 !public/Music/whats-up.mp3
+!public/Music/wild-wild-west.mp3
