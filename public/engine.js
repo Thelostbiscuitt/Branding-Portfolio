@@ -194,55 +194,60 @@
     let tracks = [];
     try { tracks = JSON.parse($("#sound-data")?.textContent || "[]"); } catch (e) { tracks = []; }
     if (!tracks.length) return null;
+    const moods = [...new Set(tracks.map((t) => t.mood).filter(Boolean))];
     const d = document.createElement("aside");
     d.className = "rg-sound";
     d.setAttribute("role", "dialog");
-    d.setAttribute("aria-label", "Habibcore sound tracklist");
+    d.setAttribute("aria-label", "Habibcore sound — tracklist and moods");
     d.hidden = true;
+    const rowsHtml = (mood) => tracks
+      .map((t, i) => ({ t, i }))
+      .filter(({ t }) => mood === "ALL" || t.mood === mood)
+      .map(({ t, i }, n) => `
+        <li><button type="button" data-play="${i}">
+          <span class="rg-sound-n">${String(n + 1).padStart(2, "0")}</span>
+          <span class="rg-sound-t">${t.title}</span>
+          <span class="rg-sound-a">${t.bpm ? `${t.bpm} BPM · ${t.mood}` : t.artist}</span>
+        </button></li>`).join("");
     d.innerHTML = `
       <button type="button" class="rg-x" aria-label="Close tracklist">&times;</button>
       <b class="rg-sound-head">HABIBCORE® SOUND</b>
-      <i class="rg-sound-sub">${String(tracks.length).padStart(2, "0")} SONGS · TAP A ROW TO PLAY</i>
-      <ol class="rg-sound-list">${tracks.map((t, i) => `
-        <li><button type="button" data-play="${i}">
-          <span class="rg-sound-n">${String(i + 1).padStart(2, "0")}</span>
-          <span class="rg-sound-t">${t.title}</span>
-          <span class="rg-sound-a">${t.artist}</span>
-        </button></li>`).join("")}</ol>`;
+      <i class="rg-sound-sub">TAP A ROW TO PLAY · EVERY RELOAD IS A NEW RIDE</i>
+      <div class="rg-sound-chips">${["ALL", ...moods].map((m) => `<button type="button" class="rg-chip-m${m === "ALL" ? " is-on" : ""}" data-mood="${m}">${m}</button>`).join("")}</div>
+      <ol class="rg-sound-list" data-mood="ALL">${rowsHtml("ALL")}</ol>`;
     rangeGraph.parentElement.appendChild(d);
     d.querySelector(".rg-x").addEventListener("click", () => { d.hidden = true; });
+    let lastMood = "ALL";
+    const paint = (e) => {
+      const st = e && e.detail ? e.detail
+        : window.__SOUND ? { ...window.__SOUND.state(), index: window.__SOUND.index(), playing: window.__SOUND.playing() }
+        : null;
+      if (!st) return;
+      if (st.mood !== lastMood) {
+        lastMood = st.mood;
+        const list = d.querySelector(".rg-sound-list");
+        list.dataset.mood = st.mood;
+        list.innerHTML = rowsHtml(st.mood);
+        d.querySelectorAll(".rg-chip-m").forEach((c) => c.classList.toggle("is-on", c.dataset.mood === st.mood));
+      }
+      d.querySelectorAll("[data-play]").forEach((btn) => {
+        const cur = Number(btn.dataset.play) === st.index;
+        btn.closest("li").classList.toggle("is-cur", cur);
+        btn.closest("li").classList.toggle("is-playing", cur && st.playing);
+      });
+    };
+    document.addEventListener("soundchange", paint);
     d.addEventListener("click", (e) => {
+      const chip = e.target.closest("[data-mood]");
+      if (chip && window.__SOUND) { window.__SOUND.setMood(chip.dataset.mood); return; }
       const btn = e.target.closest("[data-play]");
       if (!btn || !window.__SOUND) return;
       const i = Number(btn.dataset.play);
       if (i === window.__SOUND.index()) window.__SOUND.toggle();
       else window.__SOUND.play(i);
     });
-    const paint = (e) => {
-      const idx = e && e.detail ? e.detail.index : (window.__SOUND ? window.__SOUND.index() : -1);
-      const playing = e && e.detail ? e.detail.playing : (window.__SOUND ? window.__SOUND.playing() : false);
-      d.querySelectorAll("li").forEach((li, i) => {
-        li.classList.toggle("is-cur", i === idx);
-        li.classList.toggle("is-playing", i === idx && playing);
-      });
-    };
-    document.addEventListener("soundchange", paint);
-    return d;
+    return { el: d, open: () => { d.hidden = !d.hidden; if (!d.hidden) paint(); } };
   })();
-  const openSoundList = () => {
-    if (!rgSound) return;
-    rgSound.hidden = !rgSound.hidden;
-    if (!rgSound.hidden) paintSound();
-  };
-  function paintSound() {
-    if (!rgSound || rgSound.hidden) return;
-    const idx = window.__SOUND ? window.__SOUND.index() : -1;
-    const playing = window.__SOUND ? window.__SOUND.playing() : false;
-    rgSound.querySelectorAll("li").forEach((li, i) => {
-      li.classList.toggle("is-cur", i === idx);
-      li.classList.toggle("is-playing", i === idx && playing);
-    });
-  }
 
   const rgDetail = (() => {
     if (!rangeGraph) return null;
@@ -522,7 +527,7 @@
     rgState.open = false; rgState.disc = null; rgState.proj = null; rgState.hub = null;
     stage.classList.remove("creative-open");
     closeRgDetail();
-    if (rgSound) rgSound.hidden = true;
+    if (rgSound) rgSound.el.hidden = true;
     const NS = "http://www.w3.org/2000/svg";
     const svg = document.createElementNS(NS, "svg");
     rangeGraph.appendChild(svg);
@@ -635,7 +640,7 @@
         sBtn.style.top = `${spos[1]}%`;
         sBtn.style.setProperty("--rd", `${260 + nodes.length * 90}ms`);
         sBtn.innerHTML = `<b>Habibcore Sound</b><i>MY SONGS · TAP TO LIST</i>`;
-        sBtn.addEventListener("click", () => openSoundList());
+        sBtn.addEventListener("click", () => { if (rgSound) rgSound.open(); });
         rangeGraph.appendChild(sBtn);
         rgLayer.push(sLine, sBtn);
       }
@@ -1104,25 +1109,52 @@
     audio.preload = "none";
     audio.volume = 0.25;
     let ti = 0, started = false;
+    /* preferences persist across reloads (localStorage); the shuffle order
+       itself is re-rolled on every visit, so no two sessions ride the same set */
+    const prefs = { shuffle: true, repeat: false, mood: "ALL" };
+    try { Object.assign(prefs, JSON.parse(localStorage.getItem("hc-sound") || "{}")); } catch (e) { /* fresh visitor */ }
+    const savePrefs = () => { try { localStorage.setItem("hc-sound", JSON.stringify(prefs)); } catch (e) {} };
+    const pool = () => {
+      const all = tracks.map((_, i) => i);
+      return prefs.mood === "ALL" ? all : all.filter((i) => tracks[i].mood === prefs.mood);
+    };
+    const shuffled = (idx, keepFirst) => {
+      for (let i = idx.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [idx[i], idx[j]] = [idx[j], idx[i]]; }
+      if (keepFirst != null) { const k = idx.indexOf(keepFirst); if (k > 0) { idx.splice(k, 1); idx.unshift(keepFirst); } }
+      return idx;
+    };
+    let deck = [], di = 0;
+    const buildDeck = (firstIdx) => {
+      let p = pool();
+      if (!p.length) { prefs.mood = "ALL"; p = pool(); }
+      deck = prefs.shuffle ? shuffled(p.slice(), firstIdx) : p;
+      di = (firstIdx != null && deck.includes(firstIdx)) ? deck.indexOf(firstIdx) : 0;
+    };
     const tBtn = $('[data-act="toggle"]', player);
+    const shBtn = $('[data-act="shuffle"]', player);
+    const rpBtn = $('[data-act="repeat"]', player);
     const titleEl = $(".pl-title", player);
     const artistEl = $(".pl-artist", player);
     const countEl = $(".pl-count", player);
     const barEl = $(".pl-bar i", player);
     const pad = (n) => String(n + 1).padStart(2, "0");
-    function emit() { document.dispatchEvent(new CustomEvent("soundchange", { detail: { index: ti, playing: started && !audio.paused } })); }
-    const load = (i) => {
-      ti = ((i % tracks.length) + tracks.length) % tracks.length;
+    function emit() { document.dispatchEvent(new CustomEvent("soundchange", { detail: { index: ti, playing: started && !audio.paused, mood: prefs.mood, shuffle: prefs.shuffle, repeat: prefs.repeat, deck: deck.length, pos: di } })); }
+    const paintPrefs = () => {
+      if (shBtn) { shBtn.classList.toggle("is-on", prefs.shuffle); shBtn.setAttribute("aria-pressed", String(prefs.shuffle)); }
+      if (rpBtn) { rpBtn.classList.toggle("is-on", prefs.repeat); rpBtn.setAttribute("aria-pressed", String(prefs.repeat)); rpBtn.setAttribute("aria-label", prefs.repeat ? "Repeat this song: on" : "Repeat this song: off"); }
+    };
+    const loadFromDeck = () => {
+      ti = deck[di];
       const t = tracks[ti];
       audio.src = t.file;
       if (titleEl) titleEl.textContent = t.title;
       if (artistEl) artistEl.textContent = t.artist;
-      if (countEl) countEl.textContent = `${pad(ti)} / ${String(tracks.length).padStart(2, "0")}`;
+      if (countEl) countEl.textContent = `${pad(di)} / ${String(deck.length).padStart(2, "0")}`;
       if (barEl) barEl.style.transform = "scaleX(0)";
       emit();
     };
     const play = () => { const p = audio.play(); if (p && p.catch) p.catch(() => { /* gesture gate — stay silent until it lifts */ }); };
-    const firstPlay = () => { if (started) return; started = true; load(0); play(); };
+    const firstPlay = () => { if (started) return; started = true; buildDeck(null); paintPrefs(); loadFromDeck(); play(); };
     audio.addEventListener("play", () => {
       player.classList.add("playing");
       if (tBtn) { tBtn.setAttribute("aria-pressed", "true"); tBtn.setAttribute("aria-label", "Pause music"); }
@@ -1133,7 +1165,10 @@
       if (tBtn) { tBtn.setAttribute("aria-pressed", "false"); tBtn.setAttribute("aria-label", "Play music"); }
       emit();
     });
-    audio.addEventListener("ended", () => { load(ti + 1); play(); });
+    audio.addEventListener("ended", () => {
+      if (prefs.repeat) { audio.currentTime = 0; play(); } /* repeat-one */
+      else { di++; if (di >= deck.length) { di = 0; if (prefs.shuffle) deck = shuffled(pool(), null); } loadFromDeck(); play(); }
+    });
     audio.addEventListener("timeupdate", () => {
       if (!barEl || !audio.duration || !isFinite(audio.duration)) return;
       barEl.style.transform = `scaleX(${(audio.currentTime / audio.duration).toFixed(4)})`;
@@ -1162,17 +1197,35 @@
       else if (audio.paused) play();
       else audio.pause();
     });
-    const skip = (d) => { if (!started) { firstPlay(); return; } load(ti + d); play(); };
+    const skip = (d) => {
+      if (!started) { firstPlay(); return; }
+      di += d;
+      if (di >= deck.length) { di = 0; if (prefs.shuffle) deck = shuffled(pool(), null); }
+      if (di < 0) di = deck.length - 1;
+      loadFromDeck(); play();
+    };
     const nextBtn = $('[data-act="next"]', player);
     const prevBtn = $('[data-act="prev"]', player);
     if (nextBtn) nextBtn.addEventListener("click", () => skip(1));
     if (prevBtn) prevBtn.addEventListener("click", () => skip(-1));
-    /* read-only API for the Creative chapter's sound node (tracklist overlay) */
+    if (shBtn) shBtn.addEventListener("click", () => { prefs.shuffle = !prefs.shuffle; savePrefs(); buildDeck(started ? ti : null); paintPrefs(); emit(); });
+    if (rpBtn) rpBtn.addEventListener("click", () => { prefs.repeat = !prefs.repeat; savePrefs(); paintPrefs(); emit(); });
+    /* API for the strip and the Creative chapter's sound node */
     window.__SOUND = {
-      play: (i) => { started = true; load(i); play(); },
+      play: (i) => { started = true; buildDeck(i); loadFromDeck(); play(); },
       toggle: () => { if (!started) { firstPlay(); return; } if (audio.paused) play(); else audio.pause(); },
+      setMood: (m) => {
+        if (prefs.mood === m) return;
+        prefs.mood = m; savePrefs();
+        const inPool = pool().includes(ti);
+        buildDeck(inPool ? ti : null);
+        if (started && !inPool) loadFromDeck();
+        emit();
+      },
+      seek: (frac) => { if (isFinite(audio.duration) && audio.duration > 0) audio.currentTime = Math.max(0, Math.min(1, frac)) * audio.duration; },
       index: () => ti,
       playing: () => started && !audio.paused,
+      state: () => ({ ...prefs, pos: di, deck: deck.length }),
     };
   })();
 

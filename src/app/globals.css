@@ -1539,3 +1539,10 @@ section.block{padding-top:max(88px, 6.691vw) !important}
 .rg-sound-a{font-size:max(6px, 0.363vw) !important;color:var(--gray);letter-spacing:0.08em;white-space:nowrap}
 .rg-sound li.is-cur .rg-sound-t, .rg-sound li.is-cur .rg-sound-n{color:var(--rust)}
 .rg-sound li.is-playing .rg-sound-t::after{content:" · PLAYING";font-weight:400;font-size:max(6px, 0.363vw) !important;color:var(--rust);letter-spacing:0.12em}
+/* shuffle / repeat toggles + mood chips (all sizing: max(px, px/19.16 vw)) */
+.pl-btn .pl-i-stroke{fill:none !important;stroke:currentColor;stroke-width:1.2;stroke-linecap:round;stroke-linejoin:round}
+.pl-btn.is-on{background:var(--rust);border-color:var(--rust);color:var(--white)}
+.rg-sound-chips{display:flex;flex-wrap:wrap;gap:max(4px, 0.209vw) !important;margin-top:max(8px, 0.418vw) !important}
+.rg-chip-m{font-family:var(--font-m);font-size:max(6px, 0.363vw) !important;letter-spacing:0.12em;padding:max(2px, 0.105vw) max(6px, 0.313vw) !important;border:1px solid var(--line);background:none;color:var(--gray);transition:color var(--dur-micro) var(--ease-out), border-color var(--dur-micro) var(--ease-out)}
+.rg-chip-m:hover, .rg-chip-m:focus-visible{color:var(--black);border-color:var(--border-mid)}
+.rg-chip-m.is-on{background:var(--black);border-color:var(--black);color:var(--white)}
