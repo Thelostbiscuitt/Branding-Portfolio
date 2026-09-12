@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
+    "build:cf": "next build && node scripts/prune-out-music.mjs && npx wrangler pages deploy out --project-name habibcore",
     "start": "next start",
     "lint": "eslint .",
     "security:audit": "npm audit --audit-level=moderate",
