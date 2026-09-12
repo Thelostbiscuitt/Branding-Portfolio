@@ -28,11 +28,11 @@ export default function Player() {
           <svg className="pl-i-stroke" viewBox="0 0 10 10" aria-hidden="true"><path d="M7.9 3.9A3.1 3.1 0 0 0 2.2 4.9" /><path d="M2.1 6.1a3.1 3.1 0 0 0 5.7-1" /><path d="M7.8 1.6v2.3H5.5" /><path d="M2.2 8.4V6.1h2.3" /></svg>
         </button>
       </div>
-      <div className="pl-meta">
+      <button type="button" className="pl-meta" data-act="list" aria-haspopup="dialog" aria-expanded="false" aria-label="Open tracklist — Habibcore sound">
         <span className="pl-now">HABIBCORE® SOUND</span>
         <b className="pl-title">{tracks[0].title}</b>
         <span className="pl-artist">{tracks[0].artist}</span>
-      </div>
+      </button>
       <span className="pl-count">01 / {String(tracks.length).padStart(2, '0')}</span>
       <span className="pl-bar" aria-hidden="true"><i /></span>
       <script

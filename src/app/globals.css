@@ -1546,3 +1546,6 @@ section.block{padding-top:max(88px, 6.691vw) !important}
 .rg-chip-m{font-family:var(--font-m);font-size:max(6px, 0.363vw) !important;letter-spacing:0.12em;padding:max(2px, 0.105vw) max(6px, 0.313vw) !important;border:1px solid var(--line);background:none;color:var(--gray);transition:color var(--dur-micro) var(--ease-out), border-color var(--dur-micro) var(--ease-out)}
 .rg-chip-m:hover, .rg-chip-m:focus-visible{color:var(--black);border-color:var(--border-mid)}
 .rg-chip-m.is-on{background:var(--black);border-color:var(--black);color:var(--white)}
+/* the strip's song name is a button — tap it, anywhere, for the full tracklist */
+.player .pl-meta{background:none;border:0;padding:0;cursor:pointer;text-align:left;font-family:var(--font-m)}
+.player .pl-meta:hover .pl-title, .player .pl-meta:focus-visible .pl-title{color:var(--rust)}

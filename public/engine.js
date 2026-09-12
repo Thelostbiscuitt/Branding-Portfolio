@@ -185,69 +185,8 @@
   const CREATIVE_HUB_POS = { 0: [26, 86], 7: [50, 10] };
   const rgState = { open: false, level: 0, disc: null, proj: null, hub: null, lastFocus: null };
 
-  /* ————— sound tracklist overlay —————
-     The Creative chapter's sound node opens this: the whole Habibcore set,
-     one row per song, tap a row to play. Lives on the stage (not inside
-     range-graph) so word-change wipes can't eat it mid-read. */
-  const rgSound = (() => {
-    if (!rangeGraph) return null;
-    let tracks = [];
-    try { tracks = JSON.parse($("#sound-data")?.textContent || "[]"); } catch (e) { tracks = []; }
-    if (!tracks.length) return null;
-    const moods = [...new Set(tracks.map((t) => t.mood).filter(Boolean))];
-    const d = document.createElement("aside");
-    d.className = "rg-sound";
-    d.setAttribute("role", "dialog");
-    d.setAttribute("aria-label", "Habibcore sound — tracklist and moods");
-    d.hidden = true;
-    const rowsHtml = (mood) => tracks
-      .map((t, i) => ({ t, i }))
-      .filter(({ t }) => mood === "ALL" || t.mood === mood)
-      .map(({ t, i }, n) => `
-        <li><button type="button" data-play="${i}">
-          <span class="rg-sound-n">${String(n + 1).padStart(2, "0")}</span>
-          <span class="rg-sound-t">${t.title}</span>
-          <span class="rg-sound-a">${t.bpm ? `${t.bpm} BPM · ${t.mood}` : t.artist}</span>
-        </button></li>`).join("");
-    d.innerHTML = `
-      <button type="button" class="rg-x" aria-label="Close tracklist">&times;</button>
-      <b class="rg-sound-head">HABIBCORE® SOUND</b>
-      <i class="rg-sound-sub">TAP A ROW TO PLAY · EVERY RELOAD IS A NEW RIDE</i>
-      <div class="rg-sound-chips">${["ALL", ...moods].map((m) => `<button type="button" class="rg-chip-m${m === "ALL" ? " is-on" : ""}" data-mood="${m}">${m}</button>`).join("")}</div>
-      <ol class="rg-sound-list" data-mood="ALL">${rowsHtml("ALL")}</ol>`;
-    rangeGraph.parentElement.appendChild(d);
-    d.querySelector(".rg-x").addEventListener("click", () => { d.hidden = true; });
-    let lastMood = "ALL";
-    const paint = (e) => {
-      const st = e && e.detail ? e.detail
-        : window.__SOUND ? { ...window.__SOUND.state(), index: window.__SOUND.index(), playing: window.__SOUND.playing() }
-        : null;
-      if (!st) return;
-      if (st.mood !== lastMood) {
-        lastMood = st.mood;
-        const list = d.querySelector(".rg-sound-list");
-        list.dataset.mood = st.mood;
-        list.innerHTML = rowsHtml(st.mood);
-        d.querySelectorAll(".rg-chip-m").forEach((c) => c.classList.toggle("is-on", c.dataset.mood === st.mood));
-      }
-      d.querySelectorAll("[data-play]").forEach((btn) => {
-        const cur = Number(btn.dataset.play) === st.index;
-        btn.closest("li").classList.toggle("is-cur", cur);
-        btn.closest("li").classList.toggle("is-playing", cur && st.playing);
-      });
-    };
-    document.addEventListener("soundchange", paint);
-    d.addEventListener("click", (e) => {
-      const chip = e.target.closest("[data-mood]");
-      if (chip && window.__SOUND) { window.__SOUND.setMood(chip.dataset.mood); return; }
-      const btn = e.target.closest("[data-play]");
-      if (!btn || !window.__SOUND) return;
-      const i = Number(btn.dataset.play);
-      if (i === window.__SOUND.index()) window.__SOUND.toggle();
-      else window.__SOUND.play(i);
-    });
-    return { el: d, open: () => { d.hidden = !d.hidden; if (!d.hidden) paint(); } };
-  })();
+  /* The sound tracklist overlay lives in the player IIFE below — it is
+     site-wide (opened from the strip's song name), not range-bound. */
 
   const rgDetail = (() => {
     if (!rangeGraph) return null;
@@ -527,7 +466,6 @@
     rgState.open = false; rgState.disc = null; rgState.proj = null; rgState.hub = null;
     stage.classList.remove("creative-open");
     closeRgDetail();
-    if (rgSound) rgSound.el.hidden = true;
     const NS = "http://www.w3.org/2000/svg";
     const svg = document.createElementNS(NS, "svg");
     rangeGraph.appendChild(svg);
@@ -562,6 +500,30 @@
       });
       rangeGraph.appendChild(b);
     });
+    /* sound node — Habibcore Sound rides the Creative and Habibcore words
+       (never Design); opens the site-wide tracklist */
+    if (idx === 1 || idx === 7) {
+      const anchor = idx === 7 ? [50, 10] : [50, 50];
+      const spos = idx === 7 ? [33, 25] : [50, 84];
+      const sLine = document.createElementNS(NS, "line");
+      sLine.setAttribute("x1", `${anchor[0]}%`); sLine.setAttribute("y1", `${anchor[1]}%`);
+      sLine.setAttribute("x2", `${spos[0]}%`); sLine.setAttribute("y2", `${spos[1]}%`);
+      sLine.style.strokeDasharray = "1400";
+      sLine.style.strokeDashoffset = "1400";
+      sLine.dataset.lvl = "0";
+      svg.appendChild(sLine);
+      const sBtn = document.createElement("button");
+      sBtn.type = "button";
+      sBtn.className = "rg-bubble rg-sm rg-flag rg-sound-b";
+      sBtn.tabIndex = 0;
+      sBtn.style.left = `${spos[0]}%`;
+      sBtn.style.top = `${spos[1]}%`;
+      sBtn.style.setProperty("--rd", `${260 + nodes.length * 90}ms`);
+      sBtn.innerHTML = `<b>Habibcore Sound</b><i>MY SONGS · TAP TO LIST</i>`;
+      sBtn.addEventListener("click", () => { if (window.__SOUND) window.__SOUND.openList(); });
+      rangeGraph.appendChild(sBtn);
+      rgLayer.push(sLine, sBtn);
+    }
     /* creative practice hub — quiet third participant on the Design and
        Habibcore chapters; everything else stays exactly as it was.
        The hub is tethered to the centre word by a line, and carries its
@@ -620,29 +582,6 @@
         flagBtn.addEventListener("click", () => openRgDetail(flagship.id, flagBtn));
         rangeGraph.appendChild(flagBtn);
         rgLayer.push(flagLine, flagBtn);
-      }
-
-      /* sound satellite — Creative → the Habibcore set; opens the tracklist */
-      if (rgSound) {
-        const spos = [clamp(hubPos[0] - 17, 7, 93), clamp(hubPos[1] + 15, 10, 90)];
-        const sLine = document.createElementNS(NS, "line");
-        sLine.setAttribute("x1", `${hubPos[0]}%`); sLine.setAttribute("y1", `${hubPos[1]}%`);
-        sLine.setAttribute("x2", `${spos[0]}%`); sLine.setAttribute("y2", `${spos[1]}%`);
-        sLine.style.strokeDasharray = "1400";
-        sLine.style.strokeDashoffset = "1400";
-        sLine.dataset.lvl = "0";
-        svg.appendChild(sLine);
-        const sBtn = document.createElement("button");
-        sBtn.type = "button";
-        sBtn.className = "rg-bubble rg-sm rg-flag rg-sound-b";
-        sBtn.tabIndex = 0;
-        sBtn.style.left = `${spos[0]}%`;
-        sBtn.style.top = `${spos[1]}%`;
-        sBtn.style.setProperty("--rd", `${260 + nodes.length * 90}ms`);
-        sBtn.innerHTML = `<b>Habibcore Sound</b><i>MY SONGS · TAP TO LIST</i>`;
-        sBtn.addEventListener("click", () => { if (rgSound) rgSound.open(); });
-        rangeGraph.appendChild(sBtn);
-        rgLayer.push(sLine, sBtn);
       }
 
       /* hovering any part of the chain lights the whole tether */
@@ -1227,6 +1166,69 @@
       playing: () => started && !audio.paused,
       state: () => ({ ...prefs, pos: di, deck: deck.length }),
     };
+
+    /* ————— tracklist overlay — site-wide —————
+       Opens from the strip's song name (any page, any section) or from the
+       Habibcore Sound node on the Creative / Habibcore words. Full set,
+       mood chips, tap a row to play. */
+    const metaBtn = $('[data-act="list"]', player);
+    const overlay = document.createElement("aside");
+    overlay.className = "rg-sound";
+    overlay.setAttribute("role", "dialog");
+    overlay.setAttribute("aria-label", "Habibcore sound — tracklist and moods");
+    overlay.hidden = true;
+    const moods = [...new Set(tracks.map((t) => t.mood).filter(Boolean))];
+    const rowsHtml = (mood) => tracks
+      .map((t, i) => ({ t, i }))
+      .filter(({ t }) => mood === "ALL" || t.mood === mood)
+      .map(({ t, i }, n) => `
+        <li><button type="button" data-play="${i}">
+          <span class="rg-sound-n">${String(n + 1).padStart(2, "0")}</span>
+          <span class="rg-sound-t">${t.title}</span>
+          <span class="rg-sound-a">${t.bpm ? `${t.bpm} BPM · ${t.mood}` : t.artist}</span>
+        </button></li>`).join("");
+    overlay.innerHTML = `
+      <button type="button" class="rg-x" aria-label="Close tracklist">&times;</button>
+      <b class="rg-sound-head">HABIBCORE® SOUND</b>
+      <i class="rg-sound-sub">TAP A ROW TO PLAY · EVERY RELOAD IS A NEW RIDE</i>
+      <div class="rg-sound-chips">${["ALL", ...moods].map((m) => `<button type="button" class="rg-chip-m" data-mood="${m}">${m}</button>`).join("")}</div>
+      <ol class="rg-sound-list" data-mood="ALL"></ol>`;
+    document.body.appendChild(overlay);
+    let lastMood = null;
+    const paintList = () => {
+      if (overlay.hidden) return;
+      if (prefs.mood !== lastMood) {
+        lastMood = prefs.mood;
+        const list = overlay.querySelector(".rg-sound-list");
+        list.dataset.mood = prefs.mood;
+        list.innerHTML = rowsHtml(prefs.mood);
+        overlay.querySelectorAll(".rg-chip-m").forEach((c) => c.classList.toggle("is-on", c.dataset.mood === prefs.mood));
+      }
+      overlay.querySelectorAll("[data-play]").forEach((btn) => {
+        const cur = Number(btn.dataset.play) === ti;
+        btn.closest("li").classList.toggle("is-cur", cur);
+        btn.closest("li").classList.toggle("is-playing", cur && started && !audio.paused);
+      });
+    };
+    const setOpen = (v) => {
+      overlay.hidden = !v;
+      if (metaBtn) metaBtn.setAttribute("aria-expanded", String(v));
+      if (v) paintList();
+    };
+    overlay.querySelector(".rg-x").addEventListener("click", () => setOpen(false));
+    overlay.addEventListener("click", (e) => {
+      const chip = e.target.closest(".rg-chip-m");
+      if (chip) { window.__SOUND.setMood(chip.dataset.mood); return; }
+      const btn = e.target.closest("[data-play]");
+      if (!btn) return;
+      const i = Number(btn.dataset.play);
+      if (i === ti) window.__SOUND.toggle();
+      else window.__SOUND.play(i);
+    });
+    document.addEventListener("soundchange", paintList);
+    const openList = () => setOpen(overlay.hidden);
+    window.__SOUND.openList = openList;
+    if (metaBtn) metaBtn.addEventListener("click", () => openList());
   })();
 
   /* ————— boot ————— */
