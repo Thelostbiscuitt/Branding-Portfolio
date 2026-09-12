@@ -34,9 +34,11 @@ export async function onRequest({ request, env, params }) {
     "ETag": obj.httpEtag,
   });
 
-  if (obj.range) {
-    const start = obj.range.offset;
-    const end = obj.range.end ?? obj.size - 1;
+  // 206 only when the client actually asked for a range; compute the
+  // span from the request (R2's obj.range doesn't echo {offset,length}).
+  if (range) {
+    const start = range.offset ?? 0;
+    const end = range.length !== undefined ? start + range.length - 1 : obj.size - 1;
     headers.set("Content-Range", `bytes ${start}-${end}/${obj.size}`);
     headers.set("Content-Length", String(end - start + 1));
     return new Response(obj.body, { status: 206, headers });
