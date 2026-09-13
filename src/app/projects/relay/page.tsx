@@ -30,7 +30,7 @@ export default function Relay() {
       meta={{
         category:  'Product · Systems',
         year:      '2026',
-        client:    'Client — immigration firm',
+        client:    'Client: immigration firm',
         role:      'Product Design · Systems · Full-stack Engineering',
         tools:     ['Next.js 16', 'TypeScript', 'PostgreSQL + pgvector', 'Prisma 7', 'Tailwind v4', 'JWT (jose)'],
         tags:      ['CRM', 'RBAC', 'Audit Trail', 'SLA Systems', 'CRS Calculator'],
@@ -45,11 +45,11 @@ export default function Relay() {
                 Immigration relationship managers run their entire practice through this
                 portal: client records, document checklists, roadmap requests with legal
                 deadlines, and the CRS score that decides what a client qualifies for.
-                The system they had worked, mostly — until the details started to matter.
+                The system they had worked, mostly, until the details started to matter.
               </p>
               <p>
                 In the previous build, a single query that forgot its scope filter could
-                list every client in the system. Not an attack — one missing WHERE clause
+                list every client in the system. Not an attack: one missing WHERE clause
                 out of thirty. But a client list is not something this system is allowed
                 to leak, and &ldquo;mostly&rdquo; is not a security posture.
               </p>
@@ -69,8 +69,8 @@ export default function Relay() {
               <ul>
                 <li><strong style={{color:'var(--black)'}}>Roles are a table, not a boolean.</strong> Admin, RM, quality assurance and final-level are seeded rows; what a role can see is a column on the role, so narrowing one later is a seed change instead of a rewrite of every query.</li>
                 <li><strong style={{color:'var(--black)'}}>A route&rsquo;s path prefix is not a permission.</strong> Every data-layer function that reads or writes on someone&rsquo;s behalf takes a request context and calls the permission check. A function that cannot be passed one cannot sit behind a guarded route.</li>
-                <li><strong style={{color:'var(--black)'}}>The audit trail is append-only, enforced by Postgres.</strong> A trigger rejects updates and deletes; corrections are appended, never edited — and a script proves the guarantee against the live database rather than taking it on trust.</li>
-                <li><strong style={{color:'var(--black)'}}>The SLA clock does not pause.</strong> Roadmap requests are due ten working days out — weekends and Nigerian public holidays excluded. Holidays are entered, not computed, because lunar-calendar dates are declared days in advance and a guessed holiday would silently shift every due date that spans it.</li>
+                <li><strong style={{color:'var(--black)'}}>The audit trail is append-only, enforced by Postgres.</strong> A trigger rejects updates and deletes; corrections are appended, never edited, and a script proves the guarantee against the live database rather than taking it on trust.</li>
+                <li><strong style={{color:'var(--black)'}}>The SLA clock does not pause.</strong> Roadmap requests are due ten working days out, weekends and Nigerian public holidays excluded. Holidays are entered, not computed, because lunar-calendar dates are declared days in advance and a guessed holiday would silently shift every due date that spans it.</li>
                 <li><strong style={{color:'var(--black)'}}>The CRS point tables are data.</strong> Every published number lives in one table file, and the calculator runs entirely in the browser: nothing is sent anywhere, nothing is stored.</li>
               </ul>
             </>
@@ -83,14 +83,14 @@ export default function Relay() {
             <>
               <p>
                 Designed, engineered, tested, and delivered as a complete rebuild. The
-                firm did not adopt it before I left — what ships is their decision, and
+                firm did not adopt it before I left. What ships is their decision, and
                 by then it was out of my hands. What carried forward is the thinking:
                 several of the rebuild&rsquo;s design decisions informed the CRM and
                 mobile app the firm continued with.
               </p>
               <p>
                 For me it stands as the fullest expression of the range: not a landing
-                page, not a bot — business software where the consequences of a wrong
+                page, not a bot: business software where the consequences of a wrong
                 query are real, and the design work is making the correct behaviour the
                 easy one.
               </p>
@@ -108,7 +108,7 @@ export default function Relay() {
           },
           {
             name: 'Postgres itself',
-            use:  'Append-only triggers, role visibility as data, cascade rules — the guarantees live in the database, and verify scripts prove them against a live instance.',
+            use:  'Append-only triggers, role visibility as data, cascade rules: the guarantees live in the database, and verify scripts prove them against a live instance.',
           },
           {
             name: 'Claude Code',
@@ -116,7 +116,7 @@ export default function Relay() {
           },
         ],
         outcome:
-          'No adoption metrics here — the honest number is zero, and the case for the work rests on the architecture, not on usage.',
+          'No adoption metrics here: the honest number is zero, and the case for the work rests on the architecture, not on usage.',
       }}
       /* Shot list for sanitized captures (no client data), when the firm's
          confidentiality allows publishing:

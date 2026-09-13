@@ -11,7 +11,7 @@ import { Shuffle, SkipBack, Play, Pause, SkipForward, Repeat } from 'lucide-reac
  */
 export default function Player() {
   return (
-    <aside className="player" aria-label="Background music — BlvckOreo">
+    <aside className="player" aria-label="Background music: BlvckOreo">
       <div className="pl-controls">
         <button type="button" className="pl-btn pl-toggle" data-act="toggle" aria-label="Play music" aria-pressed="false">
           <Play className="pl-i-play" size={10} strokeWidth={2} aria-hidden="true" />
@@ -36,7 +36,7 @@ export default function Player() {
         data-act="list"
         aria-haspopup="dialog"
         aria-expanded="false"
-        aria-label="Open tracklist — Habibcore sound"
+        aria-label="Open tracklist: Habibcore sound"
       >
         <span className="pl-now">HABIBCORE® SOUND</span>
         <b className="pl-title">{tracks[0].title}</b>

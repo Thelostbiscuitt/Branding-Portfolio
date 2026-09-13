@@ -12,13 +12,13 @@ export const viewport: Viewport = {
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://habibcore.com'),
-  title: 'HABIBCORE® — Habib, Designer & Builder, Lagos',
+  title: 'HABIBCORE® · Habib, Designer & Builder, Lagos',
   description:
-    'Brands, digital products and AI tools — drawn, coded and shipped by the same pair of hands in Lagos. No handoff, no translation loss between vision and execution.',
+    'Brands, digital products and AI tools, drawn, coded and shipped by the same pair of hands in Lagos. No handoff, no translation loss between vision and execution.',
   openGraph: {
-    title: 'HABIBCORE® — Habib, Designer & Builder, Lagos',
+    title: 'HABIBCORE® · Habib, Designer & Builder, Lagos',
     description:
-      'I design it. I build it. I answer for it. Portfolio of Habib — Habibcore, Lagos.',
+      'I design it. I build it. I answer for it. Portfolio of Habib · Habibcore, Lagos.',
     url: 'https://habibcore.com',
     siteName: 'HABIBCORE®',
     locale: 'en_NG',
@@ -26,8 +26,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'HABIBCORE® — Habib, Designer & Builder, Lagos',
-    description: 'I design it. I build it. I answer for it. Portfolio of Habib — Habibcore, Lagos.',
+    title: 'HABIBCORE® · Habib, Designer & Builder, Lagos',
+    description: 'I design it. I build it. I answer for it. Portfolio of Habib · Habibcore, Lagos.',
   },
 }
 

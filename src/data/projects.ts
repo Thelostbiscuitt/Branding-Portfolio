@@ -25,7 +25,7 @@ export const projects: Project[] = [
     era:         'current',
     title:       'Biscuit AI: Telegram Assistant',
     description: 'A production-ready Telegram assistant built on OpenRouter. Layered memory you can inspect and erase, Tavily web search, a local book library, image generation, and cost visibility, all in one conversation.',
-    positioning: 'Memory you can inspect and erase — not just a chat.',
+    positioning: 'Memory you can inspect and erase, not just a chat.',
     tags:        ['Telegram', 'AI Interface', 'Memory', 'Web Search', 'Image Gen', 'Python'],
     thumb:       '/projects/biscuit-ai/hero.jpg',
     year:        '2026',
