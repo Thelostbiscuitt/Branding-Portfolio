@@ -82,3 +82,6 @@ public/Music/*
 !public/Music/whats-up.mp3
 !public/Music/wild-wild-west.mp3
 preview-shots/
+
+# brand identity pack + local previews (design resources, never shipped)
+/Branding
