@@ -43,7 +43,6 @@ export default function Home() {
     <a href="#top" className="brand" aria-label="Habib, back to top">Habib<b>.</b></a>
     <nav className="nav-links" aria-label="Primary">
       <a href="#work">WORK</a>
-      <a href="#archive">ARCHIVE</a>
       <a href="#about">ABOUT</a>
       <a href="#contact">CONTACT</a>
     </nav>
@@ -185,7 +184,6 @@ export default function Home() {
                   <div className="p-tags"><span>PYTHON</span><span>OPENROUTER</span><span>TELEGRAM</span><span>MEMORY SYSTEMS</span><span>TAVILY</span></div>
                   <div className="p-actions">
                     <a className="a-live" href="https://github.com/Thelostbiscuitt/BiscuitBot" target="_blank" rel="noopener noreferrer"><span className="u-line">VIEW LIVE ↗</span></a>
-                    <a className="a-live" href="/projects/biscuit-ai" style={{color:'var(--ember)',borderBottom:'1.5px solid var(--ember)'}}><span className="u-line">READ THE FULL CASE →</span></a>
                     <a className="a-dis" href="mailto:habib@habibcore.com?subject=Re%3A%20Biscuit%20AI%20%E2%80%94%20Telegram%20Assistant"><span className="u-line">DISCUSS THIS PROJECT →</span></a>
                   </div>
                 </div>
@@ -217,7 +215,6 @@ export default function Home() {
                   <p className="p-desc">An AI kitchen assistant for Telegram. Tracks ingredients and expiry dates, then suggests meals from over forty cuisines via Google Gemini, all through plain chat commands. No forms, no dashboards, just conversation.</p>
                   <div className="p-tags"><span>GEMINI</span><span>TELEGRAM</span><span>INVENTORY</span><span>UX DESIGN</span></div>
                   <div className="p-actions">
-                    <a className="a-live" href="/projects/chef4me" style={{color:'var(--ember)',borderBottom:'1.5px solid var(--ember)'}}><span className="u-line">READ THE FULL CASE →</span></a>
                     <a className="a-dis" href="mailto:habib@habibcore.com?subject=Re%3A%20Chef4Me%20%E2%80%94%20Kitchen%20Assistant"><span className="u-line">DISCUSS THIS PROJECT →</span></a>
                   </div>
                 </div>
@@ -249,7 +246,6 @@ export default function Home() {
                   <p className="p-desc">A self-initiated brand extension pitch for one of Nigeria&rsquo;s largest pension funds: product redesigns, identity guidelines, social systems and brand voice, built on four years of operational experience inside the organisation.</p>
                   <div className="p-tags"><span>BRAND</span><span>IDENTITY</span><span>PRODUCT DESIGN</span><span>SOCIAL SYSTEM</span><span>VIDEO</span></div>
                   <div className="p-actions">
-                    <a className="a-live" href="/projects/leadway-pensure" style={{color:'var(--ember)',borderBottom:'1.5px solid var(--ember)'}}><span className="u-line">READ THE FULL CASE →</span></a>
                     <a className="a-dis" href="mailto:habib@habibcore.com?subject=Re%3A%20Leadway%20Pensure%20%E2%80%94%20Brand%20%26%20Comms"><span className="u-line">DISCUSS THIS PROJECT →</span></a>
                   </div>
                 </div>
@@ -282,7 +278,6 @@ export default function Home() {
                   <div className="p-tags"><span>WEB DESIGN</span><span>DEVELOPMENT</span><span>HEALTHCARE</span><span>LOCAL BUSINESS</span></div>
                   <div className="p-actions">
                     <a className="a-live" href="https://olumayowanursinghome.com" target="_blank" rel="noopener noreferrer"><span className="u-line">VIEW LIVE ↗</span></a>
-                    <a className="a-live" href="/projects/olumayowa-nursing-home" style={{color:'var(--ember)',borderBottom:'1.5px solid var(--ember)'}}><span className="u-line">READ THE FULL CASE →</span></a>
                     <a className="a-dis" href="mailto:habib@habibcore.com?subject=Re%3A%20Olumayowa%20Nursing%20Home"><span className="u-line">DISCUSS THIS PROJECT →</span></a>
                   </div>
                 </div>
@@ -314,7 +309,6 @@ export default function Home() {
                   <p className="p-desc">A company-wide AI literacy programme for Birdview Travels &amp; Tours: eleven modules delivered in one 90-minute session, with a self-built web hub carrying the curriculum, slides and flashcards on a single link.</p>
                   <div className="p-tags"><span>CURRICULUM DESIGN</span><span>FACILITATION</span><span>WEB HUB</span><span>AI LITERACY</span></div>
                   <div className="p-actions">
-                    <a className="a-live" href="/projects/ai-workplace-training" style={{color:'var(--ember)',borderBottom:'1.5px solid var(--ember)'}}><span className="u-line">READ THE FULL CASE →</span></a>
                     <a className="a-dis" href="mailto:habib@habibcore.com?subject=Re%3A%20AI%20in%20the%20Workplace"><span className="u-line">DISCUSS THIS PROJECT →</span></a>
                   </div>
                 </div>
@@ -346,7 +340,6 @@ export default function Home() {
                   <p className="p-desc">A complete operations rebuild for an immigration firm&rsquo;s relationship managers: role-scoped data, an append-only audit trail enforced at the database level, working-days SLA clocks and an in-browser CRS calculator.</p>
                   <div className="p-tags"><span>NEXT.JS</span><span>CRM</span><span>RBAC</span><span>AUDIT TRAIL</span><span>SLA SYSTEMS</span></div>
                   <div className="p-actions">
-                    <a className="a-live" href="/projects/relay" style={{color:'var(--ember)',borderBottom:'1.5px solid var(--ember)'}}><span className="u-line">READ THE FULL CASE →</span></a>
                     <a className="a-dis" href="mailto:habib@habibcore.com?subject=Re%3A%20Relay%20%E2%80%94%20Operations%20Portal"><span className="u-line">DISCUSS THIS PROJECT →</span></a>
                   </div>
                 </div>
@@ -369,209 +362,7 @@ export default function Home() {
   </section>
 
   {/* ————— 03 range —————  */}
-  
-  {/* ——— 02.5 archive ——— */}
-  <section className="block" id="archive" data-folio="02.5 — FULL ARCHIVE">
-    <div className="container">
-      <div className="sec-head">
-        <p><span className="sh-idx">02.5</span> / FULL ARCHIVE</p>
-        <p className="sh-note">EVERYTHING THAT SHIPPED</p>
-      </div>
-      <p className="rv" style={{ maxWidth: 448, fontSize: 15, lineHeight: 1.65, color: 'var(--ink2)', marginTop: 24, marginBottom: 32 } as React.CSSProperties}>Every project, release and artwork. Dated, tagged, linked.</p>
-      <div className="hc-arch">
-        <details>
-          <summary>
-            <span style={{"color": "var(--gray)"}}>01</span>
-            <span style={{fontFamily: "var(--font-d)", fontWeight: 700, fontStretch: "110%", fontSize: 16, textTransform: "uppercase", letterSpacing: "-.01em", color: "var(--ink)"}}>BlvckOreo</span>
-            <span style={{"color": "var(--gray)"}}>2023</span>
-            <span style={{color: "var(--ember)"}}>MUSIC · BRAND</span>
-          </summary>
-          <div style={{ padding: "0 0 24px 44px", maxWidth: 640 }}>
-            <p style={{fontSize: 14, lineHeight: 1.65, color: "var(--ink2)", margin: "0 0 12px"}}>Personal press kit holding two albums with opposite visual worlds. Buy 1 Get 1 Free, Mainland Pack, Messages From Mars, Visitor From Mars, Bedroom Recordings.</p>
-            <img src="/generated/blvckoreo.webp" alt="BlvckOreo" loading="lazy" style={{maxWidth: 280, height: "auto", border: "1px solid var(--line)", display: "block", margin: "0 0 12px"}} />
-            <a href="/projects/blvckoreo-epk" style={{fontFamily: "var(--font-m)", fontSize: 11, letterSpacing: ".12em", textTransform: "uppercase", color: "var(--ink)", borderBottom: "1.5px solid var(--ink)", paddingBottom: 2, display: "inline-block", marginRight: 16}}>READ THE CASE</a>
-            <a href="https://www.behance.net/BlvckOreo" style={{fontFamily: "var(--font-m)", fontSize: 11, letterSpacing: ".12em", textTransform: "uppercase", color: "var(--ink)", borderBottom: "1.5px solid var(--ink)", paddingBottom: 2, display: "inline-block"}}>BEHANCE</a>
-          </div>
-        </details>
-        <details>
-          <summary>
-            <span style={{"color": "var(--gray)"}}>02</span>
-            <span style={{fontFamily: "var(--font-d)", fontWeight: 700, fontStretch: "110%", fontSize: 16, textTransform: "uppercase", letterSpacing: "-.01em", color: "var(--ink)"}}>1ETHFP</span>
-            <span style={{"color": "var(--gray)"}}>2024</span>
-            <span style={{color: "var(--ember)"}}>NFT · WEB3</span>
-          </summary>
-          <div style={{ padding: "0 0 24px 44px", maxWidth: 640 }}>
-            <p style={{fontSize: 14, lineHeight: 1.65, color: "var(--ink2)", margin: "0 0 12px"}}>A roadmap, an anthem and a promo video for a web3 music-and-culture collective.</p>
-            <img src="/generated/1ethfp.webp" alt="1ETHFP" loading="lazy" style={{maxWidth: 280, height: "auto", border: "1px solid var(--line)", display: "block", margin: "0 0 12px"}} />
-            <a href="/projects/1ethfp" style={{fontFamily: "var(--font-m)", fontSize: 11, letterSpacing: ".12em", textTransform: "uppercase", color: "var(--ink)", borderBottom: "1.5px solid var(--ink)", paddingBottom: 2, display: "inline-block", marginRight: 16}}>READ THE CASE</a>
-            <a href="https://www.behance.net/gallery/217139673/1ETHFP-COLLABORATION" style={{fontFamily: "var(--font-m)", fontSize: 11, letterSpacing: ".12em", textTransform: "uppercase", color: "var(--ink)", borderBottom: "1.5px solid var(--ink)", paddingBottom: 2, display: "inline-block"}}>BEHANCE</a>
-          </div>
-        </details>
-        <details>
-          <summary>
-            <span style={{"color": "var(--gray)"}}>03</span>
-            <span style={{fontFamily: "var(--font-d)", fontWeight: 700, fontStretch: "110%", fontSize: 16, textTransform: "uppercase", letterSpacing: "-.01em", color: "var(--ink)"}}>Yin Yang Gang</span>
-            <span style={{"color": "var(--gray)"}}>2024</span>
-            <span style={{color: "var(--ember)"}}>NFT · BRANDING</span>
-          </summary>
-          <div style={{ padding: "0 0 24px 44px", maxWidth: 640 }}>
-            <p style={{fontSize: 14, lineHeight: 1.65, color: "var(--ink2)", margin: "0 0 12px"}}>Branding work for the Yin Yang Gang NFT collective.</p>
-            <a href="https://www.behance.net/gallery/217138953/YIN-YANG-GANG-COLLABORATION" style={{fontFamily: "var(--font-m)", fontSize: 11, letterSpacing: ".12em", textTransform: "uppercase", color: "var(--ink)", borderBottom: "1.5px solid var(--ink)", paddingBottom: 2, display: "inline-block", marginRight: 16}}>BEHANCE</a>
-          </div>
-        </details>
-        <details>
-          <summary>
-            <span style={{"color": "var(--gray)"}}>04</span>
-            <span style={{fontFamily: "var(--font-d)", fontWeight: 700, fontStretch: "110%", fontSize: 16, textTransform: "uppercase", letterSpacing: "-.01em", color: "var(--ink)"}}>Ether</span>
-            <span style={{"color": "var(--gray)"}}>2024</span>
-            <span style={{color: "var(--ember)"}}>NFT · BRANDING</span>
-          </summary>
-          <div style={{ padding: "0 0 24px 44px", maxWidth: 640 }}>
-            <p style={{fontSize: 14, lineHeight: 1.65, color: "var(--ink2)", margin: "0 0 12px"}}>Branding work for the Ether NFT collective.</p>
-            <a href="https://www.behance.net/gallery/217138415/ETHER-COLLABORATION" style={{fontFamily: "var(--font-m)", fontSize: 11, letterSpacing: ".12em", textTransform: "uppercase", color: "var(--ink)", borderBottom: "1.5px solid var(--ink)", paddingBottom: 2, display: "inline-block", marginRight: 16}}>BEHANCE</a>
-          </div>
-        </details>
-        <details>
-          <summary>
-            <span style={{"color": "var(--gray)"}}>05</span>
-            <span style={{fontFamily: "var(--font-d)", fontWeight: 700, fontStretch: "110%", fontSize: 16, textTransform: "uppercase", letterSpacing: "-.01em", color: "var(--ink)"}}>Gen.Sadiq — Maradonna</span>
-            <span style={{"color": "var(--gray)"}}>2025</span>
-            <span style={{color: "var(--ember)"}}>NFT · VIDEO</span>
-          </summary>
-          <div style={{ padding: "0 0 24px 44px", maxWidth: 640 }}>
-            <p style={{fontSize: 14, lineHeight: 1.65, color: "var(--ink2)", margin: "0 0 12px"}}>Branding and promo film for Gen.Sadiq.</p>
-            <img src="/projects/Gen.Sadiq - Maradonna/001.png" alt="Gen.Sadiq — Maradonna" loading="lazy" style={{maxWidth: 280, height: "auto", border: "1px solid var(--line)", display: "block", margin: "0 0 12px"}} />
-            <a href="/projects/Gen.Sadiq - Maradonna/promo video.mp4" style={{fontFamily: "var(--font-m)", fontSize: 11, letterSpacing: ".12em", textTransform: "uppercase", color: "var(--ink)", borderBottom: "1.5px solid var(--ink)", paddingBottom: 2, display: "inline-block"}}>WATCH THE FILM</a>
-          </div>
-        </details>
-        <details>
-          <summary>
-            <span style={{"color": "var(--gray)"}}>06</span>
-            <span style={{fontFamily: "var(--font-d)", fontWeight: 700, fontStretch: "110%", fontSize: 16, textTransform: "uppercase", letterSpacing: "-.01em", color: "var(--ink)"}}>Return of the Dead</span>
-            <span style={{"color": "var(--gray)"}}>2023</span>
-            <span style={{color: "var(--ember)"}}>ARTWORK · MUSIC</span>
-          </summary>
-          <div style={{ padding: "0 0 24px 44px", maxWidth: 640 }}>
-            <p style={{fontSize: 14, lineHeight: 1.65, color: "var(--ink2)", margin: "0 0 12px"}}>Cover artwork for the BlvckOreo track.</p>
-            <img src="/projects/Graphic Design/Return of the dead Artwork.png" alt="Return of the Dead" loading="lazy" style={{maxWidth: 280, height: "auto", border: "1px solid var(--line)", display: "block", margin: "0 0 12px"}} />
-            <a href="/projects/Graphic Design/Return of the dead Artwork.png" style={{fontFamily: "var(--font-m)", fontSize: 11, letterSpacing: ".12em", textTransform: "uppercase", color: "var(--ink)", borderBottom: "1.5px solid var(--ink)", paddingBottom: 2, display: "inline-block", marginRight: 16}}>VIEW FULL</a>
-          </div>
-        </details>
-        <details>
-          <summary>
-            <span style={{"color": "var(--gray)"}}>07</span>
-            <span style={{fontFamily: "var(--font-d)", fontWeight: 700, fontStretch: "110%", fontSize: 16, textTransform: "uppercase", letterSpacing: "-.01em", color: "var(--ink)"}}>Vpn Visa</span>
-            <span style={{"color": "var(--gray)"}}>2023</span>
-            <span style={{color: "var(--ember)"}}>ARTWORK · MUSIC</span>
-          </summary>
-          <div style={{ padding: "0 0 24px 44px", maxWidth: 640 }}>
-            <p style={{fontSize: 14, lineHeight: 1.65, color: "var(--ink2)", margin: "0 0 12px"}}>Cover artwork for the BlvckOreo track.</p>
-            <img src="/projects/Graphic Design/Vpn Visa.png" alt="Vpn Visa" loading="lazy" style={{maxWidth: 280, height: "auto", border: "1px solid var(--line)", display: "block", margin: "0 0 12px"}} />
-            <a href="/projects/Graphic Design/Vpn Visa.png" style={{fontFamily: "var(--font-m)", fontSize: 11, letterSpacing: ".12em", textTransform: "uppercase", color: "var(--ink)", borderBottom: "1.5px solid var(--ink)", paddingBottom: 2, display: "inline-block", marginRight: 16}}>VIEW FULL</a>
-          </div>
-        </details>
-        <details>
-          <summary>
-            <span style={{"color": "var(--gray)"}}>08</span>
-            <span style={{fontFamily: "var(--font-d)", fontWeight: 700, fontStretch: "110%", fontSize: 16, textTransform: "uppercase", letterSpacing: "-.01em", color: "var(--ink)"}}>Show Me</span>
-            <span style={{"color": "var(--gray)"}}>2024</span>
-            <span style={{color: "var(--ember)"}}>GRAPHIC DESIGN</span>
-          </summary>
-          <div style={{ padding: "0 0 24px 44px", maxWidth: 640 }}>
-            <p style={{fontSize: 14, lineHeight: 1.65, color: "var(--ink2)", margin: "0 0 12px"}}>Standalone graphic design piece.</p>
-            <img src="/projects/Graphic Design/Show Me.png" alt="Show Me" loading="lazy" style={{maxWidth: 280, height: "auto", border: "1px solid var(--line)", display: "block", margin: "0 0 12px"}} />
-            <a href="/projects/Graphic Design/Show Me.png" style={{fontFamily: "var(--font-m)", fontSize: 11, letterSpacing: ".12em", textTransform: "uppercase", color: "var(--ink)", borderBottom: "1.5px solid var(--ink)", paddingBottom: 2, display: "inline-block", marginRight: 16}}>VIEW FULL</a>
-          </div>
-        </details>
-        <details>
-          <summary>
-            <span style={{"color": "var(--gray)"}}>09</span>
-            <span style={{fontFamily: "var(--font-d)", fontWeight: 700, fontStretch: "110%", fontSize: 16, textTransform: "uppercase", letterSpacing: "-.01em", color: "var(--ink)"}}>EPP ME!!!</span>
-            <span style={{"color": "var(--gray)"}}>2024</span>
-            <span style={{color: "var(--ember)"}}>GRAPHIC DESIGN</span>
-          </summary>
-          <div style={{ padding: "0 0 24px 44px", maxWidth: 640 }}>
-            <p style={{fontSize: 14, lineHeight: 1.65, color: "var(--ink2)", margin: "0 0 12px"}}>Standalone graphic design piece.</p>
-            <img src="/projects/Graphic Design/EPP ME!!!.png" alt="EPP ME!!!" loading="lazy" style={{maxWidth: 280, height: "auto", border: "1px solid var(--line)", display: "block", margin: "0 0 12px"}} />
-            <a href="/projects/Graphic Design/EPP ME!!!.png" style={{fontFamily: "var(--font-m)", fontSize: 11, letterSpacing: ".12em", textTransform: "uppercase", color: "var(--ink)", borderBottom: "1.5px solid var(--ink)", paddingBottom: 2, display: "inline-block", marginRight: 16}}>VIEW FULL</a>
-          </div>
-        </details>
-        <details>
-          <summary>
-            <span style={{"color": "var(--gray)"}}>10</span>
-            <span style={{fontFamily: "var(--font-d)", fontWeight: 700, fontStretch: "110%", fontSize: 16, textTransform: "uppercase", letterSpacing: "-.01em", color: "var(--ink)"}}>Bedroom Recordings</span>
-            <span style={{"color": "var(--gray)"}}>2024</span>
-            <span style={{color: "var(--ember)"}}>MUSIC · ARTWORK</span>
-          </summary>
-          <div style={{ padding: "0 0 24px 44px", maxWidth: 640 }}>
-            <p style={{fontSize: 14, lineHeight: 1.65, color: "var(--ink2)", margin: "0 0 12px"}}>Tracklist artwork for the Bedroom Recordings release on Audiomack.</p>
-            <img src="/projects/Graphic Design/Bedroom Recordings 2 Tracklist" alt="Bedroom Recordings" loading="lazy" style={{maxWidth: 280, height: "auto", border: "1px solid var(--line)", display: "block", margin: "0 0 12px"}} />
-          </div>
-        </details>
-        <details>
-          <summary>
-            <span style={{"color": "var(--gray)"}}>11</span>
-            <span style={{fontFamily: "var(--font-d)", fontWeight: 700, fontStretch: "110%", fontSize: 16, textTransform: "uppercase", letterSpacing: "-.01em", color: "var(--ink)"}}>The Basics of Graphic Design</span>
-            <span style={{"color": "var(--gray)"}}>2025</span>
-            <span style={{color: "var(--ember)"}}>TRAINING · PDF</span>
-          </summary>
-          <div style={{ padding: "0 0 24px 44px", maxWidth: 640 }}>
-            <p style={{fontSize: 14, lineHeight: 1.65, color: "var(--ink2)", margin: "0 0 12px"}}>The complete training document for graphic design basics.</p>
-            <a href="/projects/The basics of graphic design training/TBOGD.pptx.pdf" style={{fontFamily: "var(--font-m)", fontSize: 11, letterSpacing: ".12em", textTransform: "uppercase", color: "var(--ink)", borderBottom: "1.5px solid var(--ink)", paddingBottom: 2, display: "inline-block", marginRight: 16}}>DOWNLOAD PDF</a>
-          </div>
-        </details>
-        <details>
-          <summary>
-            <span style={{"color": "var(--gray)"}}>12</span>
-            <span style={{fontFamily: "var(--font-d)", fontWeight: 700, fontStretch: "110%", fontSize: 16, textTransform: "uppercase", letterSpacing: "-.01em", color: "var(--ink)"}}>Miah's Built Camp</span>
-            <span style={{"color": "var(--gray)"}}>2024</span>
-            <span style={{color: "var(--ember)"}}>BRANDING · BEHANCE</span>
-          </summary>
-          <div style={{ padding: "0 0 24px 44px", maxWidth: 640 }}>
-            <p style={{fontSize: 14, lineHeight: 1.65, color: "var(--ink2)", margin: "0 0 12px"}}>Branding board on Behance.</p>
-            <a href="https://www.behance.net/gallery/217138211/MIAHS-BUILT-CAMP" style={{fontFamily: "var(--font-m)", fontSize: 11, letterSpacing: ".12em", textTransform: "uppercase", color: "var(--ink)", borderBottom: "1.5px solid var(--ink)", paddingBottom: 2, display: "inline-block", marginRight: 16}}>BEHANCE</a>
-          </div>
-        </details>
-        <details>
-          <summary>
-            <span style={{"color": "var(--gray)"}}>13</span>
-            <span style={{fontFamily: "var(--font-d)", fontWeight: 700, fontStretch: "110%", fontSize: 16, textTransform: "uppercase", letterSpacing: "-.01em", color: "var(--ink)"}}>Momoguro Fan Art</span>
-            <span style={{"color": "var(--gray)"}}>2024</span>
-            <span style={{color: "var(--ember)"}}>ILLUSTRATION</span>
-          </summary>
-          <div style={{ padding: "0 0 24px 44px", maxWidth: 640 }}>
-            <p style={{fontSize: 14, lineHeight: 1.65, color: "var(--ink2)", margin: "0 0 12px"}}>Illustration board on Behance.</p>
-            <a href="https://www.behance.net/gallery/217140837/MOMOGURO-FAN-ART" style={{fontFamily: "var(--font-m)", fontSize: 11, letterSpacing: ".12em", textTransform: "uppercase", color: "var(--ink)", borderBottom: "1.5px solid var(--ink)", paddingBottom: 2, display: "inline-block", marginRight: 16}}>BEHANCE</a>
-          </div>
-        </details>
-        <details>
-          <summary>
-            <span style={{"color": "var(--gray)"}}>14</span>
-            <span style={{fontFamily: "var(--font-d)", fontWeight: 700, fontStretch: "110%", fontSize: 16, textTransform: "uppercase", letterSpacing: "-.01em", color: "var(--ink)"}}>1984 Fan Art</span>
-            <span style={{"color": "var(--gray)"}}>2024</span>
-            <span style={{color: "var(--ember)"}}>ILLUSTRATION</span>
-          </summary>
-          <div style={{ padding: "0 0 24px 44px", maxWidth: 640 }}>
-            <p style={{fontSize: 14, lineHeight: 1.65, color: "var(--ink2)", margin: "0 0 12px"}}>Illustration board on Behance.</p>
-            <a href="https://www.behance.net/gallery/217140261/1984-FAN-ART" style={{fontFamily: "var(--font-m)", fontSize: 11, letterSpacing: ".12em", textTransform: "uppercase", color: "var(--ink)", borderBottom: "1.5px solid var(--ink)", paddingBottom: 2, display: "inline-block", marginRight: 16}}>BEHANCE</a>
-          </div>
-        </details>
-        <details>
-          <summary>
-            <span style={{"color": "var(--gray)"}}>15</span>
-            <span style={{fontFamily: "var(--font-d)", fontWeight: 700, fontStretch: "110%", fontSize: 16, textTransform: "uppercase", letterSpacing: "-.01em", color: "var(--ink)"}}>CSWK 2024</span>
-            <span style={{"color": "var(--gray)"}}>2024</span>
-            <span style={{color: "var(--ember)"}}>ARTWORK</span>
-          </summary>
-          <div style={{ padding: "0 0 24px 44px", maxWidth: 640 }}>
-            <p style={{fontSize: 14, lineHeight: 1.65, color: "var(--ink2)", margin: "0 0 12px"}}>Artwork board on Behance.</p>
-            <a href="https://www.behance.net/gallery/217236413/CSWK2024" style={{fontFamily: "var(--font-m)", fontSize: 11, letterSpacing: ".12em", textTransform: "uppercase", color: "var(--ink)", borderBottom: "1.5px solid var(--ink)", paddingBottom: 2, display: "inline-block", marginRight: 16}}>BEHANCE</a>
-          </div>
-        </details>
-      </div>
-    </div>
-  </section>
-<section className="block range" data-folio="03 · RANGE">
+  <section className="block range" data-folio="03 · RANGE">
     <div className="range-pin">
       <div className="range-sticky">
         <img className="range-mark" src="/logo.png" alt="" aria-hidden="true" width={1378} height={1378} decoding="async" />

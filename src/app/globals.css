@@ -252,7 +252,7 @@ a:hover .u-line, a:focus-visible .u-line, .u-line:hover { background-size: 100% 
 
 /* ————— custom cursor ————— */
 .cursor-dot, .cursor-ring {
-  position: fixed; top: 0; left: 0; z-index: 300;
+  position: fixed; top: 0; left: 0; z-index: 98;
   pointer-events: none;
   border-radius: 50%;
   opacity: 0;
@@ -1621,20 +1621,3 @@ body.is-locked .player{visibility:hidden;opacity:0;pointer-events:none}
   .p-fig img{height:auto;object-position:center}
   .p-body{padding-left:0 !important}
 }
-
-
-/* ————— FULL ARCHIVE — every project, release, artwork, linked ————— */
-.hc-arch{border-top:1.5px solid var(--ink)}
-.hc-arch details{border-bottom:1px solid var(--line)}
-.hc-arch summary{display:grid;grid-template-columns:44px 1fr auto auto;gap:16px;align-items:baseline;padding:16px 0;cursor:pointer;font-family:var(--font-m);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--fog);list-style:none}
-.hc-arch summary::-webkit-details-marker{display:none}
-.hc-arch summary:hover{color:var(--ink)}
-.hc-arch summary .an{color:var(--gray)}
-.hc-arch summary .at{font-family:var(--font-d);font-weight:700;font-stretch:110%;font-size:16px;text-transform:uppercase;letter-spacing:-.01em;color:var(--ink)}
-.hc-arch summary .ay{color:var(--gray)}
-.hc-arch summary .ai{color:var(--ember)}
-.hc-arch .abody{padding:0 0 24px 44px;max-width:640px}
-.hc-arch .abody p{font-size:14px;line-height:1.65;color:var(--ink2);margin-bottom:12px}
-.hc-arch .abody img{max-width:280px;height:auto;border:1px solid var(--line);margin-bottom:12px;display:block}
-.hc-arch .abody a{font-family:var(--font-m);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink);border-bottom:1.5px solid var(--ink);padding-bottom:2px;display:inline-block;margin-right:16px;transition:color .12s}
-.hc-arch .abody a:hover{color:var(--ember);border-color:var(--ember)}
