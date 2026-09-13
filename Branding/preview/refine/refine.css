@@ -1,0 +1,136 @@
+/* ============================================================
+   HABIBCORE - IDENTITY REFINEMENT v3 (preview layer, quiet set)
+   85/15: the portfolio keeps its character; the identity is embedded,
+   not displayed. Everything scoped under html.refine-on so BEFORE and
+   AFTER is a true toggle of the same page.
+
+   WHAT V3 DELIBERATELY DOES NOT DO (v2 corrections):
+   - no uppercase display: Archivo arrives at natural case, +4% width
+   - no -42deg ticks, no corner folds, no greyscale image filters
+   - no watermark mark in the hero (the statement stands alone)
+   - no borders on the expanded panels; one quiet divider per row
+   - Signal stays at the site's existing accent positions, gaining
+     meaning only where a state changes (expanded, pressed, error)
+   ============================================================ */
+
+/* ---- faces: Plex Mono for the metadata voice; Archivo VF with the
+   width axis actually registered (the shipped file was width-locked) ---- */
+@font-face{font-family:'IBM Plex Mono';src:url('/fonts/ibm-plex-mono-400-latin.woff2') format('woff2');font-weight:400;font-style:normal;font-display:swap}
+@font-face{font-family:'IBM Plex Mono';src:url('/fonts/ibm-plex-mono-500-latin.woff2') format('woff2');font-weight:500;font-style:normal;font-display:swap}
+@font-face{font-family:'IBM Plex Mono';src:url('/fonts/ibm-plex-mono-600-latin.woff2') format('woff2');font-weight:600;font-style:normal;font-display:swap}
+@font-face{font-family:'Archivo';src:url('/fonts/archivo-variable-latin.woff2') format('woff2');font-weight:100 900;font-stretch:62% 125%;font-style:normal;font-display:swap}
+
+/* ============================================================
+   1 - PALETTE: the pack ramp under the site's own token names.
+   Rust stays on light (4.91 AA); the dark-surface accent becomes
+   Signal (5.63 AA on ink) purely by remapping --ember.
+   ============================================================ */
+html.refine-on{
+  --paper:#F5F3EE; --paper2:#E1E0DC; --offwhite:#F0EFEC;
+  --ink:#111111;   --black:#111111;
+  --ink2:#5D5C58;  --gray:#5D5C58; --fog:#5D5C58;   /* metadata 3.29 -> 6.04 (fixes a pre-existing AA fail) */
+  --line:#C7C6C1;
+  --night:#111111; --nightline:#2B2A28; --nightfog:#8A8984; /* 4.99 on ink */
+  --border:rgba(17,17,17,.08); --border-mid:rgba(17,17,17,.14);
+  --white:#F5F3EE;
+  --rust:#B84318; --orange:#B84318; --orange-dim:#B84318; --amber:#B84318;
+  --ember:#FF4B00;                 /* Signal, dark surfaces + states only */
+  /* display face: Archivo replaces Fraunces for structure; the serif
+     is retained explicitly for the editorial italics and quotes */
+  --font-d:'Archivo',Helvetica,Arial,sans-serif;
+  --font-serif:'Fraunces',Georgia,serif;
+  --font-m:'IBM Plex Mono','Courier New',monospace;
+}
+
+/* ============================================================
+   2 - TYPE HIERARCHY: expressive display vs precise metadata.
+   Natural case, a hint of width (+4%), existing sizes untouched.
+   ============================================================ */
+html.refine-on .hero h1,
+html.refine-on .h-display,
+html.refine-on .contact h2,
+html.refine-on .p-title,
+html.refine-on .mm-link,
+html.refine-on .wordmark p{
+  font-stretch:104%;
+  letter-spacing:-0.015em;
+}
+html.refine-on .p-title{font-weight:620}
+/* editorial contrast: the italic emphases and pull-quotes keep the serif */
+html.refine-on .hero h1 em,
+html.refine-on .h-display em,
+html.refine-on .contact h2 em{font-family:var(--font-serif);font-style:italic;font-weight:430;letter-spacing:0}
+html.refine-on .voices-grid blockquote{font-family:var(--font-serif)}
+/* the availability stamp speaks the metadata face (it already repeats) */
+html.refine-on .stamp-wrap text{font-family:'IBM Plex Mono',monospace}
+
+/* ============================================================
+   3 - INTERACTION: plane geometry on buttons; links resolve.
+   The site's own hover behaviours are kept - only radius, height
+   and the fill colour mapping change.
+   ============================================================ */
+html.refine-on .btn,
+html.refine-on .btn-ink,
+html.refine-on .btn-line,
+html.refine-on .btn-solid,
+html.refine-on .f-submit,
+html.refine-on .copy-btn,
+html.refine-on .chip{border-radius:2px}
+html.refine-on .btn{min-height:44px}
+
+/* ============================================================
+   4 - SELECTED WORK: one quiet divider per row; hard-edged tags;
+   the expansion indicator turns Signal only when a state changes.
+   ============================================================ */
+html.refine-on .p-row{border-top:1px solid var(--line)}
+html.refine-on .p-tags span{border-radius:0}
+html.refine-on .p-row.open .p-plus,
+html.refine-on .p-panel.open .p-plus{color:var(--ember)}
+
+/* ============================================================
+   5 - METADATA DISCIPLINE: tabular figures where figures align.
+   ============================================================ */
+html.refine-on [data-clock],
+html.refine-on .nav-clock,
+html.refine-on .pl-count,
+html.refine-on .range-count,
+html.refine-on .facts .fv,
+html.refine-on .sh-idx,
+html.refine-on .fn,
+html.refine-on .p-kind,
+html.refine-on .p-year,
+html.refine-on .p-idx{font-variant-numeric:tabular-nums}
+
+/* ============================================================
+   6 - CANONICAL MARK: quiet placements only. Same size and seat as
+   the elements they replace; no containers, no constant animation.
+   (nav 21px beside the wordmark; footer 17px on the ink plate.)
+   ============================================================ */
+.hc-nav-mark,.hc-foot-mark{display:none}
+html.refine-on .hc-nav-mark{display:inline-block;width:21px;height:24px;margin-right:10px;vertical-align:-5px}
+html.refine-on .hc-foot-mark{display:inline-block;width:17px;height:19px;margin-right:9px;vertical-align:-3px;opacity:.9}
+
+/* ============================================================
+   7 - ACCESSIBILITY: visible keyline focus in the site's own ink;
+   paper-keyline focus on the ink surfaces.
+   ============================================================ */
+html.refine-on a:focus-visible,
+html.refine-on button:focus-visible,
+html.refine-on input:focus-visible,
+html.refine-on textarea:focus-visible,
+html.refine-on summary:focus-visible{outline:2px solid var(--ink);outline-offset:3px}
+html.refine-on .contact a:focus-visible,
+html.refine-on .contact button:focus-visible,
+html.refine-on .contact input:focus-visible,
+html.refine-on .contact textarea:focus-visible,
+html.refine-on .footer a:focus-visible,
+html.refine-on .toast:focus-visible{outline-color:var(--paper)}
+html.refine-on .toast{border-radius:0}   /* toast border-left already Signal via --ember */
+
+/* ============================================================
+   8 - OPTIONAL SIGNAL EXTENSION (default OFF): pushes Signal into
+   two further light-surface graphics so the accent can be judged.
+   ============================================================ */
+html.signal-plus .pl-bar i{background:var(--ember)}
+html.signal-plus .stamp-rot,
+html.signal-plus .stamp-arrow{color:var(--ember) !important}

@@ -1601,3 +1601,23 @@ button,.pl-bar,.rg-chip-m,.rg-sound-list button,.menu-btn,.f-submit,.chip{touch-
    it outranks the menu's z-index, so without this it would float over it */
 body.is-locked .player{visibility:hidden;opacity:0;pointer-events:none}
 
+
+/* ————— FIX — project panel: the decorative hover wipe spans the whole
+   .p-row article, including the expanded panel, and paints above the
+   panel content (panel had no z-index). Result: the write-up was blank
+   until the pointer left the row. The wipe now retires on open, and the
+   panel always paints above it. ————— */
+.p-row.open .p-wipe{transform:scaleY(0);opacity:0;transition:none}
+.p-panel{position:relative;z-index:1}
+
+/* ————— FIX — mobile project display: the desktop vw clamp squeezed the
+   write-up into a 91px column (min(448px, 23.419vw) at 390px) and forced
+   portrait captures into a 16:10 top-cropped strip. Full-width column;
+   images keep their own ratio. ————— */
+@media (max-width: 640px){
+  .p-blurb,.p-desc{max-width:100% !important}
+  .p-desc{font-size:15px !important}
+  .p-fig{aspect-ratio:auto;max-height:none}
+  .p-fig img{height:auto;object-position:center}
+  .p-body{padding-left:0 !important}
+}

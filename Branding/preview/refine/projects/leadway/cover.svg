@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900">
+  <rect width="1600" height="900" fill="#111"/>
+  <radialGradient id="g" cx="50%" cy="50%" r="50%">
+    <stop offset="0%" stop-color="#E8660A" stop-opacity="0.3"/>
+    <stop offset="100%" stop-color="#E8660A" stop-opacity="0"/>
+  </radialGradient>
+  <rect width="1600" height="900" fill="url(#g)"/>
+  <text x="800" y="420" font-family="Georgia,serif" font-size="120" font-weight="900" fill="#E8660A" opacity="0.12" text-anchor="middle">Leadway</text>
+  <text x="800" y="560" font-family="Georgia,serif" font-size="120" font-weight="900" fill="#E8660A" opacity="0.12" text-anchor="middle">Pensure</text>
+</svg>

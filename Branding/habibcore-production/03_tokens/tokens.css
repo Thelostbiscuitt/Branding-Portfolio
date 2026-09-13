@@ -1,0 +1,318 @@
+/* ============================================================================
+   HABIBCORE® — DESIGN TOKENS v1.0
+   ============================================================================
+   Source of truth: HABIBCORE_Identity_System.pdf — Edition 2026
+   (Part 03 Visual DNA · Part 04 Graphic System · Part 05 Typography ·
+    Part 06 Colour · Part 08 Iconography · Part 09 Motion)
+
+   PALETTE NOTE — read before editing:
+   The production brief listed INK #111111 / PAPER #F5F3EE + warm greys.
+   The authoritative PDF (Part 06, FIG. 16, DECISION RECORD — COLOUR SYSTEM)
+   specifies Ink #0A0A0A / Paper #FFFFFF / G1 #F4F4F2 / G2 #E6E6E3 /
+   G3 #6E6E6A / Signal #FF4B00. Per the governing rule "the PDF is the primary
+   brand-system authority", the PDF values below are canonical. Every value is
+   centralised here: changing the system later happens in this file only.
+
+   Naming: --hc-{category}-{name}   (hc = HABIBCORE)
+   Layers: primitive (raw values) → semantic (role-bound) → component
+   ============================================================================ */
+
+/* ------------------------------------------------------------------ *
+   1. PRIMITIVES — raw values, never use directly in components
+ * ------------------------------------------------------------------ */
+:root {
+  /* colour primitives (PDF Part 06, FIG. 16) */
+  --hc-ink:        #0A0A0A;   /* ground, text, plates */
+  --hc-paper:      #FFFFFF;   /* default canvas */
+  --hc-grey-1:     #F4F4F2;   /* G1 — fields, table stripes, quiet panels */
+  --hc-grey-2:     #E6E6E3;   /* G2 — hairlines, dividers, disabled */
+  --hc-grey-3:     #6E6E6A;   /* G3 — metadata, captions, secondary text */
+  --hc-signal:     #FF4B00;   /* SIGNAL — states/annotation ONLY (budget ≤1%) */
+
+  /* ink/paper channel triplets (for rgba composition) */
+  --hc-ink-rgb:    10 10 10;
+  --hc-paper-rgb:  255 255 255;
+
+  /* three-beat dash opacity (PDF 03.4: 100 / 55 / 30) */
+  --hc-beat-1:     1;
+  --hc-beat-2:     0.55;
+  --hc-beat-3:     0.3;
+
+  /* spacing — capsule rhythm scale (PDF 03.4): 4 · 8 · 12 · 24 · 48 · 96
+     (×2 steps above 12). Values marked ◆16/32/64 are 8px-logic EXTENSIONS
+     for component internals; they are multiples of the 8px baseline and
+     never break the canonical rhythm. */
+  --hc-space-4:    4px;     /* canonical */
+  --hc-space-8:    8px;     /* canonical — the baseline unit */
+  --hc-space-12:   12px;    /* canonical */
+  --hc-space-16:   16px;    /* ◆ extended */
+  --hc-space-24:   24px;    /* canonical */
+  --hc-space-32:   32px;    /* ◆ extended */
+  --hc-space-48:   48px;    /* canonical */
+  --hc-space-64:   64px;    /* ◆ extended */
+  --hc-space-96:   96px;    /* canonical */
+
+  /* radii (PDF 03.4 / FIG. 09 caption) */
+  --hc-radius-plane:   2px;   /* plane-small — buttons, chips, inputs */
+  --hc-radius-capsule: 6px;   /* capsule — dash ends, pill states */
+  --hc-radius-plane-lg: 10%;  /* plane-large — large panels/cards (10% of width) */
+
+  /* geometry — the two sanctioned angles (PDF 03.2).
+     Everything diagonal in the brand is one of these two. No others. */
+  --hc-angle-fold:      -42deg;  /* fold axis (42° family) */
+  --hc-angle-counter:   33deg;   /* counter-fold (147° = 180 − 33, screen-space) */
+
+  /* stroke weights */
+  --hc-keyline-w:      1.5px;  /* plate frames, specimen borders */
+  --hc-hairline-w:     1px;    /* structural hairlines (0.5px print-only) */
+  --hc-icon-stroke-w:  2px;    /* 24-grid icons, rounded caps/joins */
+  --hc-icon-stroke-sm: 2.5px;  /* icons at ≤16px (the "16px rule") */
+
+  /* type families (OFL; fallback stack per DECISION RECORD — PRIMARY TYPE) */
+  --hc-font-sans: "Archivo", "Liberation Sans", sans-serif;
+  --hc-font-mono: "IBM Plex Mono", "Courier New", monospace;
+
+  /* Archivo axis positions (PDF 05.1 decision record) */
+  --hc-w-display: 120 850;   /* width weight — display/wordmark */
+  --hc-w-sub:     106 750;   /* subheads */
+  --hc-w-text:    100 400;   /* body */
+  --hc-w-cond:    76 500;    /* condensed — dense data tables only */
+
+  /* motion durations (PDF 09.5 token table) */
+  --hc-dur-micro:    120ms;   /* T_MICRO — hover, focus, chips */
+  --hc-dur-ui:       240ms;   /* T_UI — menus, tabs, accordions */
+  --hc-dur-lock:     320ms;   /* T_LOCK — the signature settle */
+  --hc-dur-assemble: 1350ms;  /* T_ASSEMBLE — logo build, once per session */
+  --hc-dur-page:     420ms;   /* T_PAGE — plate slide transitions */
+  --hc-dur-textfold: 360ms;   /* T_TEXTFOLD — width 76→120, display sizes only */
+
+  /* motion easing (PDF 09.5) */
+  --hc-ease-out:  cubic-bezier(0, 0, 0.2, 1);        /* T_MICRO */
+  --hc-ease-ui:   cubic-bezier(0.2, 0.7, 0.2, 1);    /* T_UI — documented */
+  --hc-ease-lock: cubic-bezier(0.3, 1.18, 0.38, 1);  /* T_LOCK ≈ ≤2% overshoot + settle */
+  --hc-ease-travel: linear;                          /* T_SPLINE: −42° paths only */
+
+  /* breakpoints (EXTENDED — not in PDF; required for responsive rules) */
+  --hc-bp-mobile:  640px;
+  --hc-bp-desktop: 1024px;
+  --hc-bp-wide:    1440px;
+
+  /* containers & measure (PDF 04.1) */
+  --hc-container-max: 1440px;
+  --hc-reading-measure: 68ch;
+
+  /* touch targets (PDF 10.4 MOBILE row) */
+  --hc-touch-min: 44px;
+}
+
+/* ------------------------------------------------------------------ *
+   2. SEMANTIC — the only layer components may reference
+   Default theme: PAPER (light). Ink theme: [data-hc-theme="ink"].
+ * ------------------------------------------------------------------ */
+:root {
+  /* surfaces */
+  --hc-bg:            var(--hc-paper);
+  --hc-surface:       var(--hc-grey-1);        /* "field" container */
+  --hc-surface-ink:   var(--hc-ink);           /* "ink block" container */
+  --hc-on-ink:        var(--hc-paper);         /* text/art on ink blocks */
+
+  /* text */
+  --hc-text:          var(--hc-ink);
+  --hc-text-muted:    var(--hc-grey-3);
+  --hc-text-soft:     rgb(var(--hc-ink-rgb) / 0.76);  /* claim/copy on plates — ink-derived, palette stays 5+1 */
+  --hc-text-on-ink:   var(--hc-paper);
+  --hc-text-on-ink-muted: rgb(var(--hc-paper-rgb) / 0.6);
+
+  /* keylines & rules */
+  --hc-keyline-color:       var(--hc-ink);
+  --hc-keyline-on-ink:      rgb(var(--hc-paper-rgb) / 0.55);
+  --hc-hairline-color:      var(--hc-grey-2);
+  --hc-hairline-strong:     var(--hc-grey-3);
+
+  /* state colour — Signal behaves like a capsule counter: small, rare */
+  --hc-state-live:    var(--hc-signal);
+  --hc-state-error:   var(--hc-signal);
+  --hc-state-idle:    var(--hc-grey-3);
+  --hc-state-booked:  var(--hc-grey-3);
+
+  /* focus (system inherits keyline language) */
+  --hc-focus-ring: 2px solid var(--hc-ink);
+  --hc-focus-ring-on-ink: 2px solid var(--hc-paper);
+}
+
+[data-hc-theme="ink"] {
+  --hc-bg:            var(--hc-ink);
+  --hc-surface:       rgb(var(--hc-paper-rgb) / 0.06);
+  --hc-text:          var(--hc-paper);
+  --hc-text-muted:    rgb(var(--hc-paper-rgb) / 0.6);
+  --hc-keyline-color: var(--hc-paper);
+  --hc-keyline-on-ink: rgb(var(--hc-paper-rgb) / 0.55);
+  --hc-hairline-color: rgb(var(--hc-paper-rgb) / 0.18);
+  --hc-focus-ring: 2px solid var(--hc-paper);
+}
+
+/* ------------------------------------------------------------------ *
+   3. GRID — 12 columns on the 8px baseline, metadata rail (PDF 04.1)
+ * ------------------------------------------------------------------ */
+:root {
+  --hc-grid-columns:   12;
+  --hc-grid-gutter:    16px;                        /* web gutter (4mm print) */
+  --hc-grid-baseline:  8px;
+  /* page margin = 6% of the short edge (PDF 04.1), clamped to the rhythm */
+  --hc-page-margin:    clamp(16px, 6vmin, 96px);
+  /* metadata rail = rightmost column minus 40px */
+  --hc-rail-inset:     40px;
+}
+@media (min-width: 1024px) {
+  :root { --hc-grid-gutter: 24px; }                 /* responsive gutter step */
+}
+
+/* ------------------------------------------------------------------ *
+   4. TYPOGRAPHY ROLES — seven roles, no one-offs (PDF 05.3)
+   One width per block. Caps are structural. Body is sentence case.
+ * ------------------------------------------------------------------ */
+:root {
+  --hc-type-display-xl-size:  clamp(44px, 6.5vw, 80px);
+  --hc-type-display-size:     clamp(24px, 3vw, 36px);
+  --hc-type-subhead-size:     clamp(16px, 1.7vw, 19px);
+  --hc-type-body-size:        clamp(14px, 1.1vw, 16px);
+  --hc-type-meta-size:        10px;
+  --hc-type-data-size:        12px;
+  --hc-type-legal-size:       9px;
+  --hc-type-button-size:      10px;
+}
+
+.hc-display-xl {
+  font: 850 var(--hc-type-display-xl-size) var(--hc-font-sans);
+  font-stretch: 120%;
+  text-transform: uppercase;
+  letter-spacing: -0.01em;
+  line-height: 0.96;
+}
+.hc-display {
+  font: 820 var(--hc-type-display-size) var(--hc-font-sans);
+  font-stretch: 114%;
+  text-transform: uppercase;
+  letter-spacing: -0.01em;
+  line-height: 1;
+}
+.hc-subhead {
+  font: 750 var(--hc-type-subhead-size) var(--hc-font-sans);
+  font-stretch: 106%;
+  text-transform: uppercase;
+  line-height: 1.2;
+}
+.hc-body {
+  font: 400 var(--hc-type-body-size) / 1.6 var(--hc-font-sans);
+  /* sentence case — never set body in caps */
+}
+.hc-meta {
+  font: 500 var(--hc-type-meta-size) var(--hc-font-mono);
+  text-transform: uppercase;
+  letter-spacing: 0.15em;              /* +12–18% per role table */
+  color: var(--hc-text-muted);
+}
+.hc-data {
+  font: 400 var(--hc-type-data-size) / 1.5 var(--hc-font-mono);
+  font-variant-numeric: tabular-nums;  /* aligned figures never jitter */
+}
+.hc-legal {
+  font: 400 var(--hc-type-legal-size) / 1.6 var(--hc-font-mono);
+  color: rgb(var(--hc-ink-rgb) / 0.6);
+}
+.hc-button-label {
+  font: 500 var(--hc-type-button-size) var(--hc-font-mono);
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+}
+.hc-nav-item {
+  font: 500 11px var(--hc-font-mono);
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+}
+
+/* ------------------------------------------------------------------ *
+   5. GEOMETRY / KEYLINES / DASHES — components of the DNA (PDF 03/04)
+ * ------------------------------------------------------------------ */
+:root {
+  /* plate frame (P-03 keyline): 1.5px, 0 offset — the drawing-border look */
+  --hc-plate-border: var(--hc-keyline-w) solid var(--hc-keyline-color);
+  --hc-plate-border-on-ink: var(--hc-keyline-w) solid var(--hc-keyline-on-ink);
+
+  /* dash rule — three-beat echo of the counters (P-02), at most once/screen */
+  --hc-dash-h: 5px;                    /* 5–6px @1440 */
+  --hc-dash-w-long:  22px;             /* long  · 100% */
+  --hc-dash-w-short: 12px;             /* short · 55% */
+  --hc-dash-w-med:   17px;             /* medium · 30% */
+
+  /* dash-field pattern — the one sanctioned texture (PDF 04.4).
+     CSS gradient angle 52deg ≈ stripes on the −42° family
+     (CSS angle = stripe NORMAL; subtract 90° for the stripe direction).
+     Never behind body text; max one zone per page. */
+  --hc-pattern-dash-field-light: repeating-linear-gradient(
+    52deg, rgb(var(--hc-ink-rgb) / 0.055) 0 10px, transparent 10px 46px);
+  --hc-pattern-dash-field-dark: repeating-linear-gradient(
+    52deg, rgb(var(--hc-paper-rgb) / 0.08) 0 10px, transparent 10px 46px);
+
+  /* structural crops (PDF 04.3, FIG. 11) — at most one diagonal event/screen */
+  --hc-clip-fold-crop:    polygon(0 0, 100% 0, 100% 62%, 0 100%);
+  --hc-clip-counter-base: polygon(0 12%, 100% 0, 100% 100%, 0 100%);
+
+  /* icon grid (PDF 08.1): 24×24, 2px inset live area, −42° diagonals only */
+  --hc-icon-grid: 24px;
+  --hc-icon-inset: 2px;
+}
+
+/* ------------------------------------------------------------------ *
+   6. MOTION BEHAVIOUR (PDF 09.1 laws + 09.6 prohibitions)
+   Law 5 — Silence: nothing loops permanently except state indicators.
+ * ------------------------------------------------------------------ */
+:root {
+  --hc-motion-hover:  transform var(--hc-dur-micro) var(--hc-ease-out);
+  --hc-motion-ui:     transform var(--hc-dur-ui) var(--hc-ease-ui),
+                      opacity var(--hc-dur-ui) var(--hc-ease-ui);
+  --hc-motion-lock:   transform var(--hc-dur-lock) var(--hc-ease-lock);
+  --hc-motion-page:   transform var(--hc-dur-page) var(--hc-ease-ui);
+}
+
+/* Reduced-motion contract (PDF 09.6): every choreographed sequence has a
+   named static equivalent. The brand never depends on movement. */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  /* named equivalents:
+     assembly  → single fade-in at T_LOCK (no staged build)
+     dash loaders → static 42% fill
+     plate reveals → settled final state, no wipes
+     live dot → steady fill, no pulse                                   */
+  .hc-anim-assembly  { animation: none; opacity: 1; transform: none; }
+  .hc-anim-loader    { animation: none; }
+  .hc-anim-reveal    { animation: none; clip-path: none; opacity: 1; }
+  .hc-anim-live-dot  { animation: none; }
+}
+
+/* ------------------------------------------------------------------ *
+   7. COMPONENT PRIMITIVES — the shared atoms (PDF 04.2 / 10.4)
+ * ------------------------------------------------------------------ */
+:root {
+  /* plate — keyline-framed media/panel container */
+  --hc-plate-bg: var(--hc-paper);
+  --hc-plate-lift: -2px;               /* hover lift (FIG. 13) */
+
+  /* buttons — rectangles, plane radius 2px, mono 10px caps (PDF 10.4) */
+  --hc-btn-primary-bg: var(--hc-ink);
+  --hc-btn-primary-fg: var(--hc-paper);
+  --hc-btn-secondary-bg: transparent;
+  --hc-btn-secondary-border: var(--hc-keyline-w) solid var(--hc-ink);
+  --hc-btn-danger-border: var(--hc-keyline-w) solid var(--hc-ink);
+  --hc-btn-danger-fg: var(--hc-signal);        /* Signal label, keyline body */
+  --hc-btn-pad-x: 16px;
+  --hc-btn-pad-y: 12px;                        /* yields ≥44px touch height */
+
+  /* status capsule (nav) */
+  --hc-status-dot: 6px;
+}
