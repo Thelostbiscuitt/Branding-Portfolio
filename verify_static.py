@@ -1,0 +1,116 @@
+# verify_static.py — structural integrity checks for the ported v3 build.
+import pathlib, re, sys
+
+html = pathlib.Path("index.html").read_text(encoding="utf-8")
+errors, notes = [], []
+
+# 1. no stray data URIs (favicon only)
+stray = re.findall(r'data:(?!image/svg\+xml)(?:image|audio|font)/[a-z+]+;base64', html)
+if stray:
+    errors.append(f"stray inline data URIs: {stray[:3]}")
+if html.count("data:image/svg+xml;base64") != 1:
+    errors.append("favicon is not the single inline image")
+
+# 2. every referenced media file exists
+for m in sorted(set(re.findall(r'(?:src|href)="(media/[^"]+)"', html))):
+    if not pathlib.Path(m).exists():
+        errors.append(f"missing media file: {m}")
+media_refs = sorted(set(re.findall(r'(?:src|href)="(media/[^"]+)"', html)))
+img_refs = re.findall(r'src="(media/[^"]+)"', html)
+notes.append(f"media references: {len(media_refs)} unique — {len(img_refs)} total <img> uses")
+
+# 3. images referenced once under one canonical path each
+img_refs = re.findall(r'src="(media/[^"]+)"', html)
+dupes = {p for p in img_refs if img_refs.count(p) > 1}
+if dupes:
+    notes.append(f"multi-use media paths (expected: cards reuse case imgs): {sorted(dupes)}")
+
+# 4. route integrity: data-route pages vs all internal hash links vs ROUTE_META
+routes = set(re.findall(r'data-route="([^"]+)"', html))
+links = set(re.findall(r'href="#([^"]*)"', html))
+norm = {("#/" + l.strip("/")) if l and not l.startswith("/") else ("/" if not l else l)
+        for l in links if (l == "" or l.startswith("/")) and "' +" not in l and "+ '" not in l}
+bad_links = sorted(l for l in norm if l != "/" and l not in routes)
+if bad_links:
+    errors.append(f"hash links to unknown routes: {bad_links}")
+
+meta_keys = set(re.findall(r'"(/[^"]*)":\s*\{"t":', html))
+orphans = sorted(meta_keys - routes)
+if orphans:
+    errors.append(f"ROUTE_META entries with no page: {orphans}")
+
+# 5. case anatomy: featured cases carry the five-act structure; the ARCHIVE
+#    (CREATIVE band) cases carry the reference's lighter anatomy
+ARCH = {"/work/skaame", "/work/layo-isaac", "/work/blvckoreo", "/work/1ethfp",
+        "/work/bedroom-recordings-ii", "/work/singles-cover-art",
+        "/work/visitor-from-mars", "/work/gen-sadiq", "/work/tbogd"}
+case_routes = sorted(r for r in routes if r.startswith("/work/"))
+for r in case_routes:
+    start = html.find(f'data-route="{r}"')
+    end = html.find('data-route="', start + 1)
+    seg = html[start:end]
+    secs = (("CONTEXT", "WHAT I DID", "NEXT CASE") if r in ARCH else
+            ("OVERVIEW", "THE CHALLENGE", "APPROACH", "DELIVERABLES", "RESULT",
+             "QUESTIONS WE ACTUALLY GET", "NEXT CASE"))
+    for sec in secs:
+        if sec not in seg:
+            errors.append(f"case {r}: missing section {sec}")
+    if 'cp-media' not in seg or 'src="media/' not in seg:
+        errors.append(f"case {r}: missing media figure")
+notes.append(f"case routes with full anatomy: {len(case_routes)} ({len(case_routes)-len(ARCH)} featured + {len(ARCH)} archive)")
+
+# 6. filters counter truthfulness: cats on cards vs CASES cats
+cards = re.findall(r'data-cats="([^"]+)"', html)
+notes.append(f"work cards with data-cats: {len(cards)}")
+
+# 7. capabilities: RELEVANT WORK links resolve
+for m in re.findall(r'href="#(/capabilities/[^"]+)"', html):
+    if m not in routes:
+        errors.append(f"capability link to unknown route: {m}")
+
+# 8. SEO head
+for needle in ('rel="canonical" href="https://habibcore.com/"', 'property="og:image" content="https://habibcore.com/media/og-plate.png"',
+               'name="twitter:card" content="summary"', 'name="theme-color" content="#0A0A0A"', 'lang="en"'):
+    if needle not in html:
+        errors.append(f"head missing: {needle}")
+
+# 9. build chip
+if "BUILD v3.5 — PORTED" not in html:
+    errors.append("BUILD v3.5 — PORTED chip missing")
+
+# 9b. v3.5 work wheel + depth
+if ".idx-row:hover" in html:
+    errors.append("wheel hover rule survived (mouse must highlight nothing)")
+if 'id="pickLogo"' not in html or html.count("pickLogo") < 3:
+    errors.append("logo picker (pickLogo) missing")
+if 'id="workCount"' in html or 'data-cat="ALL"' in html or "SHOWING 10 OF 10" in html:
+    errors.append("work intro/counter/filters still present")
+if "position: fixed; left: 50%; bottom: 18px;" not in html:
+    errors.append("view pill float css missing")
+for marker, expected, label in [("THE NUMBERS", 8, "capability stats"), ("WHAT I BUILD", 8, "capability service areas"),
+                                ("QUESTIONS I ACTUALLY GET", 9, "faq blocks"), ("The handoff is the bug", 1, "approach argument"),
+                                ("OPERATING PRINCIPLES", 1, "approach principles"), ("THE MANIFESTO", 1, "about manifesto"),
+                                ("HOW I EMBED", 1, "about embed"), ("WORD OF MOUTH", 1, "about word of mouth")]:
+    n = html.count(marker)
+    if n != expected:
+        errors.append(f"{label}: found {n}x, expected {expected}")
+
+# 10. audio deck: 6 BLVCK OREO masters (mood+bpm) + 4 Bedroom Recordings II cuts (artist)
+tracks = re.findall(r'\{\s*src:\s*"(media/audio/[^"]+)",\s*no:\s*"(T-\d+)",\s*title:\s*"([^"]+)",\s*mood:\s*"([^"]+)"(?:,\s*artist:\s*"([^"]+)")?(?:,\s*bpm:\s*(\d+))?', html)
+if len(tracks) != 10:
+    errors.append(f"expected 10 TRACKS (6 BO + 4 BR2), found {len(tracks)}")
+for src, no, title, mood, artist, bpm in tracks:
+    if not pathlib.Path(src).exists():
+        errors.append(f"missing deck audio: {src}")
+br2 = [t for t in tracks if t[4]]
+if len(br2) != 4 or any("YE!!OWSOUL" not in t[4] for t in br2):
+    errors.append("BR2 deck tracks missing YE!!OWSOUL artist credit")
+notes.append("deck tracks: " + ", ".join(f"{no} {title} ({mood}{', ' + bpm + 'BPM' if bpm else ''})" for _, no, title, mood, _, bpm in tracks))
+
+print("ROUTES (%d): %s" % (len(routes), sorted(routes)))
+print("\n".join(notes))
+if errors:
+    print("\nFAILURES:")
+    print("\n".join(" - " + e for e in errors))
+    sys.exit(1)
+print("\nSTATIC CHECKS: ALL PASS")

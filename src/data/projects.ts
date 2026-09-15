@@ -52,7 +52,7 @@ export const projects: Project[] = [
     description: 'A self-initiated brand extension pitch for Nigeria\u2019s largest pension fund. Covers product redesigns, identity guidelines, social systems, and brand voice. Built from four years of operational experience inside the organisation.',
     positioning: 'An unprompted pitch, delivered as a live web document.',
     tags:        ['Brand', 'Identity', 'Product Design', 'Social System', 'Video'],
-    thumb:       '/projects/leadway/hero.jpg',
+    thumb:       '/projects/leadway/Brand pitch design deck/hero.jpg',
     year:        '2024\u20132026',
   },
   {

@@ -1,0 +1,15 @@
+import { chromium } from "playwright-core";
+const browser = await chromium.launch();
+const page = await browser.newPage({ viewport: { width: 1600, height: 900 } });
+await page.goto("http://localhost:8123/index.html#/work");
+await page.waitForTimeout(800);
+await page.click('.view-toggle button[data-view="index"]');
+await page.waitForTimeout(400);
+await page.screenshot({ path: "/tmp/listview_top.png" });
+await page.evaluate(() => { const r = document.querySelectorAll('.idx-row')[3]; r.scrollIntoView({block:'center'}); });
+await page.waitForTimeout(400);
+await page.screenshot({ path: "/tmp/listview_mid.png" });
+await page.evaluate(() => { window.dispatchEvent(new Event('scroll')); });
+await page.waitForTimeout(300);
+await page.screenshot({ path: "/tmp/listview_mid2.png" });
+await browser.close();
