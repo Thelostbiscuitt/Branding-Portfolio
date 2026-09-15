@@ -1861,6 +1861,10 @@ body[data-route="/work"] .view-toggle .pill {
 @media (max-width: 900px) {
   body[data-route="/work"] .view-toggle .pill { bottom: 12px; }
 }
+/* the pill sits in a zero-height fixed container — the rv2 reveal would never
+   fire for it, so force it permanently visible while /work is active */
+body[data-route="/work"] .view-toggle.rv2,
+body[data-route="/work"] .view-toggle.rv2.in { opacity: 1; transform: none; }
 
 /* ---------- reactive mark v2: visible affordance, deeper audio spread ---------- */
 .m3d-hint { opacity: .55; }
