@@ -65,7 +65,7 @@ ok("menu opens, label flips", (await page.textContent(".menu-trig .mt-label")) =
 await page.keyboard.press("Escape");
 await page.waitForTimeout(100);
 ok("menu closes on Escape", (await page.textContent(".menu-trig .mt-label")) === "Menu");
-ok("BUILD v3.8 — PORTED chip", (await page.textContent(".menu-build")).includes("BUILD v3.8 — PORTED"));
+ok("BUILD v3.9 — PORTED chip", (await page.textContent(".menu-build")).includes("BUILD v3.9 — PORTED"));
 await page.hover('.dock-btn[data-flyout="caps"]');
 await page.waitForTimeout(200);
 ok("caps flyout hover-opens", await page.evaluate(() => !document.getElementById("flyout-caps").hidden));
@@ -162,7 +162,12 @@ const pillState = await page.evaluate(() => {
 ok("case pill builds on case route (6 sections)", !pillState.hidden && pillState.btns.length === 6, pillState.btns.join(" / "));
 ok("case pill scroll-spy highlights Overview at top", pillState.on === "Overview", `on=${pillState.on}`);
 await page.click('#casePill button[data-cs="result"]');
-await page.waitForTimeout(700);
+// smooth-scroll can start late and take >1s; wait for the section to actually reach the top
+await page.waitForFunction(
+  () => (document.querySelector('.page.active .cp-sec[data-cs="result"]')?.getBoundingClientRect().top ?? 9999) < 300,
+  { timeout: 5000 }
+).catch(() => {});
+await page.waitForTimeout(250);
 const jumpState = await page.evaluate(() => ({
   resultTop: document.querySelector('.page.active .cp-sec[data-cs="result"]').getBoundingClientRect().top,
   on: document.getElementById("casePill").querySelector("button.on")?.textContent.trim()
@@ -361,6 +366,18 @@ const apDepth = await page.evaluate(() => {
     rows: document.querySelectorAll('.page[data-route="/approach"] .range-index .index-row').length };
 });
 ok("approach: argument + principles + FAQ", apDepth.a && apDepth.p && apDepth.q, `index-rows=${apDepth.rows}`);
+const apV39 = await page.evaluate(() => {
+  const pg = document.querySelector('.page[data-route="/approach"]');
+  const links = [...pg.querySelectorAll(".cap-cards .ev, .ev-row")].map(a => a.getAttribute("href"));
+  return { hero: !!pg.querySelector(".cap-hero-h"), evRows: pg.querySelectorAll(".ev-row").length,
+    evLinks: pg.querySelectorAll(".cap-cards .ev").length,
+    posTargets: [...pg.querySelectorAll(".pos-grid .arrow-row")].map(a => a.getAttribute("href")).filter(h => h !== "#/capabilities").length,
+    allResolve: links.every(h => document.querySelector(`.page[data-route="${h.replace("#", "")}"]`)),
+    close: !!pg.querySelector(".cap-close .cap-btn") };
+});
+ok("approach: v3.9 industries posture (hero, 5 plate rows, 9 evidence links, retargeted modes, all resolve, close)",
+  apV39.hero && apV39.evRows === 5 && apV39.evLinks === 9 && apV39.posTargets === 6 && apV39.allResolve && apV39.close,
+  JSON.stringify(apV39));
 await page.goto(BASE + "/#/about"); await page.waitForTimeout(150);
 const abDepth = await page.evaluate(() => {
   const t = document.querySelector('.page[data-route="/about"]')?.textContent || "";

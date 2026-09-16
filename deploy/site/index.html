@@ -396,6 +396,7 @@ button, input, textarea { font: inherit; color: inherit; }
 .sec-head { display: grid; gap: var(--hc-space-12);
             padding-block: var(--hc-space-64) var(--hc-space-48);
             border-top: var(--hc-hairline-w) solid var(--hc-hairline-color); }
+.cap-hero .idx { display: flex; justify-content: space-between; gap: var(--hc-space-16); flex-wrap: wrap; }
 .sec-head .idx { display: flex; justify-content: space-between; gap: var(--hc-space-16); flex-wrap: wrap; }
 .claim-soft { color: var(--hc-text-soft); }
 
@@ -1990,6 +1991,28 @@ body:not([data-route^="/work/"]) .case-pill { display: none; }
 @media (max-width: 900px) { .cap-cols { grid-template-columns: 1fr; gap: var(--hc-space-24); } .cap-sec .cap-stats { grid-template-columns: repeat(2, 1fr); } }
 @media (max-width: 720px) { .cap-cards { grid-template-columns: 1fr; } .rel-work .arrow-row { flex-direction: column; align-items: flex-start; gap: 8px; } .rel-work .arrow-row span:last-child { white-space: normal; } }
 
+/* ---------- v3.9: approach page in the industries posture ---------- */
+.cap-cols-3 { grid-template-columns: repeat(3, 1fr); }
+.cap-sub-center { margin-inline: auto; text-align: center; margin-bottom: var(--hc-space-48); }
+.ev-stack { display: grid; gap: var(--hc-space-12); }
+.ev-row { display: grid; grid-template-columns: 44px 1fr auto; align-items: center; gap: var(--hc-space-24); border: 1.5px solid rgb(var(--hc-ink-rgb) / .16); border-radius: 20px; padding: clamp(20px,2.4vw,32px); text-decoration: none; color: inherit; transition: background var(--hc-dur-micro) var(--hc-ease-out), color var(--hc-dur-micro) var(--hc-ease-out), border-color var(--hc-dur-micro) var(--hc-ease-out); }
+.ev-no { font: 500 11px var(--hc-font-mono); color: rgb(var(--hc-ink-rgb) / .45); }
+.ev-name { display: block; font: 700 clamp(18px,2vw,28px)/1.2 var(--hc-font-sans); font-stretch: 110%; }
+.ev-desc { display: block; margin-top: 6px; font: 500 9px var(--hc-font-mono); letter-spacing: .16em; color: rgb(var(--hc-ink-rgb) / .55); text-transform: uppercase; }
+.ev-link { font: 600 11px var(--hc-font-mono); letter-spacing: .14em; color: rgb(var(--hc-ink-rgb) / .55); white-space: nowrap; }
+.ev-row:hover, .ev-row:focus-visible { background: var(--hc-ink); color: var(--hc-paper); border-color: var(--hc-ink); }
+.ev-row:hover .ev-no, .ev-row:hover .ev-desc, .ev-row:hover .ev-link, .ev-row:focus-visible .ev-no, .ev-row:focus-visible .ev-desc, .ev-row:focus-visible .ev-link { color: rgb(var(--hc-paper-rgb) / .65); }
+.cap-cards .ev { display: inline-block; margin-top: 14px; font: 600 10px var(--hc-font-mono); letter-spacing: .14em; color: rgb(var(--hc-ink-rgb) / .55); text-decoration: none; }
+.cap-cards .cap-svc:hover .ev, .cap-cards .cap-svc:focus-within .ev { color: rgb(var(--hc-paper-rgb) / .65); }
+.pos-grid { display: grid; grid-template-columns: 1fr 1fr; gap: var(--hc-space-48); }
+.pos-grid .col-label { font: 600 11px var(--hc-font-mono); letter-spacing: .18em; color: rgb(var(--hc-ink-rgb) / .55); margin-bottom: var(--hc-space-12); }
+.pos-grid .arrow-row { display: flex; justify-content: space-between; align-items: center; gap: var(--hc-space-16); border: 1.5px solid rgb(var(--hc-ink-rgb) / .16); border-radius: 16px; padding: 18px 20px; margin-top: var(--hc-space-12); text-decoration: none; transition: background var(--hc-dur-micro) var(--hc-ease-out), color var(--hc-dur-micro) var(--hc-ease-out), border-color var(--hc-dur-micro) var(--hc-ease-out); }
+.pos-grid .arrow-row span:first-child { font: 600 13px/1.35 var(--hc-font-sans); }
+.pos-grid .arrow-row:hover, .pos-grid .arrow-row:focus-visible { background: var(--hc-ink); color: var(--hc-paper); border-color: var(--hc-ink); }
+.cap-close .cap-cta { align-self: center; margin-top: var(--hc-space-16); }
+@media (max-width: 900px) { .cap-cols-3 { grid-template-columns: 1fr; } .pos-grid { grid-template-columns: 1fr; } }
+@media (max-width: 720px) { .ev-row { grid-template-columns: 32px 1fr; } .ev-row .ev-link { grid-column: 2; justify-self: start; } }
+
 /* ---------- consent gate: float above the bottom chrome (dock chip, pill) ---------- */
 #soundGate { bottom: 84px; }
 /* ---------- v3.7 mobile polish (kept last so it wins the cascade) ---------- */
@@ -2140,7 +2163,7 @@ body:not([data-route^="/work/"]) .case-pill { display: none; }
         <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="8.5"/><path d="M3.5 12h17M12 3.5c2.5 2.3 3.8 5.2 3.8 8.5s-1.3 6.2-3.8 8.5c-2.5-2.3-3.8-5.2-3.8-8.5s1.3-6.2 3.8-8.5Z"/></svg>
       </a>
       <span class="menu-clock"><span aria-hidden="true">LAGOS, NG &mdash; </span><span data-clock>00:00:00 WAT</span></span>
-      <span class="menu-build">BUILD v3.8 — PORTED</span>
+      <span class="menu-build">BUILD v3.9 — PORTED</span>
     </div>
   </div>
 
@@ -2737,57 +2760,76 @@ body:not([data-route^="/work/"]) .case-pill { display: none; }
         </section>
       </div></div></div><div class="page " data-route="/approach" data-title="approach">
     <section class="section wrap" aria-label="Approach">
-      <div class="page-head" >
-        <div class="idx"><span class="kicker">04 / HOW I WORK</span><span class="kicker">IDEA &rarr; SHIP</span></div>
-        <h1>Designed. Built. Shipped.</h1>
-        <p class="lede">Most projects lose something in translation &mdash; designer to engineer, vision to build. These don&rsquo;t. The person who draws the interface is the person who ships it, and the person you brief is the person who answers when something breaks at 2am.</p>
-      </div>
-      <div class="sec-head" style="margin-top:64px"><div class="idx"><span class="kicker">THE ARGUMENT</span><span class="kicker">WHY ONE PAIR OF HANDS</span></div></div>
-      <div class="measure"><p class="hc-body claim">The handoff is the bug.</p></div>
-      <div class="cap-detail" style="border-top:0;margin-top:24px"><div class="side"><span class="k">THE CASE</span></div><div class="main"><div class="blk"><p class="b">Most projects don&rsquo;t fail at the idea stage &mdash; they fail in translation. Designer to engineer. Strategy to build. Vision to production. Every handoff is a game of whispers, and the details that make the work good are the first things dropped, because the person dropping them never knew they mattered.</p></div><div class="blk"><p class="b">HABIBCORE is structured so there is nothing to translate. The person who draws the interface writes the code that renders it. The person who defines the voice writes the copy that carries it. When something breaks at 2am, the same person who made it fixes it &mdash; no intermediary, no ticket queue, no &ldquo;let me check with the team.&rdquo;</p></div><div class="blk"><p class="b">That isn&rsquo;t a hustle flex; it&rsquo;s quality control. Fewer hands means fewer places for intent to leak out of the work &mdash; and it is why the case studies on this site read as shipped products, not proposals.</p></div></div></div>
-      <div class="pos-grid" style="margin-top:48px">
-      <div>
-        <div class="col-label">I DESIGN</div>
-        <a class="arrow-row" href="#/capabilities"><span>Brand identity &amp; art direction</span><span>&rarr;</span></a>
-        <a class="arrow-row" href="#/capabilities"><span>Digital products &amp; interfaces</span><span>&rarr;</span></a>
-        <a class="arrow-row" href="#/capabilities"><span>Creative direction &amp; campaigns</span><span>&rarr;</span></a>
-      </div>
-      <div>
-        <div class="col-label">I BUILD</div>
-        <a class="arrow-row" href="#/capabilities"><span>Web apps &amp; production sites</span><span>&rarr;</span></a>
-        <a class="arrow-row" href="#/capabilities"><span>AI systems &amp; assistants</span><span>&rarr;</span></a>
-        <a class="arrow-row" href="#/capabilities"><span>Automations &amp; internal tools</span><span>&rarr;</span></a>
-      </div>
-    </div>
-  
-      <div class="sec-head" style="margin-top:64px"><div class="idx"><span class="kicker">THE STEPS</span><span class="kicker">EVERY PROJECT</span></div></div>
-      <div class="steps">
-        <div class="step rv"><span class="no">01</span><span class="nm">Idea</span><p class="d hc-body">The problem, seen clearly.</p></div>
-        <div class="step rv"><span class="no">02</span><span class="nm">Design</span><p class="d hc-body">The interface, the identity, the system.</p></div>
-        <div class="step rv"><span class="no">03</span><span class="nm">Structure</span><p class="d hc-body">What the user never sees, but always feels.</p></div>
-        <div class="step rv"><span class="no">04</span><span class="nm">Code</span><p class="d hc-body">Built with the tools the product itself uses.</p></div>
-        <div class="step rv"><span class="no">05</span><span class="nm">Ship</span><p class="d hc-body">Deployed, running, answerable to one person.</p></div>
-      </div>
-      <div class="sec-head" style="margin-top:64px"><div class="idx"><span class="kicker">THE FIVE PLATES</span><span class="kicker">HOW A CASE STUDY RUNS</span></div>
-      <p class="hc-body claim-soft measure">Substantial projects are documented on the same spine the identity system uses &mdash; so every case study reads the same way, at whatever depth the evidence supports.</p></div>
-      <div class="range-index"><div class="index-row" id="plate-1"><span class="no">01</span><span class="name">BRIEF.</span><span class="meta">THE PROBLEM, SEEN CLEARLY — WHAT EXISTS, WHAT’S MISSING, WHAT “DONE” MEANS.</span></div><div class="index-row" id="plate-2"><span class="no">02</span><span class="name">SYSTEM.</span><span class="meta">STRUCTURE BEFORE SURFACE: IDENTITY, ARCHITECTURE, DATA MODEL. WHAT THE USER NEVER SEES BUT ALWAYS FEELS.</span></div><div class="index-row" id="plate-3"><span class="no">03</span><span class="name">BUILD.</span><span class="meta">BUILT WITH THE TOOLS THE PRODUCT ITSELF USES — NO HANDOFF, NO TRANSLATION LOSS.</span></div><div class="index-row" id="plate-4"><span class="no">04</span><span class="name">PROOF.</span><span class="meta">SHIPPED, RUNNING, MEASURABLE. THE WORK IS THE ARGUMENT.</span></div><div class="index-row" id="plate-5"><span class="no">05</span><span class="name">OPERATE.</span><span class="meta">ANSWERABLE AFTER LAUNCH — THE SAME PAIR OF HANDS, 2AM INCLUDED.</span></div></div>
-      <div class="sec-head" style="margin-top:64px"><div class="idx"><span class="kicker">OPERATING PRINCIPLES</span><span class="kicker">WHAT THE WORK OBEYS</span></div></div>
-      <div class="range-index">
-        <div class="index-row"><span class="no">I</span><span class="name">ONE BRIEF, ONE HEAD.</span><span class="meta">THE IDEA AND THE BUILD SHARE A SKULL. NOTHING GETS SIMPLIFIED ON ITS WAY FROM SKETCH TO CODE, BECAUSE NOTHING TRAVELS.</span></div>
-        <div class="index-row"><span class="no">II</span><span class="name">SYSTEMS BEFORE SURFACES.</span><span class="meta">STRUCTURE FIRST: IDENTITY, ARCHITECTURE, DATA MODEL. SURFACE IS THE LAST DECISION, NOT THE FIRST.</span></div>
-        <div class="index-row"><span class="no">III</span><span class="name">EVIDENCE OVER ADJECTIVES.</span><span class="meta">EVERY CLAIM ON THIS SITE LINKS TO A SHIPPED THING. IF THE WORK CAN&rsquo;T CARRY THE SENTENCE, THE SENTENCE GOES.</span></div>
-        <div class="index-row"><span class="no">IV</span><span class="name">OWNERSHIP DOESN&rsquo;T END AT LAUNCH.</span><span class="meta">SHIP IS A MILESTONE. THE PRODUCT IS ANSWERABLE AFTER IT &mdash; AND SO IS THE PERSON WHO MADE IT.</span></div>
-      </div>
-      <div class="sec-head" style="margin-top:64px"><div class="idx"><span class="kicker">OWNERSHIP</span><span class="kicker">FOLLOW-THROUGH</span></div></div>
-      <div class="measure"><p class="hc-body claim-soft">One person answerable for the whole thing, from the first sketch to the production logs. The email on the contact page reaches the same pair of hands &mdash; 2am included.</p></div>
-      <div class="sec-head" style="margin-top:64px"><div class="idx"><span class="kicker">QUESTIONS I ACTUALLY GET</span><span class="kicker">PROCESS</span></div></div>
-      <div class="cp-faq" style="margin-top:24px">
+        <div class="cap-hero">
+          <div class="idx"><span class="kicker">04 / HOW I WORK</span><span class="kicker">IDEA &rarr; SHIP</span></div>
+          <h1 class="cap-hero-h"><em>The handoff</em> is the bug.</h1>
+          <p class="cap-sub">Most projects lose something in translation &mdash; designer to engineer, vision to build. These don&rsquo;t. The person who draws the interface is the person who ships it, and the person you brief is the person who answers when something breaks at 2am.</p>
+          <a class="cap-cta" href="#/contact">BOOK A DISCOVERY CALL <span class="arr">&rarr;</span></a>
+        </div>
+
+        <section class="cap-sec" aria-label="The argument">
+          <span class="kicker">THE ARGUMENT</span>
+          <h2 class="cap-state-h"><em>Most projects fail</em> in translation, not in the idea.</h2>
+          <div class="cap-cols cap-cols-3">
+            <p class="b">Most projects don&rsquo;t fail at the idea stage &mdash; they fail in translation. Designer to engineer. Strategy to build. Vision to production. Every handoff is a game of whispers, and the details that make the work good are the first things dropped, because the person dropping them never knew they mattered.</p>
+            <p class="b">HABIBCORE is structured so there is nothing to translate. The person who draws the interface writes the code that renders it. The person who defines the voice writes the copy that carries it. When something breaks at 2am, the same person who made it fixes it &mdash; no intermediary, no ticket queue, no &ldquo;let me check with the team.&rdquo;</p>
+            <p class="b">That isn&rsquo;t a hustle flex; it&rsquo;s quality control. Fewer hands means fewer places for intent to leak out of the work &mdash; and it is why the case studies on this site read as shipped products, not proposals.</p>
+          </div>
+          <div class="cap-ctarow">
+            <a class="cap-btn" href="#/contact">BOOK A DISCOVERY CALL</a>
+            <a class="cap-cta" href="#/work">VIEW THE WORK <span class="arr">&rarr;</span></a>
+          </div>
+        </section>
+
+        <section class="cap-sec" aria-label="I design, I build">
+          <span class="kicker">ONE PAIR OF HANDS</span>
+          <h2 class="cap-state-h"><em>Two modes:</em> design and build.</h2>
+          <div class="pos-grid">
+            <div><div class="col-label">I DESIGN</div><a class="arrow-row" href="#/capabilities/brand-identity"><span>Brand identity &amp; art direction</span><span>&rarr;</span></a><a class="arrow-row" href="#/capabilities/product-design"><span>Digital products &amp; interfaces</span><span>&rarr;</span></a><a class="arrow-row" href="#/capabilities/creative-direction"><span>Creative direction &amp; campaigns</span><span>&rarr;</span></a></div>
+            <div><div class="col-label">I BUILD</div><a class="arrow-row" href="#/capabilities/software"><span>Web apps &amp; production sites</span><span>&rarr;</span></a><a class="arrow-row" href="#/capabilities/ai-systems"><span>AI systems &amp; assistants</span><span>&rarr;</span></a><a class="arrow-row" href="#/capabilities/automation"><span>Automations &amp; internal tools</span><span>&rarr;</span></a></div>
+          </div>
+        </section>
+
+        <section class="cap-sec" aria-label="The steps">
+          <div class="cap-center">
+            <span class="kicker">THE STEPS</span>
+            <h2 class="cap-state-h"><em>Five steps,</em> every project.</h2>
+          </div>
+          <div class="cap-cards"><div class="cap-svc"><span class="no">01</span><div><b>Idea</b><p class="b">The problem, seen clearly.</p><a class="ev" href="#/work/leadway-pensure">PROOF: LEADWAY PENSURE &rarr;</a></div></div><div class="cap-svc"><span class="no">02</span><div><b>Design</b><p class="b">The interface, the identity, the system.</p><a class="ev" href="#/work/skaame">PROOF: SKAAME &rarr;</a></div></div><div class="cap-svc"><span class="no">03</span><div><b>Structure</b><p class="b">What the user never sees, but always feels.</p><a class="ev" href="#/work/relay">PROOF: RELAY &rarr;</a></div></div><div class="cap-svc"><span class="no">04</span><div><b>Code</b><p class="b">Built with the tools the product itself uses.</p><a class="ev" href="#/work/biscuit-ai">PROOF: BISCUIT AI &rarr;</a></div></div><div class="cap-svc"><span class="no">05</span><div><b>Ship</b><p class="b">Deployed, running, answerable to one person.</p><a class="ev" href="#/work/olumayowa-nursing-home">PROOF: OLUMAYOWA &rarr;</a></div></div></div>
+        </section>
+
+        <section class="cap-sec" aria-label="The five plates">
+          <div class="cap-center">
+            <span class="kicker">THE FIVE PLATES</span>
+            <h2 class="cap-state-h"><em>Every case study,</em> one spine.</h2>
+          </div>
+          <p class="cap-sub cap-sub-center">Substantial projects are documented on the same spine the identity system uses &mdash; so every case study reads the same way, at whatever depth the evidence supports. Each plate, seen in a shipped thing:</p>
+          <div class="ev-stack"><a class="ev-row" href="#/work/leadway-pensure"><span class="ev-no">01</span><span class="ev-main"><b class="ev-name">BRIEF.</b><span class="ev-desc">THE PROBLEM, SEEN CLEARLY — WHAT EXISTS, WHAT’S MISSING, WHAT “DONE” MEANS.</span></span><span class="ev-link">LEADWAY PENSURE &rarr;</span></a><a class="ev-row" href="#/work/relay"><span class="ev-no">02</span><span class="ev-main"><b class="ev-name">SYSTEM.</b><span class="ev-desc">STRUCTURE BEFORE SURFACE: IDENTITY, ARCHITECTURE, DATA MODEL. WHAT THE USER NEVER SEES BUT ALWAYS FEELS.</span></span><span class="ev-link">RELAY &rarr;</span></a><a class="ev-row" href="#/work/biscuit-ai"><span class="ev-no">03</span><span class="ev-main"><b class="ev-name">BUILD.</b><span class="ev-desc">BUILT WITH THE TOOLS THE PRODUCT ITSELF USES — NO HANDOFF, NO TRANSLATION LOSS.</span></span><span class="ev-link">BISCUIT AI &rarr;</span></a><a class="ev-row" href="#/work/olumayowa-nursing-home"><span class="ev-no">04</span><span class="ev-main"><b class="ev-name">PROOF.</b><span class="ev-desc">SHIPPED, RUNNING, MEASURABLE. THE WORK IS THE ARGUMENT.</span></span><span class="ev-link">OLUMAYOWA &rarr;</span></a><a class="ev-row" href="#/work/ai-in-the-workplace"><span class="ev-no">05</span><span class="ev-main"><b class="ev-name">OPERATE.</b><span class="ev-desc">ANSWERABLE AFTER LAUNCH — THE SAME PAIR OF HANDS, 2AM INCLUDED.</span></span><span class="ev-link">AI IN THE WORKPLACE &rarr;</span></a></div>
+        </section>
+
+        <section class="cap-sec" aria-label="Operating principles">
+          <div class="cap-center">
+            <span class="kicker">OPERATING PRINCIPLES</span>
+            <h2 class="cap-state-h"><em>What the work</em> obeys.</h2>
+          </div>
+          <div class="cap-cards"><div class="cap-svc"><span class="no">I</span><div><b>ONE BRIEF, ONE HEAD.</b><p class="b">THE IDEA AND THE BUILD SHARE A SKULL. NOTHING GETS SIMPLIFIED ON ITS WAY FROM SKETCH TO CODE, BECAUSE NOTHING TRAVELS.</p><a class="ev" href="#/work/biscuit-ai">PROOF: BISCUIT AI &rarr;</a></div></div><div class="cap-svc"><span class="no">II</span><div><b>SYSTEMS BEFORE SURFACES.</b><p class="b">STRUCTURE FIRST: IDENTITY, ARCHITECTURE, DATA MODEL. SURFACE IS THE LAST DECISION, NOT THE FIRST.</p><a class="ev" href="#/work/relay">PROOF: RELAY &rarr;</a></div></div><div class="cap-svc"><span class="no">III</span><div><b>EVIDENCE OVER ADJECTIVES.</b><p class="b">EVERY CLAIM ON THIS SITE LINKS TO A SHIPPED THING. IF THE WORK CAN&rsquo;T CARRY THE SENTENCE, THE SENTENCE GOES.</p><a class="ev" href="#/work">PROOF: THE FULL INDEX &rarr;</a></div></div><div class="cap-svc"><span class="no">IV</span><div><b>OWNERSHIP DOESN&rsquo;T END AT LAUNCH.</b><p class="b">SHIP IS A MILESTONE. THE PRODUCT IS ANSWERABLE AFTER IT &mdash; AND SO IS THE PERSON WHO MADE IT.</p><a class="ev" href="#/work/ai-in-the-workplace">PROOF: AI IN THE WORKPLACE &rarr;</a></div></div></div>
+        </section>
+
+        <section class="cap-sec" aria-label="Questions">
+          <span class="kicker">QUESTIONS I ACTUALLY GET</span>
+          <div class="cp-faq">
         <details><summary>Do you ever hand off to developers?</summary><p class="b">Only by request. The default is that the person who designed it builds it &mdash; that&rsquo;s the whole quality argument. When a client has their own team, I ship specs and systems they can execute without me in the room.</p></details>
         <details><summary>What do you need from me to start?</summary><p class="b">The problem, in plain language &mdash; what&rsquo;s broken, what &ldquo;done&rdquo; looks like, and what it currently costs you. The brief gets sharpened together; the process below takes over from there.</p></details>
         <details><summary>Can you work with our existing brand or product?</summary><p class="b">Yes. Several engagements were extensions or repairs of existing systems &mdash; audit first, then standardise what drifted and specify what&rsquo;s missing. Relay was inherited mid-build.</p></details>
       </div>
-      <p style="margin-top:24px"><a class="tlink" href="#/work">See the approach applied &mdash; the work &rarr;</a></p>
-    </section></div><div class="page " data-route="/about" data-title="about">
+        </section>
+
+        <section class="cap-close" aria-label="Ownership">
+          <p class="cap-close-h"><em>One person answerable,</em> 2am included.</p>
+          <a class="cap-btn" href="#/contact">START A PROJECT &rarr;</a>
+          <a class="cap-cta cap-cta-center" href="#/work">SEE IT APPLIED &mdash; THE WORK <span class="arr">&rarr;</span></a>
+        </section>
+      </section></div><div class="page " data-route="/about" data-title="about">
     <section class="section wrap" aria-label="About">
       <div class="page-head" >
         <div class="idx"><span class="kicker">07 / ABOUT</span><span class="kicker">THE OPERATOR</span></div>

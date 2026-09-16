@@ -75,14 +75,22 @@ for needle in ('rel="canonical" href="https://habibcore.com/"', 'property="og:im
         errors.append(f"head missing: {needle}")
 
 # 9. build chip
-if "BUILD v3.8 — PORTED" not in html:
-    errors.append("BUILD v3.8 — PORTED chip missing")
+if "BUILD v3.9 — PORTED" not in html:
+    errors.append("BUILD v3.9 — PORTED chip missing")
 
 # 9b-v3.8. capability pages in the industries posture
-for marker, expected, label in [('class="cap-hero"', 8, "capability statement heroes"),
-                                ('class="cap-cards"', 8, "capability build-card grids"),
-                                ('class="cap-close"', 8, "capability closing statements"),
-                                ('class="cap-state-h"', 24, "capability two-tone statements (3 x 8)")]:
+for marker, expected, label in [('class="cap-hero"', 9, "statement heroes (8 caps + approach)"),
+                                ('class="cap-cards"', 10, "build-card grids (8 caps + approach steps/principles)"),
+                                ('class="cap-close"', 9, "closing statements (8 caps + approach)"),
+                                ('class="cap-state-h"', 29, "two-tone statements (24 caps + 5 approach)")]:
+    n = html.count(marker)
+    if n != expected:
+        errors.append(f"{label}: found {n}x, expected {expected}")
+
+# 9b-v3.9. approach page: every step/plate/principle wired to shipped proof
+for marker, expected, label in [('class="ev-row"', 5, "approach plate evidence rows"),
+                                ('class="ev"', 9, "approach evidence links (5 steps + 4 principles)"),
+                                ('The handoff</em> is the bug', 1, "approach argument")]:
     n = html.count(marker)
     if n != expected:
         errors.append(f"{label}: found {n}x, expected {expected}")
@@ -97,7 +105,7 @@ if 'id="workCount"' in html or 'data-cat="ALL"' in html or "SHOWING 10 OF 10" in
 if "position: fixed; left: 50%; bottom: 18px;" not in html:
     errors.append("view pill float css missing")
 for marker, expected, label in [("THE NUMBERS", 8, "capability stats"), ("WHAT I BUILD", 8, "capability service areas"),
-                                ("QUESTIONS I ACTUALLY GET", 9, "faq blocks"), ("The handoff is the bug", 1, "approach argument"),
+                                ("QUESTIONS I ACTUALLY GET", 9, "faq blocks"), 
                                 ("OPERATING PRINCIPLES", 1, "approach principles"), ("THE MANIFESTO", 1, "about manifesto"),
                                 ("HOW I EMBED", 1, "about embed"), ("WORD OF MOUTH", 1, "about word of mouth")]:
     n = html.count(marker)

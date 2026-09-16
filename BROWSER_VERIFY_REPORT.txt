@@ -171,7 +171,7 @@
       "extra": ""
     },
     {
-      "name": "BUILD v3.6 — PORTED chip",
+      "name": "BUILD v3.9 — PORTED chip",
       "pass": true,
       "extra": ""
     },
@@ -193,7 +193,7 @@
     {
       "name": "LAGOS clock ticks",
       "pass": true,
-      "extra": "04:01:39 WAT"
+      "extra": "07:31:57 WAT"
     },
     {
       "name": "flyout evidence card uses /media",
@@ -323,7 +323,7 @@
     {
       "name": "case pill click jumps to Result (spy follows to the section in view)",
       "pass": true,
-      "extra": "resultTop=169 on=FAQ"
+      "extra": "resultTop=107 on=FAQ"
     },
     {
       "name": "case pill hidden off case routes",
@@ -393,7 +393,7 @@
     {
       "name": "deck plays real master T-01",
       "pass": true,
-      "extra": "src=whats-up.mp3 t=0.59s"
+      "extra": "src=whats-up.mp3 t=0.58s"
     },
     {
       "name": "dock title updates",
@@ -616,6 +616,11 @@
       "extra": "stats=4 svc=4 faq=3"
     },
     {
+      "name": "cap brand-identity: v3.8 industries posture (hero, 4 cards, shipped rows, close)",
+      "pass": true,
+      "extra": "{\"hero\":true,\"heroCta\":true,\"cards\":4,\"shipRows\":3,\"close\":true}"
+    },
+    {
       "name": "all 8 capability pages carry the depth",
       "pass": true,
       "extra": "8/8"
@@ -623,7 +628,12 @@
     {
       "name": "approach: argument + principles + FAQ",
       "pass": true,
-      "extra": "index-rows=9"
+      "extra": "index-rows=0"
+    },
+    {
+      "name": "approach: v3.9 industries posture (hero, 5 plate rows, 9 evidence links, retargeted modes, all resolve, close)",
+      "pass": true,
+      "extra": "{\"hero\":true,\"evRows\":5,\"evLinks\":9,\"posTargets\":6,\"allResolve\":true,\"close\":true}"
     },
     {
       "name": "about: letter + embed + manifesto + word of mouth",
