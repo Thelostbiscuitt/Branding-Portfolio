@@ -186,7 +186,7 @@
       "extra": ""
     },
     {
-      "name": "BUILD v4.1 — WELCOME LOADER chip",
+      "name": "BUILD v4.2 — WELCOME LOCKUP chip",
       "pass": true,
       "extra": ""
     },
@@ -208,7 +208,7 @@
     {
       "name": "LAGOS clock ticks",
       "pass": true,
-      "extra": "10:57:51 WAT"
+      "extra": "11:19:40 WAT"
     },
     {
       "name": "flyout evidence card uses /media",
@@ -408,7 +408,7 @@
     {
       "name": "deck plays real master T-01",
       "pass": true,
-      "extra": "src=whats-up.mp3 t=0.58s"
+      "extra": "src=whats-up.mp3 t=0.59s"
     },
     {
       "name": "dock title updates",

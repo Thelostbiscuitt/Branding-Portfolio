@@ -75,8 +75,8 @@ for needle in ('rel="canonical" href="https://habibcore.com/"', 'property="og:im
         errors.append(f"head missing: {needle}")
 
 # 9. build chip
-if "BUILD v4.1 — WELCOME LOADER" not in html:
-    errors.append("BUILD v4.1 — WELCOME LOADER chip missing")
+if "BUILD v4.2 — WELCOME LOCKUP" not in html:
+    errors.append("BUILD v4.2 — WELCOME LOCKUP chip missing")
 if 'id="ld"' not in html:
     errors.append("v4.1: welcome loader #ld missing")
 if 'id="ld-wave"' not in html or 'id="ld-wm"' not in html:
