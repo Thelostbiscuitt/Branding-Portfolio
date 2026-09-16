@@ -75,8 +75,17 @@ for needle in ('rel="canonical" href="https://habibcore.com/"', 'property="og:im
         errors.append(f"head missing: {needle}")
 
 # 9. build chip
-if "BUILD v3.7 — PORTED" not in html:
-    errors.append("BUILD v3.7 — PORTED chip missing")
+if "BUILD v3.8 — PORTED" not in html:
+    errors.append("BUILD v3.8 — PORTED chip missing")
+
+# 9b-v3.8. capability pages in the industries posture
+for marker, expected, label in [('class="cap-hero"', 8, "capability statement heroes"),
+                                ('class="cap-cards"', 8, "capability build-card grids"),
+                                ('class="cap-close"', 8, "capability closing statements"),
+                                ('class="cap-state-h"', 24, "capability two-tone statements (3 x 8)")]:
+    n = html.count(marker)
+    if n != expected:
+        errors.append(f"{label}: found {n}x, expected {expected}")
 
 # 9b. v3.5 work wheel + depth
 if ".idx-row:hover" in html:

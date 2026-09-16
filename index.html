@@ -1950,6 +1950,46 @@ body:not([data-route^="/work/"]) .case-pill { display: none; }
 @media (max-width: 900px) { .case-pill { bottom: 12px; max-width: calc(100vw - 24px); overflow-x: auto; } }
 #work[data-workview="index"] { padding-top: var(--hc-space-96); }
 
+/* ---------- v3.8: capability pages - industries posture ---------- */
+.cap-hero { display: flex; flex-direction: column; justify-content: center; min-height: min(76svh, 760px); padding: clamp(56px,8vh,96px) 0 clamp(40px,6vh,72px); }
+.cap-hero .idx { margin-bottom: 0; }
+.cap-hero-h { font: 800 clamp(42px,6.6vw,100px)/1.02 var(--hc-font-sans); font-stretch: 110%; letter-spacing: -.02em; margin: var(--hc-space-24) 0 var(--hc-space-32); max-width: 16ch; }
+.cap-hero-h em, .cap-state-h em, .cap-close-h em { font-style: normal; color: rgb(var(--hc-ink-rgb) / .35); }
+.cap-sub { max-width: 56ch; font: 400 clamp(16px,1.25vw,19px)/1.6 var(--hc-font-sans); color: rgb(var(--hc-ink-rgb) / .78); margin: 0 0 var(--hc-space-32); }
+.cap-cta { display: inline-flex; align-items: center; gap: 12px; font: 600 12px var(--hc-font-mono); letter-spacing: .16em; color: var(--hc-ink); text-decoration: none; align-self: flex-start; }
+.cap-cta .arr { display: inline-grid; place-items: center; width: 34px; height: 34px; border: 1.5px solid var(--hc-ink); border-radius: 50%; transition: background var(--hc-dur-micro) var(--hc-ease-out), color var(--hc-dur-micro) var(--hc-ease-out); }
+.cap-cta:hover .arr, .cap-cta:focus-visible .arr { background: var(--hc-ink); color: var(--hc-paper); }
+.cap-sec { padding-block: clamp(56px,9vh,112px); border-top: 1px solid rgb(var(--hc-ink-rgb) / .1); }
+.cap-sec > .kicker, .cap-center .kicker { display: block; margin-bottom: var(--hc-space-32); }
+.cap-state-h { font: 800 clamp(32px,4.8vw,72px)/1.06 var(--hc-font-sans); font-stretch: 110%; letter-spacing: -.02em; margin: 0 0 var(--hc-space-40); max-width: 24ch; }
+.cap-center { text-align: center; margin-bottom: var(--hc-space-48); }
+.cap-center .cap-state-h { margin-inline: auto; }
+.cap-cols { display: grid; grid-template-columns: 1fr 1fr; gap: var(--hc-space-48); max-width: 1100px; }
+.cap-cols .b { font: 400 clamp(16px,1.3vw,20px)/1.65 var(--hc-font-sans); margin: 0; }
+.cap-ctarow { display: flex; align-items: center; gap: var(--hc-space-24); flex-wrap: wrap; margin-top: var(--hc-space-48); }
+.cap-btn { display: inline-block; background: var(--hc-ink); color: var(--hc-paper); font: 600 12px var(--hc-font-mono); letter-spacing: .16em; padding: 16px 26px; border-radius: 999px; text-decoration: none; border: 1.5px solid var(--hc-ink); transition: background var(--hc-dur-micro) var(--hc-ease-out), color var(--hc-dur-micro) var(--hc-ease-out); }
+.cap-btn:hover, .cap-btn:focus-visible { background: transparent; color: var(--hc-ink); }
+.cap-sec .cap-stats { grid-template-columns: repeat(4, 1fr); }
+.cap-sec .cap-stats b { font: 800 clamp(36px,4.6vw,68px)/1 var(--hc-font-sans); font-stretch: 110%; letter-spacing: -.02em; }
+.cap-sec .cap-stats span { margin-top: var(--hc-space-8); }
+.cap-cards { display: grid; grid-template-columns: 1fr 1fr; gap: var(--hc-space-16); }
+.cap-cards .cap-svc { border: 1.5px solid rgb(var(--hc-ink-rgb) / .16); border-radius: 20px; padding: var(--hc-space-24); grid-template-columns: 44px 1fr; transition: background var(--hc-dur-micro) var(--hc-ease-out), color var(--hc-dur-micro) var(--hc-ease-out), border-color var(--hc-dur-micro) var(--hc-ease-out); }
+.cap-cards .cap-svc:first-child { border-top: 1.5px solid rgb(var(--hc-ink-rgb) / .16); padding-top: var(--hc-space-24); }
+.cap-cards .cap-svc .no { font-size: 12px; }
+.cap-cards .cap-svc b { font-size: clamp(18px,1.6vw,24px); }
+.cap-cards .cap-svc:hover, .cap-cards .cap-svc:focus-within { background: var(--hc-ink); color: var(--hc-paper); border-color: var(--hc-ink); }
+.cap-cards .cap-svc:hover .no, .cap-cards .cap-svc:focus-within .no { color: rgb(var(--hc-paper-rgb) / .6); }
+.rel-work { margin-block: 0; }
+.rel-work .arrow-row { display: flex; justify-content: space-between; align-items: center; gap: var(--hc-space-24); border: 1.5px solid rgb(var(--hc-ink-rgb) / .16); border-radius: 20px; padding: clamp(20px,2.4vw,32px); margin-top: var(--hc-space-12); transition: background var(--hc-dur-micro) var(--hc-ease-out), color var(--hc-dur-micro) var(--hc-ease-out), border-color var(--hc-dur-micro) var(--hc-ease-out); }
+.rel-work .arrow-row span:first-child { font: 700 clamp(18px,2vw,28px)/1.2 var(--hc-font-sans); font-stretch: 110%; }
+.rel-work .arrow-row span:last-child { font: 500 11px var(--hc-font-mono); letter-spacing: .14em; color: rgb(var(--hc-ink-rgb) / .55); white-space: nowrap; }
+.rel-work .arrow-row:hover, .rel-work .arrow-row:focus-visible { background: var(--hc-ink); color: var(--hc-paper); border-color: var(--hc-ink); }
+.rel-work .arrow-row:hover span:last-child, .rel-work .arrow-row:focus-visible span:last-child { color: rgb(var(--hc-paper-rgb) / .65); }
+.cap-close { text-align: center; padding: clamp(88px,14vh,176px) 0; }
+.cap-close-h { font: 800 clamp(30px,4.4vw,64px)/1.1 var(--hc-font-sans); font-stretch: 110%; letter-spacing: -.02em; max-width: 24ch; margin: 0 auto var(--hc-space-40); }
+@media (max-width: 900px) { .cap-cols { grid-template-columns: 1fr; gap: var(--hc-space-24); } .cap-sec .cap-stats { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 720px) { .cap-cards { grid-template-columns: 1fr; } .rel-work .arrow-row { flex-direction: column; align-items: flex-start; gap: 8px; } .rel-work .arrow-row span:last-child { white-space: normal; } }
+
 /* ---------- consent gate: float above the bottom chrome (dock chip, pill) ---------- */
 #soundGate { bottom: 84px; }
 /* ---------- v3.7 mobile polish (kept last so it wins the cascade) ---------- */
@@ -2100,7 +2140,7 @@ body:not([data-route^="/work/"]) .case-pill { display: none; }
         <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="8.5"/><path d="M3.5 12h17M12 3.5c2.5 2.3 3.8 5.2 3.8 8.5s-1.3 6.2-3.8 8.5c-2.5-2.3-3.8-5.2-3.8-8.5s1.3-6.2 3.8-8.5Z"/></svg>
       </a>
       <span class="menu-clock"><span aria-hidden="true">LAGOS, NG &mdash; </span><span data-clock>00:00:00 WAT</span></span>
-      <span class="menu-build">BUILD v3.7 — PORTED</span>
+      <span class="menu-build">BUILD v3.8 — PORTED</span>
     </div>
   </div>
 
@@ -2251,127 +2291,451 @@ body:not([data-route^="/work/"]) .case-pill { display: none; }
       </div>
       <div class="range-index"><a class="cap-row" href="#/capabilities/brand-identity"><span class="no">01</span><span class="nm">Brand Identity</span><span class="meta">IDENTITY SYSTEMS · VOICE · GUIDELINES</span><span class="go">DISCOVER &rarr;</span></a><a class="cap-row" href="#/capabilities/product-design"><span class="no">02</span><span class="nm">Product Design</span><span class="meta">INTERFACES · WEB APPS · TOOLS</span><span class="go">DISCOVER &rarr;</span></a><a class="cap-row" href="#/capabilities/software"><span class="no">03</span><span class="nm">Software</span><span class="meta">DESIGNED, BUILT &amp; SHIPPED END TO END</span><span class="go">DISCOVER &rarr;</span></a><a class="cap-row" href="#/capabilities/ai-systems"><span class="no">04</span><span class="nm">AI Systems</span><span class="meta">ASSISTANTS · LITERACY · INTEGRATION</span><span class="go">DISCOVER &rarr;</span></a><a class="cap-row" href="#/capabilities/automation"><span class="no">05</span><span class="nm">Automation</span><span class="meta">WORKFLOWS · PIPELINES · SLAS</span><span class="go">DISCOVER &rarr;</span></a><a class="cap-row" href="#/capabilities/creative-direction"><span class="no">06</span><span class="nm">Creative Direction</span><span class="meta">ART DIRECTION · IMAGE · VIDEO · MUSIC</span><span class="go">DISCOVER &rarr;</span></a><a class="cap-row" href="#/capabilities/graphic-design"><span class="no">07</span><span class="nm">Graphic Design</span><span class="meta">COVER ART · EDITORIAL · COMPOSITION</span><span class="go">DISCOVER &rarr;</span></a><a class="cap-row" href="#/capabilities/training"><span class="no">08</span><span class="nm">Training</span><span class="meta">CURRICULUM · FACILITATION · HUBS</span><span class="go">DISCOVER &rarr;</span></a></div>
       <p class="slot-note" style="margin-top:24px">NOTES / JOURNAL &amp; INDUSTRY PAGES ARE SLOTTED FOR LATER &mdash; THE ARCHITECTURE ALREADY CARRIES THEM.</p>
-    </section></div><div class="page " data-route="/capabilities/brand-identity" data-title="cap-brand-identity"><div class="page-cap">
-      <div class="wrap page-head">
-        <div class="idx"><span class="kicker">CAPABILITY 01 / 08</span><span class="kicker">IDENTITY SYSTEMS · VOICE · GUIDELINES</span></div>
-        <h1>Brand Identity</h1>
-        <p class="lede">Identity systems built to be used — drawn, specified and shipped with the product they belong to.</p>
-        <p class="crumbs-top" style="margin-top:16px"><a class="tlink" href="#/capabilities">&larr; All capabilities</a></p>
-      </div>
-      <div class="wrap">
-        <div class="cap-detail" style="border-top:0"><div class="side"><span class="k">IN PRACTICE</span></div><div class="main"><div class="blk"><p class="b">Brand identity, editorial and graphic composition is the craft under every project — the part of the practice with the longest history. Identities are built as systems: mark, type, voice and social content specified tightly enough that the next person can execute without guessing.</p></div><div class="blk"><p class="b">The strongest proof is an unprompted one: a full brand-extension pitch for Leadway Pensure, one of Nigeria’s largest pension funds — identity guidelines, product redesigns, a social system and brand voice, built on four years of operational experience inside the organisation and delivered as a live web document rather than a static deck.</p></div></div></div>
-        <div class="cap-detail"><div class="side"><span class="k">WHAT THAT INCLUDES</span></div><div class="main"><ul class="tags"><li>Identity guidelines</li><li>Brand voice</li><li>Social content systems</li><li>Editorial &amp; art direction</li><li>Cover art &amp; image systems</li></ul></div></div>
-        <div class="cap-detail"><div class="side"><span class="k">THE NUMBERS</span></div><div class="main"><div class="cap-stats"><div><b>15+</b><span>identity systems &amp; mark sets shipped</span></div><div><b>2020</b><span>the year the first one went out</span></div><div><b>4 yrs</b><span>inside the brand's own operations</span></div><div><b>1</b><span>enterprise pitch, unprompted</span></div></div></div></div><div class="cap-detail"><div class="side"><span class="k">WHY IT MATTERS</span></div><div class="main"><div class="blk"><h3>An identity is a system, not a logo.</h3><p class="b">A mark without specifications is a drawing. The identities built here are systems: mark, type, colour and voice specified tightly enough that the next person executes without guessing. That standard exists because it was tested where identity failure is expensive &mdash; inside an enterprise operation, where every inconsistent touchpoint becomes a support ticket or a compliance query.</p></div><div class="blk"><p class="b">The strongest proof is an unprompted one: a full brand-extension pitch for Leadway Pensure, one of Nigeria&rsquo;s largest pension funds &mdash; identity guidelines, product redesigns, a social system and a brand voice &mdash; built on four years of operational experience inside the organisation and delivered as a live web document rather than a static deck.</p></div></div></div><div class="cap-detail"><div class="side"><span class="k">WHAT I BUILD</span></div><div class="main"><div class="cap-svc"><span class="no">01</span><div><b>Identity guidelines</b><p class="b">Mark, type, colour and usage specified for real teams &mdash; not a brand book that dies in a drive.</p></div></div><div class="cap-svc"><span class="no">02</span><div><b>Brand voice</b><p class="b">Voice definitions and copy frameworks that keep the brand coherent across product, social and correspondence.</p></div></div><div class="cap-svc"><span class="no">03</span><div><b>Social content systems</b><p class="b">Templates and rhythm that survive contact with a busy week &mdash; built, used and proved on live channels.</p></div></div><div class="cap-svc"><span class="no">04</span><div><b>Editorial &amp; art direction</b><p class="b">Cover art, image systems and the composition rules that make a body of work read as one hand.</p></div></div></div></div><div class="cap-detail"><div class="side"><span class="k">RELEVANT WORK</span></div><div class="main rel-work"><a class="arrow-row" href="#/work/leadway-pensure"><span>Leadway Pensure — brand &amp; comms</span><span>2024–26 &rarr;</span></a><a class="arrow-row" href="#/work/blvckoreo"><span>BlvckOreo — personal brand</span><span>2023 &rarr;</span></a><a class="arrow-row" href="#/work/skaame"><span>Skaame — artist EPK</span><span>2024 &rarr;</span></a></div></div>
-        
+    </section></div><div class="page " data-route="/capabilities/brand-identity" data-title="cap-brand-identity"><div class="page-cap"><div class="wrap">
+        <div class="cap-hero">
+          <p class="crumbs-top"><a class="tlink" href="#/capabilities">&larr; All capabilities</a></p>
+          <div class="idx"><span class="kicker">CAPABILITY 01 / 08 &mdash; IDENTITY SYSTEMS · VOICE · GUIDELINES</span></div>
+          <h1 class="cap-hero-h"><em>An identity is a</em> system, not a logo.</h1>
+          <p class="cap-sub">Brand identity, editorial and graphic composition is the craft under every project &mdash; the part of the practice with the longest history. Identities are built to be used: drawn, specified and shipped with the product they belong to.</p>
+          <a class="cap-cta" href="#/contact">BOOK A DISCOVERY CALL <span class="arr">&rarr;</span></a>
+        </div>
+
+        <section class="cap-sec" aria-label="The numbers">
+          <span class="kicker">THE NUMBERS</span>
+          <div class="cap-stats"><div><b>15+</b><span>identity systems &amp; mark sets shipped</span></div><div><b>2020</b><span>the year the first one went out</span></div><div><b>4 yrs</b><span>inside the brand's own operations</span></div><div><b>1</b><span>enterprise pitch, unprompted</span></div></div>
+        </section>
+
+        <section class="cap-sec" aria-label="Why it matters">
+          <span class="kicker">WHY IT MATTERS</span>
+          <h2 class="cap-state-h"><em>A mark without specifications</em> is a drawing.</h2>
+          <div class="cap-cols">
+            <p class="b">A mark without specifications is a drawing. The identities built here are systems: mark, type, colour and voice specified tightly enough that the next person executes without guessing. That standard exists because it was tested where identity failure is expensive &mdash; inside an enterprise operation, where every inconsistent touchpoint becomes a support ticket or a compliance query.</p>
+            <p class="b">The strongest proof is an unprompted one: a full brand-extension pitch for Leadway Pensure, one of Nigeria&rsquo;s largest pension funds &mdash; identity guidelines, product redesigns, a social system and a brand voice &mdash; built on four years of operational experience inside the organisation and delivered as a live web document rather than a static deck.</p>
+          </div>
+          <div class="cap-ctarow">
+            <a class="cap-btn" href="#/contact">BOOK A DISCOVERY CALL</a>
+            <a class="cap-cta" href="#/work">VIEW THE WORK <span class="arr">&rarr;</span></a>
+          </div>
+        </section>
+
+        <section class="cap-sec" aria-label="What I build">
+          <div class="cap-center">
+            <span class="kicker">WHAT I BUILD</span>
+            <h2 class="cap-state-h"><em>What I build</em> when the brand has to work.</h2>
+          </div>
+          <div class="cap-cards"><div class="cap-svc"><span class="no">01</span><div><b>Identity guidelines</b><p class="b">Mark, type, colour and usage specified for real teams &mdash; not a brand book that dies in a drive.</p></div></div><div class="cap-svc"><span class="no">02</span><div><b>Brand voice</b><p class="b">Voice definitions and copy frameworks that keep the brand coherent across product, social and correspondence.</p></div></div><div class="cap-svc"><span class="no">03</span><div><b>Social content systems</b><p class="b">Templates and rhythm that survive contact with a busy week &mdash; built, used and proved on live channels.</p></div></div><div class="cap-svc"><span class="no">04</span><div><b>Editorial &amp; art direction</b><p class="b">Cover art, image systems and the composition rules that make a body of work read as one hand.</p></div></div></div>
+        </section>
+
+        <section class="cap-sec" aria-label="Relevant work">
+          <div class="cap-center">
+            <span class="kicker">RELEVANT WORK</span>
+            <h2 class="cap-state-h"><em>Shipped</em> proof.</h2>
+          </div>
+          <div class="rel-work"><a class="arrow-row" href="#/work/leadway-pensure"><span>Leadway Pensure — brand &amp; comms</span><span>2024–26 &rarr;</span></a><a class="arrow-row" href="#/work/blvckoreo"><span>BlvckOreo — personal brand</span><span>2023 &rarr;</span></a><a class="arrow-row" href="#/work/skaame"><span>Skaame — artist EPK</span><span>2024 &rarr;</span></a></div>
+        </section>
+
         <div class="cap-detail"><div class="side"><span class="k">RELATED</span></div><div class="main"><div class="filter-row" style="margin:0"><a class="fchip" style="text-decoration:none" href="#/capabilities/creative-direction">Creative Direction &rarr;</a><a class="fchip" style="text-decoration:none" href="#/capabilities/graphic-design">Graphic Design &rarr;</a></div></div></div>
-        <div class="cap-detail"><div class="side"><span class="k">QUESTIONS I ACTUALLY GET</span></div><div class="main"><div class="cp-faq"><details><summary>Do you do logo-only work?</summary><p class="b">Rarely. A logo without the system around it can&rsquo;t hold up in use &mdash; and use is the whole point. Small scope, yes; shallow scope, no.</p></details><details><summary>Can you work inside an existing identity?</summary><p class="b">Yes. Several engagements extend or repair an existing system &mdash; auditing what&rsquo;s there, standardising what drifted, specifying what&rsquo;s missing.</p></details><details><summary>What does &ldquo;shipped with the product&rdquo; mean?</summary><p class="b">The identity is delivered in the medium it lives in &mdash; live web documents, working templates, production files &mdash; not a PDF that dies in a drawer.</p></details></div></div></div><div class="cap-detail"><div class="side"><span class="k">START</span></div><div class="main"><p class="b">Bring the problem &mdash; <a class="tlink" href="#/contact">start a project &rarr;</a></p></div></div>
-      </div>
-    </div></div><div class="page " data-route="/capabilities/product-design" data-title="cap-product-design"><div class="page-cap">
-      <div class="wrap page-head">
-        <div class="idx"><span class="kicker">CAPABILITY 02 / 08</span><span class="kicker">INTERFACES · WEB APPS · TOOLS</span></div>
-        <h1>Product Design</h1>
-        <p class="lede">Interfaces designed to be shipped, not framed — because the same hands build what gets drawn.</p>
-        <p class="crumbs-top" style="margin-top:16px"><a class="tlink" href="#/capabilities">&larr; All capabilities</a></p>
-      </div>
-      <div class="wrap">
-        <div class="cap-detail" style="border-top:0"><div class="side"><span class="k">IN PRACTICE</span></div><div class="main"><div class="blk"><p class="b">Product design here always ends in production. The person who draws the interface is the person who codes it, so the design survives contact with reality: no handoff loss, no “the engineers couldn’t build it”, no drift between the mockup and the thing users touch.</p></div><div class="blk"><p class="b">Recent work runs from a memory-inspectable Telegram assistant (Biscuit AI) to a conversation-first kitchen inventory (Chef4Me) and a one-page healthcare site a patient can scan in seconds (Olumayowa Nursing Home). Different surfaces, one standard: designed, built, shipped, answerable.</p></div></div></div>
-        <div class="cap-detail"><div class="side"><span class="k">WHAT THAT INCLUDES</span></div><div class="main"><ul class="tags"><li>Product &amp; interface design</li><li>Conversational UX</li><li>Information architecture</li><li>Design systems &amp; tokens</li><li>Prototype-to-production builds</li></ul></div></div>
-        <div class="cap-detail"><div class="side"><span class="k">THE NUMBERS</span></div><div class="main"><div class="cap-stats"><div><b>3</b><span>products designed &amp; shipped solo</span></div><div><b>1</b><span>site a patient scans in seconds</span></div><div><b>40+</b><span>cuisines in a suggestion UI</span></div><div><b>18</b><span>stages of pipeline made navigable</span></div></div></div></div><div class="cap-detail"><div class="side"><span class="k">WHY IT MATTERS</span></div><div class="main"><div class="blk"><h3>Interfaces designed to be shipped, not framed.</h3><p class="b">Product design fails in the gap between the drawing and the build. Here there is no gap: the person who designs the interface writes the code that renders it, so every decision survives contact with production. Mockups that can&rsquo;t be built don&rsquo;t leave the sketchbook.</p></div><div class="blk"><p class="b">The proof runs live: a Telegram assistant whose layered memory you can inspect and erase, an AI kitchen companion that inventories your kitchen through plain chat, a healthcare site six services deep that a patient can scan in seconds. Each one was designed, built and shipped by the same pair of hands &mdash; and each one behaves in production exactly as drawn.</p></div></div></div><div class="cap-detail"><div class="side"><span class="k">WHAT I BUILD</span></div><div class="main"><div class="cap-svc"><span class="no">01</span><div><b>Product interface design</b><p class="b">Dashboards, tools and app UI &mdash; designed for the decision the user has to make in under thirty seconds.</p></div></div><div class="cap-svc"><span class="no">02</span><div><b>Marketing &amp; client sites</b><p class="b">Single-purpose sites built to carry one message cleanly &mdash; then deployed, not just delivered.</p></div></div><div class="cap-svc"><span class="no">03</span><div><b>Conversational UX</b><p class="b">Telegram-first products where the chat is the interface: no forms, no dashboards, just conversation.</p></div></div><div class="cap-svc"><span class="no">04</span><div><b>Design systems &amp; specs</b><p class="b">Tokens, components and states documented tightly enough that even a future you can&rsquo;t get it wrong.</p></div></div></div></div><div class="cap-detail"><div class="side"><span class="k">RELEVANT WORK</span></div><div class="main rel-work"><a class="arrow-row" href="#/work/biscuit-ai"><span>Biscuit AI — Telegram assistant</span><span>2026 &rarr;</span></a><a class="arrow-row" href="#/work/chef4me"><span>Chef4Me — kitchen assistant</span><span>2026 &rarr;</span></a><a class="arrow-row" href="#/work/olumayowa-nursing-home"><span>Olumayowa Nursing Home — healthcare site</span><span>2026 &rarr;</span></a><a class="arrow-row" href="#/work/relay"><span>Relay — operations portal</span><span>2024 &rarr;</span></a></div></div>
-        <div class="cap-detail" style="border-top:0;padding-top:0"><div class="side"><span class="k">PROOF</span></div><div class="main"><div class="proof-strip"><div class="m"><b>6+</b><span>PROJECTS DESIGNED &amp; SHIPPED END TO END</span></div><div class="m"><b>0</b><span>HANDOFFS — DESIGN AND BUILD ARE THE SAME PAIR OF HANDS</span></div></div></div></div>
-        <div class="cap-detail"><div class="side"><span class="k">RELATED</span></div><div class="main"><div class="filter-row" style="margin:0"><a class="fchip" style="text-decoration:none" href="#/capabilities/software">Software &rarr;</a><a class="fchip" style="text-decoration:none" href="#/capabilities/ai-systems">AI Systems &rarr;</a></div></div></div>
-        <div class="cap-detail"><div class="side"><span class="k">QUESTIONS I ACTUALLY GET</span></div><div class="main"><div class="cp-faq"><details><summary>Do you hand off to engineers?</summary><p class="b">Usually there&rsquo;s nobody to hand off to &mdash; I build what I draw. When a client has their own developers, I ship specs and systems they can execute without me in the room.</p></details><details><summary>Figma only, or code?</summary><p class="b">Both, in sequence. The design exists to be built, and the build is how the design gets tested.</p></details><details><summary>How do you validate a design?</summary><p class="b">By shipping it to real users. A live product with real behaviour beats a hallway test with a clickable prototype.</p></details></div></div></div><div class="cap-detail"><div class="side"><span class="k">START</span></div><div class="main"><p class="b">Bring the problem &mdash; <a class="tlink" href="#/contact">start a project &rarr;</a></p></div></div>
-      </div>
-    </div></div><div class="page " data-route="/capabilities/software" data-title="cap-software"><div class="page-cap">
-      <div class="wrap page-head">
-        <div class="idx"><span class="kicker">CAPABILITY 03 / 08</span><span class="kicker">DESIGNED, BUILT &amp; SHIPPED END TO END</span></div>
-        <h1>Software</h1>
-        <p class="lede">Production software by the same pair of hands that designed it — from schema to interface.</p>
-        <p class="crumbs-top" style="margin-top:16px"><a class="tlink" href="#/capabilities">&larr; All capabilities</a></p>
-      </div>
-      <div class="wrap">
-        <div class="cap-detail" style="border-top:0"><div class="side"><span class="k">IN PRACTICE</span></div><div class="main"><div class="blk"><p class="b">The software practice is deliberately full-stack-of-one: Next.js portals, Python assistants, production sites — architected, built and shipped without a relay team. That only works because structure is treated as a design material: data models, access control and audit rules are designed, not improvised.</p></div><div class="blk"><p class="b">Relay is the reference build: a complete operations rebuild for an immigration firm — role-scoped data, an append-only audit trail enforced at the database level, working-days SLA clocks and an in-browser CRS calculator. The enforcement point is the schema, because UI rules get bypassed and constraints don’t.</p></div></div></div>
-        <div class="cap-detail"><div class="side"><span class="k">WHAT THAT INCLUDES</span></div><div class="main"><ul class="tags"><li>Next.js / Python builds</li><li>RBAC &amp; audit trails</li><li>Database-level enforcement</li><li>SLA &amp; working-days logic</li><li>Production deploys &amp; logs</li></ul></div></div>
-        <div class="cap-detail"><div class="side"><span class="k">THE NUMBERS</span></div><div class="main"><div class="cap-stats"><div><b>2</b><span>production assistants in daily use</span></div><div><b>0</b><span>handoffs between design and deploy</span></div><div><b>2am</b><span>the hour support still gets answered</span></div><div><b>100%</b><span>of this site, hand-built</span></div></div></div></div><div class="cap-detail"><div class="side"><span class="k">WHY IT MATTERS</span></div><div class="main"><div class="blk"><h3>The build is where design gets tested.</h3><p class="b">Software that ships behaves differently from software that demos. Building the product yourself means the design decisions are made with production in view &mdash; state handling, error paths, the boring code that keeps a thing running on a bad day.</p></div><div class="blk"><p class="b">The practice runs on the tools it sells: Biscuit AI (a Telegram assistant on OpenRouter with inspectable, erasable memory), Chef4Me (a Gemini-powered kitchen assistant), Relay (an operations portal whose audit trail the database itself enforces) &mdash; and this site, hash-routed, zero-dependency and served from the edge. All designed, built and operated by one pair of hands.</p></div></div></div><div class="cap-detail"><div class="side"><span class="k">WHAT I BUILD</span></div><div class="main"><div class="cap-svc"><span class="no">01</span><div><b>Production web apps</b><p class="b">Full-stack builds that go from schema to deployment &mdash; not prototypes that die at the demo.</p></div></div><div class="cap-svc"><span class="no">02</span><div><b>Telegram &amp; chat products</b><p class="b">Assistants that live where the user already is, wired to real model providers and real cost visibility.</p></div></div><div class="cap-svc"><span class="no">03</span><div><b>Internal tools &amp; portals</b><p class="b">The unglamorous software an operation actually runs on &mdash; pipelines, trackers, audit trails.</p></div></div><div class="cap-svc"><span class="no">04</span><div><b>Deployment &amp; operations</b><p class="b">DNS, hosting, logs and the 2am answer. The product is finished when it runs, not when the repo looks done.</p></div></div></div></div><div class="cap-detail"><div class="side"><span class="k">RELEVANT WORK</span></div><div class="main rel-work"><a class="arrow-row" href="#/work/relay"><span>Relay — operations portal (Next.js, RBAC, audit)</span><span>2024 &rarr;</span></a><a class="arrow-row" href="#/work/biscuit-ai"><span>Biscuit AI — Python assistant</span><span>2026 &rarr;</span></a><a class="arrow-row" href="#/work/olumayowa-nursing-home"><span>Olumayowa — designed, built &amp; shipped</span><span>2026 &rarr;</span></a></div></div>
-        <div class="cap-detail" style="border-top:0;padding-top:0"><div class="side"><span class="k">PROOF</span></div><div class="main"><div class="proof-strip"><div class="m"><b>APPEND-ONLY</b><span>AUDIT TRAIL ENFORCED AT DATABASE LEVEL</span></div><div class="m"><b>END TO END</b><span>ONE PAIR OF HANDS, SKETCH TO PRODUCTION LOGS</span></div></div></div></div>
-        <div class="cap-detail"><div class="side"><span class="k">RELATED</span></div><div class="main"><div class="filter-row" style="margin:0"><a class="fchip" style="text-decoration:none" href="#/capabilities/product-design">Product Design &rarr;</a><a class="fchip" style="text-decoration:none" href="#/capabilities/automation">Automation &rarr;</a></div></div></div>
-        <div class="cap-detail"><div class="side"><span class="k">QUESTIONS I ACTUALLY GET</span></div><div class="main"><div class="cp-faq"><details><summary>What&rsquo;s the stack?</summary><p class="b">Python for AI and automation, JavaScript for the web, whatever the deployment target demands. The stack is chosen per product, not per fashion.</p></details><details><summary>Who maintains it after launch?</summary><p class="b">I do &mdash; or your team does, with documentation written for humans. Maintenance is scoped at the start, not discovered in a crisis.</p></details><details><summary>Can you take over an existing codebase?</summary><p class="b">Yes. Relay was inherited mid-build. The audit-then-improve pattern is the same whether the mess is mine or not.</p></details></div></div></div><div class="cap-detail"><div class="side"><span class="k">START</span></div><div class="main"><p class="b">Bring the problem &mdash; <a class="tlink" href="#/contact">start a project &rarr;</a></p></div></div>
-      </div>
-    </div></div><div class="page " data-route="/capabilities/ai-systems" data-title="cap-ai-systems"><div class="page-cap">
-      <div class="wrap page-head">
-        <div class="idx"><span class="kicker">CAPABILITY 04 / 08</span><span class="kicker">ASSISTANTS · LITERACY · INTEGRATION</span></div>
-        <h1>AI Systems</h1>
-        <p class="lede">AI systems with memory you can inspect, costs you can see — and people trained to use them.</p>
-        <p class="crumbs-top" style="margin-top:16px"><a class="tlink" href="#/capabilities">&larr; All capabilities</a></p>
-      </div>
-      <div class="wrap">
-        <div class="cap-detail" style="border-top:0"><div class="side"><span class="k">IN PRACTICE</span></div><div class="main"><div class="blk"><p class="b">The AI work is production-first: assistants that run daily, not demos. Biscuit AI (OpenRouter) exposes layered memory that can be inspected and erased from inside the chat, with Tavily search, a local book library and cost visibility surfaced in the conversation. Chef4Me turns kitchen inventory into plain chat commands via Google Gemini.</p></div><div class="blk"><p class="b">Inside operations, the same thinking became infrastructure: an AI-assisted CRM spanning an 18-stage client pipeline, workflow automations and AI evaluation — plus a company-wide literacy programme so the vocabulary keeps up with the tooling.</p></div></div></div>
-        <div class="cap-detail"><div class="side"><span class="k">WHAT THAT INCLUDES</span></div><div class="main"><ul class="tags"><li>AI assistants (OpenRouter, Gemini)</li><li>Memory &amp; retrieval design</li><li>AI-assisted CRM &amp; pipelines</li><li>AI evaluation</li><li>AI literacy &amp; enablement</li></ul></div></div>
-        <div class="cap-detail"><div class="side"><span class="k">THE NUMBERS</span></div><div class="main"><div class="cap-stats"><div><b>2</b><span>production assistants, daily use</span></div><div><b>3</b><span>model providers wired in production</span></div><div><b>11</b><span>modules in the literacy programme</span></div><div><b>1</b><span>memory you can inspect and erase</span></div></div></div></div><div class="cap-detail"><div class="side"><span class="k">WHY IT MATTERS</span></div><div class="main"><div class="blk"><h3>AI that earns its place in the workflow.</h3><p class="b">Most AI features are demos wearing a lanyard. The test is harder: does the assistant survive month two, when the novelty is gone and only usefulness remains? That demands boring discipline &mdash; memory that behaves, costs that are visible, and answers you can check.</p></div><div class="blk"><p class="b">Biscuit AI&rsquo;s memory is structured in layers that can be opened, read and wiped from inside the chat itself &mdash; because trust in an assistant you can&rsquo;t inspect is misplaced. Chef4Me suggests meals from the live inventory through plain commands, because the interface cost of telling the truth about your kitchen has to be zero. Both are wired to real providers (OpenRouter, Google Gemini, Tavily) with costs surfaced, not hidden.</p></div></div></div><div class="cap-detail"><div class="side"><span class="k">WHAT I BUILD</span></div><div class="main"><div class="cap-svc"><span class="no">01</span><div><b>Assistant development</b><p class="b">Telegram-native assistants with layered memory, web search and cost visibility &mdash; in production, not in a pitch.</p></div></div><div class="cap-svc"><span class="no">02</span><div><b>AI integration</b><p class="b">Model wiring (OpenRouter, Gemini, Tavily) tuned per task: the right model at the right price for the right job.</p></div></div><div class="cap-svc"><span class="no">03</span><div><b>AI literacy programmes</b><p class="b">The eleven-module, company-wide programme delivered at Birdview &mdash; from first prompt to evaluation rubrics.</p></div></div><div class="cap-svc"><span class="no">04</span><div><b>AI evaluation</b><p class="b">Rubrics and monitoring that make model output a measurable thing, so quality is argued with data, not vibes.</p></div></div></div></div><div class="cap-detail"><div class="side"><span class="k">RELEVANT WORK</span></div><div class="main rel-work"><a class="arrow-row" href="#/work/biscuit-ai"><span>Biscuit AI — memory you can inspect and erase</span><span>2026 &rarr;</span></a><a class="arrow-row" href="#/work/chef4me"><span>Chef4Me — Gemini suggestion engine</span><span>2026 &rarr;</span></a><a class="arrow-row" href="#/work/ai-in-the-workplace"><span>AI in the Workplace — 11-module programme</span><span>2026 &rarr;</span></a></div></div>
-        <div class="cap-detail" style="border-top:0;padding-top:0"><div class="side"><span class="k">PROOF</span></div><div class="main"><div class="proof-strip"><div class="m"><b>18-STAGE</b><span>AI-ASSISTED CLIENT PIPELINE</span></div><div class="m"><b>250+</b><span>CLIENTS MANAGED THROUGH IT</span></div></div></div></div>
-        <div class="cap-detail"><div class="side"><span class="k">RELATED</span></div><div class="main"><div class="filter-row" style="margin:0"><a class="fchip" style="text-decoration:none" href="#/capabilities/training">Training &rarr;</a><a class="fchip" style="text-decoration:none" href="#/capabilities/automation">Automation &rarr;</a></div></div></div>
-        <div class="cap-detail"><div class="side"><span class="k">QUESTIONS I ACTUALLY GET</span></div><div class="main"><div class="cp-faq"><details><summary>Which models do you use?</summary><p class="b">Whichever the task demands: OpenRouter for multi-model routing, Google Gemini for the kitchen, Tavily for search. Provider choice is an engineering decision, not a sponsorship.</p></details><details><summary>How do you handle running costs?</summary><p class="b">Costs are surfaced inside the product itself. Usage should be a decision, never a surprise on an invoice.</p></details><details><summary>Can you train our team on it?</summary><p class="b">Yes &mdash; an eleven-module literacy programme has already run company-wide. Training is a capability, not an afterthought.</p></details></div></div></div><div class="cap-detail"><div class="side"><span class="k">START</span></div><div class="main"><p class="b">Bring the problem &mdash; <a class="tlink" href="#/contact">start a project &rarr;</a></p></div></div>
-      </div>
-    </div></div><div class="page " data-route="/capabilities/automation" data-title="cap-automation"><div class="page-cap">
-      <div class="wrap page-head">
-        <div class="idx"><span class="kicker">CAPABILITY 05 / 08</span><span class="kicker">WORKFLOWS · PIPELINES · SLAS</span></div>
-        <h1>Automation</h1>
-        <p class="lede">Automation built from inside real operations — the systems that keep the work moving.</p>
-        <p class="crumbs-top" style="margin-top:16px"><a class="tlink" href="#/capabilities">&larr; All capabilities</a></p>
-      </div>
-      <div class="wrap">
-        <div class="cap-detail" style="border-top:0"><div class="side"><span class="k">IN PRACTICE</span></div><div class="main"><div class="blk"><p class="b">Four years inside financial-services operations is where this discipline was trained: at Leadway Pensure, building the systems that moved 10,000+ clients to self-service — process first, tooling second.</p></div><div class="blk"><p class="b">The same approach carried into Birdview: workflow automations and process documentation across an 18-stage client pipeline, and into Relay, where working-days SLA clocks count the same calendar the authority does. The test for every automation is simple — does the system enforce what process used to hope for?</p></div></div></div>
-        <div class="cap-detail"><div class="side"><span class="k">WHAT THAT INCLUDES</span></div><div class="main"><ul class="tags"><li>Workflow &amp; pipeline automation</li><li>Process documentation</li><li>SLA &amp; working-days systems</li><li>Self-service migration</li><li>Operations tooling</li></ul></div></div>
-        <div class="cap-detail"><div class="side"><span class="k">THE NUMBERS</span></div><div class="main"><div class="cap-stats"><div><b>18</b><span>stages in one live client pipeline</span></div><div><b>250+</b><span>clients managed on the system</span></div><div><b>10,000+</b><span>end-clients moved to self-service</span></div><div><b>4 yrs</b><span>running the ops, not just visiting</span></div></div></div></div><div class="cap-detail"><div class="side"><span class="k">WHY IT MATTERS</span></div><div class="main"><div class="blk"><h3>Automation that operations actually keeps.</h3><p class="b">Automation built by visitors gets deleted by operators. The builds that last are designed by people who have run the process themselves &mdash; who know which step the team skips on a Friday and which exception the spreadsheet was quietly absorbing for years.</p></div><div class="blk"><p class="b">Four years inside the operations of one of Nigeria&rsquo;s largest pension funds built the reflex: before automating a process, run it. The results are still live &mdash; 10,000+ end-clients moved to self-service channels, and at Birdview an AI-assisted CRM spanning an 18-stage client pipeline carrying 250+ clients, with the process documentation and audit trails an operation needs to trust it.</p></div></div></div><div class="cap-detail"><div class="side"><span class="k">WHAT I BUILD</span></div><div class="main"><div class="cap-svc"><span class="no">01</span><div><b>Workflow automation</b><p class="b">The repetitive paths an operation walks daily &mdash; automated with the team&rsquo;s habits in view, not against them.</p></div></div><div class="cap-svc"><span class="no">02</span><div><b>CRM &amp; pipeline systems</b><p class="b">Stage-driven client pipelines with the data model doing the enforcement, not the discipline of the staff.</p></div></div><div class="cap-svc"><span class="no">03</span><div><b>Process documentation</b><p class="b">The written system behind the built system &mdash; so the operation survives any single person&rsquo;s absence.</p></div></div><div class="cap-svc"><span class="no">04</span><div><b>Audit trails &amp; data hygiene</b><p class="b">Records the database itself enforces, so the question &ldquo;who changed this, and when?&rdquo; always has an answer.</p></div></div></div></div><div class="cap-detail"><div class="side"><span class="k">RELEVANT WORK</span></div><div class="main rel-work"><a class="arrow-row" href="#/work/relay"><span>Relay — SLA clocks &amp; enforced audit</span><span>2024 &rarr;</span></a><a class="arrow-row" href="#/work/ai-in-the-workplace"><span>Birdview — process &amp; AI systems</span><span>2026 &rarr;</span></a></div></div>
-        <div class="cap-detail" style="border-top:0;padding-top:0"><div class="side"><span class="k">PROOF</span></div><div class="main"><div class="proof-strip"><div class="m"><b>10,000+</b><span>CLIENTS MOVED TO SELF-SERVICE</span></div><div class="m"><b>18-STAGE</b><span>PIPELINE SYSTEMATISED &amp; DOCUMENTED</span></div></div></div></div>
-        <div class="cap-detail"><div class="side"><span class="k">RELATED</span></div><div class="main"><div class="filter-row" style="margin:0"><a class="fchip" style="text-decoration:none" href="#/capabilities/software">Software &rarr;</a><a class="fchip" style="text-decoration:none" href="#/capabilities/ai-systems">AI Systems &rarr;</a></div></div></div>
-        <div class="cap-detail"><div class="side"><span class="k">QUESTIONS I ACTUALLY GET</span></div><div class="main"><div class="cp-faq"><details><summary>Do you automate broken processes?</summary><p class="b">No &mdash; automating a broken process just breaks faster. The process gets repaired first, then the software carries it.</p></details><details><summary>What tools do you build on?</summary><p class="b">Whatever the operation already runs, extended where needed. The tool is chosen for the team, not the résumé.</p></details><details><summary>Who owns the system after you leave?</summary><p class="b">You do, with the documentation to prove it. Dependency is a design failure, not a business model.</p></details></div></div></div><div class="cap-detail"><div class="side"><span class="k">START</span></div><div class="main"><p class="b">Bring the problem &mdash; <a class="tlink" href="#/contact">start a project &rarr;</a></p></div></div>
-      </div>
-    </div></div><div class="page " data-route="/capabilities/creative-direction" data-title="cap-creative-direction"><div class="page-cap">
-      <div class="wrap page-head">
-        <div class="idx"><span class="kicker">CAPABILITY 06 / 08</span><span class="kicker">ART DIRECTION · IMAGE · VIDEO · MUSIC</span></div>
-        <h1>Creative Direction</h1>
-        <p class="lede">Before the software there was music and image — the foundation everything else stands on.</p>
-        <p class="crumbs-top" style="margin-top:16px"><a class="tlink" href="#/capabilities">&larr; All capabilities</a></p>
-      </div>
-      <div class="wrap">
-        <div class="cap-detail" style="border-top:0"><div class="side"><span class="k">IN PRACTICE</span></div><div class="main"><div class="blk"><p class="b">Creative direction is the oldest layer of the practice: photographic worlds and type systems built per release, no templates. EPKs for artists (Skaame, Layo Isaac), a self-directed brand under the Blvck Oreo name, and web3 music-and-culture work (1ETHFP) — cover art, press photography, promo film and merch drawn from one mark.</p></div><div class="blk"><p class="b">It never left. The same eye now runs through the product work — composition, hierarchy, restraint — and the sound system on this site is the live version of it.</p></div></div></div>
-        <div class="cap-detail"><div class="side"><span class="k">WHAT THAT INCLUDES</span></div><div class="main"><ul class="tags"><li>Art direction &amp; image worlds</li><li>EPKs &amp; press kits</li><li>Promo film — cut to the beat</li><li>Music production (Blvck Oreo)</li><li>Merch &amp; identity surfaces</li></ul></div></div>
-        <div class="cap-detail"><div class="side"><span class="k">THE NUMBERS</span></div><div class="main"><div class="cap-stats"><div><b>2</b><span>EP releases, creative-lead to release</span></div><div><b>6+</b><span>cover artworks in the archive</span></div><div><b>2</b><span>films shot, cut and scored</span></div><div><b>10</b><span>tracks streaming from this site</span></div></div></div></div><div class="cap-detail"><div class="side"><span class="k">WHY IT MATTERS</span></div><div class="main"><div class="blk"><h3>Image is a brand asset, not decoration.</h3><p class="b">Creative direction is deciding what a body of work says before anyone decides what it looks like. The practice was trained in music &mdash; where the image has to carry the sound and release is a deadline, not a suggestion &mdash; and that discipline carries into every brand project.</p></div><div class="blk"><p class="b">The archive proves the range: two EPs creative-lead, co-produced and released (Bedroom Recordings II with YE!!OWSOUL; Visitor from Mars with The Beatoven), a four-single cover-art series where each cover is a world for its record, and a commissioned round-up film for Leadway&rsquo;s Customer Service Week 2024 &mdash; shot, directed, cut and scored by one pair of hands.</p></div></div></div><div class="cap-detail"><div class="side"><span class="k">WHAT I BUILD</span></div><div class="main"><div class="cap-svc"><span class="no">01</span><div><b>Art direction</b><p class="b">The through-line for a body of work &mdash; the one idea every asset obeys.</p></div></div><div class="cap-svc"><span class="no">02</span><div><b>Film</b><p class="b">Shot, produced, directed, cut and scored end to end &mdash; promo films and round-ups that carry a brand&rsquo;s voice in motion.</p></div></div><div class="cap-svc"><span class="no">03</span><div><b>Music release packages</b><p class="b">Cover art, tracklists and rollout rhythm for records &mdash; from cassette sleeve to streaming.</p></div></div><div class="cap-svc"><span class="no">04</span><div><b>Campaign visuals</b><p class="b">Key art and image systems that hold a campaign together across formats.</p></div></div></div></div><div class="cap-detail"><div class="side"><span class="k">RELEVANT WORK</span></div><div class="main rel-work"><a class="arrow-row" href="#/work/skaame"><span>Skaame — artist web EPK &amp; promo film</span><span>2024 &rarr;</span></a><a class="arrow-row" href="#/work/layo-isaac"><span>Layo Isaac — artist EPK</span><span>2024 &rarr;</span></a><a class="arrow-row" href="#/work/blvckoreo"><span>BlvckOreo — brand, music, merch</span><span>2023 &rarr;</span></a><a class="arrow-row" href="#/work/1ethfp"><span>1ETHFP — web3 creative collaboration</span><span>2024 &rarr;</span></a></div></div>
-        <div class="cap-detail" style="border-top:0;padding-top:0"><div class="side"><span class="k">PROOF</span></div><div class="main"><div class="cp-quote" style="margin-top:32px"><blockquote>&ldquo;These designs were exactly what I needed. It’s rare to be able to describe what I want and have someone actually deliver that.&rdquo;</blockquote><cite>SKAAME — ARTIST</cite></div></div></div>
-        <div class="cap-detail"><div class="side"><span class="k">RELATED</span></div><div class="main"><div class="filter-row" style="margin:0"><a class="fchip" style="text-decoration:none" href="#/capabilities/brand-identity">Brand Identity &rarr;</a><a class="fchip" style="text-decoration:none" href="#/capabilities/graphic-design">Graphic Design &rarr;</a></div></div></div>
-        <div class="cap-detail"><div class="side"><span class="k">QUESTIONS I ACTUALLY GET</span></div><div class="main"><div class="cp-faq"><details><summary>Do you shoot the footage yourself?</summary><p class="b">Yes &mdash; the CSW 2024 film was shot on site, b-roll included, then cut and scored in-house. One pair of hands, start to finish.</p></details><details><summary>Music production too?</summary><p class="b">Yes &mdash; co-production credits on two released EPs. The sound system on this site streams the real masters.</p></details><details><summary>One-off or series?</summary><p class="b">Series thinking, wherever possible &mdash; four singles became a cover-art series because a world per record is stronger than a picture per track.</p></details></div></div></div><div class="cap-detail"><div class="side"><span class="k">START</span></div><div class="main"><p class="b">Bring the problem &mdash; <a class="tlink" href="#/contact">start a project &rarr;</a></p></div></div>
-      </div>
-    </div></div><div class="page " data-route="/capabilities/graphic-design" data-title="cap-graphic-design"><div class="page-cap">
-      <div class="wrap page-head">
-        <div class="idx"><span class="kicker">CAPABILITY 07 / 08</span><span class="kicker">COVER ART · EDITORIAL · COMPOSITION</span></div>
-        <h1>Graphic Design</h1>
-        <p class="lede">The craft under every project — cover artwork, press photography and illustration as primary material.</p>
-        <p class="crumbs-top" style="margin-top:16px"><a class="tlink" href="#/capabilities">&larr; All capabilities</a></p>
-      </div>
-      <div class="wrap">
-        <div class="cap-detail" style="border-top:0"><div class="side"><span class="k">IN PRACTICE</span></div><div class="main"><div class="blk"><p class="b">Graphic design is treated as a first-class output, not a service tier: cover artwork and illustration as primary material, editorial composition that carries dense information without noise, and typography (Archivo + IBM Plex Mono) used as an engineered voice.</p></div><div class="blk"><p class="b">It shows up everywhere — EPK pages, cover art, the identity system this site itself runs on — always in service of the work, never as decoration.</p></div></div></div>
-        <div class="cap-detail"><div class="side"><span class="k">WHAT THAT INCLUDES</span></div><div class="main"><ul class="tags"><li>Cover artwork &amp; illustration</li><li>Editorial composition</li><li>Press photography direction</li><li>Typography systems</li></ul></div></div>
-        <div class="cap-detail"><div class="side"><span class="k">THE NUMBERS</span></div><div class="main"><div class="cap-stats"><div><b>4</b><span>singles, four worlds, one series</span></div><div><b>2</b><span>physical release packages designed</span></div><div><b>1</b><span>training deck from scratch</span></div><div><b>&infin;</b><span>the grid that keeps it honest</span></div></div></div></div><div class="cap-detail"><div class="side"><span class="k">WHY IT MATTERS</span></div><div class="main"><div class="blk"><h3>Composition is the oldest craft in the room.</h3><p class="b">Every capability on this site stands on this one. Cover art, editorial layout, deck design &mdash; the discipline of making information carry feeling without losing clarity. It was the first skill, and it never left.</p></div><div class="blk"><p class="b">Recent proof: the Bedroom Recordings II cassette and tracklist package, the four-single cover series for Blvck Oreo (each cover a self-contained world for its record), the lyric and promo videos for Gen.Sadiq&rsquo;s Maradonna &mdash; signed off by the artist and his manager in the first round &mdash; and The Basics of Graphic Design, a training deck that teaches the craft itself.</p></div></div></div><div class="cap-detail"><div class="side"><span class="k">WHAT I BUILD</span></div><div class="main"><div class="cap-svc"><span class="no">01</span><div><b>Cover art &amp; packaging</b><p class="b">Single covers, cassette sleeves and tracklists &mdash; the artwork a record deserves, print-ready.</p></div></div><div class="cap-svc"><span class="no">02</span><div><b>Editorial &amp; decks</b><p class="b">Pitch decks and training material composed to be followed, not admired &mdash; the Leadway pitch is the flagship.</p></div></div><div class="cap-svc"><span class="no">03</span><div><b>Promo &amp; lyric visuals</b><p class="b">Beat-locked promo films and lyric videos built for release day, not just the archive.</p></div></div><div class="cap-svc"><span class="no">04</span><div><b>Archive &amp; systems</b><p class="b">Cover series designed to compound &mdash; each new release extending the world, not restarting it.</p></div></div></div></div><div class="cap-detail"><div class="side"><span class="k">RELEVANT WORK</span></div><div class="main rel-work"><a class="arrow-row" href="#/work/blvckoreo"><span>BlvckOreo — cover art &amp; identity</span><span>2023 &rarr;</span></a><a class="arrow-row" href="#/work/visitor-from-mars"><span>Visitor from Mars — creative lead &amp; director</span><span>2021 &rarr;</span></a><a class="arrow-row" href="#/work/skaame"><span>Skaame — EPK composition</span><span>2024 &rarr;</span></a><a class="arrow-row" href="#/work/bedroom-recordings-ii"><span>Bedroom Recordings II — cassette artwork</span><span>2025 &rarr;</span></a><a class="arrow-row" href="#/work/singles-cover-art"><span>Singles &amp; Cover Art — cover series</span><span>2023–25 &rarr;</span></a><a class="arrow-row" href="#/work/gen-sadiq"><span>Gen.Sadiq — Maradonna cover &amp; film</span><span>2023–25 &rarr;</span></a><a class="arrow-row" href="#/work/visitor-from-mars"><span>Visitor from Mars — tape artwork &amp; release</span><span>2021 &rarr;</span></a></div></div>
         
+        <section class="cap-sec" aria-label="Questions">
+          <span class="kicker">QUESTIONS I ACTUALLY GET</span>
+          <div class="cp-faq"><details><summary>Do you do logo-only work?</summary><p class="b">Rarely. A logo without the system around it can&rsquo;t hold up in use &mdash; and use is the whole point. Small scope, yes; shallow scope, no.</p></details><details><summary>Can you work inside an existing identity?</summary><p class="b">Yes. Several engagements extend or repair an existing system &mdash; auditing what&rsquo;s there, standardising what drifted, specifying what&rsquo;s missing.</p></details><details><summary>What does &ldquo;shipped with the product&rdquo; mean?</summary><p class="b">The identity is delivered in the medium it lives in &mdash; live web documents, working templates, production files &mdash; not a PDF that dies in a drawer.</p></details></div></div>
+        </section>
+
+        <section class="cap-close" aria-label="Start">
+          <p class="cap-close-h">Bring the identity problem. Leave with the system.</p>
+          <a class="cap-btn" href="#/contact">START A PROJECT &rarr;</a>
+        </section>
+      </div></div></div><div class="page " data-route="/capabilities/product-design" data-title="cap-product-design"><div class="page-cap"><div class="wrap">
+        <div class="cap-hero">
+          <p class="crumbs-top"><a class="tlink" href="#/capabilities">&larr; All capabilities</a></p>
+          <div class="idx"><span class="kicker">CAPABILITY 02 / 08 &mdash; INTERFACES · WEB APPS · TOOLS</span></div>
+          <h1 class="cap-hero-h"><em>Designed to be</em> shipped, not framed.</h1>
+          <p class="cap-sub">Product design fails in the gap between the drawing and the build. Here there is no gap: the person who designs the interface writes the code that renders it, so every decision survives contact with production.</p>
+          <a class="cap-cta" href="#/contact">BOOK A DISCOVERY CALL <span class="arr">&rarr;</span></a>
+        </div>
+
+        <section class="cap-sec" aria-label="The numbers">
+          <span class="kicker">THE NUMBERS</span>
+          <div class="cap-stats"><div><b>3</b><span>products designed &amp; shipped solo</span></div><div><b>1</b><span>site a patient scans in seconds</span></div><div><b>40+</b><span>cuisines in a suggestion UI</span></div><div><b>18</b><span>stages of pipeline made navigable</span></div></div>
+        </section>
+
+        <section class="cap-sec" aria-label="Why it matters">
+          <span class="kicker">WHY IT MATTERS</span>
+          <h2 class="cap-state-h"><em>Mockups that can&rsquo;t be built</em> don&rsquo;t leave the sketchbook.</h2>
+          <div class="cap-cols">
+            <p class="b">Product design fails in the gap between the drawing and the build. Here there is no gap: the person who designs the interface writes the code that renders it, so every decision survives contact with production. Mockups that can&rsquo;t be built don&rsquo;t leave the sketchbook.</p>
+            <p class="b">The proof runs live: a Telegram assistant whose layered memory you can inspect and erase, an AI kitchen companion that inventories your kitchen through plain chat, a healthcare site six services deep that a patient can scan in seconds. Each one was designed, built and shipped by the same pair of hands &mdash; and each one behaves in production exactly as drawn.</p>
+          </div>
+          <div class="cap-ctarow">
+            <a class="cap-btn" href="#/contact">BOOK A DISCOVERY CALL</a>
+            <a class="cap-cta" href="#/work">VIEW THE WORK <span class="arr">&rarr;</span></a>
+          </div>
+        </section>
+
+        <section class="cap-sec" aria-label="What I build">
+          <div class="cap-center">
+            <span class="kicker">WHAT I BUILD</span>
+            <h2 class="cap-state-h"><em>What I build</em> when the interface has to ship.</h2>
+          </div>
+          <div class="cap-cards"><div class="cap-svc"><span class="no">01</span><div><b>Product interface design</b><p class="b">Dashboards, tools and app UI &mdash; designed for the decision the user has to make in under thirty seconds.</p></div></div><div class="cap-svc"><span class="no">02</span><div><b>Marketing &amp; client sites</b><p class="b">Single-purpose sites built to carry one message cleanly &mdash; then deployed, not just delivered.</p></div></div><div class="cap-svc"><span class="no">03</span><div><b>Conversational UX</b><p class="b">Telegram-first products where the chat is the interface: no forms, no dashboards, just conversation.</p></div></div><div class="cap-svc"><span class="no">04</span><div><b>Design systems &amp; specs</b><p class="b">Tokens, components and states documented tightly enough that even a future you can&rsquo;t get it wrong.</p></div></div></div>
+        </section>
+
+        <section class="cap-sec" aria-label="Relevant work">
+          <div class="cap-center">
+            <span class="kicker">RELEVANT WORK</span>
+            <h2 class="cap-state-h"><em>Shipped</em> proof.</h2>
+          </div>
+          <div class="rel-work"><a class="arrow-row" href="#/work/biscuit-ai"><span>Biscuit AI — Telegram assistant</span><span>2026 &rarr;</span></a><a class="arrow-row" href="#/work/chef4me"><span>Chef4Me — kitchen assistant</span><span>2026 &rarr;</span></a><a class="arrow-row" href="#/work/olumayowa-nursing-home"><span>Olumayowa Nursing Home — healthcare site</span><span>2026 &rarr;</span></a><a class="arrow-row" href="#/work/relay"><span>Relay — operations portal</span><span>2024 &rarr;</span></a></div>
+        </section>
+
+        <div class="cap-detail" style="border-top:0;padding-top:0"><div class="side"><span class="k">PROOF</span></div><div class="main"><div class="proof-strip"><div class="m"><b>6+</b><span>PROJECTS DESIGNED &amp; SHIPPED END TO END</span></div><div class="m"><b>0</b><span>HANDOFFS — DESIGN AND BUILD ARE THE SAME PAIR OF HANDS</span></div></div></div></div>
+        
+        <div class="cap-detail"><div class="side"><span class="k">RELATED</span></div><div class="main"><div class="filter-row" style="margin:0"><a class="fchip" style="text-decoration:none" href="#/capabilities/software">Software &rarr;</a><a class="fchip" style="text-decoration:none" href="#/capabilities/ai-systems">AI Systems &rarr;</a></div></div></div>
+        
+        <section class="cap-sec" aria-label="Questions">
+          <span class="kicker">QUESTIONS I ACTUALLY GET</span>
+          <div class="cp-faq"><details><summary>Do you hand off to engineers?</summary><p class="b">Usually there&rsquo;s nobody to hand off to &mdash; I build what I draw. When a client has their own developers, I ship specs and systems they can execute without me in the room.</p></details><details><summary>Figma only, or code?</summary><p class="b">Both, in sequence. The design exists to be built, and the build is how the design gets tested.</p></details><details><summary>How do you validate a design?</summary><p class="b">By shipping it to real users. A live product with real behaviour beats a hallway test with a clickable prototype.</p></details></div></div>
+        </section>
+
+        <section class="cap-close" aria-label="Start">
+          <p class="cap-close-h">Bring the interface problem. Leave with a live URL.</p>
+          <a class="cap-btn" href="#/contact">START A PROJECT &rarr;</a>
+        </section>
+      </div></div></div><div class="page " data-route="/capabilities/software" data-title="cap-software"><div class="page-cap"><div class="wrap">
+        <div class="cap-hero">
+          <p class="crumbs-top"><a class="tlink" href="#/capabilities">&larr; All capabilities</a></p>
+          <div class="idx"><span class="kicker">CAPABILITY 03 / 08 &mdash; DESIGNED, BUILT &amp; SHIPPED END TO END</span></div>
+          <h1 class="cap-hero-h"><em>Designed, built and shipped</em> by one pair of hands.</h1>
+          <p class="cap-sub">Production software by the same pair of hands that designed it &mdash; from schema to interface to deploy. No handoffs where intent dies, and no version of the product that exists only in a mockup.</p>
+          <a class="cap-cta" href="#/contact">BOOK A DISCOVERY CALL <span class="arr">&rarr;</span></a>
+        </div>
+
+        <section class="cap-sec" aria-label="The numbers">
+          <span class="kicker">THE NUMBERS</span>
+          <div class="cap-stats"><div><b>2</b><span>production assistants in daily use</span></div><div><b>0</b><span>handoffs between design and deploy</span></div><div><b>2am</b><span>the hour support still gets answered</span></div><div><b>100%</b><span>of this site, hand-built</span></div></div>
+        </section>
+
+        <section class="cap-sec" aria-label="Why it matters">
+          <span class="kicker">WHY IT MATTERS</span>
+          <h2 class="cap-state-h"><em>The build</em> is where design gets tested.</h2>
+          <div class="cap-cols">
+            <p class="b">Software that ships behaves differently from software that demos. Building the product yourself means the design decisions are made with production in view &mdash; state handling, error paths, the boring code that keeps a thing running on a bad day.</p>
+            <p class="b">The practice runs on the tools it sells: Biscuit AI (a Telegram assistant on OpenRouter with inspectable, erasable memory), Chef4Me (a Gemini-powered kitchen assistant), Relay (an operations portal whose audit trail the database itself enforces) &mdash; and this site, hash-routed, zero-dependency and served from the edge. All designed, built and operated by one pair of hands.</p>
+          </div>
+          <div class="cap-ctarow">
+            <a class="cap-btn" href="#/contact">BOOK A DISCOVERY CALL</a>
+            <a class="cap-cta" href="#/work">VIEW THE WORK <span class="arr">&rarr;</span></a>
+          </div>
+        </section>
+
+        <section class="cap-sec" aria-label="What I build">
+          <div class="cap-center">
+            <span class="kicker">WHAT I BUILD</span>
+            <h2 class="cap-state-h"><em>What I build</em> when it has to run.</h2>
+          </div>
+          <div class="cap-cards"><div class="cap-svc"><span class="no">01</span><div><b>Production web apps</b><p class="b">Full-stack builds that go from schema to deployment &mdash; not prototypes that die at the demo.</p></div></div><div class="cap-svc"><span class="no">02</span><div><b>Telegram &amp; chat products</b><p class="b">Assistants that live where the user already is, wired to real model providers and real cost visibility.</p></div></div><div class="cap-svc"><span class="no">03</span><div><b>Internal tools &amp; portals</b><p class="b">The unglamorous software an operation actually runs on &mdash; pipelines, trackers, audit trails.</p></div></div><div class="cap-svc"><span class="no">04</span><div><b>Deployment &amp; operations</b><p class="b">DNS, hosting, logs and the 2am answer. The product is finished when it runs, not when the repo looks done.</p></div></div></div>
+        </section>
+
+        <section class="cap-sec" aria-label="Relevant work">
+          <div class="cap-center">
+            <span class="kicker">RELEVANT WORK</span>
+            <h2 class="cap-state-h"><em>Shipped</em> proof.</h2>
+          </div>
+          <div class="rel-work"><a class="arrow-row" href="#/work/relay"><span>Relay — operations portal (Next.js, RBAC, audit)</span><span>2024 &rarr;</span></a><a class="arrow-row" href="#/work/biscuit-ai"><span>Biscuit AI — Python assistant</span><span>2026 &rarr;</span></a><a class="arrow-row" href="#/work/olumayowa-nursing-home"><span>Olumayowa — designed, built &amp; shipped</span><span>2026 &rarr;</span></a></div>
+        </section>
+
+        <div class="cap-detail" style="border-top:0;padding-top:0"><div class="side"><span class="k">PROOF</span></div><div class="main"><div class="proof-strip"><div class="m"><b>APPEND-ONLY</b><span>AUDIT TRAIL ENFORCED AT DATABASE LEVEL</span></div><div class="m"><b>END TO END</b><span>ONE PAIR OF HANDS, SKETCH TO PRODUCTION LOGS</span></div></div></div></div>
+        
+        <div class="cap-detail"><div class="side"><span class="k">RELATED</span></div><div class="main"><div class="filter-row" style="margin:0"><a class="fchip" style="text-decoration:none" href="#/capabilities/product-design">Product Design &rarr;</a><a class="fchip" style="text-decoration:none" href="#/capabilities/automation">Automation &rarr;</a></div></div></div>
+        
+        <section class="cap-sec" aria-label="Questions">
+          <span class="kicker">QUESTIONS I ACTUALLY GET</span>
+          <div class="cp-faq"><details><summary>What&rsquo;s the stack?</summary><p class="b">Python for AI and automation, JavaScript for the web, whatever the deployment target demands. The stack is chosen per product, not per fashion.</p></details><details><summary>Who maintains it after launch?</summary><p class="b">I do &mdash; or your team does, with documentation written for humans. Maintenance is scoped at the start, not discovered in a crisis.</p></details><details><summary>Can you take over an existing codebase?</summary><p class="b">Yes. Relay was inherited mid-build. The audit-then-improve pattern is the same whether the mess is mine or not.</p></details></div></div>
+        </section>
+
+        <section class="cap-close" aria-label="Start">
+          <p class="cap-close-h">Bring the spec &mdash; or just the problem.</p>
+          <a class="cap-btn" href="#/contact">START A PROJECT &rarr;</a>
+        </section>
+      </div></div></div><div class="page " data-route="/capabilities/ai-systems" data-title="cap-ai-systems"><div class="page-cap"><div class="wrap">
+        <div class="cap-hero">
+          <p class="crumbs-top"><a class="tlink" href="#/capabilities">&larr; All capabilities</a></p>
+          <div class="idx"><span class="kicker">CAPABILITY 04 / 08 &mdash; ASSISTANTS · LITERACY · INTEGRATION</span></div>
+          <h1 class="cap-hero-h"><em>AI that earns</em> its place in the workflow.</h1>
+          <p class="cap-sub">Assistants with memory you can inspect and costs you can see &mdash; wired to real providers, in production, not in a pitch. Plus the literacy that makes them stick after the build is gone.</p>
+          <a class="cap-cta" href="#/contact">BOOK A DISCOVERY CALL <span class="arr">&rarr;</span></a>
+        </div>
+
+        <section class="cap-sec" aria-label="The numbers">
+          <span class="kicker">THE NUMBERS</span>
+          <div class="cap-stats"><div><b>2</b><span>production assistants, daily use</span></div><div><b>3</b><span>model providers wired in production</span></div><div><b>11</b><span>modules in the literacy programme</span></div><div><b>1</b><span>memory you can inspect and erase</span></div></div>
+        </section>
+
+        <section class="cap-sec" aria-label="Why it matters">
+          <span class="kicker">WHY IT MATTERS</span>
+          <h2 class="cap-state-h"><em>Trust in an assistant</em> you can&rsquo;t inspect is misplaced.</h2>
+          <div class="cap-cols">
+            <p class="b">Most AI features are demos wearing a lanyard. The test is harder: does the assistant survive month two, when the novelty is gone and only usefulness remains? That demands boring discipline &mdash; memory that behaves, costs that are visible, and answers you can check.</p>
+            <p class="b">Biscuit AI&rsquo;s memory is structured in layers that can be opened, read and wiped from inside the chat itself &mdash; because trust in an assistant you can&rsquo;t inspect is misplaced. Chef4Me suggests meals from the live inventory through plain commands, because the interface cost of telling the truth about your kitchen has to be zero. Both are wired to real providers (OpenRouter, Google Gemini, Tavily) with costs surfaced, not hidden.</p>
+          </div>
+          <div class="cap-ctarow">
+            <a class="cap-btn" href="#/contact">BOOK A DISCOVERY CALL</a>
+            <a class="cap-cta" href="#/work">VIEW THE WORK <span class="arr">&rarr;</span></a>
+          </div>
+        </section>
+
+        <section class="cap-sec" aria-label="What I build">
+          <div class="cap-center">
+            <span class="kicker">WHAT I BUILD</span>
+            <h2 class="cap-state-h"><em>What I build</em> when AI has to earn trust.</h2>
+          </div>
+          <div class="cap-cards"><div class="cap-svc"><span class="no">01</span><div><b>Assistant development</b><p class="b">Telegram-native assistants with layered memory, web search and cost visibility &mdash; in production, not in a pitch.</p></div></div><div class="cap-svc"><span class="no">02</span><div><b>AI integration</b><p class="b">Model wiring (OpenRouter, Gemini, Tavily) tuned per task: the right model at the right price for the right job.</p></div></div><div class="cap-svc"><span class="no">03</span><div><b>AI literacy programmes</b><p class="b">The eleven-module, company-wide programme delivered at Birdview &mdash; from first prompt to evaluation rubrics.</p></div></div><div class="cap-svc"><span class="no">04</span><div><b>AI evaluation</b><p class="b">Rubrics and monitoring that make model output a measurable thing, so quality is argued with data, not vibes.</p></div></div></div>
+        </section>
+
+        <section class="cap-sec" aria-label="Relevant work">
+          <div class="cap-center">
+            <span class="kicker">RELEVANT WORK</span>
+            <h2 class="cap-state-h"><em>Shipped</em> proof.</h2>
+          </div>
+          <div class="rel-work"><a class="arrow-row" href="#/work/biscuit-ai"><span>Biscuit AI — memory you can inspect and erase</span><span>2026 &rarr;</span></a><a class="arrow-row" href="#/work/chef4me"><span>Chef4Me — Gemini suggestion engine</span><span>2026 &rarr;</span></a><a class="arrow-row" href="#/work/ai-in-the-workplace"><span>AI in the Workplace — 11-module programme</span><span>2026 &rarr;</span></a></div>
+        </section>
+
+        <div class="cap-detail" style="border-top:0;padding-top:0"><div class="side"><span class="k">PROOF</span></div><div class="main"><div class="proof-strip"><div class="m"><b>18-STAGE</b><span>AI-ASSISTED CLIENT PIPELINE</span></div><div class="m"><b>250+</b><span>CLIENTS MANAGED THROUGH IT</span></div></div></div></div>
+        
+        <div class="cap-detail"><div class="side"><span class="k">RELATED</span></div><div class="main"><div class="filter-row" style="margin:0"><a class="fchip" style="text-decoration:none" href="#/capabilities/training">Training &rarr;</a><a class="fchip" style="text-decoration:none" href="#/capabilities/automation">Automation &rarr;</a></div></div></div>
+        
+        <section class="cap-sec" aria-label="Questions">
+          <span class="kicker">QUESTIONS I ACTUALLY GET</span>
+          <div class="cp-faq"><details><summary>Which models do you use?</summary><p class="b">Whichever the task demands: OpenRouter for multi-model routing, Google Gemini for the kitchen, Tavily for search. Provider choice is an engineering decision, not a sponsorship.</p></details><details><summary>How do you handle running costs?</summary><p class="b">Costs are surfaced inside the product itself. Usage should be a decision, never a surprise on an invoice.</p></details><details><summary>Can you train our team on it?</summary><p class="b">Yes &mdash; an eleven-module literacy programme has already run company-wide. Training is a capability, not an afterthought.</p></details></div></div>
+        </section>
+
+        <section class="cap-close" aria-label="Start">
+          <p class="cap-close-h">Bring the workflow. The assistant earns the rest.</p>
+          <a class="cap-btn" href="#/contact">START A PROJECT &rarr;</a>
+        </section>
+      </div></div></div><div class="page " data-route="/capabilities/automation" data-title="cap-automation"><div class="page-cap"><div class="wrap">
+        <div class="cap-hero">
+          <p class="crumbs-top"><a class="tlink" href="#/capabilities">&larr; All capabilities</a></p>
+          <div class="idx"><span class="kicker">CAPABILITY 05 / 08 &mdash; WORKFLOWS · PIPELINES · SLAS</span></div>
+          <h1 class="cap-hero-h"><em>Built inside operations,</em> not above them.</h1>
+          <p class="cap-sub">Automation built from inside real operations &mdash; workflows, pipelines and SLAs that keep the work moving. Proven on 250+ live clients, run for four years, not just visited.</p>
+          <a class="cap-cta" href="#/contact">BOOK A DISCOVERY CALL <span class="arr">&rarr;</span></a>
+        </div>
+
+        <section class="cap-sec" aria-label="The numbers">
+          <span class="kicker">THE NUMBERS</span>
+          <div class="cap-stats"><div><b>18</b><span>stages in one live client pipeline</span></div><div><b>250+</b><span>clients managed on the system</span></div><div><b>10,000+</b><span>end-clients moved to self-service</span></div><div><b>4 yrs</b><span>running the ops, not just visiting</span></div></div>
+        </section>
+
+        <section class="cap-sec" aria-label="Why it matters">
+          <span class="kicker">WHY IT MATTERS</span>
+          <h2 class="cap-state-h"><em>Operations keep</em> what they understand.</h2>
+          <div class="cap-cols">
+            <p class="b">Automation built by visitors gets deleted by operators. The builds that last are designed by people who have run the process themselves &mdash; who know which step the team skips on a Friday and which exception the spreadsheet was quietly absorbing for years.</p>
+            <p class="b">Four years inside the operations of one of Nigeria&rsquo;s largest pension funds built the reflex: before automating a process, run it. The results are still live &mdash; 10,000+ end-clients moved to self-service channels, and at Birdview an AI-assisted CRM spanning an 18-stage client pipeline carrying 250+ clients, with the process documentation and audit trails an operation needs to trust it.</p>
+          </div>
+          <div class="cap-ctarow">
+            <a class="cap-btn" href="#/contact">BOOK A DISCOVERY CALL</a>
+            <a class="cap-cta" href="#/work">VIEW THE WORK <span class="arr">&rarr;</span></a>
+          </div>
+        </section>
+
+        <section class="cap-sec" aria-label="What I build">
+          <div class="cap-center">
+            <span class="kicker">WHAT I BUILD</span>
+            <h2 class="cap-state-h"><em>What I build</em> when ops can&rsquo;t stall.</h2>
+          </div>
+          <div class="cap-cards"><div class="cap-svc"><span class="no">01</span><div><b>Workflow automation</b><p class="b">The repetitive paths an operation walks daily &mdash; automated with the team&rsquo;s habits in view, not against them.</p></div></div><div class="cap-svc"><span class="no">02</span><div><b>CRM &amp; pipeline systems</b><p class="b">Stage-driven client pipelines with the data model doing the enforcement, not the discipline of the staff.</p></div></div><div class="cap-svc"><span class="no">03</span><div><b>Process documentation</b><p class="b">The written system behind the built system &mdash; so the operation survives any single person&rsquo;s absence.</p></div></div><div class="cap-svc"><span class="no">04</span><div><b>Audit trails &amp; data hygiene</b><p class="b">Records the database itself enforces, so the question &ldquo;who changed this, and when?&rdquo; always has an answer.</p></div></div></div>
+        </section>
+
+        <section class="cap-sec" aria-label="Relevant work">
+          <div class="cap-center">
+            <span class="kicker">RELEVANT WORK</span>
+            <h2 class="cap-state-h"><em>Shipped</em> proof.</h2>
+          </div>
+          <div class="rel-work"><a class="arrow-row" href="#/work/relay"><span>Relay — SLA clocks &amp; enforced audit</span><span>2024 &rarr;</span></a><a class="arrow-row" href="#/work/ai-in-the-workplace"><span>Birdview — process &amp; AI systems</span><span>2026 &rarr;</span></a></div>
+        </section>
+
+        <div class="cap-detail" style="border-top:0;padding-top:0"><div class="side"><span class="k">PROOF</span></div><div class="main"><div class="proof-strip"><div class="m"><b>10,000+</b><span>CLIENTS MOVED TO SELF-SERVICE</span></div><div class="m"><b>18-STAGE</b><span>PIPELINE SYSTEMATISED &amp; DOCUMENTED</span></div></div></div></div>
+        
+        <div class="cap-detail"><div class="side"><span class="k">RELATED</span></div><div class="main"><div class="filter-row" style="margin:0"><a class="fchip" style="text-decoration:none" href="#/capabilities/software">Software &rarr;</a><a class="fchip" style="text-decoration:none" href="#/capabilities/ai-systems">AI Systems &rarr;</a></div></div></div>
+        
+        <section class="cap-sec" aria-label="Questions">
+          <span class="kicker">QUESTIONS I ACTUALLY GET</span>
+          <div class="cp-faq"><details><summary>Do you automate broken processes?</summary><p class="b">No &mdash; automating a broken process just breaks faster. The process gets repaired first, then the software carries it.</p></details><details><summary>What tools do you build on?</summary><p class="b">Whatever the operation already runs, extended where needed. The tool is chosen for the team, not the résumé.</p></details><details><summary>Who owns the system after you leave?</summary><p class="b">You do, with the documentation to prove it. Dependency is a design failure, not a business model.</p></details></div></div>
+        </section>
+
+        <section class="cap-close" aria-label="Start">
+          <p class="cap-close-h">Bring the pipeline that hurts most.</p>
+          <a class="cap-btn" href="#/contact">START A PROJECT &rarr;</a>
+        </section>
+      </div></div></div><div class="page " data-route="/capabilities/creative-direction" data-title="cap-creative-direction"><div class="page-cap"><div class="wrap">
+        <div class="cap-hero">
+          <p class="crumbs-top"><a class="tlink" href="#/capabilities">&larr; All capabilities</a></p>
+          <div class="idx"><span class="kicker">CAPABILITY 06 / 08 &mdash; ART DIRECTION · IMAGE · VIDEO · MUSIC</span></div>
+          <h1 class="cap-hero-h"><em>Image is a brand asset,</em> not decoration.</h1>
+          <p class="cap-sub">Before the software there was music and image &mdash; the foundation everything else stands on. Creative direction trained where the image has to carry the sound.</p>
+          <a class="cap-cta" href="#/contact">BOOK A DISCOVERY CALL <span class="arr">&rarr;</span></a>
+        </div>
+
+        <section class="cap-sec" aria-label="The numbers">
+          <span class="kicker">THE NUMBERS</span>
+          <div class="cap-stats"><div><b>2</b><span>EP releases, creative-lead to release</span></div><div><b>6+</b><span>cover artworks in the archive</span></div><div><b>2</b><span>films shot, cut and scored</span></div><div><b>10</b><span>tracks streaming from this site</span></div></div>
+        </section>
+
+        <section class="cap-sec" aria-label="Why it matters">
+          <span class="kicker">WHY IT MATTERS</span>
+          <h2 class="cap-state-h"><em>Direction decides</em> what the work says before what it looks like.</h2>
+          <div class="cap-cols">
+            <p class="b">Creative direction is deciding what a body of work says before anyone decides what it looks like. The practice was trained in music &mdash; where the image has to carry the sound and release is a deadline, not a suggestion &mdash; and that discipline carries into every brand project.</p>
+            <p class="b">The archive proves the range: two EPs creative-lead, co-produced and released (Bedroom Recordings II with YE!!OWSOUL; Visitor from Mars with The Beatoven), a four-single cover-art series where each cover is a world for its record, and a commissioned round-up film for Leadway&rsquo;s Customer Service Week 2024 &mdash; shot, directed, cut and scored by one pair of hands.</p>
+          </div>
+          <div class="cap-ctarow">
+            <a class="cap-btn" href="#/contact">BOOK A DISCOVERY CALL</a>
+            <a class="cap-cta" href="#/work">VIEW THE WORK <span class="arr">&rarr;</span></a>
+          </div>
+        </section>
+
+        <section class="cap-sec" aria-label="What I build">
+          <div class="cap-center">
+            <span class="kicker">WHAT I BUILD</span>
+            <h2 class="cap-state-h"><em>What I build</em> when image carries sound.</h2>
+          </div>
+          <div class="cap-cards"><div class="cap-svc"><span class="no">01</span><div><b>Art direction</b><p class="b">The through-line for a body of work &mdash; the one idea every asset obeys.</p></div></div><div class="cap-svc"><span class="no">02</span><div><b>Film</b><p class="b">Shot, produced, directed, cut and scored end to end &mdash; promo films and round-ups that carry a brand&rsquo;s voice in motion.</p></div></div><div class="cap-svc"><span class="no">03</span><div><b>Music release packages</b><p class="b">Cover art, tracklists and rollout rhythm for records &mdash; from cassette sleeve to streaming.</p></div></div><div class="cap-svc"><span class="no">04</span><div><b>Campaign visuals</b><p class="b">Key art and image systems that hold a campaign together across formats.</p></div></div></div>
+        </section>
+
+        <section class="cap-sec" aria-label="Relevant work">
+          <div class="cap-center">
+            <span class="kicker">RELEVANT WORK</span>
+            <h2 class="cap-state-h"><em>Shipped</em> proof.</h2>
+          </div>
+          <div class="rel-work"><a class="arrow-row" href="#/work/skaame"><span>Skaame — artist web EPK &amp; promo film</span><span>2024 &rarr;</span></a><a class="arrow-row" href="#/work/layo-isaac"><span>Layo Isaac — artist EPK</span><span>2024 &rarr;</span></a><a class="arrow-row" href="#/work/blvckoreo"><span>BlvckOreo — brand, music, merch</span><span>2023 &rarr;</span></a><a class="arrow-row" href="#/work/1ethfp"><span>1ETHFP — web3 creative collaboration</span><span>2024 &rarr;</span></a></div>
+        </section>
+
+        <div class="cap-detail" style="border-top:0;padding-top:0"><div class="side"><span class="k">PROOF</span></div><div class="main"><div class="cp-quote" style="margin-top:32px"><blockquote>&ldquo;These designs were exactly what I needed. It’s rare to be able to describe what I want and have someone actually deliver that.&rdquo;</blockquote><cite>SKAAME — ARTIST</cite></div></div></div>
+        
+        <div class="cap-detail"><div class="side"><span class="k">RELATED</span></div><div class="main"><div class="filter-row" style="margin:0"><a class="fchip" style="text-decoration:none" href="#/capabilities/brand-identity">Brand Identity &rarr;</a><a class="fchip" style="text-decoration:none" href="#/capabilities/graphic-design">Graphic Design &rarr;</a></div></div></div>
+        
+        <section class="cap-sec" aria-label="Questions">
+          <span class="kicker">QUESTIONS I ACTUALLY GET</span>
+          <div class="cp-faq"><details><summary>Do you shoot the footage yourself?</summary><p class="b">Yes &mdash; the CSW 2024 film was shot on site, b-roll included, then cut and scored in-house. One pair of hands, start to finish.</p></details><details><summary>Music production too?</summary><p class="b">Yes &mdash; co-production credits on two released EPs. The sound system on this site streams the real masters.</p></details><details><summary>One-off or series?</summary><p class="b">Series thinking, wherever possible &mdash; four singles became a cover-art series because a world per record is stronger than a picture per track.</p></details></div></div>
+        </section>
+
+        <section class="cap-close" aria-label="Start">
+          <p class="cap-close-h">Bring the sound. The image follows.</p>
+          <a class="cap-btn" href="#/contact">START A PROJECT &rarr;</a>
+        </section>
+      </div></div></div><div class="page " data-route="/capabilities/graphic-design" data-title="cap-graphic-design"><div class="page-cap"><div class="wrap">
+        <div class="cap-hero">
+          <p class="crumbs-top"><a class="tlink" href="#/capabilities">&larr; All capabilities</a></p>
+          <div class="idx"><span class="kicker">CAPABILITY 07 / 08 &mdash; COVER ART · EDITORIAL · COMPOSITION</span></div>
+          <h1 class="cap-hero-h"><em>Composition is</em> the oldest craft in the room.</h1>
+          <p class="cap-sub">The craft under every project &mdash; cover artwork, editorial layout, press photography and illustration as primary material. Every other capability on this site stands on this one.</p>
+          <a class="cap-cta" href="#/contact">BOOK A DISCOVERY CALL <span class="arr">&rarr;</span></a>
+        </div>
+
+        <section class="cap-sec" aria-label="The numbers">
+          <span class="kicker">THE NUMBERS</span>
+          <div class="cap-stats"><div><b>4</b><span>singles, four worlds, one series</span></div><div><b>2</b><span>physical release packages designed</span></div><div><b>1</b><span>training deck from scratch</span></div><div><b>&infin;</b><span>the grid that keeps it honest</span></div></div>
+        </section>
+
+        <section class="cap-sec" aria-label="Why it matters">
+          <span class="kicker">WHY IT MATTERS</span>
+          <h2 class="cap-state-h"><em>Clarity</em> that carries feeling without losing it.</h2>
+          <div class="cap-cols">
+            <p class="b">Every capability on this site stands on this one. Cover art, editorial layout, deck design &mdash; the discipline of making information carry feeling without losing clarity. It was the first skill, and it never left.</p>
+            <p class="b">Recent proof: the Bedroom Recordings II cassette and tracklist package, the four-single cover series for Blvck Oreo (each cover a self-contained world for its record), the lyric and promo videos for Gen.Sadiq&rsquo;s Maradonna &mdash; signed off by the artist and his manager in the first round &mdash; and The Basics of Graphic Design, a training deck that teaches the craft itself.</p>
+          </div>
+          <div class="cap-ctarow">
+            <a class="cap-btn" href="#/contact">BOOK A DISCOVERY CALL</a>
+            <a class="cap-cta" href="#/work">VIEW THE WORK <span class="arr">&rarr;</span></a>
+          </div>
+        </section>
+
+        <section class="cap-sec" aria-label="What I build">
+          <div class="cap-center">
+            <span class="kicker">WHAT I BUILD</span>
+            <h2 class="cap-state-h"><em>What I build</em> when print meets pixels.</h2>
+          </div>
+          <div class="cap-cards"><div class="cap-svc"><span class="no">01</span><div><b>Cover art &amp; packaging</b><p class="b">Single covers, cassette sleeves and tracklists &mdash; the artwork a record deserves, print-ready.</p></div></div><div class="cap-svc"><span class="no">02</span><div><b>Editorial &amp; decks</b><p class="b">Pitch decks and training material composed to be followed, not admired &mdash; the Leadway pitch is the flagship.</p></div></div><div class="cap-svc"><span class="no">03</span><div><b>Promo &amp; lyric visuals</b><p class="b">Beat-locked promo films and lyric videos built for release day, not just the archive.</p></div></div><div class="cap-svc"><span class="no">04</span><div><b>Archive &amp; systems</b><p class="b">Cover series designed to compound &mdash; each new release extending the world, not restarting it.</p></div></div></div>
+        </section>
+
+        <section class="cap-sec" aria-label="Relevant work">
+          <div class="cap-center">
+            <span class="kicker">RELEVANT WORK</span>
+            <h2 class="cap-state-h"><em>Shipped</em> proof.</h2>
+          </div>
+          <div class="rel-work"><a class="arrow-row" href="#/work/blvckoreo"><span>BlvckOreo — cover art &amp; identity</span><span>2023 &rarr;</span></a><a class="arrow-row" href="#/work/visitor-from-mars"><span>Visitor from Mars — creative lead &amp; director</span><span>2021 &rarr;</span></a><a class="arrow-row" href="#/work/skaame"><span>Skaame — EPK composition</span><span>2024 &rarr;</span></a><a class="arrow-row" href="#/work/bedroom-recordings-ii"><span>Bedroom Recordings II — cassette artwork</span><span>2025 &rarr;</span></a><a class="arrow-row" href="#/work/singles-cover-art"><span>Singles &amp; Cover Art — cover series</span><span>2023–25 &rarr;</span></a><a class="arrow-row" href="#/work/gen-sadiq"><span>Gen.Sadiq — Maradonna cover &amp; film</span><span>2023–25 &rarr;</span></a><a class="arrow-row" href="#/work/visitor-from-mars"><span>Visitor from Mars — tape artwork &amp; release</span><span>2021 &rarr;</span></a></div>
+        </section>
+
         <div class="cap-detail"><div class="side"><span class="k">RELATED</span></div><div class="main"><div class="filter-row" style="margin:0"><a class="fchip" style="text-decoration:none" href="#/capabilities/brand-identity">Brand Identity &rarr;</a><a class="fchip" style="text-decoration:none" href="#/capabilities/creative-direction">Creative Direction &rarr;</a></div></div></div>
-        <div class="cap-detail"><div class="side"><span class="k">QUESTIONS I ACTUALLY GET</span></div><div class="main"><div class="cp-faq"><details><summary>Print as well as digital?</summary><p class="b">Yes &mdash; the BR2 cassette package was designed for physical release first. Print discipline makes digital work look expensive.</p></details><details><summary>What&rsquo;s the turnaround on a single cover?</summary><p class="b">Fast &mdash; the Maradonna package (cover, promo film, lyric video) was commissioned and signed off in the first round.</p></details><details><summary>Where&rsquo;s the wider archive?</summary><p class="b">The graphic-design archive beyond the site lives on Behance &mdash; linked from the Singles &amp; Cover Art case.</p></details></div></div></div><div class="cap-detail"><div class="side"><span class="k">START</span></div><div class="main"><p class="b">Bring the problem &mdash; <a class="tlink" href="#/contact">start a project &rarr;</a></p></div></div>
-      </div>
-    </div></div><div class="page " data-route="/capabilities/training" data-title="cap-training"><div class="page-cap">
-      <div class="wrap page-head">
-        <div class="idx"><span class="kicker">CAPABILITY 08 / 08</span><span class="kicker">CURRICULUM · FACILITATION · HUBS</span></div>
-        <h1>Training</h1>
-        <p class="lede">AI literacy that outlives the room — eleven modules, ninety minutes, one link.</p>
-        <p class="crumbs-top" style="margin-top:16px"><a class="tlink" href="#/capabilities">&larr; All capabilities</a></p>
-      </div>
-      <div class="wrap">
-        <div class="cap-detail" style="border-top:0"><div class="side"><span class="k">IN PRACTICE</span></div><div class="main"><div class="blk"><p class="b">Training here is a designed product, not a slide dump. AI in the Workplace, built for Birdview Travels & Tours, sequenced eleven modules into one 90-minute company-wide session — from daily AI users to first-timers — backed by a self-built web hub carrying the curriculum, slides and flashcards on a single URL. No logins, no lost files, material that stays alive after the session ends.</p></div><div class="blk"><p class="b">The result: a company running on one shared AI vocabulary — and a facilitator who had already spent two months optimising their workflows before standing in front of the room.</p></div></div></div>
-        <div class="cap-detail"><div class="side"><span class="k">WHAT THAT INCLUDES</span></div><div class="main"><ul class="tags"><li>Curriculum design (11 modules)</li><li>Facilitated sessions</li><li>Self-built web hubs</li><li>Flashcard revision sets</li><li>AI vocabulary &amp; enablement</li></ul></div></div>
-        <div class="cap-detail"><div class="side"><span class="k">THE NUMBERS</span></div><div class="main"><div class="cap-stats"><div><b>11</b><span>modules in the AI programme</span></div><div><b>2</b><span>training builds, shipped live</span></div><div><b>1</b><span>web hub carrying a full curriculum</span></div><div><b>90 min</b><span>one session, one working skill</span></div></div></div></div><div class="cap-detail"><div class="side"><span class="k">WHY IT MATTERS</span></div><div class="main"><div class="blk"><h3>Training that survives the trainer leaving.</h3><p class="b">Training fails when it depends on the trainer staying in the room. The programmes built here are designed for the opposite: curricula with their own logic, hubs that carry the material after the session ends, and skills employees can rehearse without supervision.</p></div><div class="blk"><p class="b">Two builds prove the pattern. The Basics of Graphic Design: a from-scratch curriculum teaching composition itself &mdash; grid, type, hierarchy &mdash; as a deck that teaches. AI in the Workplace: an eleven-module, company-wide AI literacy programme (delivered at Birdview) with its own web hub &mdash; curriculum, flashcards, slides and a live assessment path. The client&rsquo;s operations signed off the result.</p></div></div></div><div class="cap-detail"><div class="side"><span class="k">WHAT I BUILD</span></div><div class="main"><div class="cap-svc"><span class="no">01</span><div><b>AI literacy programmes</b><p class="b">Company-wide training from first prompt to evaluation &mdash; eleven modules, built and delivered.</p></div></div><div class="cap-svc"><span class="no">02</span><div><b>Curriculum design</b><p class="b">Course structure, pacing and assessment built like a product: each module earns the next.</p></div></div><div class="cap-svc"><span class="no">03</span><div><b>Facilitation</b><p class="b">Live sessions taught by the person who wrote the material &mdash; no relay of someone else&rsquo;s slides.</p></div></div><div class="cap-svc"><span class="no">04</span><div><b>Web hubs</b><p class="b">The training lives on after the session: a hub carrying curriculum, flashcards and slides on one link.</p></div></div></div></div><div class="cap-detail"><div class="side"><span class="k">RELEVANT WORK</span></div><div class="main rel-work"><a class="arrow-row" href="#/work/ai-in-the-workplace"><span>AI in the Workplace — Birdview Travels &amp; Tours</span><span>2026 &rarr;</span></a><a class="arrow-row" href="#/work/tbogd"><span>The Basics of Graphic Design — training deck</span><span>2026 &rarr;</span></a></div></div>
+        
+        <section class="cap-sec" aria-label="Questions">
+          <span class="kicker">QUESTIONS I ACTUALLY GET</span>
+          <div class="cp-faq"><details><summary>Print as well as digital?</summary><p class="b">Yes &mdash; the BR2 cassette package was designed for physical release first. Print discipline makes digital work look expensive.</p></details><details><summary>What&rsquo;s the turnaround on a single cover?</summary><p class="b">Fast &mdash; the Maradonna package (cover, promo film, lyric video) was commissioned and signed off in the first round.</p></details><details><summary>Where&rsquo;s the wider archive?</summary><p class="b">The graphic-design archive beyond the site lives on Behance &mdash; linked from the Singles &amp; Cover Art case.</p></details></div></div>
+        </section>
+
+        <section class="cap-close" aria-label="Start">
+          <p class="cap-close-h">Bring the message. The grid keeps it honest.</p>
+          <a class="cap-btn" href="#/contact">START A PROJECT &rarr;</a>
+        </section>
+      </div></div></div><div class="page " data-route="/capabilities/training" data-title="cap-training"><div class="page-cap"><div class="wrap">
+        <div class="cap-hero">
+          <p class="crumbs-top"><a class="tlink" href="#/capabilities">&larr; All capabilities</a></p>
+          <div class="idx"><span class="kicker">CAPABILITY 08 / 08 &mdash; CURRICULUM · FACILITATION · HUBS</span></div>
+          <h1 class="cap-hero-h"><em>Training that survives</em> the trainer leaving.</h1>
+          <p class="cap-sub">AI literacy that outlives the room &mdash; eleven modules, ninety minutes, one live link. Curricula with their own logic, hubs that carry the material after the session ends.</p>
+          <a class="cap-cta" href="#/contact">BOOK A DISCOVERY CALL <span class="arr">&rarr;</span></a>
+        </div>
+
+        <section class="cap-sec" aria-label="The numbers">
+          <span class="kicker">THE NUMBERS</span>
+          <div class="cap-stats"><div><b>11</b><span>modules in the AI programme</span></div><div><b>2</b><span>training builds, shipped live</span></div><div><b>1</b><span>web hub carrying a full curriculum</span></div><div><b>90 min</b><span>one session, one working skill</span></div></div>
+        </section>
+
+        <section class="cap-sec" aria-label="Why it matters">
+          <span class="kicker">WHY IT MATTERS</span>
+          <h2 class="cap-state-h"><em>Material built like a product:</em> each module earns the next.</h2>
+          <div class="cap-cols">
+            <p class="b">Training fails when it depends on the trainer staying in the room. The programmes built here are designed for the opposite: curricula with their own logic, hubs that carry the material after the session ends, and skills employees can rehearse without supervision.</p>
+            <p class="b">Two builds prove the pattern. The Basics of Graphic Design: a from-scratch curriculum teaching composition itself &mdash; grid, type, hierarchy &mdash; as a deck that teaches. AI in the Workplace: an eleven-module, company-wide AI literacy programme (delivered at Birdview) with its own web hub &mdash; curriculum, flashcards, slides and a live assessment path. The client&rsquo;s operations signed off the result.</p>
+          </div>
+          <div class="cap-ctarow">
+            <a class="cap-btn" href="#/contact">BOOK A DISCOVERY CALL</a>
+            <a class="cap-cta" href="#/work">VIEW THE WORK <span class="arr">&rarr;</span></a>
+          </div>
+        </section>
+
+        <section class="cap-sec" aria-label="What I build">
+          <div class="cap-center">
+            <span class="kicker">WHAT I BUILD</span>
+            <h2 class="cap-state-h"><em>What I build</em> when teams have to remember.</h2>
+          </div>
+          <div class="cap-cards"><div class="cap-svc"><span class="no">01</span><div><b>AI literacy programmes</b><p class="b">Company-wide training from first prompt to evaluation &mdash; eleven modules, built and delivered.</p></div></div><div class="cap-svc"><span class="no">02</span><div><b>Curriculum design</b><p class="b">Course structure, pacing and assessment built like a product: each module earns the next.</p></div></div><div class="cap-svc"><span class="no">03</span><div><b>Facilitation</b><p class="b">Live sessions taught by the person who wrote the material &mdash; no relay of someone else&rsquo;s slides.</p></div></div><div class="cap-svc"><span class="no">04</span><div><b>Web hubs</b><p class="b">The training lives on after the session: a hub carrying curriculum, flashcards and slides on one link.</p></div></div></div>
+        </section>
+
+        <section class="cap-sec" aria-label="Relevant work">
+          <div class="cap-center">
+            <span class="kicker">RELEVANT WORK</span>
+            <h2 class="cap-state-h"><em>Shipped</em> proof.</h2>
+          </div>
+          <div class="rel-work"><a class="arrow-row" href="#/work/ai-in-the-workplace"><span>AI in the Workplace — Birdview Travels &amp; Tours</span><span>2026 &rarr;</span></a><a class="arrow-row" href="#/work/tbogd"><span>The Basics of Graphic Design — training deck</span><span>2026 &rarr;</span></a></div>
+        </section>
+
         <div class="cap-detail" style="border-top:0;padding-top:0"><div class="side"><span class="k">PROOF</span></div><div class="main"><div class="proof-strip"><div class="m"><b>11</b><span>MODULES · ONE 90-MINUTE SESSION</span></div><div class="m"><b>1 LINK</b><span>HUB CARRYING CURRICULUM, SLIDES &amp; FLASHCARDS</span></div></div><div class="cp-quote" style="margin-top:32px"><blockquote>&ldquo;Michael is a solution thinker — he came into the company and within two months had already thought of effective solutions to optimise our workflow and positioned us to become more AI-inclined.&rdquo;</blockquote><cite>ABIDEMI AMODU — MANAGING DIRECTOR</cite></div></div></div>
+        
         <div class="cap-detail"><div class="side"><span class="k">RELATED</span></div><div class="main"><div class="filter-row" style="margin:0"><a class="fchip" style="text-decoration:none" href="#/capabilities/ai-systems">AI Systems &rarr;</a><a class="fchip" style="text-decoration:none" href="#/capabilities/automation">Automation &rarr;</a></div></div></div>
-        <div class="cap-detail"><div class="side"><span class="k">QUESTIONS I ACTUALLY GET</span></div><div class="main"><div class="cp-faq"><details><summary>Who is the training for?</summary><p class="b">Non-technical teams who have to live with AI systems, and operators who have to run them. Both programmes were built for real workplaces, not conference audiences.</p></details><details><summary>Can it be branded for our company?</summary><p class="b">Yes &mdash; the Birdview programme was delivered inside the client&rsquo;s operation, on their material, with their examples.</p></details><details><summary>Is the material available after the sessions?</summary><p class="b">Always. AI in the Workplace runs on a live web hub &mdash; one link carries the whole curriculum.</p></details></div></div></div><div class="cap-detail"><div class="side"><span class="k">START</span></div><div class="main"><p class="b">Bring the problem &mdash; <a class="tlink" href="#/contact">start a project &rarr;</a></p></div></div>
-      </div>
-    </div></div><div class="page " data-route="/approach" data-title="approach">
+        
+        <section class="cap-sec" aria-label="Questions">
+          <span class="kicker">QUESTIONS I ACTUALLY GET</span>
+          <div class="cp-faq"><details><summary>Who is the training for?</summary><p class="b">Non-technical teams who have to live with AI systems, and operators who have to run them. Both programmes were built for real workplaces, not conference audiences.</p></details><details><summary>Can it be branded for our company?</summary><p class="b">Yes &mdash; the Birdview programme was delivered inside the client&rsquo;s operation, on their material, with their examples.</p></details><details><summary>Is the material available after the sessions?</summary><p class="b">Always. AI in the Workplace runs on a live web hub &mdash; one link carries the whole curriculum.</p></details></div></div>
+        </section>
+
+        <section class="cap-close" aria-label="Start">
+          <p class="cap-close-h">Bring the team. The hub does the remembering.</p>
+          <a class="cap-btn" href="#/contact">START A PROJECT &rarr;</a>
+        </section>
+      </div></div></div><div class="page " data-route="/approach" data-title="approach">
     <section class="section wrap" aria-label="Approach">
       <div class="page-head" >
         <div class="idx"><span class="kicker">04 / HOW I WORK</span><span class="kicker">IDEA &rarr; SHIP</span></div>

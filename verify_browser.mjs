@@ -65,7 +65,7 @@ ok("menu opens, label flips", (await page.textContent(".menu-trig .mt-label")) =
 await page.keyboard.press("Escape");
 await page.waitForTimeout(100);
 ok("menu closes on Escape", (await page.textContent(".menu-trig .mt-label")) === "Menu");
-ok("BUILD v3.7 — PORTED chip", (await page.textContent(".menu-build")).includes("BUILD v3.7 — PORTED"));
+ok("BUILD v3.8 — PORTED chip", (await page.textContent(".menu-build")).includes("BUILD v3.8 — PORTED"));
 await page.hover('.dock-btn[data-flyout="caps"]');
 await page.waitForTimeout(200);
 ok("caps flyout hover-opens", await page.evaluate(() => !document.getElementById("flyout-caps").hidden));
@@ -341,6 +341,16 @@ const capDepth = await page.evaluate(() => {
 });
 ok("cap brand-identity: THE NUMBERS + WHAT I BUILD + FAQ", capDepth.n && capDepth.b && capDepth.q);
 ok("cap brand-identity: 4 stats + 4 service areas + 3 FAQs", capDepth.stats === 4 && capDepth.svc === 4 && capDepth.faq === 3, `stats=${capDepth.stats} svc=${capDepth.svc} faq=${capDepth.faq}`);
+const capV38 = await page.evaluate(() => {
+  const pg = document.querySelector('.page[data-route="/capabilities/brand-identity"]');
+  return { hero: !!pg.querySelector(".cap-hero-h"), heroCta: !!pg.querySelector(".cap-hero .cap-cta"),
+    cards: pg.querySelectorAll(".cap-cards .cap-svc").length,
+    shipRows: pg.querySelectorAll(".rel-work .arrow-row").length,
+    close: !!pg.querySelector(".cap-close .cap-btn") };
+});
+ok("cap brand-identity: v3.8 industries posture (hero, 4 cards, shipped rows, close)",
+  capV38.hero && capV38.heroCta && capV38.cards === 4 && capV38.shipRows >= 3 && capV38.close,
+  JSON.stringify(capV38));
 const capsDepth = await page.evaluate(() => [...document.querySelectorAll(".page")]
   .filter(p => (p.getAttribute("data-route") || "").startsWith("/capabilities/") && p.getAttribute("data-route") !== "/capabilities" && p.textContent.includes("WHAT I BUILD")).length);
 ok("all 8 capability pages carry the depth", capsDepth === 8, `${capsDepth}/8`);
