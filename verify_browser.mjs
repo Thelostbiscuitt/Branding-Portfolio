@@ -65,7 +65,7 @@ ok("menu opens, label flips", (await page.textContent(".menu-trig .mt-label")) =
 await page.keyboard.press("Escape");
 await page.waitForTimeout(100);
 ok("menu closes on Escape", (await page.textContent(".menu-trig .mt-label")) === "Menu");
-ok("BUILD v3.6 — PORTED chip", (await page.textContent(".menu-build")).includes("BUILD v3.6 — PORTED"));
+ok("BUILD v3.7 — PORTED chip", (await page.textContent(".menu-build")).includes("BUILD v3.7 — PORTED"));
 await page.hover('.dock-btn[data-flyout="caps"]');
 await page.waitForTimeout(200);
 ok("caps flyout hover-opens", await page.evaluate(() => !document.getElementById("flyout-caps").hidden));

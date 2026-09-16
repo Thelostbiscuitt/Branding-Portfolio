@@ -75,8 +75,8 @@ for needle in ('rel="canonical" href="https://habibcore.com/"', 'property="og:im
         errors.append(f"head missing: {needle}")
 
 # 9. build chip
-if "BUILD v3.6 — PORTED" not in html:
-    errors.append("BUILD v3.6 — PORTED chip missing")
+if "BUILD v3.7 — PORTED" not in html:
+    errors.append("BUILD v3.7 — PORTED chip missing")
 
 # 9b. v3.5 work wheel + depth
 if ".idx-row:hover" in html:
