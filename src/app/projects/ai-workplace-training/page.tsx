@@ -27,7 +27,7 @@ export default function AIWorkplaceTraining() {
   return (
     <ProjectLayout
       title="AI in the Workplace: Employee Training"
-      heroImage="/projects/ai-workplace-training/hero.jpg"
+      heroImage="/projects/Visitor%20from%20Mars/ai-workplace-training/hero.jpg"
       heroAlt="AI in the Workplace training hub: session curriculum overview"
       meta={{
         category:  'Design',
@@ -168,9 +168,9 @@ export default function AIWorkplaceTraining() {
           'The curriculum is mine and the scaffolding was generated. The rule that did not bend is the one taught in Module 8: nothing factual or customer-facing ships without a person checking it first.',
       }}
       screenshots={[
-        { src: '/projects/ai-workplace-training/sc-curriculum.png', alt: 'Training hub: session timeline and the eleven-module breakdown, with the prompt writing module expanded' },
-        { src: '/projects/ai-workplace-training/sc-slides.png',     alt: 'Training hub slides mode: the RCTF prompt framework broken into Role, Context, Task, and Format' },
-        { src: '/projects/ai-workplace-training/sc-flashcards.png', alt: 'Training hub flashcards mode: ten flip cards covering the core concepts' },
+        { src: '/projects/Visitor%20from%20Mars/ai-workplace-training/sc-curriculum.png', alt: 'Training hub: session timeline and the eleven-module breakdown, with the prompt writing module expanded' },
+        { src: '/projects/Visitor%20from%20Mars/ai-workplace-training/sc-slides.png',     alt: 'Training hub slides mode: the RCTF prompt framework broken into Role, Context, Task, and Format' },
+        { src: '/projects/Visitor%20from%20Mars/ai-workplace-training/sc-flashcards.png', alt: 'Training hub flashcards mode: ten flip cards covering the core concepts' },
       ]}
       next={{
         slug:     'skaame-epk',

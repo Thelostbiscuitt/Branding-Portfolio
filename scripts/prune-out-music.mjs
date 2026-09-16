@@ -17,8 +17,6 @@ const outMusic = path.resolve(process.cwd(), 'out', 'Music');
 const tracksSrc = await fs.readFile(path.resolve(process.cwd(), 'src/data/tracks.ts'), 'utf8');
 const trackFiles = [...tracksSrc.matchAll(/file:\s*'\/Music\/([^']+)'/g)].map((m) => m[1]);
 if (!trackFiles.length) throw new Error('prune-out-music: no track files parsed from src/data/tracks.ts');
-const keep = new Set(trackFiles);
-
 await fs.rm(outMusic, { recursive: true, force: true });
 for (const file of trackFiles) {
   const src = path.resolve(process.cwd(), 'public', 'Music', file);

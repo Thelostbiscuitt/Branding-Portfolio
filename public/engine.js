@@ -83,7 +83,7 @@
           if (this.current !== prev) window.scrollTo(0, this.current);
           effects(this.velocity);
           this.raf = requestAnimationFrame(loop);
-        } catch (err) {
+        } catch {
           /* Fail open: never leave the page unscrollable. */
           this.failOpen();
         }
@@ -181,7 +181,7 @@
      → project → artifact, one branch at a time, so the initial composition
      stays quiet. Desktop (pinned) only; mobile uses the .range-index list. */
   const R_BY_ID = new Map();
-  try { JSON.parse($("#range-data")?.textContent || "[]").forEach((n) => R_BY_ID.set(n.id, n)); } catch (e) { /* island missing — graph simply stays as-is */ }
+  try { JSON.parse($("#range-data")?.textContent || "[]").forEach((n) => R_BY_ID.set(n.id, n)); } catch { /* island missing — graph simply stays as-is */ }
   const CREATIVE_HUB_POS = { 0: [26, 86], 7: [50, 10] };
   const rgState = { open: false, level: 0, disc: null, proj: null, hub: null, lastFocus: null };
 
@@ -283,13 +283,14 @@
       else if (b.fixed) a.cy -= o.dir * d;
       else { a.cy -= (o.dir * d) / 2; b.cy += (o.dir * d) / 2; }
     };
-    o.axis === "x" ? moveX() : moveY();
+    if (o.axis === "x") moveX(); else moveY();
   };
   const clampToStage = (m, W, H) => {
     const nx = clamp(m.cx, m.hw + 6, W - m.hw - 6);
     const ny = clamp(m.cy, m.hh + 6, H - m.hh - 6);
+    const changed = nx !== m.cx || ny !== m.cy;
     m.cx = nx; m.cy = ny;
-    return nx !== m.cx || ny !== m.cy;
+    return changed;
   };
   /* fixed bubbles + the active display word — nodes must route around them */
   const fixedNodes = (sr) => {
@@ -631,6 +632,7 @@
     progressBar.style.transform = `scaleX(${p})`;
   };
   const paintNav = (y, now) => {
+    if (!nav) return;
     if (now - navTick <= 90) return;
     navTick = now;
     const dy = y - lastY;
@@ -751,11 +753,11 @@
   });
 
   /* ————— custom cursor + hover states ————— */
-  const cursor = (() => {
-    if (!FINE || REDUCED) return { setState: () => {} };
+  (() => {
+    if (!FINE || REDUCED) return;
     const dot = $(".cursor-dot");
     const ring = $(".cursor-ring");
-    if (!dot || !ring) return { setState: () => {} };
+    if (!dot || !ring) return;
     let mx = innerWidth / 2, my = innerHeight / 2, rx = mx, ry = my;
     let seen = false;
     document.addEventListener("mousemove", (e) => {
@@ -784,7 +786,6 @@
       ring.style.transform = `translate(${rx}px, ${ry}px)`;
       requestAnimationFrame(follow);
     })();
-    return { setState };
   })();
 
   /* ————— magnetic elements ————— */
@@ -816,7 +817,7 @@
     magnetize(el, el.classList.contains("f-submit") ? 0.12 : 0.3);
   });
 
-  /* ————— preloader → hero entrance ————— */
+  /* ————— fill-to-logo loader → hero entrance ————— */
   const heroEntrance = () => {
     /* line-masked h1 words */
     $$(".hero h1 .lm > span").forEach((sp, i) => {
@@ -827,80 +828,102 @@
     $(".stamp-wrap")?.classList.add("in");
     nav?.classList.add("in");
   };
-  const preloader = (() => {
-    const pl = $(".preloader");
-    if (!pl) { heroEntrance(); return; }
-    if (REDUCED) { pl.remove(); heroEntrance(); return; }
+  (() => {
+    const pl = $(".hc-loader");
+    if (!pl) {
+      try { sessionStorage.setItem("habibcore-intro-seen", "1"); } catch { /* private storage */ }
+      document.documentElement.classList.add("hc-intro-seen");
+      heroEntrance();
+      return;
+    }
+    if (document.documentElement.classList.contains("hc-intro-seen")) {
+      pl.remove();
+      heroEntrance();
+      return;
+    }
+
+    const fill = $(".hc-fill", pl);
+    const mark = $(".hc-filled-mark", pl);
+    const zoom = $(".hc-zoom-mark", pl);
+    const percent = $(".hc-percent", pl);
+    const blocked = $$(".skip-link, .nav, .mobile-menu, main, .player, footer");
+    const previousFocus = document.activeElement;
+    blocked.forEach((el) => { el.inert = true; });
     document.body.classList.add("is-locked");
-    /* Warm the graphics pipeline while the curtain is up: kick decode on
-       every image so the scroll glide and cursor never stall on a decode
-       spike after reveal. (The reference page ships its images inline;
-       this is the network equivalent — all ~476KB is fetched and decoded
-       during the greeting sequence.) */
-    $$("img").forEach((img) => {
-      img.setAttribute("loading", "eager");
-      img.setAttribute("decoding", "async");
-      if (typeof img.decode === "function") img.decode().catch(() => {});
-    });
-    const wordEl = $(".pl-word", pl);
-    const langEl = $(".pl-lang b", pl);
-    /* Lagos → Nigeria → World, resolving into the identity lockup.
-       Ten beats at ~150ms — the whole introduction reads in under 2s.
-       No progress bar, no spinner: the greeting IS the opening. */
-    const GREET = [
-      ["Hello", "01 — ENGLISH · LAGOS", "en"],
-      ["Pẹ̀lẹ́ o", "02 — YORÙBÁ · NIGERIA", "yo"],
-      ["Ndewo", "03 — IGBO · NIGERIA", "ig"],
-      ["Sannu", "04 — HAUSA · NIGERIA", "ha"],
-      ["Bonjour", "05 — FRANÇAIS", "fr"],
-      ["Hola", "06 — ESPAÑOL", "es"],
-      ["Olá", "07 — PORTUGUÊS", "pt"],
-      ["مرحبا", "08 — ARABIC · MARHABAN", "ar", "rtl"],
-      ["こんにちは", "09 — JAPANESE · KONNICHIWA", "ja"],
-      ["你好", "10 — CHINESE · NǏ HǍO", "zh"],
-    ];
-    const fast = !FINE; /* touch devices: keep it quick, just not rushed */
-    const WORD_MS = fast ? 110 : 150;  /* one metronome for every greeting */
-    const FINAL_MS = fast ? 380 : 480; /* hold the identity lockup a beat longer */
-    const FINAL = ["HABIBCORE®", "LAGOS → WORLD", "en"];
-    let i = 0;
-    const show = ([text, tag, lang, dir]) => {
-      if (!wordEl) return;
-      wordEl.textContent = text;
-      wordEl.lang = lang || "en";
-      if (dir) wordEl.setAttribute("dir", dir); else wordEl.removeAttribute("dir");
-      if (langEl) langEl.textContent = tag;
-      wordEl.classList.remove("swap");
-      if (langEl) langEl.classList.remove("swap");
-      void wordEl.offsetWidth; /* restart the entrance animation */
-      wordEl.classList.add("swap");
-      if (langEl) langEl.classList.add("swap");
-    };
-    const finish = () => {
-      setTimeout(() => {
-        pl.classList.add("done");
-        document.body.classList.remove("is-locked");
-        heroEntrance();
-        engine.measure();
-        setTimeout(() => pl.remove(), 1000);
-      }, 140);
-    };
-    const step = () => {
-      if (i < GREET.length) {
-        show(GREET[i]);
-        i += 1;
-        setTimeout(step, WORD_MS);
-      } else if (i === GREET.length) {
-        show(FINAL);
-        i += 1;
-        setTimeout(finish, FINAL_MS);
+    pl.focus({ preventScroll: true });
+
+    const duration = REDUCED ? 160 : 1050;
+    const start = performance.now();
+    let readyAt = null;
+    let progress = 0;
+    let finished = false;
+    const waitTimeout = setTimeout(() => { readyAt ??= performance.now(); }, 3500);
+
+    // React has hydrated before this afterInteractive script runs. Fonts and
+    // the mark are the remaining critical assets; below-the-fold media is not.
+    Promise.allSettled([
+      document.fonts.ready,
+      mark.decode(),
+      new Promise((resolve) => requestAnimationFrame(() => requestAnimationFrame(resolve))),
+    ]).then(() => { readyAt ??= performance.now(); });
+
+    const reveal = () => {
+      if (finished) return;
+      finished = true;
+      clearTimeout(waitTimeout);
+      pl.classList.add("is-opening");
+      blocked.forEach((el) => { el.inert = false; });
+      document.body.classList.remove("is-locked");
+      heroEntrance();
+      engine.measure();
+      try { sessionStorage.setItem("habibcore-intro-seen", "1"); } catch { /* private storage */ }
+      if (document.activeElement === pl) {
+        const target = previousFocus && previousFocus !== document.body ? previousFocus : $(".skip-link");
+        target?.focus({ preventScroll: true });
       }
+      setTimeout(() => pl.remove(), REDUCED ? 130 : 120);
     };
-    step();
+
+    const finish = () => {
+      percent.textContent = "100%";
+      fill.style.clipPath = "inset(0% 0 0 0)";
+      if (REDUCED) { reveal(); return; }
+
+      requestAnimationFrame(() => {
+        const r = mark.getBoundingClientRect();
+        if (!r.width || !r.height) { reveal(); return; }
+        zoom.style.left = `${r.left}px`;
+        zoom.style.top = `${r.top}px`;
+        zoom.style.width = `${r.width}px`;
+        zoom.style.height = `${r.height}px`;
+        zoom.style.opacity = "1";
+        pl.classList.add("is-complete");
+        const scale = Math.max(innerWidth / r.width, innerHeight / r.height) * 1.55;
+        zoom.animate([
+          { transform: "scale(1)", opacity: 1 },
+          { transform: `scale(${scale})`, opacity: 1 },
+        ], { duration: 440, easing: "cubic-bezier(.16,1,.3,1)", fill: "forwards" })
+          .finished.then(reveal, reveal);
+      });
+    };
+
+    const tick = (now) => {
+      const elapsed = now - start;
+      progress = readyAt === null
+        ? Math.min(.94, elapsed / duration)
+        : readyAt - start <= duration
+          ? Math.min(1, elapsed / duration)
+          : .94 + .06 * Math.min(1, (now - readyAt) / (REDUCED ? 80 : 160));
+      fill.style.clipPath = `inset(${(1 - progress) * 100}% 0 0 0)`;
+      percent.textContent = `${String(Math.round(progress * 100)).padStart(2, "0")}%`;
+      if (progress < 1) requestAnimationFrame(tick);
+      else finish();
+    };
+    requestAnimationFrame(tick);
   })();
 
   /* ————— velocity-reactive marquee ————— */
-  const marquee = (() => {
+  (() => {
     const track = $(".marquee-track");
     if (!track) return null;
     let x = 0;
@@ -917,7 +940,6 @@
       }
       requestAnimationFrame(loop);
     })();
-    return true;
   })();
 
   /* ————— work accordion (exclusive) ————— */
@@ -943,7 +965,7 @@
   });
 
   /* ————— cursor-following work preview (tilt + lerp) ————— */
-  const preview = (() => {
+  (() => {
     const host = $(".work-preview");
     if (!host || !FINE || REDUCED) return;
     const img = $("img", host);
@@ -1098,7 +1120,7 @@
     const player = $(".player");
     if (!player) return;
     let tracks = [];
-    try { tracks = JSON.parse($("#sound-data")?.textContent || "[]"); } catch (e) { tracks = []; }
+    try { tracks = JSON.parse($("#sound-data")?.textContent || "[]"); } catch { tracks = []; }
     if (!tracks.length) return;
     const audio = new Audio();
     audio.preload = "none";
@@ -1107,10 +1129,10 @@
     /* preferences persist across reloads (localStorage); the shuffle order
        itself is re-rolled on every visit, so no two sessions ride the same set */
     const prefs = { shuffle: true, repeat: false, mood: "ALL" };
-    try { Object.assign(prefs, JSON.parse(localStorage.getItem("hc-sound") || "{}")); } catch (e) { /* fresh visitor */ }
-    const savePrefs = () => { try { localStorage.setItem("hc-sound", JSON.stringify(prefs)); } catch (e) {} };
+    try { Object.assign(prefs, JSON.parse(localStorage.getItem("hc-sound") || "{}")); } catch { /* fresh visitor */ }
+    const savePrefs = () => { try { localStorage.setItem("hc-sound", JSON.stringify(prefs)); } catch {} };
     const pool = () => {
-      const all = tracks.map((_, i) => i);
+      const all = Array.from(tracks.keys());
       return prefs.mood === "ALL" ? all : all.filter((i) => tracks[i].mood === prefs.mood);
     };
     const shuffled = (idx, keepFirst) => {
@@ -1183,7 +1205,7 @@
       bar.addEventListener("pointerdown", (e) => {
         e.preventDefault();
         seekTo(e);
-        try { bar.setPointerCapture(e.pointerId); } catch (_) { /* synthetic or already-released pointer */ }
+        try { bar.setPointerCapture(e.pointerId); } catch { /* synthetic or already-released pointer */ }
       });
       bar.addEventListener("pointermove", (e) => { if (e.buttons > 0) seekTo(e); });
       bar.addEventListener("keydown", (e) => {
@@ -1345,4 +1367,3 @@
   window.addEventListener("resize", () => engine.measure());
   effects(0);
 })();
-

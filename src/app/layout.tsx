@@ -37,15 +37,19 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
+      <head>
+        <script dangerouslySetInnerHTML={{
+          __html: "try{if(sessionStorage.getItem('habibcore-intro-seen')==='1')document.documentElement.classList.add('hc-intro-seen')}catch{}",
+        }} />
+        <noscript><style>{'.hc-loader{display:none}'}</style></noscript>
+      </head>
       <body>
         <meta name="theme-color" content="#f2ede3" />
         <link rel="preload" href="/fonts/fraunces-100-900-normal.woff2" as="font" type="font/woff2" crossOrigin="anonymous" />
-        <link rel="preload" href="/fonts/fraunces-100-900-italic.woff2" as="font" type="font/woff2" crossOrigin="anonymous" />
         <link rel="preload" href="/fonts/archivo-100-900-normal.woff2" as="font" type="font/woff2" crossOrigin="anonymous" />
         <link rel="preload" href="/fonts/space-mono-400-normal.woff2" as="font" type="font/woff2" crossOrigin="anonymous" />
-        <link rel="preload" href="/fonts/space-mono-700-normal.woff2" as="font" type="font/woff2" crossOrigin="anonymous" />
-        <link rel="preload" href="/logo-mark.png" as="image" fetchPriority="high" />
+        <link rel="preload" href="/habibcore-logo-transparent.png" as="image" fetchPriority="high" />
         {children}
         <Player />
         <Script src="/engine.js" strategy="afterInteractive" />

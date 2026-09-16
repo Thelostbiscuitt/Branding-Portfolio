@@ -75,7 +75,7 @@ export const projects: Project[] = [
     title:       'AI in the Workplace: Employee Training',
     description: 'A company-wide AI literacy programme for Birdview Travels & Tours: eleven modules delivered in one 90-minute session, with a self-built web hub carrying the curriculum, slides, and flashcards on one link.',
     tags:        ['Curriculum Design', 'Facilitation', 'Web Hub', 'Internal Comms', 'AI Literacy'],
-    thumb:       '/projects/ai-workplace-training/hero.jpg',
+    thumb:       '/projects/Visitor%20from%20Mars/ai-workplace-training/hero.jpg',
     year:        '2026',
   },
   {

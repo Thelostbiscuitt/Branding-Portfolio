@@ -1,0 +1,15 @@
+import { chromium } from "playwright-core";
+const b = await chromium.launch();
+const p = await b.newPage({ viewport: { width: 1600, height: 900 } });
+await p.goto("http://localhost:8123/#/");
+await p.waitForTimeout(900);
+await p.screenshot({ path: "/tmp/proof/41_live_loader.png" });
+await p.waitForTimeout(1100);
+await p.screenshot({ path: "/tmp/proof/42_live_loader_mid.png" });
+await p.waitForTimeout(900);
+await p.screenshot({ path: "/tmp/proof/43_live_zoom.png" });
+await p.waitForTimeout(1200);
+await p.screenshot({ path: "/tmp/proof/44_live_site.png" });
+const gone = await p.evaluate(() => !document.getElementById("ld"));
+await b.close();
+console.log("loader removed after play:", gone);
