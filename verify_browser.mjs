@@ -65,7 +65,7 @@ ok("menu opens, label flips", (await page.textContent(".menu-trig .mt-label")) =
 await page.keyboard.press("Escape");
 await page.waitForTimeout(100);
 ok("menu closes on Escape", (await page.textContent(".menu-trig .mt-label")) === "Menu");
-ok("BUILD v3.9 — PORTED chip", (await page.textContent(".menu-build")).includes("BUILD v3.9 — PORTED"));
+ok("BUILD v4.0 — COPY SYSTEM 2026 chip", (await page.textContent(".menu-build")).includes("BUILD v4.0 — COPY SYSTEM 2026"));
 await page.hover('.dock-btn[data-flyout="caps"]');
 await page.waitForTimeout(200);
 ok("caps flyout hover-opens", await page.evaluate(() => !document.getElementById("flyout-caps").hidden));
@@ -140,7 +140,7 @@ if (await listBtn.count()) {
 await page.goto(BASE + "/#/work/biscuit-ai");
 await page.waitForTimeout(150);
 const caseSeg = await page.evaluate(() => document.querySelector('.page[data-route="/work/biscuit-ai"]')?.innerHTML || "");
-for (const sec of ["OVERVIEW", "THE CHALLENGE", "APPROACH", "DELIVERABLES", "RESULT", "QUESTIONS WE ACTUALLY GET"]) {
+for (const sec of ["OVERVIEW", "THE CHALLENGE", "APPROACH", "DELIVERABLES", "RESULT", "QUESTIONS WORTH ANSWERING"]) {
   ok(`biscuit-ai anatomy: ${sec}`, caseSeg.includes(sec));
 }
 ok("biscuit-ai YEAR is 2026 (workspace fact)", ((await page.evaluate(() => document.querySelector('.page[data-route="/work/biscuit-ai"] .ch-meta')?.textContent)) || "").includes("2026"));
@@ -341,10 +341,10 @@ await page.goto(BASE + "/#/capabilities/brand-identity"); await page.waitForTime
 const capDepth = await page.evaluate(() => {
   const pg = document.querySelector('.page[data-route="/capabilities/brand-identity"]');
   const t = pg?.textContent || "";
-  return { n: t.includes("THE NUMBERS"), b: t.includes("WHAT I BUILD"), q: t.includes("QUESTIONS I ACTUALLY GET"),
+  return { n: t.includes("THE NUMBERS"), b: t.includes("WHAT I ACTUALLY DO"), q: t.includes("QUESTIONS WORTH ANSWERING"),
     stats: pg.querySelectorAll(".cap-stats > div").length, svc: pg.querySelectorAll(".cap-svc").length, faq: pg.querySelectorAll(".cp-faq details").length };
 });
-ok("cap brand-identity: THE NUMBERS + WHAT I BUILD + FAQ", capDepth.n && capDepth.b && capDepth.q);
+ok("cap brand-identity: THE NUMBERS + WHAT I ACTUALLY DO + FAQ", capDepth.n && capDepth.b && capDepth.q);
 ok("cap brand-identity: 4 stats + 4 service areas + 3 FAQs", capDepth.stats === 4 && capDepth.svc === 4 && capDepth.faq === 3, `stats=${capDepth.stats} svc=${capDepth.svc} faq=${capDepth.faq}`);
 const capV38 = await page.evaluate(() => {
   const pg = document.querySelector('.page[data-route="/capabilities/brand-identity"]');
@@ -357,12 +357,12 @@ ok("cap brand-identity: v3.8 industries posture (hero, 4 cards, shipped rows, cl
   capV38.hero && capV38.heroCta && capV38.cards === 4 && capV38.shipRows >= 3 && capV38.close,
   JSON.stringify(capV38));
 const capsDepth = await page.evaluate(() => [...document.querySelectorAll(".page")]
-  .filter(p => (p.getAttribute("data-route") || "").startsWith("/capabilities/") && p.getAttribute("data-route") !== "/capabilities" && p.textContent.includes("WHAT I BUILD")).length);
+  .filter(p => (p.getAttribute("data-route") || "").startsWith("/capabilities/") && p.getAttribute("data-route") !== "/capabilities" && p.textContent.includes("WHAT I ACTUALLY DO")).length);
 ok("all 8 capability pages carry the depth", capsDepth === 8, `${capsDepth}/8`);
 await page.goto(BASE + "/#/approach"); await page.waitForTimeout(150);
 const apDepth = await page.evaluate(() => {
   const t = document.querySelector('.page[data-route="/approach"]')?.textContent || "";
-  return { a: t.includes("THE ARGUMENT"), p: t.includes("OPERATING PRINCIPLES"), q: t.includes("QUESTIONS I ACTUALLY GET"),
+  return { a: t.includes("THE ARGUMENT"), p: t.includes("OPERATING PRINCIPLES"), q: t.includes("QUESTIONS WORTH ANSWERING"),
     rows: document.querySelectorAll('.page[data-route="/approach"] .range-index .index-row').length };
 });
 ok("approach: argument + principles + FAQ", apDepth.a && apDepth.p && apDepth.q, `index-rows=${apDepth.rows}`);

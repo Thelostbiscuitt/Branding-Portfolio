@@ -51,7 +51,7 @@ for r in case_routes:
     seg = html[start:end]
     secs = (("CONTEXT", "WHAT I DID", "NEXT CASE") if r in ARCH else
             ("OVERVIEW", "THE CHALLENGE", "APPROACH", "DELIVERABLES", "RESULT",
-             "QUESTIONS WE ACTUALLY GET", "NEXT CASE"))
+             "QUESTIONS WORTH ANSWERING", "NEXT CASE"))
     for sec in secs:
         if sec not in seg:
             errors.append(f"case {r}: missing section {sec}")
@@ -75,8 +75,8 @@ for needle in ('rel="canonical" href="https://habibcore.com/"', 'property="og:im
         errors.append(f"head missing: {needle}")
 
 # 9. build chip
-if "BUILD v3.9 — PORTED" not in html:
-    errors.append("BUILD v3.9 — PORTED chip missing")
+if "BUILD v4.0 — COPY SYSTEM 2026" not in html:
+    errors.append("BUILD v4.0 — COPY SYSTEM 2026 chip missing")
 
 # 9b-v3.8. capability pages in the industries posture
 for marker, expected, label in [('class="cap-hero"', 9, "statement heroes (8 caps + approach)"),
@@ -90,7 +90,8 @@ for marker, expected, label in [('class="cap-hero"', 9, "statement heroes (8 cap
 # 9b-v3.9. approach page: every step/plate/principle wired to shipped proof
 for marker, expected, label in [('class="ev-row"', 5, "approach plate evidence rows"),
                                 ('class="ev"', 9, "approach evidence links (5 steps + 4 principles)"),
-                                ('The handoff</em> is the bug', 1, "approach argument")]:
+                                ('The handoff is the bug', 0, "approach argument (retired headline)"),
+                                ('I do not have</em> a 23-step process', 1, "approach hero (v4.0 copy)")]:
     n = html.count(marker)
     if n != expected:
         errors.append(f"{label}: found {n}x, expected {expected}")
@@ -104,8 +105,8 @@ if 'id="workCount"' in html or 'data-cat="ALL"' in html or "SHOWING 10 OF 10" in
     errors.append("work intro/counter/filters still present")
 if "position: fixed; left: 50%; bottom: 18px;" not in html:
     errors.append("view pill float css missing")
-for marker, expected, label in [("THE NUMBERS", 8, "capability stats"), ("WHAT I BUILD", 8, "capability service areas"),
-                                ("QUESTIONS I ACTUALLY GET", 9, "faq blocks"), 
+for marker, expected, label in [("THE NUMBERS", 8, "capability stats"), ("WHAT I ACTUALLY DO", 8, "capability service areas"),
+                                ("QUESTIONS WORTH ANSWERING", 15, "faq blocks (9 cap/approach + 6 cases)"),
                                 ("OPERATING PRINCIPLES", 1, "approach principles"), ("THE MANIFESTO", 1, "about manifesto"),
                                 ("HOW I EMBED", 1, "about embed"), ("WORD OF MOUTH", 1, "about word of mouth")]:
     n = html.count(marker)
