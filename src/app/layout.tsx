@@ -57,7 +57,9 @@ export default function RootLayout({
         />
         {children}
         <Player />
-        <Script src="/engine.js" strategy="afterInteractive" />
+        {/* ?v= busts browser-cached copies of engine.js across deploys —
+            bump it whenever public/engine.js changes */}
+        <Script src="/engine.js?v=loader-v6-2" strategy="afterInteractive" />
       </body>
     </html>
   )
