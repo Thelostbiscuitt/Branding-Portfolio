@@ -2052,9 +2052,97 @@ body:not([data-route^="/work/"]) .case-pill { display: none; }
   .sound-tease { display: inline-block; padding: 12px 0; margin: -12px 0; }
 }
 </style>
+<style data-build="v4.1">
+/* ===== welcome loader — liquid-wave wordmark wash, session-scoped ===== */
+#ld { position:fixed; inset:0; z-index:400; background:var(--hc-surface-ink, #0b0b0c);
+      display:flex; align-items:center; justify-content:center;
+      opacity:1; transition:opacity .55s ease; }
+#ld.ld-done { opacity:0; pointer-events:none; }
+#ld[hidden] { display:none; }
+.ld-stage { position:relative; width:min(76vw,880px);
+            transition:transform .9s cubic-bezier(.7,0,.84,0);
+            transform:translateZ(0); }
+#ld.ld-zoom .ld-stage { transform:scale(9); }
+.ld-stage svg { display:block; width:100%; height:auto; overflow:visible; }
+.ld-dim   { color:var(--hc-grey-1, #26262a); }
+.ld-white { color:var(--hc-paper); }
+.ld-count { position:absolute; right:0; bottom:-20px;
+            font-family:"IBM Plex Mono", monospace; font-size:11px;
+            letter-spacing:.14em; color:var(--hc-paper); opacity:.92;
+            font-variant-numeric:tabular-nums; }
+@media (prefers-reduced-motion: reduce) {
+  #ld { transition-duration:.25s; }
+  .ld-stage { transition:none; }
+}
+</style>
 </head>
 <script>document.documentElement.classList.add('js');</script>
 <body>
+<!-- ================= v4.1 welcome loader — plays once per session ================= -->
+<div id="ld" aria-hidden="true" hidden>
+  <svg width="0" height="0" style="position:absolute"><defs><g id="ld-wm"><g transform="translate(8.0,76.60000000000001)"><path fill="currentColor" d="M7.5 0.0V-68.7H24.0V-41.8H53.1V-68.7H69.5V0.0H53.1V-28.2H24.0V0.0Z"/><path fill="currentColor" d="M96.6 1.2Q93.7 1.2 90.6 0.6Q87.6 -0.1 85.0 -1.6Q82.4 -3.2 80.8 -6.2Q79.2 -9.1 79.2 -13.6Q79.2 -19.2 81.7 -22.8Q84.1 -26.4 88.6 -28.4Q93.1 -30.5 99.4 -31.3Q105.7 -32.1 113.5 -32.1V-35.7Q113.5 -38.0 112.6 -39.6Q111.8 -41.3 110.0 -42.2Q108.2 -43.1 105.1 -43.1Q102.1 -43.1 100.1 -42.4Q98.2 -41.7 97.2 -40.5Q96.3 -39.3 96.3 -37.8V-36.7H81.5Q81.4 -37.2 81.4 -37.6Q81.4 -38.0 81.4 -38.6Q81.4 -43.3 84.3 -46.7Q87.2 -50.1 92.5 -52.0Q97.8 -53.9 105.1 -53.9Q112.4 -53.9 117.6 -52.0Q122.8 -50.2 125.7 -46.5Q128.6 -42.7 128.6 -37.0V-13.8Q128.6 -12.0 129.6 -11.1Q130.6 -10.1 132.0 -10.1H135.3V-0.6Q134.2 -0.0 132.0 0.6Q129.8 1.1 126.7 1.1Q123.5 1.1 121.1 0.3Q118.7 -0.5 117.1 -2.1Q115.6 -3.6 114.9 -5.8H114.3Q112.4 -3.7 109.9 -2.2Q107.4 -0.6 104.1 0.3Q100.9 1.2 96.6 1.2ZM102.0 -9.7Q104.6 -9.7 106.7 -10.5Q108.8 -11.2 110.3 -12.6Q111.8 -14.0 112.6 -15.9Q113.5 -17.8 113.5 -20.1V-23.3Q107.8 -23.3 103.5 -22.5Q99.3 -21.8 96.9 -20.0Q94.6 -18.3 94.6 -15.3Q94.6 -13.5 95.5 -12.2Q96.4 -10.9 98.1 -10.3Q99.7 -9.7 102.0 -9.7Z"/><path fill="currentColor" d="M171.6 1.2Q166.5 1.2 162.3 -0.9Q158.0 -2.9 155.4 -7.2H154.7L153.6 0.0H141.1V-72.4H156.3V-47.0H156.9Q158.5 -49.3 160.8 -50.8Q163.0 -52.4 165.9 -53.1Q168.8 -53.9 172.1 -53.9Q178.4 -53.9 183.1 -50.9Q187.8 -48.0 190.4 -41.9Q193.1 -35.8 193.1 -26.4Q193.1 -17.0 190.5 -10.8Q187.9 -4.7 183.1 -1.8Q178.3 1.2 171.6 1.2ZM166.9 -10.9Q170.9 -10.9 173.3 -12.5Q175.6 -14.0 176.7 -17.1Q177.7 -20.2 177.7 -24.8V-27.7Q177.7 -32.3 176.7 -35.5Q175.6 -38.6 173.3 -40.2Q170.9 -41.8 166.9 -41.8Q164.1 -41.8 162.1 -40.8Q160.0 -39.7 158.7 -37.8Q157.4 -35.9 156.8 -33.2Q156.2 -30.5 156.2 -27.3V-25.2Q156.2 -20.8 157.3 -17.6Q158.4 -14.4 160.8 -12.6Q163.2 -10.9 166.9 -10.9Z"/><path fill="currentColor" d="M202.2 -60.1V-72.4H217.3V-60.1ZM202.2 0.0V-52.7H217.3V0.0Z"/><path fill="currentColor" d="M259.4 1.2Q254.3 1.2 250.1 -0.9Q245.8 -2.9 243.2 -7.2H242.5L241.4 0.0H228.9V-72.4H244.1V-47.0H244.7Q246.3 -49.3 248.6 -50.8Q250.8 -52.4 253.7 -53.1Q256.6 -53.9 259.9 -53.9Q266.2 -53.9 270.9 -50.9Q275.6 -48.0 278.2 -41.9Q280.9 -35.8 280.9 -26.4Q280.9 -17.0 278.3 -10.8Q275.7 -4.7 270.9 -1.8Q266.1 1.2 259.4 1.2ZM254.7 -10.9Q258.7 -10.9 261.1 -12.5Q263.4 -14.0 264.5 -17.1Q265.5 -20.2 265.5 -24.8V-27.7Q265.5 -32.3 264.5 -35.5Q263.4 -38.6 261.1 -40.2Q258.7 -41.8 254.7 -41.8Q251.9 -41.8 249.9 -40.8Q247.8 -39.7 246.5 -37.8Q245.2 -35.9 244.6 -33.2Q244.0 -30.5 244.0 -27.3V-25.2Q244.0 -20.8 245.1 -17.6Q246.2 -14.4 248.6 -12.6Q251.0 -10.9 254.7 -10.9Z"/><path fill="currentColor" d="M291.3 0.0V-15.5H307.3V0.0Z"/></g></g><clipPath id="ld-wave"><path id="ld-wave-path" d=""/></clipPath></defs></svg>
+  <div class="ld-stage">
+    <svg viewBox="-6 -2 343 88" role="img" aria-label="Habib.">
+      <use href="#ld-wm" class="ld-dim"/>
+      <g clip-path="url(#ld-wave)"><use href="#ld-wm" class="ld-white"/></g>
+    </svg>
+    <div class="ld-count" id="ld-count">loading… 0%</div>
+  </div>
+</div>
+<script data-build="v4.1">
+(function () {
+  "use strict";
+  var KEY = "ld-seen";
+  var ld = document.getElementById("ld");
+  if (!ld) return;
+  try { if (sessionStorage.getItem(KEY)) { ld.remove(); return; } } catch (e) { ld.remove(); return; }
+  ld.hidden = false;
+  var reduced = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var wave = document.getElementById("ld-wave-path"),
+      count = document.getElementById("ld-count"),
+      stage = ld.querySelector(".ld-stage");
+  var DUR = 3400, MIN = 1400, HOLD = 0.92, WASHES = 2.6, t0 = performance.now(),
+      loaded = false, finished = false, last = t0, p = 0;
+  var ease = function (t) { return t < .5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2; };
+  function paint() {
+    var osc = (1 - Math.cos(2 * Math.PI * p * WASHES)) / 2;
+    var top = -4 + 86 * osc;
+    if (p > .92) top = -4 + 86 * (1 - ease((p - .92) / .08));
+    var amp = 3.2, d = "";
+    for (var i = 0; i <= 28; i++) {
+      var x = -6 + (343 / 28) * i;
+      d += (i ? "L" : "M") + x.toFixed(1) + " " + (top + Math.sin(i * .62 + p * 26) * amp).toFixed(1) + " ";
+    }
+    wave.setAttribute("d", d + "L337 82L-6 82Z");
+    count.textContent = "loading… " + Math.floor(p * 100) + "%";
+  }
+  function exit() {
+    if (finished) return;
+    finished = true;
+    try { sessionStorage.setItem(KEY, "1"); } catch (e) {}
+    if (reduced) { ld.classList.add("ld-done"); setTimeout(function () { ld.remove(); }, 300); return; }
+    ld.classList.add("ld-zoom");
+    setTimeout(function () {
+      ld.classList.add("ld-done");
+      setTimeout(function () { ld.remove(); }, 600);
+    }, 620);
+  }
+  if (reduced) { wave.setAttribute("d", "M-6 -4L337 -4L337 82L-6 82Z"); count.textContent = "loading… 100%"; }
+  window.addEventListener("load", function () { loaded = true; });
+  setTimeout(function () { loaded = true; }, 6000); /* hard fallback */
+  function tick(now) {
+    if (finished) return;
+    var dt = now - last; last = now;
+    var target = loaded ? 1 : HOLD;
+    if (p < target) p = Math.min(target, p + dt / (p < HOLD ? DUR : DUR * .45));
+    if (!reduced) paint();
+    if (p >= 1 && now - t0 >= (reduced ? 500 : MIN)) return exit();
+    requestAnimationFrame(tick);
+  }
+  requestAnimationFrame(tick);
+})();
+</script>
+
 <a class="skip" href="#/work">Skip to work</a>
 
 <!-- ================= HEADER — canonical Habib. wordmark on ink ================= -->
@@ -2163,7 +2251,7 @@ body:not([data-route^="/work/"]) .case-pill { display: none; }
         <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="8.5"/><path d="M3.5 12h17M12 3.5c2.5 2.3 3.8 5.2 3.8 8.5s-1.3 6.2-3.8 8.5c-2.5-2.3-3.8-5.2-3.8-8.5s1.3-6.2 3.8-8.5Z"/></svg>
       </a>
       <span class="menu-clock"><span aria-hidden="true">LAGOS, NG &mdash; </span><span data-clock>00:00:00 WAT</span></span>
-      <span class="menu-build">BUILD v4.0 — COPY SYSTEM 2026</span>
+      <span class="menu-build">BUILD v4.1 — WELCOME LOADER</span>
     </div>
   </div>
 

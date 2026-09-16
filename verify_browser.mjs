@@ -40,6 +40,15 @@ page.on("requestfailed", (r) => {
 
 await page.goto(BASE + "/#/");
 
+// ---- 0. v4.1 welcome loader: plays once, then session-skipped
+await page.waitForSelector("#ld", { state: "visible", timeout: 4000 }).catch(() => {});
+ok("loader appears on first load", await page.evaluate(() => !!document.getElementById("ld")));
+await page.waitForSelector("#ld", { state: "detached", timeout: 9000 }).catch(() => {});
+ok("loader finishes and removes itself", await page.evaluate(() => !document.getElementById("ld")));
+await page.reload();
+await page.waitForTimeout(400);
+ok("loader skipped on reload (session guard)", await page.evaluate(() => !document.getElementById("ld")));
+
 // ---- 1. full route tour
 for (const r of ROUTES) {
   await page.goto(BASE + "/#" + r);
@@ -65,7 +74,7 @@ ok("menu opens, label flips", (await page.textContent(".menu-trig .mt-label")) =
 await page.keyboard.press("Escape");
 await page.waitForTimeout(100);
 ok("menu closes on Escape", (await page.textContent(".menu-trig .mt-label")) === "Menu");
-ok("BUILD v4.0 — COPY SYSTEM 2026 chip", (await page.textContent(".menu-build")).includes("BUILD v4.0 — COPY SYSTEM 2026"));
+ok("BUILD v4.1 — WELCOME LOADER chip", (await page.textContent(".menu-build")).includes("BUILD v4.1 — WELCOME LOADER"));
 await page.hover('.dock-btn[data-flyout="caps"]');
 await page.waitForTimeout(200);
 ok("caps flyout hover-opens", await page.evaluate(() => !document.getElementById("flyout-caps").hidden));

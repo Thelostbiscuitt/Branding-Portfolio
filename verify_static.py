@@ -75,8 +75,15 @@ for needle in ('rel="canonical" href="https://habibcore.com/"', 'property="og:im
         errors.append(f"head missing: {needle}")
 
 # 9. build chip
-if "BUILD v4.0 — COPY SYSTEM 2026" not in html:
-    errors.append("BUILD v4.0 — COPY SYSTEM 2026 chip missing")
+if "BUILD v4.1 — WELCOME LOADER" not in html:
+    errors.append("BUILD v4.1 — WELCOME LOADER chip missing")
+if 'id="ld"' not in html:
+    errors.append("v4.1: welcome loader #ld missing")
+if 'id="ld-wave"' not in html or 'id="ld-wm"' not in html:
+    errors.append("v4.1: loader wave/glyph defs missing")
+if 'sessionStorage.getItem(KEY)' not in html:
+    errors.append("v4.1: loader session guard missing")
+notes.append("v4.1 welcome loader present (session-scoped, reduced-motion aware)")
 
 # 9b-v3.8. capability pages in the industries posture
 for marker, expected, label in [('class="cap-hero"', 9, "statement heroes (8 caps + approach)"),

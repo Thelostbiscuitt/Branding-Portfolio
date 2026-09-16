@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HABIBCORE — loader preview (v4.1)</title>
+<style>
+  :root { --ink:#0b0b0c; --paper:#f4f2ed; --dim:#262628; }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { background:var(--paper); font-family:Arial, sans-serif; }
+  /* ===== mock site underneath (stand-in for the real portfolio) ===== */
+  .site { height:100vh; display:flex; align-items:flex-end; padding:28px;
+          background:var(--paper); color:var(--ink); }
+  .site h1 { font-size:clamp(40px,8vw,110px); font-weight:900; letter-spacing:-.04em; }
+  /* ===== loader overlay ===== */
+  .loader { position:fixed; inset:0; z-index:999; background:var(--hc-surface-ink, #0b0b0c);
+            display:flex; align-items:center; justify-content:center;
+            transition:opacity .5s ease; }
+  .loader.done { opacity:0; pointer-events:none; }
+  .ld-stage { position:relative; width:min(78vw,900px); transition:transform .9s cubic-bezier(.7,0,.84,0); }
+  .loader.zoom .ld-stage { transform:scale(9); }
+  .ld-stage svg { display:block; width:100%; height:auto; overflow:visible; }
+  .ld-dim  { color:var(--dim); }
+  .ld-white{ color:var(--paper); }
+  .ld-count { position:absolute; right:0; bottom:-18px;
+              font-family:'IBM Plex Mono', monospace; font-size:11px;
+              letter-spacing:.14em; color:var(--paper); opacity:.9;
+              font-variant-numeric:tabular-nums; }
+  .ld-count b { font-weight:400; }
+  .replay { position:fixed; bottom:22px; right:22px; z-index:1000;
+            font-family:monospace; font-size:12px; letter-spacing:.12em;
+            background:var(--paper); color:var(--ink); border:0;
+            padding:10px 16px; border-radius:999px; cursor:pointer; }
+</style>
+</head>
+<body>
+<div class="site"><h1>HABIBCORE</h1></div>
+
+<div class="loader" id="loader">
+  <div class="ld-stage" id="stage">
+    <svg viewBox="-6 -2 343 88" aria-label="Habib." role="img">
+      <defs><g id="wm"><g transform="translate(8.0,76.60000000000001)"><path fill="currentColor" d="M7.5 0.0V-68.7H24.0V-41.8H53.1V-68.7H69.5V0.0H53.1V-28.2H24.0V0.0Z"/><path fill="currentColor" d="M96.6 1.2Q93.7 1.2 90.6 0.6Q87.6 -0.1 85.0 -1.6Q82.4 -3.2 80.8 -6.2Q79.2 -9.1 79.2 -13.6Q79.2 -19.2 81.7 -22.8Q84.1 -26.4 88.6 -28.4Q93.1 -30.5 99.4 -31.3Q105.7 -32.1 113.5 -32.1V-35.7Q113.5 -38.0 112.6 -39.6Q111.8 -41.3 110.0 -42.2Q108.2 -43.1 105.1 -43.1Q102.1 -43.1 100.1 -42.4Q98.2 -41.7 97.2 -40.5Q96.3 -39.3 96.3 -37.8V-36.7H81.5Q81.4 -37.2 81.4 -37.6Q81.4 -38.0 81.4 -38.6Q81.4 -43.3 84.3 -46.7Q87.2 -50.1 92.5 -52.0Q97.8 -53.9 105.1 -53.9Q112.4 -53.9 117.6 -52.0Q122.8 -50.2 125.7 -46.5Q128.6 -42.7 128.6 -37.0V-13.8Q128.6 -12.0 129.6 -11.1Q130.6 -10.1 132.0 -10.1H135.3V-0.6Q134.2 -0.0 132.0 0.6Q129.8 1.1 126.7 1.1Q123.5 1.1 121.1 0.3Q118.7 -0.5 117.1 -2.1Q115.6 -3.6 114.9 -5.8H114.3Q112.4 -3.7 109.9 -2.2Q107.4 -0.6 104.1 0.3Q100.9 1.2 96.6 1.2ZM102.0 -9.7Q104.6 -9.7 106.7 -10.5Q108.8 -11.2 110.3 -12.6Q111.8 -14.0 112.6 -15.9Q113.5 -17.8 113.5 -20.1V-23.3Q107.8 -23.3 103.5 -22.5Q99.3 -21.8 96.9 -20.0Q94.6 -18.3 94.6 -15.3Q94.6 -13.5 95.5 -12.2Q96.4 -10.9 98.1 -10.3Q99.7 -9.7 102.0 -9.7Z"/><path fill="currentColor" d="M171.6 1.2Q166.5 1.2 162.3 -0.9Q158.0 -2.9 155.4 -7.2H154.7L153.6 0.0H141.1V-72.4H156.3V-47.0H156.9Q158.5 -49.3 160.8 -50.8Q163.0 -52.4 165.9 -53.1Q168.8 -53.9 172.1 -53.9Q178.4 -53.9 183.1 -50.9Q187.8 -48.0 190.4 -41.9Q193.1 -35.8 193.1 -26.4Q193.1 -17.0 190.5 -10.8Q187.9 -4.7 183.1 -1.8Q178.3 1.2 171.6 1.2ZM166.9 -10.9Q170.9 -10.9 173.3 -12.5Q175.6 -14.0 176.7 -17.1Q177.7 -20.2 177.7 -24.8V-27.7Q177.7 -32.3 176.7 -35.5Q175.6 -38.6 173.3 -40.2Q170.9 -41.8 166.9 -41.8Q164.1 -41.8 162.1 -40.8Q160.0 -39.7 158.7 -37.8Q157.4 -35.9 156.8 -33.2Q156.2 -30.5 156.2 -27.3V-25.2Q156.2 -20.8 157.3 -17.6Q158.4 -14.4 160.8 -12.6Q163.2 -10.9 166.9 -10.9Z"/><path fill="currentColor" d="M202.2 -60.1V-72.4H217.3V-60.1ZM202.2 0.0V-52.7H217.3V0.0Z"/><path fill="currentColor" d="M259.4 1.2Q254.3 1.2 250.1 -0.9Q245.8 -2.9 243.2 -7.2H242.5L241.4 0.0H228.9V-72.4H244.1V-47.0H244.7Q246.3 -49.3 248.6 -50.8Q250.8 -52.4 253.7 -53.1Q256.6 -53.9 259.9 -53.9Q266.2 -53.9 270.9 -50.9Q275.6 -48.0 278.2 -41.9Q280.9 -35.8 280.9 -26.4Q280.9 -17.0 278.3 -10.8Q275.7 -4.7 270.9 -1.8Q266.1 1.2 259.4 1.2ZM254.7 -10.9Q258.7 -10.9 261.1 -12.5Q263.4 -14.0 264.5 -17.1Q265.5 -20.2 265.5 -24.8V-27.7Q265.5 -32.3 264.5 -35.5Q263.4 -38.6 261.1 -40.2Q258.7 -41.8 254.7 -41.8Q251.9 -41.8 249.9 -40.8Q247.8 -39.7 246.5 -37.8Q245.2 -35.9 244.6 -33.2Q244.0 -30.5 244.0 -27.3V-25.2Q244.0 -20.8 245.1 -17.6Q246.2 -14.4 248.6 -12.6Q251.0 -10.9 254.7 -10.9Z"/><path fill="currentColor" d="M291.3 0.0V-15.5H307.3V0.0Z"/></g></g></defs>
+      <use href="#wm" class="ld-dim"/>
+      <g clip-path="url(#ldWave)"><use href="#wm" class="ld-white"/></g>
+      <clipPath id="ldWave"><path id="wavePath" d=""/></clipPath>
+    </svg>
+    <div class="ld-count" id="count"><b>loading… 0%</b></div>
+  </div>
+</div>
+<button class="replay" id="replay">↻ REPLAY LOADER</button>
+
+<script>
+const DUR = 3400, WASHES = 2.6;
+const loader = document.getElementById('loader'),
+      stage  = document.getElementById('stage'),
+      count  = document.getElementById('count'),
+      wave   = document.getElementById('wavePath');
+const ease = t => t<.5 ? 2*t*t : 1-Math.pow(-2*t+2,2)/2;
+function setProgress(p){                       // p: 0..1
+  if (p >= 1) return exit();
+  const c = p * WASHES;
+  const osc = (1 - Math.cos(2*Math.PI*c)) / 2; // 0→1→0→1 waterline cycles
+  let top = -4 + 86 * osc;                     // waterline in glyph space (caps ~8, baseline ~77)
+  if (p > .92) top = -4 + 86 * (1 - ease((p-.92)/.08));
+  const phase = p * 26, amp = 3.2;
+  let d = '';
+  for (let i=0;i<=28;i++){ const x=-6+(343/28)*i;
+    const y = top + Math.sin(i*.62+phase)*amp;
+    d += (i? 'L':'M') + x.toFixed(1) + ' ' + y.toFixed(1) + ' '; }
+  wave.setAttribute('d', d + 'L337 82L-6 82Z');
+  count.innerHTML = '<b>loading… ' + Math.floor(p*100) + '%</b>';
+}
+function exit(){
+  setProgressStatic();
+  loader.classList.add('zoom');
+  setTimeout(()=>{ loader.classList.add('done'); }, 620);
+}
+function setProgressStatic(){
+  wave.setAttribute('d','M-6 -4L337 -4L337 82L-6 82Z');
+  count.innerHTML = '<b>loading… 100%</b>';
+}
+let t0 = performance.now();
+(function tick(now){
+  const p = Math.min(1, (now - t0)/DUR);
+  if (!loader.classList.contains('zoom')) setProgress(p);
+  if (p < 1) requestAnimationFrame(tick);
+})(t0);
+function replay(){ loader.classList.remove('done','zoom');
+  t0 = performance.now(); requestAnimationFrame(function tick(now){
+    const p = Math.min(1,(now-t0)/DUR);
+    if (!loader.classList.contains('zoom')) setProgress(p);
+    if (p<1) requestAnimationFrame(tick);
+  }); }
+document.getElementById('replay').onclick = replay;
+window.__setProgress = p => { t0 = performance.now() - p*DUR; setProgress(Math.min(p,1)); };
+</script>
+</body>
+</html>
