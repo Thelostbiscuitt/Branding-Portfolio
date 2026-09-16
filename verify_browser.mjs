@@ -22,6 +22,10 @@ const ROUTES = ["/", "/work", "/work/biscuit-ai", "/work/chef4me", "/work/leadwa
   "/capabilities/creative-direction", "/capabilities/graphic-design", "/capabilities/training",
   "/approach", "/about", "/contact"];
 
+const CASES_slugs = ["biscuit-ai", "chef4me", "leadway-pensure", "olumayowa-nursing-home",
+  "ai-in-the-workplace", "relay", "skaame", "layo-isaac", "blvckoreo", "1ethfp",
+  "bedroom-recordings-ii", "singles-cover-art", "visitor-from-mars", "gen-sadiq", "tbogd"];
+
 const browser = await chromium.launch();
 const page = await browser.newPage({ viewport: { width: 1600, height: 900 } });
 page.on("console", (m) => { if (m.type() === "error" || m.type() === "warning") consoleIssues.push(`[console.${m.type()}] ${m.text()}`); });
@@ -61,7 +65,7 @@ ok("menu opens, label flips", (await page.textContent(".menu-trig .mt-label")) =
 await page.keyboard.press("Escape");
 await page.waitForTimeout(100);
 ok("menu closes on Escape", (await page.textContent(".menu-trig .mt-label")) === "Menu");
-ok("BUILD v3.5 — PORTED chip", (await page.textContent(".menu-build")).includes("BUILD v3.5 — PORTED"));
+ok("BUILD v3.6 — PORTED chip", (await page.textContent(".menu-build")).includes("BUILD v3.6 — PORTED"));
 await page.hover('.dock-btn[data-flyout="caps"]');
 await page.waitForTimeout(200);
 ok("caps flyout hover-opens", await page.evaluate(() => !document.getElementById("flyout-caps").hidden));
@@ -97,10 +101,11 @@ if (await listBtn.count()) {
   await page.waitForTimeout(250);
   const rows = await page.evaluate(() => document.querySelectorAll(".idx-row").length);
   const view = await page.getAttribute("#work", "data-workview");
-  ok("wheel view renders 15 giant rows", rows === 15 && view === "index", `${rows} rows, workview=${view}`);
+  ok("wheel view renders 45 giant rows (15 × 3 loop copies)", rows === 45 && view === "index", `${rows} rows, workview=${view}`);
   ok("logo lockup visible in wheel view", await page.evaluate(() => getComputedStyle(document.getElementById("pickLogo")).display !== "none"));
+  ok("wheel picker carries the REAL logo mark", await page.evaluate(() => { const i = document.querySelector("#pickLogo img"); return i && i.naturalWidth > 0 && i.src.includes("logo-mark.png"); }));
   // scroll-driven active row: the row nearest viewport centre goes solid + carries the meta pair
-  await page.evaluate(() => { document.querySelectorAll(".idx-row")[6].scrollIntoView({ block: "center" }); window.dispatchEvent(new Event("scroll")); });
+  await page.evaluate(() => { document.querySelectorAll(".idx-row")[6].scrollIntoView({ block: "center", behavior: "instant" }); window.dispatchEvent(new Event("scroll")); });
   await page.waitForTimeout(400);
   const lvState = await page.evaluate(() => {
     const cur = document.querySelector('.idx-row[aria-current="true"]');
@@ -108,11 +113,24 @@ if (await listBtn.count()) {
   });
   ok("wheel: active row follows scroll", lvState.slug && lvState.slug !== "biscuit-ai", `active=${lvState.slug}`);
   ok("wheel: YEAR/SECTOR visible on active row only", lvState.metaVisible);
+  // v3.6 infinite wheel: scroll far past the second copy seam — the page must
+  // silently re-centre inside the middle copy and keep cycling the same cases
+  await page.evaluate(() => { document.querySelectorAll(".idx-row")[38].scrollIntoView({ block: "center", behavior: "instant" }); window.dispatchEvent(new Event("scroll")); });
+  await page.waitForTimeout(450);
+  const loopState = await page.evaluate(() => {
+    const cur = document.querySelector('.idx-row[aria-current="true"]');
+    const list = document.getElementById("idxList").getBoundingClientRect();
+    return { slug: cur?.dataset.slug, count: document.querySelectorAll('.idx-row[aria-current="true"]').length };
+  });
+  ok("infinite wheel re-centres past the seam (1 active row, real slug)",
+     loopState.count === 1 && CASES_slugs.includes(loopState.slug), `active=${loopState.slug} ×${loopState.count}`);
   // the mark picks: click the logo -> opens the project the wheel parked on
+  await page.waitForTimeout(1000); /* let the loop settle before reading the parked row */
+  const slugNow = await page.evaluate(() => document.querySelector('.idx-row[aria-current="true"]')?.dataset.slug);
   await page.click("#pickLogo");
   await page.waitForTimeout(250);
   const picked = await page.evaluate(() => document.querySelector(".page.active")?.getAttribute("data-route"));
-  ok("logo picker opens the parked project", picked === "/work/" + lvState.slug, picked);
+  ok("logo picker opens the parked project", picked === "/work/" + slugNow, picked);
   await page.goto(BASE + "/#/work");
   await page.waitForTimeout(150);
   await page.click('button[data-view="grid"]');
@@ -125,11 +143,42 @@ const caseSeg = await page.evaluate(() => document.querySelector('.page[data-rou
 for (const sec of ["OVERVIEW", "THE CHALLENGE", "APPROACH", "DELIVERABLES", "RESULT", "QUESTIONS WE ACTUALLY GET"]) {
   ok(`biscuit-ai anatomy: ${sec}`, caseSeg.includes(sec));
 }
-ok("biscuit-ai YEAR is 2026 (workspace fact)", (await page.evaluate(() => document.querySelector('.page[data-route="/work/biscuit-ai"] .cp-meta-row')?.textContent)).includes("2026"));
+ok("biscuit-ai YEAR is 2026 (workspace fact)", ((await page.evaluate(() => document.querySelector('.page[data-route="/work/biscuit-ai"] .ch-meta')?.textContent)) || "").includes("2026"));
 ok("biscuit-ai GITHUB link cell", await page.evaluate(() => !!document.querySelector('.page[data-route="/work/biscuit-ai"] a[href*="BiscuitBot"]')));
 ok("NEXT CASE chain -> chef4me", await page.evaluate(() => document.querySelector('.page[data-route="/work/biscuit-ai"] .cp-next')?.getAttribute("href") === "#/work/chef4me"));
+// v3.6 JAWS anatomy: full-viewport hero + sticky section pill with scroll-spy
+ok("biscuit-ai full-viewport hero", await page.evaluate(() => {
+  const el = document.querySelector('.page[data-route="/work/biscuit-ai"] .case-hero');
+  return !!el && el.getBoundingClientRect().height >= window.innerHeight * 0.8;
+}));
+ok("biscuit-ai challenge rendered as cards", await page.evaluate(() => document.querySelectorAll('.page[data-route="/work/biscuit-ai"] .ch-card').length >= 2));
+await page.waitForTimeout(300);
+const pillState = await page.evaluate(() => {
+  const pill = document.getElementById("casePill");
+  const btns = [...pill.querySelectorAll("button")].map(b => b.textContent.trim());
+  const on = pill.querySelector("button.on")?.textContent.trim();
+  return { hidden: pill.hidden, btns, on };
+});
+ok("case pill builds on case route (6 sections)", !pillState.hidden && pillState.btns.length === 6, pillState.btns.join(" / "));
+ok("case pill scroll-spy highlights Overview at top", pillState.on === "Overview", `on=${pillState.on}`);
+await page.click('#casePill button[data-cs="result"]');
+await page.waitForTimeout(700);
+const jumpState = await page.evaluate(() => ({
+  resultTop: document.querySelector('.page.active .cp-sec[data-cs="result"]').getBoundingClientRect().top,
+  on: document.getElementById("casePill").querySelector("button.on")?.textContent.trim()
+}));
+ok("case pill click jumps to Result (spy follows to the section in view)",
+   jumpState.resultTop < 200 && (jumpState.on === "Result" || jumpState.on === "FAQ"),
+   `resultTop=${Math.round(jumpState.resultTop)} on=${jumpState.on}`);
+ok("case pill hidden off case routes", await page.evaluate(async () => {
+  location.hash = "#/about";
+  await new Promise(r => setTimeout(r, 200));
+  return document.getElementById("casePill").hidden;
+}));
+await page.goto(BASE + "/#/work/biscuit-ai");
+await page.waitForTimeout(150);
 ok("case media from /media", (await page.evaluate(() => document.querySelector('.page[data-route="/work/biscuit-ai"] .cp-media img')?.getAttribute("src")))?.startsWith("media/"));
-ok("CASE COPY v0.1 strip present", (await page.evaluate(() => document.querySelector('.page[data-route="/work/biscuit-ai"] .cp-note')?.textContent)).includes("CASE COPY v0.1"));
+ok("CASE COPY v0.1 draft strip removed from shipped pages", await page.evaluate(() => !document.querySelector('.page[data-route="/work/biscuit-ai"] .cp-note')));
 
 await page.goto(BASE + "/#/work/olumayowa-nursing-home"); await page.waitForTimeout(120);
 ok("olumayowa LIVE SITE link", await page.evaluate(() => !!document.querySelector('.page[data-route="/work/olumayowa-nursing-home"] a[href*="olumayowanursinghome.com"]')));
@@ -234,7 +283,7 @@ await page.goto(BASE + "/#/work/bedroom-recordings-ii"); await page.waitForTimeo
 ok("BR2: cassette figure from /media", (await page.evaluate(() => document.querySelector('.page[data-route="/work/bedroom-recordings-ii"] .cp-media img')?.getAttribute("src"))) === "media/bedroom-recordings-ii.webp");
 ok("BR2: tracklist figure", await page.evaluate(() => !!document.querySelector('.page[data-route="/work/bedroom-recordings-ii"] img[src="media/tracklist-br2.webp"]')));
 ok("BR2: NEXT CASE -> singles-cover-art", (await page.evaluate(() => document.querySelector('.page[data-route="/work/bedroom-recordings-ii"] .cp-next')?.getAttribute("href"))) === "#/work/singles-cover-art");
-ok("BR2: YEAR 2025", (await page.evaluate(() => document.querySelector('.page[data-route="/work/bedroom-recordings-ii"] .cp-meta-row')?.textContent)).includes("2025"));
+ok("BR2: YEAR 2025", ((await page.evaluate(() => document.querySelector('.page[data-route="/work/bedroom-recordings-ii"] .ch-meta')?.textContent)) || "").includes("2025"));
 
 await page.goto(BASE + "/#/work/singles-cover-art"); await page.waitForTimeout(150);
 ok("SINGLES: series strip (3 artworks — Gen.Sadiq moved out)", (await page.evaluate(() => document.querySelectorAll('.page[data-route="/work/singles-cover-art"] .cp-strip img').length)) === 3);

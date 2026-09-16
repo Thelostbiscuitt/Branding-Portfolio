@@ -75,8 +75,8 @@ for needle in ('rel="canonical" href="https://habibcore.com/"', 'property="og:im
         errors.append(f"head missing: {needle}")
 
 # 9. build chip
-if "BUILD v3.5 — PORTED" not in html:
-    errors.append("BUILD v3.5 — PORTED chip missing")
+if "BUILD v3.6 — PORTED" not in html:
+    errors.append("BUILD v3.6 — PORTED chip missing")
 
 # 9b. v3.5 work wheel + depth
 if ".idx-row:hover" in html:
@@ -94,6 +94,28 @@ for marker, expected, label in [("THE NUMBERS", 8, "capability stats"), ("WHAT I
     n = html.count(marker)
     if n != expected:
         errors.append(f"{label}: found {n}x, expected {expected}")
+
+# 9c. v3.6 — real mark picker, infinite wheel, JAWS-grade case pages + section pill
+if 'id="pickLogo"' in html and 'src="logo-mark.png"' not in html:
+    errors.append("pick lockup does not use the real logo mark")
+if "rowHtml + rowHtml + rowHtml" not in html:
+    errors.append("infinite wheel (3-copy list) missing")
+if "shift = -span" not in html or "shift = span" not in html:
+    errors.append("wheel copy-boundary normalizer missing")
+if 'id="casePill"' not in html:
+    errors.append("case section pill host missing")
+for marker, expected, label in [('class="case-hero"', 15, "full-viewport case heroes"),
+                                ('data-cs="challenge"', 6, "challenge data-cs hooks"),
+                                ('data-cs="approach"', 6, "approach data-cs hooks"),
+                                ('data-cs="result"', 6, "result data-cs hooks"),
+                                ('data-cs="faq"', 6, "faq data-cs hooks"),
+                                ('data-cs="overview"', 15, "overview data-cs hooks"),
+                                ('data-cs="deliverables"', 15, "deliverables data-cs hooks")]:
+    n = html.count(marker)
+    if n != expected:
+        errors.append(f"{label}: found {n}x, expected {expected}")
+if not pathlib.Path("logo-mark.png").exists():
+    errors.append("logo-mark.png missing from site root (picker asset)")
 
 # 10. audio deck: 6 BLVCK OREO masters (mood+bpm) + 4 Bedroom Recordings II cuts (artist)
 tracks = re.findall(r'\{\s*src:\s*"(media/audio/[^"]+)",\s*no:\s*"(T-\d+)",\s*title:\s*"([^"]+)",\s*mood:\s*"([^"]+)"(?:,\s*artist:\s*"([^"]+)")?(?:,\s*bpm:\s*(\d+))?', html)

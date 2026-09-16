@@ -171,7 +171,7 @@
       "extra": ""
     },
     {
-      "name": "BUILD v3.5 — PORTED chip",
+      "name": "BUILD v3.6 — PORTED chip",
       "pass": true,
       "extra": ""
     },
@@ -193,7 +193,7 @@
     {
       "name": "LAGOS clock ticks",
       "pass": true,
-      "extra": "20:28:41 WAT"
+      "extra": "04:01:39 WAT"
     },
     {
       "name": "flyout evidence card uses /media",
@@ -221,12 +221,17 @@
       "extra": ""
     },
     {
-      "name": "wheel view renders 15 giant rows",
+      "name": "wheel view renders 45 giant rows (15 × 3 loop copies)",
       "pass": true,
-      "extra": "15 rows, workview=index"
+      "extra": "45 rows, workview=index"
     },
     {
       "name": "logo lockup visible in wheel view",
+      "pass": true,
+      "extra": ""
+    },
+    {
+      "name": "wheel picker carries the REAL logo mark",
       "pass": true,
       "extra": ""
     },
@@ -241,9 +246,14 @@
       "extra": ""
     },
     {
+      "name": "infinite wheel re-centres past the seam (1 active row, real slug)",
+      "pass": true,
+      "extra": "active=blvckoreo ×1"
+    },
+    {
       "name": "logo picker opens the parked project",
       "pass": true,
-      "extra": "/work/skaame"
+      "extra": "/work/blvckoreo"
     },
     {
       "name": "biscuit-ai anatomy: OVERVIEW",
@@ -291,12 +301,42 @@
       "extra": ""
     },
     {
+      "name": "biscuit-ai full-viewport hero",
+      "pass": true,
+      "extra": ""
+    },
+    {
+      "name": "biscuit-ai challenge rendered as cards",
+      "pass": true,
+      "extra": ""
+    },
+    {
+      "name": "case pill builds on case route (6 sections)",
+      "pass": true,
+      "extra": "Overview / Challenge / Approach / Deliverable / Result / FAQ"
+    },
+    {
+      "name": "case pill scroll-spy highlights Overview at top",
+      "pass": true,
+      "extra": "on=Overview"
+    },
+    {
+      "name": "case pill click jumps to Result (spy follows to the section in view)",
+      "pass": true,
+      "extra": "resultTop=169 on=FAQ"
+    },
+    {
+      "name": "case pill hidden off case routes",
+      "pass": true,
+      "extra": ""
+    },
+    {
       "name": "case media from /media",
       "pass": true,
       "extra": ""
     },
     {
-      "name": "CASE COPY v0.1 strip present",
+      "name": "CASE COPY v0.1 draft strip removed from shipped pages",
       "pass": true,
       "extra": ""
     },
@@ -353,7 +393,7 @@
     {
       "name": "deck plays real master T-01",
       "pass": true,
-      "extra": "src=whats-up.mp3 t=0.58s"
+      "extra": "src=whats-up.mp3 t=0.59s"
     },
     {
       "name": "dock title updates",
