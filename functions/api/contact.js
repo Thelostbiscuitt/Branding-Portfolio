@@ -24,7 +24,6 @@
 const RESEND_ENDPOINT = "https://api.resend.com/emails";
 const DEFAULT_FROM = "Habibcore <onboarding@resend.dev>";
 const TO = "habib@habibcore.com";
-const MAX_BODY_BYTES = 16_384;
 
 const json = (body, status = 200) =>
   new Response(JSON.stringify(body), {
@@ -41,41 +40,6 @@ function esc(value) {
     .replace(/>/g, "&gt;")
     .replace(/"/g, "&quot;")
     .replace(/'/g, "&#039;");
-}
-
-async function readLimitedJson(request) {
-  const declared = Number(request.headers.get("Content-Length"));
-  if (declared > MAX_BODY_BYTES) throw new RangeError("Request too large");
-  const reader = request.body?.getReader();
-  if (!reader) throw new SyntaxError("Empty request");
-  const chunks = [];
-  let size = 0;
-  while (true) {
-    const { done, value } = await reader.read();
-    if (done) break;
-    size += value.byteLength;
-    if (size > MAX_BODY_BYTES) {
-      await reader.cancel();
-      throw new RangeError("Request too large");
-    }
-    chunks.push(value);
-  }
-  const bytes = new Uint8Array(size);
-  let offset = 0;
-  for (const chunk of chunks) { bytes.set(chunk, offset); offset += chunk.byteLength; }
-  return JSON.parse(new TextDecoder("utf-8", { fatal: true }).decode(bytes));
-}
-
-function validEnquiry(body) {
-  if (!body || typeof body !== "object" || Array.isArray(body)) return false;
-  const { name, email, projectType, timeline, brief } = body;
-  const textWithin = (value, max) => typeof value === "string" && value.length <= max;
-  const optionalText = [[timeline, 120], [brief, 5000]];
-  const validTypes = projectType === undefined ||
-    (Array.isArray(projectType) && projectType.length <= 8 && projectType.every((item) => textWithin(item, 80)));
-  return textWithin(name, 120) && !!name.trim() && !/[\r\n\x00-\x1f]/.test(name) &&
-    textWithin(email, 254) && /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(email) &&
-    optionalText.every(([value, max]) => value === undefined || textWithin(value, max)) && validTypes;
 }
 
 async function send(key, payload) {
@@ -171,27 +135,29 @@ function acknowledgementHtml({ safeName, safeProjectType, safeTimeline }) {
 }
 
 export async function onRequestPost({ request, env }) {
-  if (!request.headers.get("Content-Type")?.toLowerCase().startsWith("application/json")) {
-    return json({ error: "Expected JSON." }, 415);
-  }
   let body;
   try {
-    body = await readLimitedJson(request);
-  } catch (error) {
-    if (error instanceof RangeError) return json({ error: "Request too large." }, 413);
+    body = await request.json();
+  } catch {
     return json({ error: "Malformed request." }, 400);
   }
 
-  if (!validEnquiry(body)) return json({ error: "Please check your enquiry details." }, 400);
-  const { name, email, projectType, timeline, brief } = body;
+  const { name, email, projectType, timeline, brief } = body ?? {};
+
+  if (!name || !email) {
+    return json({ error: "Name and email are required." }, 400);
+  }
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+    return json({ error: "Please enter a valid email address." }, 400);
+  }
   if (!env.RESEND_API_KEY) {
     console.error("contact: RESEND_API_KEY is not configured");
     return json({ error: "Mail is not configured. Please email habib@habibcore.com directly." }, 500);
   }
 
   const from = env.CONTACT_FROM || DEFAULT_FROM;
-  const safeName = esc(name.trim());
-  const safeEmail = esc(email.trim());
+  const safeName = esc(name);
+  const safeEmail = esc(email);
   const safeTimeline = esc(timeline);
   const safeBrief = esc(brief);
   const safeProjectType = Array.isArray(projectType)
@@ -203,8 +169,8 @@ export async function onRequestPost({ request, env }) {
     await send(env.RESEND_API_KEY, {
       from,
       to: TO,
-      reply_to: email.trim(),
-      subject: `New enquiry from ${name.trim()}`,
+      reply_to: email,
+      subject: `New enquiry from ${safeName}`,
       html: notificationHtml({ safeName, safeEmail, safeProjectType, safeTimeline, safeBrief }),
     });
   } catch (err) {
@@ -217,7 +183,7 @@ export async function onRequestPost({ request, env }) {
   try {
     await send(env.RESEND_API_KEY, {
       from,
-      to: email.trim(),
+      to: email,
       reply_to: TO,
       subject: "Your message reached Habibcore",
       html: acknowledgementHtml({ safeName, safeProjectType, safeTimeline }),
@@ -228,3 +194,5 @@ export async function onRequestPost({ request, env }) {
 
   return json({ success: true });
 }
+
+

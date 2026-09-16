@@ -33,7 +33,7 @@ const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
 
 for (const file of fs.readdirSync(DIR).filter((f) => f.endsWith('.mp3')).sort()) {
   let buf;
-  try { buf = await analyze(file); } catch { console.log(JSON.stringify({ file, BROKEN: true })); continue; }
+  try { buf = await analyze(file); } catch (e) { console.log(JSON.stringify({ file, BROKEN: true })); continue; }
   const n = Math.floor(buf.length / 4);
   if (n < SR * 5) { console.log(JSON.stringify({ file, BROKEN: true })); continue; }
   const x = new Float32Array(n);

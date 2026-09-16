@@ -24,7 +24,7 @@ export default function LeadwayPensure() {
   return (
     <ProjectLayout
       title="Leadway Pensure: Brand & Communications"
-      heroImage="/projects/leadway/Brand%20pitch%20design%20deck/hero.jpg"
+      heroImage="/projects/leadway/hero.jpg"
       tone="brand"
       heroAlt="Leadway Pensure brand pitch hero: 'Your future, built with intention.'"
       meta={{
@@ -104,16 +104,16 @@ export default function LeadwayPensure() {
         },
       ]}
       screenshots={[
-        { src: '/projects/leadway/Brand%20pitch%20design%20deck/sc-brief.jpg',      alt: 'Leadway Pensure pitch: the brief, with company stats' },
-        { src: '/projects/leadway/Brand%20pitch%20design%20deck/sc-products.jpg',   alt: 'Leadway Pensure pitch: product suite intro and Personal Pension Plan treatment' },
-        { src: '/projects/leadway/Brand%20pitch%20design%20deck/sc-products-2.jpg', alt: 'Leadway Pensure pitch: AVC, Asset & Fund Management, and Micro Pension Plan cards' },
-        { src: '/projects/leadway/Brand%20pitch%20design%20deck/sc-identity.jpg',   alt: 'Leadway Pensure pitch: brand colour palette with hex values and roles' },
-        { src: '/projects/leadway/Brand%20pitch%20design%20deck/sc-type.jpg',       alt: 'Leadway Pensure pitch: typography scale from display to CTA label' },
-        { src: '/projects/leadway/Brand%20pitch%20design%20deck/sc-principles.jpg', alt: 'Leadway Pensure pitch: six brand principles built around the camel mark' },
-        { src: '/projects/leadway/Brand%20pitch%20design%20deck/sc-voice.jpg',      alt: 'Leadway Pensure pitch: brand voice do/avoid examples' },
-        { src: '/projects/leadway/Brand%20pitch%20design%20deck/sc-social.jpg',     alt: 'Leadway Pensure pitch: social post templates for Instagram, LinkedIn, X, and Facebook' },
-        { src: '/projects/leadway/Brand%20pitch%20design%20deck/sc-logo.jpg',       alt: 'Leadway Pensure pitch: logo usage across approved and prohibited backgrounds' },
-        { src: '/projects/leadway/Brand%20pitch%20design%20deck/sc-guidelines.jpg', alt: 'Leadway Pensure pitch: spacing system on a base-8 grid' },
+        { src: '/projects/leadway/sc-brief.jpg',      alt: 'Leadway Pensure pitch: the brief, with company stats' },
+        { src: '/projects/leadway/sc-products.jpg',   alt: 'Leadway Pensure pitch: product suite intro and Personal Pension Plan treatment' },
+        { src: '/projects/leadway/sc-products-2.jpg', alt: 'Leadway Pensure pitch: AVC, Asset & Fund Management, and Micro Pension Plan cards' },
+        { src: '/projects/leadway/sc-identity.jpg',   alt: 'Leadway Pensure pitch: brand colour palette with hex values and roles' },
+        { src: '/projects/leadway/sc-type.jpg',       alt: 'Leadway Pensure pitch: typography scale from display to CTA label' },
+        { src: '/projects/leadway/sc-principles.jpg', alt: 'Leadway Pensure pitch: six brand principles built around the camel mark' },
+        { src: '/projects/leadway/sc-voice.jpg',      alt: 'Leadway Pensure pitch: brand voice do/avoid examples' },
+        { src: '/projects/leadway/sc-social.jpg',     alt: 'Leadway Pensure pitch: social post templates for Instagram, LinkedIn, X, and Facebook' },
+        { src: '/projects/leadway/sc-logo.jpg',       alt: 'Leadway Pensure pitch: logo usage across approved and prohibited backgrounds' },
+        { src: '/projects/leadway/sc-guidelines.jpg', alt: 'Leadway Pensure pitch: spacing system on a base-8 grid' },
       ]}
       next={{
         slug:     'olumayowa-nursing-home',

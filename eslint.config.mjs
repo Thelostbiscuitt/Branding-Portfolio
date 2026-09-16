@@ -2,7 +2,7 @@ import nextCoreWebVitals from "eslint-config-next/core-web-vitals";
 import nextTypescript from "eslint-config-next/typescript";
 
 const eslintConfig = [
-  { ignores: ["Branding/**", "out/**", ".wrangler/**", ".kilo/**"] },
+  { ignores: ["jest.config.js", "Branding/**", "out/**"] },
   ...nextCoreWebVitals,
   ...nextTypescript,
   {

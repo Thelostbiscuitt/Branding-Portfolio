@@ -1,7 +1,7 @@
 'use client'
-/* eslint-disable @next/next/no-html-link-for-pages -- The homepage's legacy DOM engine initializes on a document load. */
 
 import { useState } from 'react'
+import Link from 'next/link'
 import { Menu, X } from 'lucide-react'
 import styles from './Nav.module.css'
 
@@ -16,19 +16,19 @@ export default function Nav() {
 
   return (
     <nav className={styles.nav} aria-label="Main navigation">
-      <a href="/" className={styles.logo} onClick={() => setOpen(false)}>
+      <Link href="/" className={styles.logo} onClick={() => setOpen(false)}>
         Habib.
-      </a>
+      </Link>
 
       <ul className={styles.links} role="list">
         {links.map((l) => (
-          <li key={l.href}><a href={l.href}>{l.label}</a></li>
+          <li key={l.href}><Link href={l.href}>{l.label}</Link></li>
         ))}
       </ul>
 
-      <a href="/#contact" className={styles.cta}>
+      <Link href="/#contact" className={styles.cta}>
         Hire me
-      </a>
+      </Link>
 
       <button
         type="button"
@@ -48,13 +48,13 @@ export default function Nav() {
       >
         {links.map((l) => (
           <li key={l.href}>
-            <a href={l.href} onClick={() => setOpen(false)}>{l.label}</a>
+            <Link href={l.href} onClick={() => setOpen(false)}>{l.label}</Link>
           </li>
         ))}
         <li>
-          <a href="/#contact" className={styles.mobileCta} onClick={() => setOpen(false)}>
+          <Link href="/#contact" className={styles.mobileCta} onClick={() => setOpen(false)}>
             Hire me
-          </a>
+          </Link>
         </li>
       </ul>
     </nav>

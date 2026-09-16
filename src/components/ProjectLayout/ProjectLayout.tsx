@@ -1,5 +1,4 @@
 import Image from 'next/image'
-/* eslint-disable @next/next/no-html-link-for-pages -- Returning home needs a document load to initialize its DOM engine. */
 import Link  from 'next/link'
 import type { ReactNode } from 'react'
 import Nav    from '@/components/Nav/Nav'
@@ -113,9 +112,9 @@ export default function ProjectLayout({
       <article id="project-content" className={`${styles.article} ${tone ? styles[`tone${tone.charAt(0).toUpperCase()}${tone.slice(1)}`] : ''}`}>
         {/* ── Back link ── */}
         <div className={styles.backRow}>
-          <a href="/#work" className={styles.back}>
+          <Link href="/#work" className={styles.back}>
             ← Back to work
-          </a>
+          </Link>
         </div>
 
         {/* ── Header ── */}

@@ -1,6 +1,5 @@
 import type * as React from 'react'
 import { rangeNodes } from '@/data/range'
-/* eslint-disable @next/next/no-img-element -- Static export uses pre-sized local images without a Next image server; below-fold media is lazy. */
 
 /* Habibcore — the homepage, ported from the 2026 index.html design.
    Warm paper / ink / rust. Fraunces / Archivo / Space Mono.
@@ -21,22 +20,17 @@ export default function Home() {
 {/* running folio  */}
 <div className="folio" aria-hidden="true">SECTION <b>00 · COVER</b></div>
 
-{/* The lockup is server-rendered so the brand is present on the first frame. */}
-<div className="hc-loader" id="hc-loader" role="status" aria-label="Loading HABIBCORE portfolio" tabIndex={-1}>
-  <div className="hc-stage">
-    <div className="hc-lockup">
-      <div className="hc-visual hc-base" aria-hidden="true">
-        <img className="hc-mark" src="/habibcore-logo-transparent.png" alt="" width={820} height={941} fetchPriority="high" />
-        <div className="hc-word">HABIBCORE</div>
-      </div>
-      <div className="hc-visual hc-fill" aria-hidden="true">
-        <img className="hc-mark hc-filled-mark" src="/habibcore-logo-transparent.png" alt="" width={820} height={941} />
-        <div className="hc-word">HABIBCORE</div>
-      </div>
-      <div className="hc-readout" aria-hidden="true">LOADING — <b className="hc-percent">00%</b></div>
-    </div>
-    <img className="hc-zoom-mark" src="/habibcore-logo-transparent.png" alt="" width={820} height={941} aria-hidden="true" />
+{/* preloader — multilingual greeting: Lagos → Nigeria → World */}
+<div className="preloader" aria-hidden="true">
+  <div className="pl-top">
+    <span>HABIBCORE® · PORTFOLIO, 2026</span>
+    <span>6°27′N, 3°24′E · LAGOS, NG</span>
   </div>
+  <div className="pl-greet">
+    <span className="pl-mark"><img src="/logo-mark.png" alt="" width={128} height={128} decoding="async" /></span>
+    <b className="pl-word">Hello</b>
+  </div>
+  <p className="pl-lang"><b>01 · ENGLISH · LAGOS</b></p>
 </div>
 
 {/* custom cursor  */}
@@ -181,7 +175,7 @@ export default function Home() {
             <div>
               <div className="p-panel-inner">
                 <div>
-                  <figure className="p-fig img-reveal"><img src="/generated/biscuit-chat.webp" alt="Biscuit AI: Telegram assistant conversation" width={1200} height={1553} decoding="async" loading="lazy" /></figure>
+                  <figure className="p-fig img-reveal"><img src="/generated/biscuit-chat.webp" alt="Biscuit AI: Telegram assistant conversation" width={1200} height={1553} decoding="async" /></figure>
                   <p className="p-figcap">FIG. 01 · AI · PRODUCT</p>
                 </div>
                 <div className="p-body">
@@ -213,7 +207,7 @@ export default function Home() {
             <div>
               <div className="p-panel-inner">
                 <div>
-                  <figure className="p-fig img-reveal"><img src="/generated/chef4me.webp" alt="Chef4Me: kitchen assistant" width={1400} height={612} decoding="async" loading="lazy" /></figure>
+                  <figure className="p-fig img-reveal"><img src="/generated/chef4me.webp" alt="Chef4Me: kitchen assistant" width={1400} height={612} decoding="async" /></figure>
                   <p className="p-figcap">FIG. 02 · CONSUMER · AI</p>
                 </div>
                 <div className="p-body">
@@ -244,7 +238,7 @@ export default function Home() {
             <div>
               <div className="p-panel-inner">
                 <div>
-                  <figure className="p-fig img-reveal"><img src="/generated/leadway.webp" alt="Leadway Pensure: brand and communications" width={1400} height={612} decoding="async" loading="lazy" /></figure>
+                  <figure className="p-fig img-reveal"><img src="/generated/leadway.webp" alt="Leadway Pensure: brand and communications" width={1400} height={612} decoding="async" /></figure>
                   <p className="p-figcap">FIG. 03 · BRAND · SYSTEMS</p>
                 </div>
                 <div className="p-body">
@@ -275,7 +269,7 @@ export default function Home() {
             <div>
               <div className="p-panel-inner">
                 <div>
-                  <figure className="p-fig img-reveal"><img src="/generated/olumayowa.webp" alt="Olumayowa Nursing Home website" width={1400} height={754} decoding="async" loading="lazy" /></figure>
+                  <figure className="p-fig img-reveal"><img src="/generated/olumayowa.webp" alt="Olumayowa Nursing Home website" width={1400} height={754} decoding="async" /></figure>
                   <p className="p-figcap">FIG. 04 · CLIENT · WEB</p>
                 </div>
                 <div className="p-body">
@@ -307,7 +301,7 @@ export default function Home() {
             <div>
               <div className="p-panel-inner">
                 <div>
-                  <figure className="p-fig img-reveal"><img src="/generated/ai-training.webp" alt="AI in the Workplace training hub" width={1400} height={770} decoding="async" loading="lazy" /></figure>
+                  <figure className="p-fig img-reveal"><img src="/generated/ai-training.webp" alt="AI in the Workplace training hub" width={1400} height={770} decoding="async" /></figure>
                   <p className="p-figcap">FIG. 05 · OPS · TRAINING</p>
                 </div>
                 <div className="p-body">
@@ -338,7 +332,7 @@ export default function Home() {
             <div>
               <div className="p-panel-inner">
                 <div>
-                  <figure className="p-fig img-reveal"><img src="/generated/relay.svg" alt="Relay operations portal diagram" width={2160} height={945} decoding="async" loading="lazy" /></figure>
+                  <figure className="p-fig img-reveal"><img src="/generated/relay.svg" alt="Relay operations portal diagram" width={2160} height={945} decoding="async" /></figure>
                   <p className="p-figcap">FIG. 06 · PRODUCT · SYSTEMS</p>
                 </div>
                 <div className="p-body">
@@ -359,10 +353,10 @@ export default function Home() {
       <div className="epk-head rv"><span className="rust">·</span> BEFORE THE SOFTWARE <span className="fog">/ BRAND &amp; CREATIVE DIRECTION, 2023–2024</span></div>
       <p className="epk-copy rv" style={{ '--d': '100ms' } as React.CSSProperties}>Before systems and software there was music and image: EPKs, cover art and creative direction for artists. The foundation everything else stands on.</p>
       <div className="epk-grid" data-stagger="90">
-        <figure className="rv" id="epk-skaame"><a className="epk-link" href="mailto:habib@habibcore.com?subject=Full%20archive%20request"><div className="epk-frame img-reveal"><img src="/generated/skaame.webp" alt="Skaame artist web EPK" width={640} height={800} decoding="async" loading="lazy" /></div></a><figcaption><span>Skaame· Artist Web EPK</span><span className="epk-year">2024</span></figcaption></figure>
-        <figure className="rv" id="epk-layo"><a className="epk-link" href="mailto:habib@habibcore.com?subject=Full%20archive%20request"><div className="epk-frame img-reveal"><img src="/generated/layo.webp" alt="Layo Isaac artist EPK" width={640} height={427} decoding="async" loading="lazy" /></div></a><figcaption><span>Layo Isaac· Artist EPK</span><span className="epk-year">2024</span></figcaption></figure>
-        <figure className="rv" id="epk-blvckoreo"><a className="epk-link" href="mailto:habib@habibcore.com?subject=Full%20archive%20request"><div className="epk-frame img-reveal"><img src="/generated/blvckoreo.webp" alt="BlvckOreo personal EPK" width={640} height={640} decoding="async" loading="lazy" /></div></a><figcaption><span>BlvckOreo· Personal EPK</span><span className="epk-year">2023</span></figcaption></figure>
-        <figure className="rv" id="epk-1ethfp"><a className="epk-link" href="mailto:habib@habibcore.com?subject=Full%20archive%20request"><div className="epk-frame img-reveal"><img src="/generated/1ethfp.webp" alt="1ETHFP creative collaboration" width={600} height={1500} decoding="async" loading="lazy" /></div></a><figcaption><span>1ETHFP· Creative Collaboration</span><span className="epk-year">2023</span></figcaption></figure>
+        <figure className="rv" id="epk-skaame"><a className="epk-link" href="mailto:habib@habibcore.com?subject=Full%20archive%20request"><div className="epk-frame img-reveal"><img src="/generated/skaame.webp" alt="Skaame artist web EPK" width={640} height={800} decoding="async" /></div></a><figcaption><span>Skaame· Artist Web EPK</span><span className="epk-year">2024</span></figcaption></figure>
+        <figure className="rv" id="epk-layo"><a className="epk-link" href="mailto:habib@habibcore.com?subject=Full%20archive%20request"><div className="epk-frame img-reveal"><img src="/generated/layo.webp" alt="Layo Isaac artist EPK" width={640} height={427} decoding="async" /></div></a><figcaption><span>Layo Isaac· Artist EPK</span><span className="epk-year">2024</span></figcaption></figure>
+        <figure className="rv" id="epk-blvckoreo"><a className="epk-link" href="mailto:habib@habibcore.com?subject=Full%20archive%20request"><div className="epk-frame img-reveal"><img src="/generated/blvckoreo.webp" alt="BlvckOreo personal EPK" width={640} height={640} decoding="async" /></div></a><figcaption><span>BlvckOreo· Personal EPK</span><span className="epk-year">2023</span></figcaption></figure>
+        <figure className="rv" id="epk-1ethfp"><a className="epk-link" href="mailto:habib@habibcore.com?subject=Full%20archive%20request"><div className="epk-frame img-reveal"><img src="/generated/1ethfp.webp" alt="1ETHFP creative collaboration" width={600} height={1500} decoding="async" /></div></a><figcaption><span>1ETHFP· Creative Collaboration</span><span className="epk-year">2023</span></figcaption></figure>
       </div>
     </div>
   </section>
@@ -371,7 +365,7 @@ export default function Home() {
   <section className="block range" data-folio="03 · RANGE">
     <div className="range-pin">
       <div className="range-sticky">
-        <img className="range-mark" src="/logo.png" alt="" aria-hidden="true" width={1378} height={1378} decoding="async" loading="lazy" />
+        <img className="range-mark" src="/logo.png" alt="" aria-hidden="true" width={1378} height={1378} decoding="async" />
         <div className="container">
           <div className="sec-head rv">
             <p><span className="sh-idx">03</span> / RANGE</p>
@@ -521,7 +515,7 @@ export default function Home() {
           <div className="fig-frame">
             <div className="fig-crop img-reveal">
               <div className="parallax" data-speed="0.055">
-                <img src="/generated/portrait.webp" alt="Habib, seated in Lagos sunlight" width={900} height={1198} decoding="async" loading="lazy" />
+                <img src="/generated/portrait.webp" alt="Habib, seated in Lagos sunlight" width={900} height={1198} decoding="async" />
               </div>
             </div>
           </div>

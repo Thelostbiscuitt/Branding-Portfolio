@@ -297,51 +297,71 @@ html.has-fine-pointer.has-cursor-fx button { cursor: none; }
 .cursor-ring.is-view .cursor-tag { opacity: 1; transform: scale(1); }
 .cursor-ring.is-down { transform: scale(0.82); }
 
-/* ————— approved fill-to-logo loader ————— */
-.hc-loader {
-  position: fixed; inset: 0; z-index: 9999;
-  display: grid; place-items: center; overflow: hidden; isolation: isolate;
-  background: #101010;
+/* ————— preloader ————— */
+.preloader {
+  position: fixed; inset: 0; z-index: 120;
+  background: var(--paper);
+  display: flex; flex-direction: column; justify-content: space-between;
+  padding: clamp(20px, 3.4vw, 44px);
+  transition: transform 0.9s var(--ease-io);
+  will-change: transform;
 }
-.hc-intro-seen .hc-loader { display: none; }
-.hc-loader.is-opening { opacity: 0; transition: opacity 110ms linear; pointer-events: none; }
-.hc-stage { position: relative; width: 100%; height: 100%; display: grid; place-items: center; overflow: hidden; }
-.hc-lockup { position: relative; display: grid; place-items: center; transform: translateY(-1.5vh); }
-.hc-visual { display: flex; flex-direction: column; align-items: center; justify-content: center; white-space: nowrap; }
-.hc-fill { position: absolute; inset: 0; clip-path: inset(100% 0 0 0); will-change: clip-path; }
-.hc-mark { width: clamp(58px, 5.4vw, 96px); height: auto; margin-bottom: clamp(22px, 2.25vw, 38px); object-fit: contain; }
-.hc-base .hc-mark { opacity: .18; }
-.hc-base .hc-word { color: #2c2c2c; }
-.hc-fill .hc-word { color: #f5f5f3; }
-.hc-word {
-  font-family: "DejaVu Sans", "Arial Black", "Helvetica Neue", Arial, sans-serif;
-  font-size: clamp(50px, 8.15vw, 138px); font-weight: 900;
-  letter-spacing: -.065em; line-height: .83; text-transform: uppercase;
+.preloader.done { transform: translateY(-101%); }
+.preloader .pl-top {
+  display: flex; justify-content: space-between; align-items: baseline;
+  font-family: var(--font-m); font-size: 11px; letter-spacing: 0.22em; color: var(--fog);
 }
-.hc-readout {
-  position: absolute; right: -.2em; bottom: -2.05em;
-  font: 700 clamp(7px, .62vw, 11px)/1.1 "Courier New", monospace;
-  letter-spacing: .14em; color: #8b8b8b; white-space: nowrap; text-transform: uppercase;
+.pl-greet {
+  position: absolute; left: 0; right: 0; top: 0; bottom: 12%;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: clamp(18px, 4vh, 40px);
+  pointer-events: none;
 }
-.hc-readout b { color: #bcbcbc; }
-.hc-zoom-mark {
-  position: fixed; z-index: 4; opacity: 0; pointer-events: none;
-  transform-origin: center center; will-change: transform, opacity;
+.pl-mark {
+  animation: plMarkIn 0.9s var(--ease-out) 0.1s both;
+  opacity: 0.92;
 }
-.hc-loader.is-complete .hc-visual, .hc-loader.is-complete .hc-readout { opacity: 0; transition: opacity 110ms linear; }
-@media (max-width: 640px) {
-  .hc-word { font-size: clamp(42px, 11vw, 72px); letter-spacing: -.07em; }
-  .hc-mark { width: 58px; margin-bottom: 24px; }
-  .hc-readout { bottom: -2.5em; font-size: 7px; }
+.pl-mark img {
+  width: clamp(56px, 7vw, 96px);
+  height: auto;
+  display: block;
+}
+@keyframes plMarkIn {
+  from { opacity: 0; transform: translateY(-10px); }
+  to   { opacity: 0.92; transform: none; }
 }
 @media (prefers-reduced-motion: reduce) {
-  .hc-loader.is-opening { transition: opacity 120ms linear !important; }
+  .pl-mark { animation: none; }
 }
-@media (scripting: none) {
-  .hc-loader { display: none; }
-  .rv { opacity: 1; transform: none; }
-  .rv-line, .lm > span, .img-reveal img { transform: none; }
-  .img-reveal { clip-path: none; }
+.preloader .pl-word {
+  font-family: var(--font-d); font-weight: 500;
+  font-size: clamp(3.2rem, 10vw, 8.5rem);
+  line-height: 1; letter-spacing: -0.02em;
+  color: var(--ink); text-align: center;
+}
+.preloader .pl-word.swap { animation: plWordIn 170ms var(--ease-out) both; }
+@keyframes plWordIn {
+  from { opacity: 0; transform: translateY(12px); filter: blur(5px); }
+  to   { opacity: 1; transform: none; filter: blur(0); }
+}
+.preloader .pl-lang {
+  position: absolute; left: 0; right: 0; bottom: clamp(44px, 9vh, 84px);
+  display: flex; justify-content: center;
+  font-family: var(--font-m); font-size: 10px; letter-spacing: 0.24em; color: var(--fog);
+}
+.preloader .pl-lang b { font-weight: 400; }
+.preloader .pl-lang b.swap { animation: plLangIn 170ms var(--ease-out) both; }
+@keyframes plLangIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .preloader .pl-word.swap, .preloader .pl-lang b.swap { animation: none; }
+}
+/* touch cadence is quick — give the entrance room by shortening it */
+@media (pointer: coarse) {
+  .preloader .pl-word.swap { animation-duration: 110ms; }
+  .preloader .pl-lang b.swap { animation-duration: 110ms; }
 }
 
 /* ————— nav ————— */
@@ -1244,6 +1264,7 @@ section.block { padding-top: clamp(88px, 12vw, 128px); }
   }
   .rv, .rv-line, .img-reveal, .lm > span { opacity: 1; transform: none; clip-path: none; }
   .img-reveal img { transform: none; }
+  .preloader { display: none; }
   .cursor-dot, .cursor-ring { display: none; }
   .stamp-rot, .stamp-arrow, .grain { animation: none; }
   .marquee-track { transform: none !important; }
@@ -1275,6 +1296,10 @@ body{font-size:max(12px, 0.836vw) !important}
 /* ————— shared type utilities ————— */
 .mono{font-size:max(8.5px, 0.575vw) !important}
 .container{max-width:min(1440px, max(75.274vw, 640px)) !important}
+/* ————— preloader ————— */
+.preloader{padding:max(20px, 2.3vw) !important}
+.preloader .pl-top{font-size:max(8.5px, 0.575vw) !important}
+.preloader .pl-count{font-size:max(4.5rem, 9.2vw) !important}
 .nav-inner{max-width:min(1440px, max(75.274vw, 640px)) !important;height:max(44px, 2.927vw) !important;gap:max(15px, 1.045vw) !important}
 .brand{font-size:max(17px, 1.15vw) !important}
 .nav-links{gap:max(24px, 1.673vw) !important}
@@ -1475,6 +1500,9 @@ section.block{padding-top:max(88px, 6.691vw) !important}
    All values are identical to the approved rendering at 1916px. */
 .hero{padding-top:clamp(96px, 6.513vw, 150px) !important}
 @media (min-width: 1024px){.stamp-wrap{right:max(-14px, -0.731vw) !important;top:max(-56px, -2.923vw) !important}}
+/* greeting intro (transient overlay) — same conversion */
+.pl-greet{gap:clamp(18px, 2.004vw, 40px) !important}
+.preloader .pl-lang{bottom:clamp(44px, 4.384vw, 84px) !important}
 
 /* ————— BACKGROUND SOUND STRIP — bottom-left, site-wide (Player.tsx + engine.js) —————
    One <audio>, play/pause/prev/next/auto-advance; starts on the visitor's
@@ -1569,7 +1597,7 @@ button,.pl-bar,.rg-chip-m,.rg-sound-list button,.menu-btn,.f-submit,.chip{touch-
   body{padding-bottom:calc(60px + env(safe-area-inset-bottom, 0px))}
   .rg-sound{left:max(12px, 2.509vw);right:max(12px, 2.509vw);width:auto !important;bottom:calc(66px + env(safe-area-inset-bottom, 0px)) !important;max-height:60vh !important}
 }
-/* while the mobile menu or loader owns the screen, the bar steps aside —
+/* while the mobile menu (or the preloader) owns the screen, the bar steps aside —
    it outranks the menu's z-index, so without this it would float over it */
 body.is-locked .player{visibility:hidden;opacity:0;pointer-events:none}
 

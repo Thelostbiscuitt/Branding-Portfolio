@@ -1,0 +1,46 @@
+/* ── Interlude ──
+   One massive typographic moment between chapters. Asymmetric: the first
+   line hangs left, the second pulls far right with an italic close. */
+
+.interlude {
+  padding: 140px 48px;
+  border-top: 1px solid var(--border);
+  overflow: hidden;
+}
+
+.lineA {
+  font-family: var(--font-display);
+  font-size: clamp(40px, 5.5vw, 88px);
+  font-weight: 800;
+  line-height: 0.95;
+  letter-spacing: -0.035em;
+  color: var(--black);
+}
+
+.lineB {
+  font-family: var(--font-display);
+  font-size: clamp(28px, 3.4vw, 54px);
+  font-weight: 400;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  color: var(--gray);
+  margin-top: 28px;
+  margin-left: 16vw;
+  max-width: 30ch;
+}
+
+.italic {
+  font-style: italic;
+  color: var(--orange);
+}
+
+@media (max-width: 900px) {
+  .interlude {
+    padding: 80px 24px;
+  }
+
+  .lineB {
+    margin-left: 0;
+    margin-top: 20px;
+  }
+}

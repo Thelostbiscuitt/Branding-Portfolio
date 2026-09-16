@@ -1,0 +1,106 @@
+.screen {
+  position: fixed;
+  inset: 0;
+  z-index: 9000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--black);
+  transition: opacity 0.5s var(--ease-out), visibility 0.5s;
+}
+
+.screenHidden {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 28px;
+}
+
+/* The mark, with the same travelling beam the nav pill uses — the two read as
+   one system. Slower here; this is a moment, not a UI element. */
+.markWrap {
+  position: relative;
+  width: 96px;
+  height: 96px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.mark {
+  position: relative;
+  z-index: 1;
+  opacity: 0;
+  animation: loadIn 0.5s var(--ease-out) 0.1s both;
+}
+
+/* Fallback first: a visible ring even if the conic-gradient query below doesn't
+   match this browser. The query overrides it with the travelling arc when it
+   can. */
+.beam {
+  position: absolute;
+  inset: -10px;
+  border-radius: 50%;
+  border: 1.5px solid rgba(232, 102, 10, 0.35);
+  opacity: 0;
+  animation: loadIn 0.5s var(--ease-out) 0.1s both, beamSpin 2.8s linear 0.5s infinite;
+}
+
+@supports (background: conic-gradient(from 0deg, red, blue)) and
+          ((mask-composite: exclude) or (-webkit-mask-composite: xor)) {
+  .beam {
+    border: none;
+    padding: 2px;
+    background: conic-gradient(
+      from 0deg,
+      transparent 0deg,
+      var(--orange) 22deg,
+      transparent 46deg,
+      transparent 360deg
+    );
+    -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+            mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+            mask-composite: exclude;
+  }
+}
+
+.line {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--gray);
+  opacity: 0;
+  animation: loadIn 0.4s var(--ease-out) 0.35s both;
+}
+
+@keyframes loadIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: none; }
+}
+
+@keyframes beamSpin {
+  to { transform: rotate(360deg); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mark,
+  .beam,
+  .line {
+    animation: loadIn 0.01s linear both;
+  }
+
+  .beam {
+    background: none;
+    border: 1px solid rgba(232, 102, 10, 0.4);
+    -webkit-mask: none;
+            mask: none;
+  }
+}

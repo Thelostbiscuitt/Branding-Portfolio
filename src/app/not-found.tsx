@@ -1,4 +1,4 @@
-/* eslint-disable @next/next/no-html-link-for-pages -- Returning home initializes its DOM engine with a document load. */
+import Link from 'next/link'
 import Nav from '@/components/Nav/Nav'
 import Footer from '@/components/Footer/Footer'
 import styles from './not-found.module.css'
@@ -19,7 +19,7 @@ export default function NotFound() {
         <p className={styles.body}>
           The page you're looking for doesn't exist, or the link's out of date.
         </p>
-        <a href="/" className={styles.cta}>Back to home →</a>
+        <Link href="/" className={styles.cta}>Back to home →</Link>
       </main>
       <Footer />
     </>
