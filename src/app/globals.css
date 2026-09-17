@@ -360,8 +360,6 @@ html.has-fine-pointer.has-cursor-fx button { cursor: none; }
 }
 /* session repeat / reduced-motion skips are flagged before first paint */
 html.hc-loader-off .hc-loader { display: none; }
-/* failsafe bail-out: overlay fades and clears, site stays usable */
-.hc-loader.hc-loader-bail { opacity: 0; transition: opacity 620ms ease; pointer-events: none; }
 @media (max-width: 640px) {
   .hc-loader .word { font-size: clamp(42px, 11vw, 72px); letter-spacing: -.07em; }
   .hc-loader .mark { width: 58px; margin-bottom: 24px; }

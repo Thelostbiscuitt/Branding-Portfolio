@@ -897,14 +897,6 @@
       setTimeout(() => pl.remove(), 120);
     };
 
-    pl.dataset.armed = String(Date.now());
-    const arm = (now) => {
-      if (completed) return; /* heartbeat only while the loader lives */
-      pl.dataset.armed = String(now);
-      requestAnimationFrame(arm);
-    };
-    requestAnimationFrame(arm);
-
     const finish = () => {
       if (completed) return;
       completed = true;
@@ -935,19 +927,11 @@
 
     const tick = (now) => {
       if (completed) return;
-      if (now - start > MAX_MS) {
-        /* hung resource guard: finish cleanly instead of stalling */
-        shown = 1;
-        pctEl.textContent = "100%";
-        fillLayer.style.clipPath = "inset(0% 0 0 0)";
-        finish();
-        return;
-      }
+      if (now - start > MAX_MS) target = 1;
       const dt = Math.max(0, now - last);
       last = now;
       shown = Math.min(shown + dt / MIN_MS, target);
       fillLayer.style.clipPath = `inset(${((1 - shown) * 100).toFixed(2)}% 0 0 0)`;
-      pl.dataset.progress = shown.toFixed(4);
       pctEl.textContent = String(Math.min(99, Math.round(shown * 100))).padStart(2, "0") + "%";
       if (shown < 1) requestAnimationFrame(tick); else finish();
     };

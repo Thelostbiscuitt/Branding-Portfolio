@@ -40,17 +40,6 @@ export default function Home() {
     <img className="zoom-mark" src="/habibcore-logo-transparent.png" alt="" decoding="async" />
   </div>
 </div>
-{/* No JS: the loader must never block the site */}
-<noscript><style>{'.hc-loader{display:none!important}'}</style></noscript>
-{/* Failsafe, independent of engine.js: if the driver never armed the loader
-    (stale/cached script, blocked request, any JS failure) — or armed it and
-    then died for over 12s — clear the overlay and hand the site back. */}
-<script
-  dangerouslySetInnerHTML={{
-    __html:
-      "(function(){setTimeout(function(){var l=document.querySelector('.hc-loader');if(!l)return;var a=parseInt(l.dataset.armed||'0',10);if(a&&Date.now()-a<12000)return;document.body.classList.remove('is-locked');var n=document.querySelectorAll('body > [inert]');for(var i=0;i<n.length;i++)n[i].removeAttribute('inert');l.classList.add('hc-loader-bail');setTimeout(function(){var x=document.querySelector('.hc-loader');if(x)x.remove()},620)},4500)})();",
-  }}
-/>
 
 {/* custom cursor  */}
 <div className="cursor-dot" aria-hidden="true"></div>
