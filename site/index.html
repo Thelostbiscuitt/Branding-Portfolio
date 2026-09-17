@@ -3463,19 +3463,34 @@ html.hc-lock body { overflow: auto !important; }</style></noscript>
 
   /* ===================== DATA — 09 SOUND — real masters ===================== */
   var TRACKS = [
-    /* Real masters — BLVCK OREO, 2021–2023 (public/Music in the repo).
-       Titles/bpm/mood measured in the legacy player's data (src/data/tracks.ts). */
-    { src: "media/audio/whats-up.mp3",    no: "T-01", title: "What's Up!!!", mood: "Drill",  bpm: 140 },
-    { src: "media/audio/ends.mp3",        no: "T-02", title: "Ends",        mood: "Groove", bpm: 92 },
-    { src: "media/audio/lagos-party.mp3", no: "T-03", title: "Lagos Party", mood: "Party",  bpm: 126 },
-    { src: "media/audio/vice-city.mp3",   no: "T-04", title: "Vice City",   mood: "Night",  bpm: 86 },
-    { src: "media/audio/afro-woo.mp3",    no: "T-05", title: "Afro Woo",    mood: "Drill",  bpm: 144 },
-    { src: "media/audio/234drill.mp3",    no: "T-06", title: "234drill",    mood: "Drill",  bpm: 144 },
-    /* Bedroom Recordings II — the EP with YE!!OWSOUL (owner-provided masters). */
-    { src: "media/audio/spazzing-hard.mp3", no: "T-07", title: "Spazzing Hard", mood: "Bedroom Recordings II", artist: "BR2 \u00D7 YE!!OWSOUL" },
-    { src: "media/audio/marceline.mp3",     no: "T-08", title: "Marceline",     mood: "Bedroom Recordings II", artist: "BR2 \u00D7 YE!!OWSOUL" },
-    { src: "media/audio/good-days.mp3",     no: "T-09", title: "Good Days",     mood: "Bedroom Recordings II", artist: "BR2 \u00D7 YE!!OWSOUL" },
-    { src: "media/audio/trap-lan-je.mp3",   no: "T-10", title: "Trap Lan Je",   mood: "Bedroom Recordings II", artist: "BR2 \u00D7 YE!!OWSOUL" }
+    /* Full 26-track set — BLVCK OREO, 2021–2023.
+       Titles/bpm/mood measured in the legacy player's data (tracks.ts). */
+    { src: "media/audio/whats-up.mp3",       no: "T-01", title: "What's Up!!!",      mood: "DRILL",  bpm: 140 },
+    { src: "media/audio/afro-woo.mp3",       no: "T-02", title: "Afro Woo",          mood: "DRILL",  bpm: 144, artist: "BLVCK OREO × DROXX" },
+    { src: "media/audio/finer-things.mp3",   no: "T-03", title: "Finer Things",      mood: "DRILL",  bpm: 140 },
+    { src: "media/audio/vibes-inshallah.mp3",no: "T-04", title: "Vibes & Inshallah", mood: "DRILL",  bpm: 152 },
+    { src: "media/audio/1-love-drill.mp3",   no: "T-05", title: "1 Love Drill",      mood: "DRILL",  bpm: 144 },
+    { src: "media/audio/234drill.mp3",       no: "T-06", title: "234drill",          mood: "DRILL",  bpm: 144 },
+    { src: "media/audio/oyoon-your-own.mp3", no: "T-07", title: "Oyoon Your Own",    mood: "DRILL",  bpm: 140 },
+    { src: "media/audio/calm-down-cover.mp3",no: "T-08", title: "Calm Down (Cover)", mood: "PARTY",  bpm: 108 },
+    { src: "media/audio/cheques.mp3",        no: "T-09", title: "Cheques",           mood: "DRILL",  bpm: 132 },
+    { src: "media/audio/fake-heads.mp3",     no: "T-10", title: "Fake Heads",        mood: "DRILL",  bpm: 148 },
+    { src: "media/audio/gidi-anthem.mp3",    no: "T-11", title: "GIDI Anthem",       mood: "PARTY",  bpm: 99 },
+    { src: "media/audio/good-days.mp3",      no: "T-12", title: "Good Days",         mood: "PARTY",  bpm: 123 },
+    { src: "media/audio/i-deserve-it.mp3",   no: "T-13", title: "I Deserve It",      mood: "DRILL",  bpm: 144 },
+    { src: "media/audio/im-that-og.mp3",     no: "T-14", title: "Im That OG",        mood: "DRILL",  bpm: 140 },
+    { src: "media/audio/lagos-party.mp3",    no: "T-15", title: "Lagos Party",       mood: "PARTY",  bpm: 126 },
+    { src: "media/audio/marceline.mp3",      no: "T-16", title: "Marceline",         mood: "DRILL",  bpm: 130 },
+    { src: "media/audio/money-wahala.mp3",   no: "T-17", title: "Money Wahala",      mood: "DRILL",  bpm: 152 },
+    { src: "media/audio/return-of-the-dead.mp3", no: "T-18", title: "Return of the Dead", mood: "PARTY", bpm: 162 },
+    { src: "media/audio/set-me-free.mp3",    no: "T-19", title: "Set Me Free",       mood: "GROOVE", bpm: 120 },
+    { src: "media/audio/spazzing-hard.mp3",  no: "T-20", title: "Spazzing Hard",     mood: "PARTY",  bpm: 124 },
+    { src: "media/audio/trap-lan-je.mp3",    no: "T-21", title: "Trap Lan'je",       mood: "GROOVE", bpm: 83 },
+    { src: "media/audio/vice-city.mp3",      no: "T-22", title: "Vice City",         mood: "NIGHT",  bpm: 86 },
+    { src: "media/audio/vpn-visa.mp3",       no: "T-23", title: "VPN Visa",          mood: "DRILL",  bpm: 144 },
+    { src: "media/audio/wild-wild-west.mp3", no: "T-24", title: "Wild Wild West",    mood: "DRILL",  bpm: 144 },
+    { src: "media/audio/ends.mp3",           no: "T-25", title: "Ends",              mood: "GROOVE", bpm: 92 },
+    { src: "media/audio/hope-cover.mp3",     no: "T-26", title: "HOPE (Cover)",      mood: "DRILL",  bpm: 148 },
   ];
 
   var $ = function (s, r) { return (r || document).querySelector(s); };
