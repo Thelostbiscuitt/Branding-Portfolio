@@ -45,7 +45,16 @@ export default function RootLayout({
         <link rel="preload" href="/fonts/archivo-100-900-normal.woff2" as="font" type="font/woff2" crossOrigin="anonymous" />
         <link rel="preload" href="/fonts/space-mono-400-normal.woff2" as="font" type="font/woff2" crossOrigin="anonymous" />
         <link rel="preload" href="/fonts/space-mono-700-normal.woff2" as="font" type="font/woff2" crossOrigin="anonymous" />
-        <link rel="preload" href="/logo-mark.png" as="image" fetchPriority="high" />
+        <link rel="preload" href="/habibcore-logo-transparent.png" as="image" fetchPriority="high" />
+        {/* Loader gate: flag repeat visits / reduced motion BEFORE first paint
+            so the v6 fill-to-logo loader shows once per session and never for
+            reduced-motion users. See engine.js (hc-loader). */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html:
+              "try{if(sessionStorage.getItem('hc-loader-seen')==='1'||matchMedia('(prefers-reduced-motion: reduce)').matches)document.documentElement.classList.add('hc-loader-off')}catch(e){}",
+          }}
+        />
         {children}
         <Player />
         <Script src="/engine.js" strategy="afterInteractive" />
