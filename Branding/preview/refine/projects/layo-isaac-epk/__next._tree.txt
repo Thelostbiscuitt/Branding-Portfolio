@@ -1,9 +1,0 @@
-:HL["/_next/static/chunks/0_ybrrl0vcc4s.css","style"]
-:HL["/_next/static/chunks/0pjgrgz7z9k50.css","style"]
-:HL["/fonts/fraunces-100-900-normal.woff2","font",{"crossOrigin":"anonymous","type":"font/woff2"}]
-:HL["/fonts/fraunces-100-900-italic.woff2","font",{"crossOrigin":"anonymous","type":"font/woff2"}]
-:HL["/fonts/archivo-100-900-normal.woff2","font",{"crossOrigin":"anonymous","type":"font/woff2"}]
-:HL["/fonts/space-mono-400-normal.woff2","font",{"crossOrigin":"anonymous","type":"font/woff2"}]
-:HL["/fonts/space-mono-700-normal.woff2","font",{"crossOrigin":"anonymous","type":"font/woff2"}]
-:HL["/logo-mark.png","image",{"fetchPriority":"high"}]
-0:{"tree":{"name":"","param":null,"prefetchHints":16,"slots":{"children":{"name":"projects","param":null,"prefetchHints":0,"slots":{"children":{"name":"layo-isaac-epk","param":null,"prefetchHints":0,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":0,"slots":null}}}}}}},"staleTime":300,"buildId":"yRhYcjnTpqs48iqRkgFG9"}

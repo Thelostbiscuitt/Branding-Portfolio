@@ -1,11 +1,10 @@
-# Habibcore — Cloudflare Pages project
-# Build: `next build` (static export → ./out), then `npx wrangler pages deploy`.
-# Bindings here are also what `wrangler pages dev` uses locally.
+# Habibcore — Cloudflare Pages project (brutalist static build)
+# Deploy: `npx wrangler pages deploy site --project-name habibcore`
 name = "habibcore"
 compatibility_date = "2025-09-01"
-pages_build_output_dir = "./out"
+pages_build_output_dir = "./site"
 
-# Habibcore Sound — the 26-track set streams from R2 (zero egress, Range-aware)
+# Habibcore Sound — the 10-track deck streams from R2 (zero egress, Range-aware)
 # via the Pages Function at functions/Music/[file].js.
 [[r2_buckets]]
 binding = "SOUND_BUCKET"
@@ -14,7 +13,3 @@ bucket_name = "habibcore-sound"
 # Enquiry endpoint — functions/api/contact.js delivers the contact form through
 # Resend. The API key is a Pages SECRET, not a var:
 #     npx wrangler pages secret put RESEND_API_KEY
-# Optional: once habibcore.com is verified in Resend, set CONTACT_FROM to
-# "Habib <contact@habibcore.com>" — that also lets the automatic acknowledgement
-# deliver to the enquirer (unverified accounts can only send to the owner).
-
