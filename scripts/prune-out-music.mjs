@@ -29,11 +29,11 @@ for (const file of trackFiles) {
 }
 console.log(`pruned out/Music → ${trackFiles.length} playlist tracks`);
 
-// Cloudflare Pages rejects any file over 25 MiB at upload time. Raw masters in
-// public/projects (e.g. the 77 MB Leadway CSW film) get copied into out/ by the
-// static export but are never referenced by the site — drop anything over the
-// cap so the deploy succeeds.
-const LIMIT = 25 * 1024 * 1024;
+// Cloudflare Pages rejects any file of 25 MiB or more at upload time (keep a 24
+// MiB margin). Raw masters in public/projects (e.g. the 77 MB Leadway CSW film)
+// get copied into out/ by the static export but are never referenced by the
+// site — drop anything over the cap so the deploy succeeds.
+const LIMIT = 24 * 1024 * 1024;
 const outRoot = path.resolve(process.cwd(), 'out');
 let oversized = 0;
 async function pruneLarge(dir) {
