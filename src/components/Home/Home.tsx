@@ -20,25 +20,17 @@ export default function Home() {
 {/* running folio  */}
 <div className="folio" aria-hidden="true">SECTION <b>00 · COVER</b></div>
 
-{/* loading — approved v6 fill-to-logo sequence (habibcore-loader-v6-fill-to-logo).
-    Static markup so the lockup is on screen at first paint; public/engine.js
-    drives the fill against real load progress and the final zoom reveal. */}
-<div className="hc-loader" aria-label="HABIBCORE loading">
-  <span className="hc-loader-sr" role="status">Loading HABIBCORE</span>
-  <div className="stage">
-    <div className="lockup">
-      <div className="visual base" aria-hidden="true">
-        <img className="mark" src="/habibcore-logo-transparent.png" alt="" decoding="async" />
-        <div className="word">HABIBCORE</div>
-      </div>
-      <div className="visual fill" aria-hidden="true">
-        <img className="mark" src="/habibcore-logo-transparent.png" alt="" decoding="async" />
-        <div className="word">HABIBCORE</div>
-      </div>
-      <div className="readout" aria-hidden="true">LOADING — <b>00%</b></div>
-    </div>
-    <img className="zoom-mark" src="/habibcore-logo-transparent.png" alt="" decoding="async" />
+{/* preloader — multilingual greeting: Lagos → Nigeria → World */}
+<div className="preloader" aria-hidden="true">
+  <div className="pl-top">
+    <span>HABIBCORE® · PORTFOLIO, 2026</span>
+    <span>6°27′N, 3°24′E · LAGOS, NG</span>
   </div>
+  <div className="pl-greet">
+    <span className="pl-mark"><img src="/logo-mark.png" alt="" width={128} height={128} decoding="async" /></span>
+    <b className="pl-word">Hello</b>
+  </div>
+  <p className="pl-lang"><b>01 · ENGLISH · LAGOS</b></p>
 </div>
 
 {/* custom cursor  */}

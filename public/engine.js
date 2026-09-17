@@ -828,115 +828,75 @@
     nav?.classList.add("in");
   };
   const preloader = (() => {
-    const pl = $(".hc-loader");
+    const pl = $(".preloader");
     if (!pl) { heroEntrance(); return; }
-    /* Repeat visit in this session, reduced motion, or flagged before paint:
-       skip the loader entirely — the site reveals immediately. */
-    let seen = false;
-    try { seen = sessionStorage.getItem("hc-loader-seen") === "1"; } catch {}
-    if (REDUCED || document.documentElement.classList.contains("hc-loader-off") || seen) {
-      pl.remove(); heroEntrance(); return;
-    }
+    if (REDUCED) { pl.remove(); heroEntrance(); return; }
     document.body.classList.add("is-locked");
-    /* Keep keyboard focus and screen readers out of the site behind the curtain. */
-    const inerted = $$("body > *").filter(
-      (el) => !el.classList.contains("hc-loader") && el.tagName !== "SCRIPT"
-    );
-    inerted.forEach((el) => el.setAttribute("inert", ""));
-    const srNote = $(".hc-loader-sr", pl);
     /* Warm the graphics pipeline while the curtain is up: kick decode on
        every image so the scroll glide and cursor never stall on a decode
-       spike after reveal. */
+       spike after reveal. (The reference page ships its images inline;
+       this is the network equivalent — all ~476KB is fetched and decoded
+       during the greeting sequence.) */
     $$("img").forEach((img) => {
       img.setAttribute("loading", "eager");
       img.setAttribute("decoding", "async");
       if (typeof img.decode === "function") img.decode().catch(() => {});
     });
-
-    /* Approved v6 fill-to-logo: the fill IS the progress indicator, so the
-       percentage shown and the clip-path rise are the same number.
-       Real readiness sets the target (logo decode → fonts → full load);
-       the displayed fill advances toward it at a rate that keeps the
-       sequence coherent when the site is ready early, and never stalls
-       when something hangs. */
-    const fillLayer = $(".visual.fill", pl);
-    const filledMark = $(".fill .mark", pl);
-    const zoomMark = $(".zoom-mark", pl);
-    const pctEl = $(".readout b", pl);
-
-    const MIN_MS = FINE ? 2600 : 2200; /* shortest coherent run */
-    const MAX_MS = 9000;               /* never hang on a stuck resource */
-    const ZOOM = 440;
-    const start = performance.now();
-    let target = 0.12;
-    let shown = 0;
-    let completed = false;
-    let last = start;
-
-    const bump = (t) => { target = Math.max(target, t); };
-    const logoImg = $(".mark", pl);
-    if (logoImg && typeof logoImg.decode === "function") {
-      logoImg.decode().then(() => bump(0.34), () => bump(0.34));
-    } else bump(0.34);
-    if (document.fonts && document.fonts.ready) {
-      document.fonts.ready.then(() => bump(0.6), () => bump(0.6));
-    } else bump(0.6);
-    if (document.readyState === "complete") bump(1);
-    else window.addEventListener("load", () => bump(1), { once: true });
-
-    const reveal = () => {
-      pl.classList.add("is-opening");
-      document.body.classList.remove("is-locked");
-      inerted.forEach((el) => el.removeAttribute("inert"));
-      document.body.classList.add("habibcore-loaded");
-      if (srNote) srNote.textContent = "Portfolio ready";
-      try { sessionStorage.setItem("hc-loader-seen", "1"); } catch {}
-      window.dispatchEvent(new CustomEvent("habibcore:loader-complete"));
-      heroEntrance();
-      engine.measure();
-      setTimeout(() => pl.remove(), 120);
+    const wordEl = $(".pl-word", pl);
+    const langEl = $(".pl-lang b", pl);
+    /* Lagos → Nigeria → World, resolving into the identity lockup.
+       Ten beats at ~150ms — the whole introduction reads in under 2s.
+       No progress bar, no spinner: the greeting IS the opening. */
+    const GREET = [
+      ["Hello", "01 — ENGLISH · LAGOS", "en"],
+      ["Pẹ̀lẹ́ o", "02 — YORÙBÁ · NIGERIA", "yo"],
+      ["Ndewo", "03 — IGBO · NIGERIA", "ig"],
+      ["Sannu", "04 — HAUSA · NIGERIA", "ha"],
+      ["Bonjour", "05 — FRANÇAIS", "fr"],
+      ["Hola", "06 — ESPAÑOL", "es"],
+      ["Olá", "07 — PORTUGUÊS", "pt"],
+      ["مرحبا", "08 — ARABIC · MARHABAN", "ar", "rtl"],
+      ["こんにちは", "09 — JAPANESE · KONNICHIWA", "ja"],
+      ["你好", "10 — CHINESE · NǏ HǍO", "zh"],
+    ];
+    const fast = !FINE; /* touch devices: keep it quick, just not rushed */
+    const WORD_MS = fast ? 110 : 150;  /* one metronome for every greeting */
+    const FINAL_MS = fast ? 380 : 480; /* hold the identity lockup a beat longer */
+    const FINAL = ["HABIBCORE®", "LAGOS → WORLD", "en"];
+    let i = 0;
+    const show = ([text, tag, lang, dir]) => {
+      if (!wordEl) return;
+      wordEl.textContent = text;
+      wordEl.lang = lang || "en";
+      if (dir) wordEl.setAttribute("dir", dir); else wordEl.removeAttribute("dir");
+      if (langEl) langEl.textContent = tag;
+      wordEl.classList.remove("swap");
+      if (langEl) langEl.classList.remove("swap");
+      void wordEl.offsetWidth; /* restart the entrance animation */
+      wordEl.classList.add("swap");
+      if (langEl) langEl.classList.add("swap");
     };
-
     const finish = () => {
-      if (completed) return;
-      completed = true;
-      pctEl.textContent = "100%";
-      fillLayer.style.clipPath = "inset(0% 0 0 0)";
-
-      // The fill has reached the top of the transparent mark. Zoom immediately.
-      requestAnimationFrame(() => {
-        const r = filledMark.getBoundingClientRect();
-        zoomMark.style.left = r.left + "px";
-        zoomMark.style.top = r.top + "px";
-        zoomMark.style.width = r.width + "px";
-        zoomMark.style.height = r.height + "px";
-        zoomMark.style.opacity = "1";
-        pl.classList.add("is-complete");
-
-        const scale = Math.max(innerWidth / r.width, innerHeight / r.height) * 1.55;
-        let revealed = false;
-        const once = () => { if (!revealed) { revealed = true; reveal(); } };
-        const anim = zoomMark.animate([
-          { transform: "scale(1)", opacity: 1 },
-          { transform: `scale(${scale})`, opacity: 1 },
-        ], { duration: ZOOM, easing: "cubic-bezier(.16,1,.3,1)", fill: "forwards" });
-        if (anim && anim.finished) anim.finished.then(once, once);
-        setTimeout(once, ZOOM + 80);
-      });
+      setTimeout(() => {
+        pl.classList.add("done");
+        document.body.classList.remove("is-locked");
+        heroEntrance();
+        engine.measure();
+        setTimeout(() => pl.remove(), 1000);
+      }, 140);
     };
-
-    const tick = (now) => {
-      if (completed) return;
-      if (now - start > MAX_MS) target = 1;
-      const dt = Math.max(0, now - last);
-      last = now;
-      shown = Math.min(shown + dt / MIN_MS, target);
-      fillLayer.style.clipPath = `inset(${((1 - shown) * 100).toFixed(2)}% 0 0 0)`;
-      pctEl.textContent = String(Math.min(99, Math.round(shown * 100))).padStart(2, "0") + "%";
-      if (shown < 1) requestAnimationFrame(tick); else finish();
+    const step = () => {
+      if (i < GREET.length) {
+        show(GREET[i]);
+        i += 1;
+        setTimeout(step, WORD_MS);
+      } else if (i === GREET.length) {
+        show(FINAL);
+        i += 1;
+        setTimeout(finish, FINAL_MS);
+      }
     };
-
-    requestAnimationFrame((now) => { last = now; tick(now); });
+    step();
   })();
 
   /* ————— velocity-reactive marquee ————— */
