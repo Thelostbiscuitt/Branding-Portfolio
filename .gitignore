@@ -1,0 +1,6 @@
+.wrangler/
+.agents/
+.claude/
+.kilo/
+*.zip
+.DS_Store
