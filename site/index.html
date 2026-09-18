@@ -24,6 +24,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,62..125,100..900;1,62..125,100..900&amp;family=IBM+Plex+Mono:wght@400;500;600&amp;display=swap" rel="stylesheet">
+<link rel="stylesheet" href="work-cases.css">
 <style>/* ============================================================================
    HABIBCORE® — DESIGN TOKENS v1.0
    ============================================================================
@@ -2054,6 +2055,63 @@ body:not([data-route^="/work/"]) .case-pill { display: none; }
   .tlink { display: inline-block; padding: 10px 2px; margin: -10px -2px; }
   .sound-tease { display: inline-block; padding: 12px 0; margin: -12px 0; }
 }
+
+/* ============================================================================
+   v4.3 — MOBILE FIT PASS (kept last so it wins the cascade)
+   1. view-toggle pill clears the fixed bottom chrome (menu trigger, player dock)
+   2. per-card chips (.wchip + .wgo) become one bottom strip — never collide,
+      never bury the artwork
+   3. list-view names scale to the real viewport width
+   4. global auto-fit guards for every screen size
+   ============================================================================ */
+
+/* ---------- global auto-fit (all screens) ---------- */
+html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
+img, video { max-width: 100%; height: auto; }
+h1, h2, h3, p, a, span, b, figcaption { overflow-wrap: break-word; }
+
+@media (max-width: 760px) {
+  /* view-toggle pill: lift above the bottom chrome band + safe area */
+  .view-toggle {
+    bottom: calc(72px + env(safe-area-inset-bottom, 0px));
+    padding-inline: 12px;
+  }
+  .view-toggle .pill { max-width: 100%; padding: 4px; gap: 2px;
+    box-shadow: 0 2px 0 rgb(var(--hc-ink-rgb) / .18); }
+  .view-toggle button { min-height: 42px; padding: 0 clamp(12px, 4vw, 20px); }
+
+  /* per-card: one clean bottom strip — chip left, VIEW CASE right */
+  .wchip {
+    left: 0; top: auto; bottom: 0; max-width: calc(100% - 104px);
+    padding: 8px 10px; gap: 8px; align-items: center;
+    background: rgb(var(--hc-ink-rgb) / .96);
+  }
+  .wchip .wn { font-size: 13px; min-width: 0; overflow: hidden; text-overflow: ellipsis; }
+  .wchip .wm { flex-direction: row; align-items: baseline; gap: 6px; }
+  .wgo {
+    top: auto; bottom: 0; right: 0; margin: 0; padding: 12px 10px;
+    min-height: 42px; display: inline-flex; align-items: center;
+  }
+  .wcard { margin-bottom: var(--hc-space-12); }
+
+  /* list view: ghost names fit the real width, rows stay tight */
+  .idx-row .ghost, .idx-row .solid { font-size: clamp(34px, 9vw, 56px); }
+  .idx-row { padding: var(--hc-space-12) 0; }
+}
+
+@media (max-width: 420px) {
+  .wchip { max-width: calc(100% - 88px); flex-wrap: wrap; row-gap: 2px; }
+  .wchip .wt { display: none; }
+  .view-toggle button { padding: 0 10px; }
+  .idx-row .meta .col b { font-size: 12px; }
+}
+
+/* fixed bottom chrome itself respects notches / home bars */
+@media (max-width: 560px) {
+  .menu-trig { bottom: calc(16px + env(safe-area-inset-bottom, 0px)); }
+  #dock { bottom: env(safe-area-inset-bottom, 0px); }
+  .case-pill { bottom: calc(72px + env(safe-area-inset-bottom, 0px)); }
+}
 </style>
 <style data-build="loader-v6">
 /* ===== welcome loader — approved v6 fill-to-logo (habibcore-loader-v6-fill-to-logo)
@@ -3166,6 +3224,7 @@ html.hc-lock body { overflow: auto !important; }</style></noscript>
 <div id="hcCursor" aria-hidden="true"><span></span></div>
 <nav class="case-pill" id="casePill" hidden aria-label="Case sections"></nav>
 
+<script src="work-cases.js"></script>
 <script>
 /* HABIBCORE® — site brand-apply behaviour
    Motion governance: PDF 09 — things move because something changed.
@@ -4325,13 +4384,19 @@ html.hc-lock body { overflow: auto !important; }</style></noscript>
   });
   inerted.forEach(function (el) { el.setAttribute("inert", ""); });
 
-  /* warm the graphics pipeline while the curtain is up: kick decode on every
-     image so the scroll glide and cursor never stall on a decode spike after
-     the reveal */
+  /* warm the graphics pipeline while the curtain is up — but gently.
+     Decoding EVERY image at once spikes the main thread and drops loader
+     frames on phones (the stall people read as "stuck at 60%"). So:
+     decoding=async everywhere, eager decode staggered for the first
+     screens only, the rest decode as they scroll in. */
   Array.prototype.forEach.call(document.images, function (img) {
     img.setAttribute("loading", "eager");
     img.setAttribute("decoding", "async");
-    if (typeof img.decode === "function") { img.decode().catch(function () {}); }
+  });
+  Array.prototype.slice.call(document.images, 0, 9).forEach(function (img, i) {
+    setTimeout(function () {
+      if (typeof img.decode === "function") { img.decode().catch(function () {}); }
+    }, 90 * i);
   });
 
   var MIN_MS = FINE ? 2600 : 2200;   /* shortest coherent run */
@@ -4400,6 +4465,12 @@ html.hc-lock body { overflow: auto !important; }</style></noscript>
     if (completed) { return; }
     try {
       if (now - start > MAX_MS) { target = 1; }   /* hang guard */
+      /* time creep — the fill ALWAYS keeps moving. Without this the target
+         parks at the fonts-ready bump (0.6) until window load fires, and the
+         counter visibly freezes at 60% on slow connections. Creep reaches 92%
+         just before the hang guard; real readiness (load) still finishes early
+         whenever it beats the clock. */
+      bump(Math.min(0.92, 0.12 + (now - start) / (MAX_MS * 0.8)));
       var dt = Math.max(0, now - last);
       last = now;
       shown = Math.min(shown + dt / MIN_MS, target);
